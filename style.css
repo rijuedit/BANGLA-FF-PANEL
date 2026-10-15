@@ -1,5 +1,5 @@
 /* =========================================
-   BANGLA FF PANEL - FULL FIXED PREMIUM STYLE
+   BANGLA FF PANEL - PREMIUM STYLE WITH TOPUP
    ========================================= */
 
 * {
@@ -202,7 +202,7 @@ body::after {
 }
 
 /* =========================================
-   HERO SECTION
+   HERO SECTION & BUTTONS
    ========================================= */
 .frame {
   width: calc(100% - 40px);
@@ -318,15 +318,24 @@ h1 b {
 .shield { color: #00f2fe; }
 .infinity { color: #a5b4fc; }
 
+/* Hero Buttons Container */
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
 .support-btn {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 30px;
+  gap: 10px;
   border: 1px solid #5865f2;
   background: linear-gradient(135deg, #312e81 0%, #1e1b4b 100%);
   border-radius: 14px;
-  padding: 14px 24px;
+  padding: 13px 22px;
   color: #ffffff;
   text-decoration: none;
   font-size: 13px;
@@ -340,6 +349,37 @@ h1 b {
   transform: translateY(-3px);
   border-color: #00f2fe;
   box-shadow: 0 0 35px rgba(0, 242, 254, 0.5);
+}
+
+/* NEW DIAMOND TOP UP BUTTON */
+.topup-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #00f2fe;
+  background: linear-gradient(135deg, rgba(0, 242, 254, 0.15) 0%, rgba(13, 27, 42, 0.9) 100%);
+  border-radius: 14px;
+  padding: 13px 22px;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  box-shadow: 0 0 22px rgba(0, 242, 254, 0.25);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.topup-btn:hover {
+  transform: translateY(-3px);
+  border-color: #00f2fe;
+  background: linear-gradient(135deg, rgba(0, 242, 254, 0.3) 0%, rgba(13, 27, 42, 1) 100%);
+  box-shadow: 0 0 35px rgba(0, 242, 254, 0.5);
+}
+
+.diamond-mark {
+  font-size: 15px;
+  filter: drop-shadow(0 0 8px #00f2fe);
 }
 
 .section-label {
@@ -524,6 +564,8 @@ h1 b {
   .cards { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   h1 { font-size: 36px; }
   .footer { flex-direction: column; align-items: flex-start; gap: 15px; }
+  .hero-buttons { flex-direction: column; width: 100%; }
+  .support-btn, .topup-btn { width: 100%; justify-content: center; }
 }
 
 @media (max-width: 480px) {
