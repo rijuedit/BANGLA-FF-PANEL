@@ -1,3 +1,6 @@
+// =========================================
+// BANGLA FF PANEL - MAIN SITE DYNAMIC SCRIPT
+// =========================================
 const firebaseConfig = {
   apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
   authDomain: "bangla-ff-admin.firebaseapp.com",
@@ -25,12 +28,12 @@ if (typeof firebase !== 'undefined') {
   db.ref('panel_data').on('value', (snapshot) => {
     const data = snapshot.val() || {};
 
-    // LOGO
+    // 1. Logo Update
     if (data.general?.logo) {
       document.querySelectorAll('.site-logo, .brand-logo img').forEach(img => img.src = data.general.logo);
     }
 
-    // Discord / TopUp
+    // 2. Discord & TopUp Update
     if (data.general?.discord) {
       document.querySelectorAll('a[href*="discord"], .discord-btn, .support-btn, .buy-now-btn').forEach(a => a.href = data.general.discord);
     }
@@ -38,11 +41,12 @@ if (typeof firebase !== 'undefined') {
       document.querySelectorAll('.topup-btn').forEach(a => a.href = data.general.topup);
     }
 
-    // HOME CARDS (icon, title, subtitle, show/hide, featured)
+    // 3. Homepage Dynamic Cards
     if (data.homeCards && Array.isArray(data.homeCards)) {
       renderHomeCards(data.homeCards);
     }
 
+    // 4. Page Specific Data Updates
     const path = window.location.pathname;
 
     if (path.includes('free-panel') && data.freePanel) applyPageData(data.freePanel);
@@ -62,13 +66,17 @@ if (typeof firebase !== 'undefined') {
       if (box && Array.isArray(data.buyList)) {
         box.innerHTML = '';
         data.buyList.forEach(item => {
-          box.innerHTML += `<div class="panel-list-item">
-            <div class="panel-info">
-              <div class="panel-icon"><i class='bx bxs-crown'></i></div>
-              <div class="panel-text"><h3>${item.name || 'PANEL'}</h3><p>${item.desc || ''}</p></div>
-            </div>
-            <div class="panel-price">${item.price || ''}</div>
-          </div>`;
+          box.innerHTML += `
+            <div class="panel-list-item">
+              <div class="panel-info">
+                <div class="panel-icon"><i class='bx bxs-crown'></i></div>
+                <div class="panel-text">
+                  <h3>${item.name || 'PANEL'}</h3>
+                  <p>${item.desc || ''}</p>
+                </div>
+              </div>
+              <div class="panel-price">${item.price || ''}</div>
+            </div>`;
         });
       }
     }
@@ -117,6 +125,7 @@ function applyPageData(p) {
   const pass = document.getElementById('panel-password');
   const dlGrid = document.querySelector('.download-grid');
 
+  // Video ON/OFF
   if (videoWrap) {
     if (p.showVideo === false) videoWrap.style.display = 'none';
     else {
@@ -125,6 +134,7 @@ function applyPageData(p) {
     }
   }
 
+  // Skip ON/OFF
   if (skip) {
     if (p.showSkip === false) skip.style.display = 'none';
     else {
@@ -135,17 +145,21 @@ function applyPageData(p) {
 
   if (pass && p.pass) pass.innerText = p.pass;
 
-  // Download boxes with custom LIVE badge
+  // EXACT MATCH DOWNLOAD CARDS (Image 1, 2, 3 Style)
   if (dlGrid && p.downloads && Array.isArray(p.downloads)) {
     dlGrid.innerHTML = '';
     p.downloads.forEach(dl => {
       const badgeText = dl.badge || 'LIVE';
       dlGrid.innerHTML += `
         <div class="download-box">
-          <span class="status-badge"><span class="dot"></span> ${badgeText}</span>
-          <div class="box-icon"><i class='bx bx-download'></i></div>
-          <h3>${dl.title || 'DOWNLOAD'}</h3>
-          <a href="${dl.url || '#'}" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
+          <div class="dl-box-top">
+            <div class="dl-icon-frame"><i class='bx bx-shield-alt-2'></i></div>
+            <span class="version-badge">${badgeText}</span>
+          </div>
+          <h3 class="dl-title">${dl.title || 'DOWNLOAD LINK'}</h3>
+          <a href="${dl.url || '#'}" target="_blank" class="dl-btn">
+            <i class='bx bx-download'></i> Download
+          </a>
         </div>`;
     });
   }
@@ -159,11 +173,13 @@ function formatYT(url) {
   return url;
 }
 
+// Mouse Glow
 document.addEventListener('mousemove', e => {
   const g = document.querySelector('.mouse-glow');
   if (g) { g.style.left = e.clientX + 'px'; g.style.top = e.clientY + 'px'; }
 });
 
+// Copy Password
 function copyPassword() {
   const el = document.getElementById('panel-password');
   if (!el) return;
