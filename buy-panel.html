@@ -5,20 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BUY Panel - BANGLA FF PANEL</title>
   
-  <!-- Google Fonts & Boxicons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  
-  <!-- Main CSS (for background and header) -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- =========================================
-       INNER PAGE CSS (Pricing / Buy Panel)
-       ========================================= -->
   <style>
     .inner-page-container {
       width: calc(100% - 40px);
-      max-width: 1000px;
+      max-width: 900px;
       margin: 40px auto 80px;
       position: relative;
       z-index: 1;
@@ -28,7 +22,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 30px;
+      margin-bottom: 28px;
     }
 
     .back-btn, .share-btn {
@@ -55,192 +49,179 @@
 
     .page-title-section {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 35px;
     }
 
     .page-title-section h1 {
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 900;
       color: #fff;
-      margin: 0 0 10px;
+      margin: 0 0 8px;
       letter-spacing: 1px;
       text-transform: uppercase;
     }
 
     .page-title-section p {
-      font: 500 13px var(--mono);
+      font: 500 12px var(--mono);
       color: #94a3b8;
       margin: 0;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
     }
 
-    /* PRICING CARDS GRID */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-    }
-
-    .pricing-card {
-      position: relative;
-      background: rgba(13, 15, 26, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 30px 25px;
-      backdrop-filter: blur(12px);
-      transition: all 0.4s ease;
+    /* PANEL LIST (Admin editable list) */
+    .panel-list {
       display: flex;
       flex-direction: column;
+      gap: 14px;
+      margin-bottom: 40px;
     }
 
-    .pricing-card:hover {
-      border-color: #00f2fe;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 242, 254, 0.2);
-      transform: translateY(-5px);
-    }
-
-    .pricing-card.popular {
-      border-color: rgba(0, 242, 254, 0.4);
-      background: linear-gradient(180deg, rgba(0, 242, 254, 0.05) 0%, rgba(13, 15, 26, 0.8) 100%);
-    }
-
-    .popular-badge {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, #00f2fe, #697bff);
-      color: #000;
-      font-size: 10px;
-      font-weight: 900;
-      padding: 5px 15px;
-      border-radius: 20px;
-      letter-spacing: 1px;
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
-    }
-
-    .package-name {
-      font-size: 18px;
-      font-weight: 800;
-      color: #00f2fe;
-      margin: 0 0 10px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .package-price {
-      font-size: 36px;
-      font-weight: 900;
-      color: #fff;
-      margin: 0 0 20px;
+    .panel-list-item {
       display: flex;
-      align-items: baseline;
-      gap: 5px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: rgba(13, 15, 26, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 18px 22px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
     }
 
-    .package-price span {
-      font-size: 14px;
+    .panel-list-item:hover {
+      border-color: rgba(0, 242, 254, 0.35);
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .panel-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .panel-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      display: grid;
+      place-items: center;
+      color: #00f2fe;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .panel-text h3 {
+      margin: 0 0 4px;
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .panel-text p {
+      margin: 0;
+      font: 500 11px var(--mono);
+      color: #94a3b8;
+      letter-spacing: 0.5px;
+    }
+
+    .panel-price {
+      font-size: 18px;
+      font-weight: 900;
+      color: #00f2fe;
+      white-space: nowrap;
+      letter-spacing: 0.5px;
+    }
+
+    .panel-price small {
+      font-size: 11px;
       color: #64748b;
       font-weight: 600;
     }
 
-    .package-features {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 30px;
-      flex-grow: 1;
+    /* BOTTOM BUY NOW SECTION */
+    .buy-now-section {
+      text-align: center;
+      padding: 32px 24px;
+      background: rgba(13, 15, 26, 0.7);
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0, 242, 254, 0.08);
     }
 
-    .package-features li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      color: #cbd5e1;
-      margin-bottom: 12px;
-      font-weight: 500;
-    }
-
-    .package-features li i {
-      color: #34d399;
+    .buy-now-section h3 {
+      margin: 0 0 8px;
       font-size: 18px;
-    }
-
-    .buy-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      background: linear-gradient(135deg, #312e81 0%, #1e1b4b 100%);
-      border: 1px solid #5865f2;
-      color: #fff;
-      padding: 14px;
-      border-radius: 10px;
-      font-size: 14px;
       font-weight: 800;
-      text-decoration: none;
-      transition: all 0.3s;
+      color: #fff;
       letter-spacing: 0.5px;
     }
 
-    .pricing-card:hover .buy-btn {
-      border-color: #00f2fe;
-      box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+    .buy-now-section p {
+      margin: 0 0 20px;
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.5;
     }
 
-    /* Support Section Below Pricing */
-    .support-bottom {
-      margin-top: 50px;
-      text-align: center;
-      padding: 30px;
-      background: rgba(13, 15, 26, 0.5);
-      border: 1px dashed rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-    }
-
-    .support-bottom h3 {
-      font-size: 16px;
-      color: #fff;
-      margin: 0 0 15px;
-    }
-
-    .support-btn-large {
+    /* এখানে Buy Now ক্লিক করলে Discord এ যাবে */
+    .buy-now-btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
-      background: rgba(88, 101, 242, 0.15);
-      border: 1px solid rgba(88, 101, 242, 0.5);
-      color: #a5b4fc;
-      padding: 12px 25px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-
-    .support-btn-large:hover {
-      background: rgba(88, 101, 242, 0.3);
-      border-color: #5865f2;
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.2) 0%, rgba(88, 101, 242, 0.25) 100%);
+      border: 1px solid #00f2fe;
       color: #fff;
-      transform: translateY(-2px);
+      padding: 14px 32px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 800;
+      text-decoration: none;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
+      transition: all 0.3s ease;
     }
 
-    @media (max-width: 768px) {
-      .pricing-grid { grid-template-columns: 1fr; }
-      .page-title-section h1 { font-size: 26px; }
+    .buy-now-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 35px rgba(0, 242, 254, 0.45);
+      background: linear-gradient(135deg, rgba(0, 242, 254, 0.35) 0%, rgba(88, 101, 242, 0.4) 100%);
+      color: #fff;
+    }
+
+    .buy-now-btn i {
+      font-size: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .panel-list-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .panel-price {
+        align-self: flex-end;
+      }
+      .page-title-section h1 {
+        font-size: 24px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Animated Background Lights -->
   <div class="ambient ambient-left"></div>
   <div class="ambient ambient-right"></div>
   <div class="mouse-glow"></div>
 
-  <!-- TOPBAR -->
   <header class="topbar">
     <a class="brand" href="index.html">
       <span class="brand-logo"><img src="logo.png" alt="Logo"></span>
@@ -255,64 +236,72 @@
     </nav>
   </header>
 
-  <!-- INNER PAGE CONTENT -->
   <main class="inner-page-container">
-    
-    <!-- Top Action Row -->
+
     <div class="inner-header-actions">
       <a href="index.html" class="back-btn"><i class='bx bx-left-arrow-alt'></i> Back</a>
       <button class="share-btn"><i class='bx bx-share-alt'></i> Share</button>
     </div>
 
-    <!-- Page Title -->
     <div class="page-title-section">
-      <h1>BUY PREMIUM PANELS</h1>
-      <p>CHOOSE THE BEST PLAN FOR YOUR GAMING NEEDS</p>
+      <h1>BUY PANEL LIST</h1>
+      <p>AVAILABLE PREMIUM PANELS</p>
     </div>
 
-    <!-- Pricing / Packages List -->
-    <div class="pricing-grid">
+    <!-- ========== PANEL LIST (Admin Panel থেকে এডিট করা যাবে) ========== -->
+    <div class="panel-list">
+
+      <!-- Item 1 -->
+      <div class="panel-list-item">
+        <div class="panel-info">
+          <div class="panel-icon"><i class='bx bxs-crown'></i></div>
+          <div class="panel-text">
+            <h3>VIP PANEL</h3>
+            <p>Aimbot AI • Anti-Ban • Auto Update</p>
+          </div>
+        </div>
+        <div class="panel-price">৳500 <small>/ month</small></div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="panel-list-item">
+        <div class="panel-info">
+          <div class="panel-icon"><i class='bx bxs-hot'></i></div>
+          <div class="panel-text">
+            <h3>PREMIUM PANEL</h3>
+            <p>Full Features • Emulator Support • Fast</p>
+          </div>
+        </div>
+        <div class="panel-price">৳800 <small>/ month</small></div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="panel-list-item">
+        <div class="panel-info">
+          <div class="panel-icon"><i class='bx bxs-diamond'></i></div>
+          <div class="panel-text">
+            <h3>LIFETIME PANEL</h3>
+            <p>All Features • Lifetime Access • Priority Support</p>
+          </div>
+        </div>
+        <div class="panel-price">৳1200 <small>/ lifetime</small></div>
+      </div>
+
+    </div>
+
+    <!-- ========== BUY NOW (Discord Link) ========== -->
+    <div class="buy-now-section">
+      <h3>কিনতে চাইলে Buy Now চাপুন</h3>
+      <p>Discord এ যোগাযোগ করে প্যানেল কিনুন। সাপোর্ট টিম আপনাকে হেল্প করবে।</p>
       
-      <!-- Package 1 (Admin Editable) -->
-      <div class="pricing-card">
-        <h3 class="package-name">VIP PANEL</h3>
-        <div class="package-price">৳500 <span>/ month</span></div>
-        <ul class="package-features">
-          <li><i class='bx bx-check-circle'></i> Aimbot AI Support</li>
-          <li><i class='bx bx-check-circle'></i> 100% Anti-Ban</li>
-          <li><i class='bx bx-check-circle'></i> Auto Updates</li>
-          <li><i class='bx bx-check-circle'></i> 24/7 Support</li>
-        </ul>
-        <a href="BUY_LINK_1" target="_blank" class="buy-btn"><i class='bx bx-cart'></i> Purchase Now</a>
-      </div>
-
-      <!-- Package 2 (Popular / Admin Editable) -->
-      <div class="pricing-card popular">
-        <div class="popular-badge">MOST POPULAR</div>
-        <h3 class="package-name">LIFETIME PANEL</h3>
-        <div class="package-price">৳1200 <span>/ lifetime</span></div>
-        <ul class="package-features">
-          <li><i class='bx bx-check-circle'></i> All VIP Features Included</li>
-          <li><i class='bx bx-check-circle'></i> Bypass Emulator Matching</li>
-          <li><i class='bx bx-check-circle'></i> Custom Sensitivity Setup</li>
-          <li><i class='bx bx-check-circle'></i> Instant Delivery</li>
-        </ul>
-        <a href="BUY_LINK_2" target="_blank" class="buy-btn"><i class='bx bx-cart'></i> Purchase Now</a>
-      </div>
-
-    </div>
-
-    <!-- Support Section -->
-    <div class="support-bottom">
-      <h3>Need Help Before Buying?</h3>
-      <a href="https://discord.gg/9VGgu48bY" target="_blank" class="support-btn-large">
-        <i class='bx bxl-discord-alt'></i> Join Our Discord
+      <!-- এখানে আপনার Discord লিংক বসাবেন -->
+      <a href="https://discord.gg/9VGgu48bY" target="_blank" rel="noopener noreferrer" class="buy-now-btn">
+        <i class='bx bxl-discord-alt'></i> Buy Now
       </a>
     </div>
 
   </main>
 
-  <!-- Main JavaScript File -->
   <script src="script.js"></script>
 </body>
 </html>
