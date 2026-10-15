@@ -1,3 +1,6 @@
+// =========================================
+// BANGLA FF PANEL - MAIN SITE DYNAMIC SCRIPT
+// =========================================
 const firebaseConfig = {
   apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
   authDomain: "bangla-ff-admin.firebaseapp.com",
@@ -107,6 +110,7 @@ function renderMobilePackagesUI() {
 }
 
 function esc(s){ return String(s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
+
 function selectPackage(type, idx, name, price) {
   if (type === 'buy') {
     selectedBuy = { name, price };
@@ -120,23 +124,55 @@ function selectPackage(type, idx, name, price) {
     document.getElementById('mp-selected-hint').innerText = `সিলেক্টেড: ${name} — ${price}`;
   }
 }
+
 function selectAndBuy(type, name, price) {
-  if (type==='buy') selectedBuy = { name, price }; else selectedMobile = { name, price };
+  if (type === 'buy') selectedBuy = { name, price }; 
+  else selectedMobile = { name, price };
   buyNowClick(type);
 }
+
 function buyNowClick(type) {
   const selected = type === 'mobile' ? selectedMobile : selectedBuy;
   if (!selected) return alert(type === 'mobile' ? 'আগে একটি Mobile প্যাকেজ সিলেক্ট করুন!' : 'আগে একটি PC প্যাকেজ সিলেক্ট করুন!');
+
+  // ASK FOR DISCORD USERNAME
+  const discordUser = prompt("আপনার Discord Username টি লিখুন (যাতে আমরা আপনাকে চিনতে পারি):\n(যেমন: riju#1234 বা @riju)");
+  
+  if (!discordUser) {
+    alert("Discord Username না দিলে অর্ডার করা যাবে না!");
+    return;
+  }
+
   const pageName = type === 'mobile' ? '📱 MOBILE PANEL' : '💻 BUY PANEL (PC)';
   const webhook = type === 'mobile' ? mobileWebhook : buyWebhook;
   const invite = type === 'mobile' ? (mobileDiscordLink || globalDiscordLink) : (buyDiscordLink || globalDiscordLink);
-  sendBuyAlert(pageName, selected.name, selected.price, webhook);
+  
+  sendBuyAlert(pageName, selected.name, selected.price, webhook, discordUser);
   window.open(invite, '_blank');
 }
-function ticketClick(e) { if(mobileWebhook) sendBuyAlert('📱 MOBILE PANEL', 'TICKET button (no package)', '—', mobileWebhook); return true; }
-function sendBuyAlert(pageName, packageName, packagePrice, webhookUrl) {
+
+function ticketClick(e) { 
+  if(mobileWebhook) {
+    const discordUser = prompt("আপনার Discord Username টি লিখুন (যাতে আমরা আপনাকে চিনতে পারি):");
+    if (!discordUser) {
+      alert("Discord Username না দিলে টিকেট ওপেন করা যাবে না!");
+      e.preventDefault();
+      return false;
+    }
+    sendBuyAlert('📱 MOBILE PANEL', 'TICKET Button (No Package Selected)', '—', mobileWebhook, discordUser); 
+  }
+  return true; 
+}
+
+function sendBuyAlert(pageName, packageName, packagePrice, webhookUrl, discordUser) {
   if (!webhookUrl || !webhookUrl.startsWith('http')) return;
-  fetch(webhookUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ content: `🔔 **NEW ORDER CLICK!**\n📄 **Section:** \`${pageName}\`\n📦 **Package:** \`${packageName}\`\n💰 **Price:** \`${packagePrice}\`\n⏰ **Time:** \`${new Date().toLocaleString()}\`\n👉 User going to Discord...` }) }).catch(()=>{});
+  fetch(webhookUrl, { 
+    method: 'POST', 
+    headers: { 'Content-Type': 'application/json' }, 
+    body: JSON.stringify({ 
+      content: `🔔 **NEW ORDER CLICK!**\n👤 **User:** \`${discordUser}\`\n📄 **Section:** \`${pageName}\`\n📦 **Package:** \`${packageName}\`\n💰 **Price:** \`${packagePrice}\`\n⏰ **Time:** \`${new Date().toLocaleString()}\`\n👉 User going to Discord...` 
+    }) 
+  }).catch(()=>{});
 }
 
 function renderHomeCards(cards) {
@@ -169,5 +205,7 @@ function applyPageData(p) {
     });
   }
 }
+
 function formatYT(url){ if(!url) return ''; if(url.includes('embed/')) return url; if(url.includes('watch?v=')) return 'https://www.youtube.com/embed/'+url.split('watch?v=')[1].split('&')[0]; if(url.includes('youtu.be/')) return 'https://www.youtube.com/embed/'+url.split('youtu.be/')[1].split('?')[0]; return url; }
+
 document.addEventListener('mousemove', e => { const g=document.querySelector('.mouse-glow'); if(g){ g.style.left=e.clientX+'px'; g.style.top=e.clientY+'px'; } });
