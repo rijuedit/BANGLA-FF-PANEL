@@ -13,6 +13,7 @@
   --text: #f1f1f7;
   --blue: #697bff;
   --cyan: #00f2fe;
+  --purple: #8b5cf6;
   --font: 'Inter', Arial, sans-serif;
   --mono: 'JetBrains Mono', monospace;
 }
@@ -53,9 +54,7 @@ body::after {
   mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
 }
 
-/* =========================================
-   ANIMATED BACKGROUND LIGHTS
-   ========================================= */
+/* Animated Background Lights */
 @keyframes floatAnimation {
   0% { transform: translate(0, 0) scale(1); }
   33% { transform: translate(40px, -40px) scale(1.1); }
@@ -88,9 +87,7 @@ body::after {
   animation-delay: -6s;
 }
 
-/* =========================================
-   NEW BRIGHT & GUARANTEED MOUSE GLOW
-   ========================================= */
+/* Mouse Glow */
 .mouse-glow {
   position: fixed;
   top: -1000px;
@@ -100,14 +97,12 @@ body::after {
   border-radius: 50%;
   background: radial-gradient(circle, rgba(0, 242, 254, 0.22) 0%, rgba(0, 242, 254, 0.06) 45%, transparent 70%);
   pointer-events: none;
-  z-index: 9999; /* সবার উপরে থাকবে */
+  z-index: 9999;
   transform: translate(-50%, -50%);
   mix-blend-mode: screen;
 }
 
-/* =========================================
-   TOPBAR / HEADER
-   ========================================= */
+/* TOPBAR */
 .topbar {
   height: 60px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -203,9 +198,7 @@ body::after {
   margin-right: 4px;
 }
 
-/* =========================================
-   HERO SECTION & BUTTONS
-   ========================================= */
+/* HERO SECTION */
 .frame {
   width: calc(100% - 40px);
   max-width: 1400px;
@@ -320,7 +313,6 @@ h1 b {
 .shield { color: #00f2fe; }
 .infinity { color: #a5b4fc; }
 
-/* Hero Buttons Container */
 .hero-buttons {
   display: flex;
   align-items: center;
@@ -353,7 +345,6 @@ h1 b {
   box-shadow: 0 0 35px rgba(0, 242, 254, 0.5);
 }
 
-/* DIAMOND TOP UP BUTTON */
 .topup-btn {
   display: inline-flex;
   align-items: center;
@@ -402,9 +393,7 @@ h1 b {
   color: #64748b;
 }
 
-/* =========================================
-   CARDS SECTION
-   ========================================= */
+/* HOMEPAGE CARDS */
 .cards {
   width: min(900px, 100%);
   display: grid;
@@ -515,8 +504,114 @@ h1 b {
 }
 
 /* =========================================
-   FOOTER
+   EXACT DOWNLOAD CARD DESIGN (From Screenshots)
    ========================================= */
+.download-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.download-box {
+  background: #0d0e16;
+  border: 1px solid #20212e;
+  border-radius: 18px;
+  padding: 22px 20px;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.download-box:hover {
+  border-color: #6366f1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(99, 102, 241, 0.25);
+  transform: translateY(-4px);
+}
+
+.dl-box-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+/* Icon Frame like Image 3 */
+.dl-icon-frame {
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: rgba(139, 92, 246, 0.12);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  display: grid;
+  place-items: center;
+  color: #a78bfa;
+  font-size: 24px;
+  box-shadow: inset 0 0 12px rgba(139, 92, 246, 0.15), 0 0 15px rgba(139, 92, 246, 0.15);
+  transition: all 0.3s ease;
+}
+
+.download-box:hover .dl-icon-frame {
+  transform: scale(1.08);
+  border-color: #a78bfa;
+  box-shadow: inset 0 0 15px rgba(139, 92, 246, 0.25), 0 0 22px rgba(139, 92, 246, 0.4);
+}
+
+/* Badge (V4.6 / LIVE Pill) */
+.version-badge {
+  font: 700 10px var(--mono);
+  color: #a5b4fc;
+  background: rgba(99, 102, 241, 0.14);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  padding: 4px 10px;
+  border-radius: 14px;
+  letter-spacing: 0.5px;
+}
+
+.dl-title {
+  font-size: 13px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+/* Full Width Purple/Blue Gradient Button */
+.dl-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  border: 1px solid #818cf8;
+  color: #ffffff;
+  padding: 11px 16px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+  transition: all 0.3s ease;
+}
+
+.dl-btn i {
+  font-size: 16px;
+}
+
+.dl-btn:hover {
+  background: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
+  border-color: #a5b4fc;
+  box-shadow: 0 6px 22px rgba(99, 102, 241, 0.55);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+/* FOOTER */
 .footer {
   width: min(900px, 100%);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -558,12 +653,11 @@ h1 b {
   color: #00f2fe;
 }
 
-/* =========================================
-   RESPONSIVE
-   ========================================= */
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .topbar { padding: 0 16px; }
   .cards { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .download-grid { grid-template-columns: 1fr; }
   h1 { font-size: 36px; }
   .footer { flex-direction: column; align-items: flex-start; gap: 15px; }
   .hero-buttons { flex-direction: column; width: 100%; }
