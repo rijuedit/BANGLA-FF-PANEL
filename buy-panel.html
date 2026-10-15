@@ -13,12 +13,12 @@
   <link rel="stylesheet" href="style.css">
 
   <!-- =========================================
-       INNER PAGE CSS (BUY Panel Custom Style)
+       INNER PAGE CSS (Pricing / Buy Panel)
        ========================================= -->
   <style>
     .inner-page-container {
       width: calc(100% - 40px);
-      max-width: 900px;
+      max-width: 1000px;
       margin: 40px auto 80px;
       position: relative;
       z-index: 1;
@@ -28,7 +28,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
     .back-btn, .share-btn {
@@ -53,220 +53,183 @@
       color: #fff;
     }
 
-    .inner-content-card {
-      background: rgba(13, 15, 26, 0.75);
-      border: 1px solid rgba(0, 242, 254, 0.15);
-      border-radius: 16px;
-      backdrop-filter: blur(12px);
-      padding: 24px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 242, 254, 0.05);
+    .page-title-section {
+      text-align: center;
+      margin-bottom: 40px;
     }
 
-    .video-container {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-      background: #000;
-    }
-
-    .video-container iframe {
-      width: 100%;
-      height: 100%;
-    }
-
-    .title-skip-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 24px 0;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .panel-titles h2 {
-      font-size: 24px;
+    .page-title-section h1 {
+      font-size: 32px;
       font-weight: 900;
       color: #fff;
-      margin: 0 0 5px;
+      margin: 0 0 10px;
       letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
-    .panel-titles p {
-      font: 600 11px var(--mono);
+    .page-title-section p {
+      font: 500 13px var(--mono);
       color: #94a3b8;
       margin: 0;
       letter-spacing: 1px;
     }
 
-    .how-to-skip-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid #10b981;
-      color: #34d399;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-
-    .how-to-skip-btn:hover {
-      background: rgba(16, 185, 129, 0.2);
-      box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
-      color: #fff;
-    }
-
-    .password-section {
-      border: 1px solid rgba(234, 179, 8, 0.3);
-      background: rgba(234, 179, 8, 0.05);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 24px;
-    }
-
-    .pass-label {
-      font: 700 10px var(--mono);
-      color: #facc15;
-      letter-spacing: 1.5px;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .pass-value-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .password-text {
-      font-size: 20px;
-      font-weight: 800;
-      color: #fff;
-    }
-
-    .copy-btn {
-      background: transparent;
-      border: 1px solid rgba(234, 179, 8, 0.5);
-      color: #facc15;
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.3s;
-    }
-
-    .copy-btn:hover {
-      background: rgba(234, 179, 8, 0.2);
-      color: #fff;
-    }
-
-    /* DOWNLOAD GRID */
-    .download-grid {
+    /* PRICING CARDS GRID */
+    .pricing-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
     }
 
-    .download-box {
+    .pricing-card {
       position: relative;
-      background: rgba(6, 7, 12, 0.6);
+      background: rgba(13, 15, 26, 0.8);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 22px 20px;
-      transition: all 0.3s ease;
+      border-radius: 16px;
+      padding: 30px 25px;
+      backdrop-filter: blur(12px);
+      transition: all 0.4s ease;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
     }
 
-    .download-box:hover {
+    .pricing-card:hover {
       border-color: #00f2fe;
-      box-shadow: 0 5px 25px rgba(0, 242, 254, 0.18);
-      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 242, 254, 0.2);
+      transform: translateY(-5px);
     }
 
-    .status-badge {
+    .pricing-card.popular {
+      border-color: rgba(0, 242, 254, 0.4);
+      background: linear-gradient(180deg, rgba(0, 242, 254, 0.05) 0%, rgba(13, 15, 26, 0.8) 100%);
+    }
+
+    .popular-badge {
       position: absolute;
-      top: 14px;
-      right: 14px;
-      font: 700 9px var(--mono);
-      padding: 3px 8px;
-      border-radius: 10px;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #00f2fe, #697bff);
+      color: #000;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 5px 15px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+    }
+
+    .package-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: #00f2fe;
+      margin: 0 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .package-price {
+      font-size: 36px;
+      font-weight: 900;
+      color: #fff;
+      margin: 0 0 20px;
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+    }
+
+    .package-price span {
+      font-size: 14px;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .package-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 30px;
+      flex-grow: 1;
+    }
+
+    .package-features li {
       display: flex;
       align-items: center;
-      gap: 5px;
-      background: rgba(34, 197, 94, 0.15);
-      border: 1px solid rgba(34, 197, 94, 0.4);
-      color: #4ade80;
-    }
-
-    .status-badge .dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 6px #22c55e;
-    }
-
-    .box-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: rgba(239, 68, 68, 0.12);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      display: grid;
-      place-items: center;
-      font-size: 22px;
-      color: #ef4444;
-      margin-bottom: 16px;
-    }
-
-    .download-box h3 {
+      gap: 10px;
       font-size: 13px;
-      font-weight: 800;
-      color: #fff;
-      margin: 0 0 16px;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
+      color: #cbd5e1;
+      margin-bottom: 12px;
+      font-weight: 500;
     }
 
-    .dl-btn {
+    .package-features li i {
+      color: #34d399;
+      font-size: 18px;
+    }
+
+    .buy-btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
+      width: 100%;
       background: linear-gradient(135deg, #312e81 0%, #1e1b4b 100%);
       border: 1px solid #5865f2;
       color: #fff;
-      padding: 9px 18px;
-      border-radius: 8px;
-      font-size: 11px;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: all 0.3s;
+      letter-spacing: 0.5px;
+    }
+
+    .pricing-card:hover .buy-btn {
+      border-color: #00f2fe;
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+    }
+
+    /* Support Section Below Pricing */
+    .support-bottom {
+      margin-top: 50px;
+      text-align: center;
+      padding: 30px;
+      background: rgba(13, 15, 26, 0.5);
+      border: 1px dashed rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+    }
+
+    .support-bottom h3 {
+      font-size: 16px;
+      color: #fff;
+      margin: 0 0 15px;
+    }
+
+    .support-btn-large {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(88, 101, 242, 0.15);
+      border: 1px solid rgba(88, 101, 242, 0.5);
+      color: #a5b4fc;
+      padding: 12px 25px;
+      border-radius: 10px;
+      font-size: 14px;
       font-weight: 700;
       text-decoration: none;
       transition: all 0.3s;
     }
 
-    .dl-btn:hover {
-      border-color: #00f2fe;
-      box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
-      transform: translateY(-1px);
+    .support-btn-large:hover {
+      background: rgba(88, 101, 242, 0.3);
+      border-color: #5865f2;
+      color: #fff;
+      transform: translateY(-2px);
     }
 
-    @media (max-width: 600px) {
-      .download-grid { grid-template-columns: 1fr; }
-      .inner-content-card { padding: 16px; }
-      .title-skip-row { flex-direction: column; align-items: flex-start; }
+    @media (max-width: 768px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+      .page-title-section h1 { font-size: 26px; }
     }
   </style>
 </head>
@@ -301,72 +264,55 @@
       <button class="share-btn"><i class='bx bx-share-alt'></i> Share</button>
     </div>
 
-    <!-- Main Content Card -->
-    <div class="inner-content-card">
+    <!-- Page Title -->
+    <div class="page-title-section">
+      <h1>BUY PREMIUM PANELS</h1>
+      <p>CHOOSE THE BEST PLAN FOR YOUR GAMING NEEDS</p>
+    </div>
+
+    <!-- Pricing / Packages List -->
+    <div class="pricing-grid">
       
-      <!-- Video Section -->
-      <div class="video-container">
-        <iframe id="main-video" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <!-- Package 1 (Admin Editable) -->
+      <div class="pricing-card">
+        <h3 class="package-name">VIP PANEL</h3>
+        <div class="package-price">৳500 <span>/ month</span></div>
+        <ul class="package-features">
+          <li><i class='bx bx-check-circle'></i> Aimbot AI Support</li>
+          <li><i class='bx bx-check-circle'></i> 100% Anti-Ban</li>
+          <li><i class='bx bx-check-circle'></i> Auto Updates</li>
+          <li><i class='bx bx-check-circle'></i> 24/7 Support</li>
+        </ul>
+        <a href="BUY_LINK_1" target="_blank" class="buy-btn"><i class='bx bx-cart'></i> Purchase Now</a>
       </div>
 
-      <!-- Title & Skip Button Row -->
-      <div class="title-skip-row">
-        <div class="panel-titles">
-          <h2>BUY PANEL</h2>
-          <p>PREMIUM • FAST • RELIABLE</p>
-        </div>
-        <a href="HOW_TO_SKIP_LINK" target="_blank" class="how-to-skip-btn">
-          <i class='bx bx-skip-next-circle'></i> HOW TO SKIP
-        </a>
-      </div>
-
-      <!-- Password Section -->
-      <div class="password-section">
-        <div class="pass-label"><i class='bx bx-lock-alt'></i> RAR PASSWORD</div>
-        <div class="pass-value-row">
-          <span class="password-text" id="panel-password">1</span>
-          <button class="copy-btn" onclick="copyPassword()"><i class='bx bx-copy'></i> Copy</button>
-        </div>
-      </div>
-
-      <!-- Download Buttons Section -->
-      <div class="download-grid">
-        
-        <!-- Button 1: BUY PANEL DOWNLOAD -->
-        <div class="download-box">
-          <span class="status-badge"><span class="dot"></span> LIVE</span>
-          <div class="box-icon"><i class='bx bxs-flame'></i></div>
-          <h3>BUY PANEL LATEST VERSION</h3>
-          <a href="BUY_PANEL_DOWNLOAD_LINK" target="_blank" class="dl-btn"><i class='bx bx-shopping-bag'></i> Buy Now</a>
-        </div>
-
+      <!-- Package 2 (Popular / Admin Editable) -->
+      <div class="pricing-card popular">
+        <div class="popular-badge">MOST POPULAR</div>
+        <h3 class="package-name">LIFETIME PANEL</h3>
+        <div class="package-price">৳1200 <span>/ lifetime</span></div>
+        <ul class="package-features">
+          <li><i class='bx bx-check-circle'></i> All VIP Features Included</li>
+          <li><i class='bx bx-check-circle'></i> Bypass Emulator Matching</li>
+          <li><i class='bx bx-check-circle'></i> Custom Sensitivity Setup</li>
+          <li><i class='bx bx-check-circle'></i> Instant Delivery</li>
+        </ul>
+        <a href="BUY_LINK_2" target="_blank" class="buy-btn"><i class='bx bx-cart'></i> Purchase Now</a>
       </div>
 
     </div>
+
+    <!-- Support Section -->
+    <div class="support-bottom">
+      <h3>Need Help Before Buying?</h3>
+      <a href="https://discord.gg/9VGgu48bY" target="_blank" class="support-btn-large">
+        <i class='bx bxl-discord-alt'></i> Join Our Discord
+      </a>
+    </div>
+
   </main>
 
   <!-- Main JavaScript File -->
   <script src="script.js"></script>
-
-  <!-- Script for Copy Password -->
-  <script>
-    function copyPassword() {
-      const passwordText = document.getElementById("panel-password").innerText;
-      navigator.clipboard.writeText(passwordText).then(() => {
-        const copyBtn = document.querySelector(".copy-btn");
-        const originalHTML = copyBtn.innerHTML;
-        
-        copyBtn.innerHTML = "<i class='bx bx-check'></i> Copied!";
-        copyBtn.style.color = "#34d399";
-        copyBtn.style.borderColor = "#34d399";
-        
-        setTimeout(() => {
-          copyBtn.innerHTML = originalHTML;
-          copyBtn.style.color = "";
-          copyBtn.style.borderColor = "";
-        }, 2000);
-      });
-    }
-  </script>
 </body>
 </html>
