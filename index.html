@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BANGLA FF PANEL | Premium Mods</title>
+    <title>BANGLA FF PANEL | Gaming Hub</title>
     <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- SweetAlert2 Popup -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,36 +16,32 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="logo">
-            <i class="fa-solid fa-crown"></i> BANGLA FF <span>PANEL</span>
+            <i class="fa-solid fa-crown"></i> BANGLA FF PANEL
         </div>
         <ul class="nav-links">
-            <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Home</a></li>
-            <li><a href="free.html"><i class="fa-solid fa-gift"></i> Free Panel</a></li>
-            <li><a href="mobile.html"><i class="fa-solid fa-mobile-screen"></i> Mobile Panel</a></li>
-            <li><a href="emulator.html"><i class="fa-solid fa-desktop"></i> Emulator</a></li>
-            <li><a href="buy.html"><i class="fa-solid fa-cart-shopping"></i> Buy Panel</a></li>
+            <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> HOME</a></li>
+            <li><a href="free.html"><i class="fa-solid fa-gift"></i> FREE PANEL</a></li>
+            <li><a href="mobile.html"><i class="fa-solid fa-mobile-screen"></i> MOBILE PANEL</a></li>
+            <li><a href="emulator.html"><i class="fa-solid fa-desktop"></i> EMULATOR</a></li>
+            <li><a href="buy.html"><i class="fa-solid fa-cart-shopping"></i> BUY PANEL</a></li>
         </ul>
     </nav>
 
-    <!-- Header / Banner -->
-    <header class="hero">
-        <h1 class="glitch-title">PREMIUM MOD MENUS</h1>
-        <p class="subtitle">Select your package and duration below</p>
-    </header>
+    <!-- Sub-Header Indicator -->
+    <div class="header-status">
+        <span class="status-tag"><span class="cyan-slash">//</span> AVAILABLE <span class="count-badge" id="system-count">05</span> SYSTEMS</span>
+    </div>
 
-    <!-- Main Content Area -->
+    <!-- Main Content Area - Category Cards Grid -->
     <main class="container">
-        <div id="list-container" class="list-container">
-            <div class="loading-spinner">
-                <i class="fa-solid fa-circle-notch fa-spin"></i>
-                <p>লোডিং হচ্ছে...</p>
-            </div>
+        <div id="card-grid" class="card-grid">
+            <!-- Dynamic Category Cards loaded via JS -->
         </div>
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2024 BANGLA FF PANEL | Best Premium Mods</p>
+        <p>&copy; 2024 BANGLA FF PANEL | All Rights Reserved</p>
     </footer>
 
     <!-- Firebase SDKs -->
