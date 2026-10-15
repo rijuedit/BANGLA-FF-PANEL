@@ -66,6 +66,7 @@ if (typeof firebase !== 'undefined') {
       if (box && Array.isArray(data.buyList)) {
         box.innerHTML = '';
         data.buyList.forEach(item => {
+          const priceShow = item.displayPrice || (item.durationText ? `${item.priceText || ('৳' + item.price)} / ${item.durationText}` : (item.priceText || ('৳' + item.price)));
           box.innerHTML += `
             <div class="panel-list-item">
               <div class="panel-info">
@@ -75,7 +76,7 @@ if (typeof firebase !== 'undefined') {
                   <p>${item.desc || ''}</p>
                 </div>
               </div>
-              <div class="panel-price">${item.price || ''}</div>
+              <div class="panel-price">${priceShow}</div>
             </div>`;
         });
       }
@@ -125,7 +126,6 @@ function applyPageData(p) {
   const pass = document.getElementById('panel-password');
   const dlGrid = document.querySelector('.download-grid');
 
-  // Video ON/OFF
   if (videoWrap) {
     if (p.showVideo === false) videoWrap.style.display = 'none';
     else {
@@ -134,7 +134,6 @@ function applyPageData(p) {
     }
   }
 
-  // Skip ON/OFF
   if (skip) {
     if (p.showSkip === false) skip.style.display = 'none';
     else {
@@ -145,7 +144,6 @@ function applyPageData(p) {
 
   if (pass && p.pass) pass.innerText = p.pass;
 
-  // EXACT MATCH DOWNLOAD CARDS (Image 1, 2, 3 Style)
   if (dlGrid && p.downloads && Array.isArray(p.downloads)) {
     dlGrid.innerHTML = '';
     p.downloads.forEach(dl => {
