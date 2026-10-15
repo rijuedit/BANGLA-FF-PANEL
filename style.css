@@ -88,6 +88,7 @@ body::after {
   animation-delay: -6s;
 }
 
+/* Updated Mouse Glow for All Pages */
 .mouse-glow {
   position: fixed;
   top: 0;
@@ -95,12 +96,13 @@ body::after {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 0;
+  z-index: 5;
   background: radial-gradient(
-    500px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh),
-    rgba(0, 242, 254, 0.1),
-    transparent 40%
+    650px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh),
+    rgba(0, 242, 254, 0.16),
+    transparent 45%
   );
+  mix-blend-mode: screen;
 }
 
 /* =========================================
@@ -351,7 +353,7 @@ h1 b {
   box-shadow: 0 0 35px rgba(0, 242, 254, 0.5);
 }
 
-/* NEW DIAMOND TOP UP BUTTON */
+/* DIAMOND TOP UP BUTTON */
 .topup-btn {
   display: inline-flex;
   align-items: center;
