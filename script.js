@@ -61,13 +61,26 @@ function applyPageData(p) {
   const video = document.getElementById('main-video');
   const skip = document.querySelector('.how-to-skip-btn');
   const pass = document.getElementById('panel-password');
-  const dls = document.querySelectorAll('.dl-btn');
+  const dlGrid = document.querySelector('.download-grid');
 
   if (video && p.video) video.src = formatYT(p.video);
   if (skip && p.skip) skip.href = p.skip;
   if (pass && p.pass) pass.innerText = p.pass;
-  if (dls[0] && p.dl1) dls[0].href = p.dl1;
-  if (dls[1] && p.dl2) dls[1].href = p.dl2;
+
+  // Dynamic Download Buttons Rendering
+  if (dlGrid && p.downloads && Array.isArray(p.downloads)) {
+    dlGrid.innerHTML = '';
+    p.downloads.forEach(dl => {
+      dlGrid.innerHTML += `
+        <div class="download-box">
+          <span class="status-badge"><span class="dot"></span> LIVE</span>
+          <div class="box-icon"><i class='bx bx-download'></i></div>
+          <h3>${dl.title || 'DOWNLOAD LINK'}</h3>
+          <a href="${dl.url || '#'}" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
+        </div>
+      `;
+    });
+  }
 }
 
 function formatYT(url) {
@@ -87,7 +100,7 @@ document.addEventListener('mousemove', function(e) {
   }
 });
 
-// Copy Password (if exists)
+// Copy Password
 function copyPassword() {
   const el = document.getElementById('panel-password');
   if (!el) return;
