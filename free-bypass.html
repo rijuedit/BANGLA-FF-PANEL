@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="style.css">
 
   <!-- =========================================
-       INNER PAGE CSS (Only for this page)
+       INNER PAGE CSS (Free Bypass Custom Style)
        ========================================= -->
   <style>
     .inner-page-container {
@@ -172,6 +172,7 @@
       color: #fff;
     }
 
+    /* DOWNLOAD GRID (2 Custom Buttons Layout) */
     .download-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -179,52 +180,78 @@
     }
 
     .download-box {
+      position: relative;
       background: rgba(6, 7, 12, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 22px 20px;
       transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .download-box:hover {
       border-color: #00f2fe;
-      box-shadow: 0 5px 20px rgba(0, 242, 254, 0.15);
+      box-shadow: 0 5px 25px rgba(0, 242, 254, 0.18);
       transform: translateY(-3px);
     }
 
-    .dl-icon {
-      font-size: 28px;
+    .status-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font: 700 9px var(--mono);
+      padding: 3px 8px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      color: #4ade80;
+    }
+
+    .status-badge .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 6px #22c55e;
+    }
+
+    .box-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
       color: #00f2fe;
-      margin-bottom: 10px;
+      margin-bottom: 16px;
     }
 
     .download-box h3 {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 800;
-      color: #e2e8f0;
-      margin: 0 0 6px;
-      letter-spacing: 0.5px;
-    }
-
-    .download-box p {
-      font: 600 9px var(--mono);
-      color: #64748b;
+      color: #fff;
       margin: 0 0 16px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
     }
 
     .dl-btn {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 8px;
-      width: 100%;
       background: linear-gradient(135deg, #312e81 0%, #1e1b4b 100%);
       border: 1px solid #5865f2;
       color: #fff;
-      padding: 10px;
+      padding: 9px 18px;
       border-radius: 8px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       text-decoration: none;
       transition: all 0.3s;
@@ -233,6 +260,7 @@
     .dl-btn:hover {
       border-color: #00f2fe;
       box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+      transform: translateY(-1px);
     }
 
     @media (max-width: 600px) {
@@ -244,7 +272,7 @@
 </head>
 <body>
 
-  <!-- Animated Background Lights (From style.css) -->
+  <!-- Animated Background Lights -->
   <div class="ambient ambient-left"></div>
   <div class="ambient ambient-right"></div>
   <div class="mouse-glow"></div>
@@ -278,18 +306,15 @@
       
       <!-- Video Section -->
       <div class="video-container">
-        <!-- এখানে ইউটিউব ভিডিও বসবে -->
         <iframe id="main-video" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
 
       <!-- Title & Skip Button Row -->
       <div class="title-skip-row">
         <div class="panel-titles">
-          <!-- টাইটেল চেঞ্জ করা হয়েছে -->
           <h2>FREE BYPASS</h2>
           <p>PREMIUM • FAST • RELIABLE</p>
         </div>
-        <!-- স্কিপ ভিডিওর লিংক এখানে বসবে -->
         <a href="HOW_TO_SKIP_LINK" target="_blank" class="how-to-skip-btn">
           <i class='bx bx-skip-next-circle'></i> HOW TO SKIP
         </a>
@@ -304,35 +329,35 @@
         </div>
       </div>
 
-      <!-- Download Buttons Section -->
+      <!-- Download Buttons Section (2 Requested Buttons) -->
       <div class="download-grid">
-        <!-- Download Box 1 -->
+        
+        <!-- Button 1: EMULATOR BYPASS -->
         <div class="download-box">
-          <div class="dl-icon"><i class='bx bx-shield-quarter'></i></div>
-          <h3>HIDDEN INTERNAL LOADER LINK</h3>
-          <p>VERSION 4.6</p>
-          <a href="DOWNLOAD_LINK_1" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
+          <span class="status-badge"><span class="dot"></span> LIVE</span>
+          <div class="box-icon"><i class='bx bx-cube-alt'></i></div>
+          <h3>EMULATOR BYPASS</h3>
+          <a href="EMULATOR_BYPASS_LINK" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
         </div>
-        <!-- Download Box 2 -->
+
+        <!-- Button 2: PROXY DISCONNECT -->
         <div class="download-box">
-          <div class="dl-icon"><i class='bx bx-code-alt'></i></div>
-          <h3>HIDDEN EXTERNAL C# LOADER LINK</h3>
-          <p>VERSION 4.6</p>
-          <a href="DOWNLOAD_LINK_2" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
+          <span class="status-badge"><span class="dot"></span> LIVE</span>
+          <div class="box-icon"><i class='bx bx-wifi-off'></i></div>
+          <h3>PROXY DISCONNECT</h3>
+          <a href="PROXY_DISCONNECT_LINK" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
         </div>
+
       </div>
 
     </div>
   </main>
 
-  <!-- Main JavaScript File (for mouse glow) -->
+  <!-- Main JavaScript File -->
   <script src="script.js"></script>
 
-  <!-- =========================================
-       INNER PAGE SCRIPT (Only for this page)
-       ========================================= -->
+  <!-- Script for Copy Password -->
   <script>
-    // Copy Password Function
     function copyPassword() {
       const passwordText = document.getElementById("panel-password").innerText;
       navigator.clipboard.writeText(passwordText).then(() => {
