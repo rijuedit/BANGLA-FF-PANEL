@@ -84,10 +84,6 @@ header {
   letter-spacing: 2px;
 }
 
-.btn-nav, .btn-explore {
-  cursor: pointer;
-}
-
 .btn-nav {
   background: rgba(17, 7, 26, 0.8);
   border: 1px solid var(--card-border);
@@ -205,7 +201,7 @@ header {
 /* === GRID LAYOUT (FIXED TO 3x2) === */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Exactly 3 columns */
+  grid-template-columns: repeat(3, 1fr); /* Exactly 3 columns on PC */
   gap: 25px;
   width: 100%;
 }
@@ -296,6 +292,7 @@ header {
   align-items: center;
   gap: 6px;
   text-transform: uppercase;
+  pointer-events: none; /* Let the card handle the click */
 }
 
 .card:hover .btn-explore {
