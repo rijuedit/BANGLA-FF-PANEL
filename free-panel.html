@@ -1,1 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Panel - BANGLA FF PANEL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Boxicons for icons -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+  <!-- Animated Background Lights -->
+  <div class="ambient ambient-left"></div>
+  <div class="ambient ambient-right"></div>
+  <div class="mouse-glow"></div>
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <!-- লোগোতে ক্লিক করলে হোমপেজে (index.html) নিয়ে যাবে -->
+    <a class="brand" href="index.html">
+      <span class="brand-logo"><img src="logo.png" alt="Logo"></span>
+      <span class="brand-text">
+        <strong>BANGLA FF PANEL</strong>
+        <small>COMMUNITY • GAMING HUB</small>
+      </span>
+    </a>
+    <nav class="top-actions">
+      <a class="home-btn" href="index.html">Home</a>
+      <a class="discord-btn" href="https://discord.gg/9VGgu48bY" target="_blank"><span class="discord-mark">◉</span> Discord</a>
+    </nav>
+  </header>
+
+  <!-- INNER PAGE CONTENT -->
+  <main class="inner-page-container">
+    
+    <!-- Top Action Row -->
+    <div class="inner-header-actions">
+      <a href="index.html" class="back-btn"><i class='bx bx-left-arrow-alt'></i> Back</a>
+      <button class="share-btn"><i class='bx bx-share-alt'></i> Share</button>
+    </div>
+
+    <!-- Main Content Card -->
+    <div class="inner-content-card">
+      
+      <!-- Video Section (Admin control ready) -->
+      <div class="video-container">
+        <!-- এখানে ইউটিউব ভিডিও বসবে -->
+        <iframe id="main-video" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+
+      <!-- Title & Skip Button Row -->
+      <div class="title-skip-row">
+        <div class="panel-titles">
+          <h2>FREE PANEL</h2>
+          <p>NEW PC PANEL UPDATED OB55</p>
+        </div>
+        <!-- স্কিপ ভিডিওর লিংক এখানে বসবে -->
+        <a href="HOW_TO_SKIP_LINK" target="_blank" class="how-to-skip-btn">
+          <i class='bx bx-skip-next-circle'></i> HOW TO SKIP
+        </a>
+      </div>
+
+      <!-- Password Section -->
+      <div class="password-section">
+        <div class="pass-label"><i class='bx bx-lock-alt'></i> RAR PASSWORD</div>
+        <div class="pass-value-row">
+          <span class="password-text" id="panel-password">1</span>
+          <button class="copy-btn" onclick="copyPassword()"><i class='bx bx-copy'></i> Copy</button>
+        </div>
+      </div>
+
+      <!-- Download Buttons Section -->
+      <div class="download-grid">
+        <!-- Download Box 1 -->
+        <div class="download-box">
+          <div class="dl-icon"><i class='bx bx-shield-quarter'></i></div>
+          <h3>HIDDEN INTERNAL LOADER LINK</h3>
+          <p>VERSION 4.6</p>
+          <a href="DOWNLOAD_LINK_1" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
+        </div>
+        <!-- Download Box 2 -->
+        <div class="download-box">
+          <div class="dl-icon"><i class='bx bx-code-alt'></i></div>
+          <h3>HIDDEN EXTERNAL C# LOADER LINK</h3>
+          <p>VERSION 4.6</p>
+          <a href="DOWNLOAD_LINK_2" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
