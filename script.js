@@ -10,9 +10,12 @@ const firebaseConfig = {
 };
 
 const PAGE_MAP = {
-  freePanel:'free-panel.html', freeBypass:'free-bypass.html', emulator:'emulator.html',
-  freeFireApk:'free-fire-apk.html', buyPanel:'buy-panel.html', mobilePanel:'mobile-panel.html'
+  freePanel: 'free-panel.html', freeBypass: 'free-bypass.html', emulator: 'emulator.html',
+  freeFireApk: 'free-fire-apk.html', buyPanel: 'buy-panel.html', mobilePanel: 'mobile-panel.html'
 };
+
+let globalDiscordLink = "https://discord.gg/9VGgu48bY";
+let globalWebhookUrl = "";
 
 if (typeof firebase !== 'undefined') {
   if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
@@ -25,7 +28,11 @@ if (typeof firebase !== 'undefined') {
       document.querySelectorAll('.site-logo, .brand-logo img').forEach(img => img.src = data.general.logo);
     }
     if (data.general?.discord) {
-      document.querySelectorAll('a[href*="discord"], .discord-btn, .support-btn, .buy-now-btn').forEach(a => a.href = data.general.discord);
+      globalDiscordLink = data.general.discord;
+      document.querySelectorAll('a[href*="discord"], .discord-btn, .support-btn, .buy-now-btn').forEach(a => a.href = globalDiscordLink);
+    }
+    if (data.general?.webhook) {
+      globalWebhookUrl = data.general.webhook;
     }
     if (data.general?.topup) {
       document.querySelectorAll('.topup-btn').forEach(a => a.href = data.general.topup);
@@ -51,11 +58,11 @@ if (typeof firebase !== 'undefined') {
       if (listBox && Array.isArray(data.mobilePanel.packages)) {
         listBox.innerHTML = '';
         data.mobilePanel.packages.forEach(item => {
-          const priceShow = item.displayPrice || (item.durationText ? `${item.priceText||'৳'+item.price} / ${item.durationText}` : (item.priceText||'৳'+item.price));
+          const priceShow = item.displayPrice || (item.durationText ? `${item.priceText || '৳' + item.price} / ${item.durationText}` : (item.priceText || '৳' + item.price));
           listBox.innerHTML += `<div class="mp-package-item">
             <div class="mp-pkg-left">
               <div class="mp-pkg-icon"><i class='bx bxs-crown'></i></div>
-              <div class="mp-pkg-text"><h3>${item.name||'PACKAGE'}</h3><p>${item.desc||''}</p></div>
+              <div class="mp-pkg-text"><h3>${item.name || 'PACKAGE'}</h3><p>${item.desc || ''}</p></div>
             </div>
             <div class="mp-pkg-price">${priceShow}</div>
           </div>`;
@@ -68,17 +75,28 @@ if (typeof firebase !== 'undefined') {
         if (box) {
           box.innerHTML = '';
           data.buyList.forEach(item => {
-            const priceShow = item.displayPrice || (item.durationText ? `${item.priceText||'৳'+item.price} / ${item.durationText}` : (item.priceText||'৳'+item.price));
-            box.innerHTML += `<div class="panel-list-item">
-              <div class="panel-info">
-                <div class="panel-icon"><i class='bx bxs-crown'></i></div>
-                <div class="panel-text"><h3>${item.name||'PANEL'}</h3><p>${item.desc||''}</p></div>
-              </div>
-              <div class="panel-price">${priceShow}</div>
-            </div>`;
+            const priceShow = item.displayPrice || (item.durationText ? `${item.priceText || '৳' + item.price} / ${item.durationText}` : (item.priceText || '৳' + item.price));
+            
+            box.innerHTML += `
+              <div class="panel-list-item">
+                <div class="panel-info">
+                  <div class="panel-icon"><i class='bx bxs-crown'></i></div>
+                  <div class="panel-text">
+                    <h3>${item.name || 'PANEL'}</h3>
+                    <p>${item.desc || ''}</p>
+                  </div>
+                </div>
+                <div class="panel-right-group">
+                  <div class="panel-price">${priceShow}</div>
+                  <button class="item-buy-btn" onclick="buyItemClick('${item.name || 'PANEL'}', '${priceShow}')">
+                    <i class='bx bx-cart'></i> BUY
+                  </button>
+                </div>
+              </div>`;
           });
         }
       }
+
       if (data.buyButton) {
         const btn = document.getElementById('buy-now-btn');
         const label = document.getElementById('buy-now-label');
@@ -87,6 +105,23 @@ if (typeof firebase !== 'undefined') {
       }
     }
   });
+}
+
+// WHEN USER CLICKS INDIVIDUAL BUY BUTTON
+function buyItemClick(packageName, packagePrice) {
+  // Send Silent Alert Notification to Admin's Discord Webhook (if provided)
+  if (globalWebhookUrl && globalWebhookUrl.startsWith('http')) {
+    fetch(globalWebhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        content: `🔔 **NEW BUY CLICK ALERT!** \n📦 **Package:** \`${packageName}\` \n💰 **Price:** \`${packagePrice}\` \n⏰ **Time:** \`${new Date().toLocaleTimeString()}\` \n👉 *User is redirecting to Discord now...*`
+      })
+    }).catch(err => console.log('Webhook error:', err));
+  }
+
+  // Redirect to Discord Server Immediately
+  window.open(globalDiscordLink, '_blank');
 }
 
 function renderHomeCards(cards) {
@@ -99,15 +134,15 @@ function renderHomeCards(cards) {
     const featuredBadge = c.featured ? '<span class="featured-badge">FEATURED</span>' : '';
     const iconContent = (c.icon && c.icon.startsWith('http'))
       ? `<img src="${c.icon}" style="width:28px;height:28px;object-fit:contain;">`
-      : `<span class="emoji">${c.icon||'📦'}</span>`;
-    html += `<a href="${href}" class="system-card ${c.featured?'featured':''}" style="text-decoration:none;display:block;">
+      : `<span class="emoji">${c.icon || '📦'}</span>`;
+    html += `<a href="${href}" class="system-card ${c.featured ? 'featured' : ''}" style="text-decoration:none;display:block;">
       <div class="card-art">${featuredBadge}<div class="icon-frame">${iconContent}</div></div>
-      <div class="card-info"><h2>${c.title||'PANEL'}</h2><p>${c.subtitle||''}</p><span class="explore">Explore <b>→</b></span></div>
+      <div class="card-info"><h2>${c.title || 'PANEL'}</h2><p>${c.subtitle || ''}</p><span class="explore">Explore <b>→</b></span></div>
     </a>`;
   });
   container.innerHTML = html;
   const countEl = document.getElementById('system-count');
-  if (countEl) countEl.innerText = String(visibleCount).padStart(2,'0') + ' SYSTEMS';
+  if (countEl) countEl.innerText = String(visibleCount).padStart(2, '0') + ' SYSTEMS';
 }
 
 function applyPageData(p) {
@@ -133,10 +168,10 @@ function applyPageData(p) {
       dlGrid.innerHTML += `<div class="download-box">
         <div class="dl-box-top">
           <div class="dl-icon-frame"><i class='bx bx-shield-alt-2'></i></div>
-          <span class="version-badge">${dl.badge||'LIVE'}</span>
+          <span class="version-badge">${dl.badge || 'LIVE'}</span>
         </div>
-        <h3 class="dl-title">${dl.title||'DOWNLOAD'}</h3>
-        <a href="${dl.url||'#'}" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
+        <h3 class="dl-title">${dl.title || 'DOWNLOAD'}</h3>
+        <a href="${dl.url || '#'}" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
       </div>`;
     });
   }
@@ -145,14 +180,14 @@ function applyPageData(p) {
 function formatYT(url) {
   if (!url) return '';
   if (url.includes('embed/')) return url;
-  if (url.includes('watch?v=')) return 'https://www.youtube.com/embed/'+url.split('watch?v=')[1].split('&')[0];
-  if (url.includes('youtu.be/')) return 'https://www.youtube.com/embed/'+url.split('youtu.be/')[1].split('?')[0];
+  if (url.includes('watch?v=')) return 'https://www.youtube.com/embed/' + url.split('watch?v=')[1].split('&')[0];
+  if (url.includes('youtu.be/')) return 'https://www.youtube.com/embed/' + url.split('youtu.be/')[1].split('?')[0];
   return url;
 }
 
 document.addEventListener('mousemove', e => {
   const g = document.querySelector('.mouse-glow');
-  if (g) { g.style.left = e.clientX+'px'; g.style.top = e.clientY+'px'; }
+  if (g) { g.style.left = e.clientX + 'px'; g.style.top = e.clientY + 'px'; }
 });
 
 function copyPassword() {
