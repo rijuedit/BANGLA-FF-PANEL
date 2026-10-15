@@ -1,5 +1,5 @@
 /* =========================================
-   BANGLA FF PANEL - PREMIUM STYLE WITH TOPUP
+   BANGLA FF PANEL - FULL PREMIUM STYLE
    ========================================= */
 
 * {
@@ -54,7 +54,7 @@ body::after {
 }
 
 /* =========================================
-   ANIMATED HACKING LIGHTS & MOUSE GLOW
+   ANIMATED BACKGROUND LIGHTS
    ========================================= */
 @keyframes floatAnimation {
   0% { transform: translate(0, 0) scale(1); }
@@ -88,20 +88,20 @@ body::after {
   animation-delay: -6s;
 }
 
-/* Updated Mouse Glow for All Pages */
+/* =========================================
+   NEW BRIGHT & GUARANTEED MOUSE GLOW
+   ========================================= */
 .mouse-glow {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  top: -1000px;
+  left: -1000px;
+  width: 550px;
+  height: 550px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 242, 254, 0.22) 0%, rgba(0, 242, 254, 0.06) 45%, transparent 70%);
   pointer-events: none;
-  z-index: 5;
-  background: radial-gradient(
-    650px circle at var(--mouse-x, 50vw) var(--mouse-y, 50vh),
-    rgba(0, 242, 254, 0.16),
-    transparent 45%
-  );
+  z-index: 9999; /* সবার উপরে থাকবে */
+  transform: translate(-50%, -50%);
   mix-blend-mode: screen;
 }
 
