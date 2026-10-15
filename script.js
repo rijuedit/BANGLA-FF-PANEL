@@ -16,6 +16,13 @@ if (typeof firebase !== 'undefined') {
   db.ref('panel_data').on('value', (snapshot) => {
     const data = snapshot.val() || {};
 
+    // LOGO
+    if (data.general?.logo) {
+      document.querySelectorAll('.site-logo, .brand-logo img').forEach(img => {
+        img.src = data.general.logo;
+      });
+    }
+
     // Discord + TopUp
     if (data.general) {
       if (data.general.discord) {
@@ -26,18 +33,17 @@ if (typeof firebase !== 'undefined') {
       }
     }
 
-    // Homepage Cards Hide/Show
+    // Homepage card visibility
     if (data.cardVisibility) {
-      const cards = document.querySelectorAll('[data-card]');
-      let visibleCount = 0;
-      cards.forEach(card => {
+      let visible = 0;
+      document.querySelectorAll('[data-card]').forEach(card => {
         const key = card.getAttribute('data-card');
-        const show = data.cardVisibility[key] !== false; // default true
+        const show = data.cardVisibility[key] !== false;
         card.style.display = show ? 'block' : 'none';
-        if (show) visibleCount++;
+        if (show) visible++;
       });
-      const countEl = document.getElementById('system-count');
-      if (countEl) countEl.innerText = String(visibleCount).padStart(2, '0') + ' SYSTEMS';
+      const c = document.getElementById('system-count');
+      if (c) c.innerText = String(visible).padStart(2,'0') + ' SYSTEMS';
     }
 
     const path = window.location.pathname;
@@ -46,23 +52,26 @@ if (typeof firebase !== 'undefined') {
     else if (path.includes('free-bypass') && data.freeBypass) applyPageData(data.freeBypass);
     else if (path.includes('emulator') && data.emulator) applyPageData(data.emulator);
     else if (path.includes('free-fire-apk') && data.apk) applyPageData(data.apk);
-    else if (path.includes('mobile-panel') && data.mobilePanel) applyPageData(data.mobilePanel);
+    else if (path.includes('mobile-panel') && data.mobilePanel) {
+      const msg = document.getElementById('mp-message-text');
+      const btn = document.getElementById('mp-ticket-btn');
+      const label = document.getElementById('mp-btn-label');
+      if (msg && data.mobilePanel.message) msg.innerText = data.mobilePanel.message;
+      if (label && data.mobilePanel.btnText) label.innerText = data.mobilePanel.btnText;
+      if (btn && data.mobilePanel.ticketLink) btn.href = data.mobilePanel.ticketLink;
+    }
     else if (path.includes('buy-panel') && data.buyList) {
       const box = document.querySelector('.panel-list');
       if (box && Array.isArray(data.buyList)) {
         box.innerHTML = '';
         data.buyList.forEach(item => {
-          box.innerHTML += `
-            <div class="panel-list-item">
-              <div class="panel-info">
-                <div class="panel-icon"><i class='bx bxs-crown'></i></div>
-                <div class="panel-text">
-                  <h3>${item.name || 'PANEL'}</h3>
-                  <p>${item.desc || ''}</p>
-                </div>
-              </div>
-              <div class="panel-price">${item.price || ''}</div>
-            </div>`;
+          box.innerHTML += `<div class="panel-list-item">
+            <div class="panel-info">
+              <div class="panel-icon"><i class='bx bxs-crown'></i></div>
+              <div class="panel-text"><h3>${item.name||'PANEL'}</h3><p>${item.desc||''}</p></div>
+            </div>
+            <div class="panel-price">${item.price||''}</div>
+          </div>`;
         });
       }
     }
@@ -70,25 +79,41 @@ if (typeof firebase !== 'undefined') {
 }
 
 function applyPageData(p) {
+  const videoWrap = document.querySelector('.video-container');
   const video = document.getElementById('main-video');
   const skip = document.querySelector('.how-to-skip-btn');
   const pass = document.getElementById('panel-password');
   const dlGrid = document.querySelector('.download-grid');
 
-  if (video && p.video) video.src = formatYT(p.video);
-  if (skip && p.skip) skip.href = p.skip;
+  // Video ON/OFF
+  if (videoWrap) {
+    if (p.showVideo === false) videoWrap.style.display = 'none';
+    else {
+      videoWrap.style.display = '';
+      if (video && p.video) video.src = formatYT(p.video);
+    }
+  }
+
+  // Skip ON/OFF
+  if (skip) {
+    if (p.showSkip === false) skip.style.display = 'none';
+    else {
+      skip.style.display = '';
+      if (p.skip) skip.href = p.skip;
+    }
+  }
+
   if (pass && p.pass) pass.innerText = p.pass;
 
   if (dlGrid && p.downloads && Array.isArray(p.downloads)) {
     dlGrid.innerHTML = '';
     p.downloads.forEach(dl => {
-      dlGrid.innerHTML += `
-        <div class="download-box">
-          <span class="status-badge"><span class="dot"></span> LIVE</span>
-          <div class="box-icon"><i class='bx bx-download'></i></div>
-          <h3>${dl.title || 'DOWNLOAD LINK'}</h3>
-          <a href="${dl.url || '#'}" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
-        </div>`;
+      dlGrid.innerHTML += `<div class="download-box">
+        <span class="status-badge"><span class="dot"></span> LIVE</span>
+        <div class="box-icon"><i class='bx bx-download'></i></div>
+        <h3>${dl.title||'DOWNLOAD'}</h3>
+        <a href="${dl.url||'#'}" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
+      </div>`;
     });
   }
 }
@@ -101,9 +126,9 @@ function formatYT(url) {
   return url;
 }
 
-document.addEventListener('mousemove', function(e) {
-  const glow = document.querySelector('.mouse-glow');
-  if (glow) { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; }
+document.addEventListener('mousemove', e => {
+  const g = document.querySelector('.mouse-glow');
+  if (g) { g.style.left = e.clientX+'px'; g.style.top = e.clientY+'px'; }
 });
 
 function copyPassword() {
