@@ -8,34 +8,24 @@
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="style.css">
   <style>
-    .inner-page-container{width:calc(100% - 40px);max-width:700px;margin:60px auto 80px;position:relative;z-index:1}
+    .inner-page-container{width:calc(100% - 40px);max-width:800px;margin:40px auto 80px;position:relative;z-index:1}
     .inner-header-actions{display:flex;justify-content:space-between;margin-bottom:24px}
     .back-btn,.share-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#cbd5e1;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;cursor:pointer}
     .back-btn:hover,.share-btn:hover{border-color:#00f2fe;color:#fff}
-    .mobile-card{
-      background:rgba(13,15,26,.8);border:1px solid rgba(0,242,254,.2);border-radius:20px;
-      padding:48px 32px;text-align:center;backdrop-filter:blur(12px);
-      box-shadow:0 0 40px rgba(0,242,254,.08);
-    }
-    .mobile-icon{
-      width:80px;height:80px;border-radius:20px;margin:0 auto 24px;
-      background:rgba(0,242,254,.1);border:1px solid rgba(0,242,254,.3);
-      display:grid;place-items:center;font-size:40px;color:#00f2fe;
-    }
-    .mobile-card h2{font-size:28px;font-weight:900;color:#fff;margin:0 0 12px;letter-spacing:1px}
-    .mobile-msg{
-      font-size:15px;color:#94a3b8;line-height:1.7;margin:0 0 32px;
-      max-width:420px;margin-left:auto;margin-right:auto;
-    }
-    .ticket-btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      background:linear-gradient(135deg,rgba(0,242,254,.2),rgba(88,101,242,.3));
-      border:1px solid #00f2fe;color:#fff;padding:16px 40px;border-radius:14px;
-      font-size:16px;font-weight:900;text-decoration:none;letter-spacing:2px;
-      text-transform:uppercase;box-shadow:0 0 25px rgba(0,242,254,.25);transition:.3s;
-    }
-    .ticket-btn:hover{transform:translateY(-3px);box-shadow:0 0 40px rgba(0,242,254,.45);color:#fff}
-    .ticket-btn i{font-size:22px}
+    .mobile-header-card{background:rgba(13,15,26,.8);border:1px solid rgba(0,242,254,.2);border-radius:20px;padding:40px 28px;text-align:center;margin-bottom:28px;box-shadow:0 0 30px rgba(0,242,254,.06)}
+    .mobile-icon{width:70px;height:70px;border-radius:18px;margin:0 auto 20px;background:rgba(0,242,254,.1);border:1px solid rgba(0,242,254,.3);display:grid;place-items:center;font-size:34px;color:#00f2fe}
+    .mobile-header-card h2{font-size:26px;font-weight:900;color:#fff;margin:0 0 10px;letter-spacing:1px}
+    .mobile-msg{font-size:14px;color:#94a3b8;line-height:1.6;margin:0 0 24px}
+    .ticket-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,rgba(0,242,254,.18),rgba(88,101,242,.25));border:1px solid #00f2fe;color:#fff;padding:14px 36px;border-radius:14px;font-size:15px;font-weight:900;text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;box-shadow:0 0 22px rgba(0,242,254,.2);transition:.3s}
+    .ticket-btn:hover{transform:translateY(-3px);box-shadow:0 0 35px rgba(0,242,254,.4);color:#fff}
+    .mp-package-list{display:flex;flex-direction:column;gap:14px;margin-bottom:28px}
+    .mp-package-item{display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(13,15,26,.75);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 22px;transition:.3s}
+    .mp-package-item:hover{border-color:rgba(0,242,254,.35);box-shadow:0 0 18px rgba(0,242,254,.1)}
+    .mp-pkg-left{display:flex;align-items:center;gap:14px}
+    .mp-pkg-icon{width:46px;height:46px;border-radius:12px;background:rgba(0,242,254,.1);border:1px solid rgba(0,242,254,.25);display:grid;place-items:center;color:#00f2fe;font-size:22px}
+    .mp-pkg-text h3{margin:0 0 4px;font-size:15px;font-weight:800;color:#fff;text-transform:uppercase}
+    .mp-pkg-text p{margin:0;font-size:12px;color:#94a3b8}
+    .mp-pkg-price{font-size:16px;font-weight:900;color:#00f2fe;white-space:nowrap}
   </style>
 </head>
 <body>
@@ -60,17 +50,17 @@
       <button class="share-btn"><i class='bx bx-share-alt'></i> Share</button>
     </div>
 
-    <div class="mobile-card">
+    <div class="mobile-header-card">
       <div class="mobile-icon"><i class='bx bx-mobile-alt'></i></div>
       <h2>MOBILE PANEL</h2>
-      <p class="mobile-msg" id="mp-message-text">
-        Mobile panel কিনতে Ticket এ যোগাযোগ করুন
-      </p>
+      <p class="mobile-msg" id="mp-message-text">Mobile panel কিনতে Ticket এ যোগাযোগ করুন</p>
       <a href="#" target="_blank" class="ticket-btn" id="mp-ticket-btn">
         <i class='bx bx-purchase-tag'></i>
         <span id="mp-btn-label">TICKET</span>
       </a>
     </div>
+
+    <div class="mp-package-list" id="mp-package-list"></div>
   </main>
 
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
