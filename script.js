@@ -1,8 +1,6 @@
 // =========================================
 // BANGLA FF PANEL - MAIN SITE DYNAMIC SCRIPT
 // =========================================
-
-// Firebase Configuration (Same Project)
 const firebaseConfig = {
   apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
   authDomain: "bangla-ff-admin.firebaseapp.com",
@@ -14,108 +12,90 @@ const firebaseConfig = {
   measurementId: "G-BBL16S84J8"
 };
 
-// Initialize Firebase if library exists
 if (typeof firebase !== 'undefined') {
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  }
+  if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  // Listen for Realtime Updates from Admin Panel
   db.ref('panel_data').on('value', (snapshot) => {
     const data = snapshot.val() || {};
 
-    // 1. Update Discord & TopUp Links Everywhere
+    // Discord + TopUp
     if (data.general) {
       if (data.general.discord) {
-        document.querySelectorAll('a[href*="discord.gg"], .discord-btn, .support-btn, .buy-now-btn').forEach(a => {
-          a.href = data.general.discord;
-        });
+        document.querySelectorAll('a[href*="discord"], .discord-btn, .support-btn, .buy-now-btn').forEach(a => a.href = data.general.discord);
       }
       if (data.general.topup) {
-        document.querySelectorAll('.topup-btn').forEach(a => {
-          a.href = data.general.topup;
-        });
+        document.querySelectorAll('.topup-btn').forEach(a => a.href = data.general.topup);
       }
     }
 
-    // 2. Page Specific Updates
     const path = window.location.pathname;
 
-    // Free Panel Page
-    if (path.includes('free-panel') && data.freePanel) {
-      applyPageData(data.freePanel);
-    }
-    // Free Bypass Page
-    else if (path.includes('free-bypass') && data.freeBypass) {
-      applyPageData(data.freeBypass);
-    }
-    // Emulator Page
-    else if (path.includes('emulator') && data.emulator) {
-      applyPageData(data.emulator);
-    }
-    // Free Fire APK Page
-    else if (path.includes('free-fire-apk') && data.apk) {
-      applyPageData(data.apk);
-    }
-    // Buy Panel List Page
-    else if (path.includes('buy-panel') && data.buyList && Array.isArray(data.buyList)) {
-      const buyContainer = document.querySelector('.panel-list');
-      if (buyContainer) {
-        buyContainer.innerHTML = '';
+    if (path.includes('free-panel') && data.freePanel) applyPageData(data.freePanel);
+    else if (path.includes('free-bypass') && data.freeBypass) applyPageData(data.freeBypass);
+    else if (path.includes('emulator') && data.emulator) applyPageData(data.emulator);
+    else if (path.includes('free-fire-apk') && data.apk) applyPageData(data.apk);
+    else if (path.includes('buy-panel') && data.buyList) {
+      const box = document.querySelector('.panel-list');
+      if (box && Array.isArray(data.buyList)) {
+        box.innerHTML = '';
         data.buyList.forEach(item => {
-          buyContainer.innerHTML += `
+          box.innerHTML += `
             <div class="panel-list-item">
               <div class="panel-info">
                 <div class="panel-icon"><i class='bx bxs-crown'></i></div>
                 <div class="panel-text">
                   <h3>${item.name || 'PANEL'}</h3>
-                  <p>${item.desc || 'Premium Features'}</p>
+                  <p>${item.desc || ''}</p>
                 </div>
               </div>
               <div class="panel-price">${item.price || ''}</div>
-            </div>
-          `;
+            </div>`;
         });
       }
     }
   });
 }
 
-// Function to update Video, Password, Links
-function applyPageData(pData) {
-  const videoIframe = document.getElementById('main-video');
-  const skipBtn = document.querySelector('.how-to-skip-btn');
-  const passText = document.getElementById('panel-password');
-  const dlBtns = document.querySelectorAll('.dl-btn');
+function applyPageData(p) {
+  const video = document.getElementById('main-video');
+  const skip = document.querySelector('.how-to-skip-btn');
+  const pass = document.getElementById('panel-password');
+  const dls = document.querySelectorAll('.dl-btn');
 
-  if (videoIframe && pData.video) videoIframe.src = formatYoutubeUrl(pData.video);
-  if (skipBtn && pData.skip) skipBtn.href = pData.skip;
-  if (passText && pData.pass) passText.innerText = pData.pass;
-  if (dlBtns[0] && pData.dl1) dlBtns[0].href = pData.dl1;
-  if (dlBtns[1] && pData.dl2) dlBtns[1].href = pData.dl2;
+  if (video && p.video) video.src = formatYT(p.video);
+  if (skip && p.skip) skip.href = p.skip;
+  if (pass && p.pass) pass.innerText = p.pass;
+  if (dls[0] && p.dl1) dls[0].href = p.dl1;
+  if (dls[1] && p.dl2) dls[1].href = p.dl2;
 }
 
-// Helper: Format YouTube URL to Embed format
-function formatYoutubeUrl(url) {
+function formatYT(url) {
   if (!url) return '';
   if (url.includes('embed/')) return url;
-  if (url.includes('watch?v=')) {
-    const id = url.split('watch?v=')[1].split('&')[0];
-    return `https://www.youtube.com/embed/${id}`;
-  }
-  if (url.includes('youtu.be/')) {
-    const id = url.split('youtu.be/')[1].split('?')[0];
-    return `https://www.youtube.com/embed/${id}`;
-  }
+  if (url.includes('watch?v=')) return 'https://www.youtube.com/embed/' + url.split('watch?v=')[1].split('&')[0];
+  if (url.includes('youtu.be/')) return 'https://www.youtube.com/embed/' + url.split('youtu.be/')[1].split('?')[0];
   return url;
 }
 
-// Mouse Glow Tracking Effect (Universal)
-document.addEventListener('mousemove', function (e) {
+// Mouse Glow
+document.addEventListener('mousemove', function(e) {
   const glow = document.querySelector('.mouse-glow');
   if (glow) {
     glow.style.left = e.clientX + 'px';
     glow.style.top = e.clientY + 'px';
   }
 });
+
+// Copy Password (if exists)
+function copyPassword() {
+  const el = document.getElementById('panel-password');
+  if (!el) return;
+  navigator.clipboard.writeText(el.innerText).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    if (!btn) return;
+    const old = btn.innerHTML;
+    btn.innerHTML = "<i class='bx bx-check'></i> Copied!";
+    setTimeout(() => btn.innerHTML = old, 2000);
+  });
+}
