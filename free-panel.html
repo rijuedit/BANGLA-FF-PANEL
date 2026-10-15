@@ -4,65 +4,292 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free Panel - BANGLA FF PANEL</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Boxicons CDN -->
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  
+  <!-- Main CSS Link -->
   <link rel="stylesheet" href="style.css">
+
   <style>
-    .inner-page-container{width:calc(100% - 40px);max-width:900px;margin:40px auto 80px;position:relative;z-index:1}
-    .inner-header-actions{display:flex;justify-content:space-between;margin-bottom:20px}
-    .back-btn,.share-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#cbd5e1;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;cursor:pointer;transition:.3s}
-    .back-btn:hover,.share-btn:hover{background:rgba(0,242,254,.1);border-color:#00f2fe;color:#fff}
-    .inner-content-card{background:rgba(13,15,26,.75);border:1px solid rgba(0,242,254,.15);border-radius:16px;backdrop-filter:blur(12px);padding:24px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
-    .video-container{width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:#000}
-    .video-container iframe{width:100%;height:100%}
-    .title-skip-row{display:flex;justify-content:space-between;align-items:center;margin:24px 0;flex-wrap:wrap;gap:15px}
-    .panel-titles h2{font-size:24px;font-weight:900;color:#fff;margin:0 0 5px}
-    .panel-titles p{font:600 11px var(--mono);color:#94a3b8;margin:0}
-    .how-to-skip-btn{display:flex;align-items:center;gap:8px;background:rgba(16,185,129,.1);border:1px solid #10b981;color:#34d399;padding:10px 18px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;transition:.3s}
-    .how-to-skip-btn:hover{background:rgba(16,185,129,.2);color:#fff}
-    .password-section{border:1px solid rgba(234,179,8,.3);background:rgba(234,179,8,.05);border-radius:12px;padding:16px 20px;margin-bottom:24px}
-    .pass-label{font:700 10px var(--mono);color:#facc15;margin-bottom:8px;display:flex;align-items:center;gap:6px}
-    .pass-value-row{display:flex;justify-content:space-between;align-items:center}
-    .password-text{font-size:20px;font-weight:800;color:#fff}
-    .copy-btn{background:transparent;border:1px solid rgba(234,179,8,.5);color:#facc15;padding:6px 14px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px}
-    .download-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .download-box{background:rgba(6,7,12,.6);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:20px;text-align:center;transition:.3s}
-    .download-box:hover{border-color:#00f2fe;transform:translateY(-3px)}
-    .dl-icon{font-size:28px;color:#00f2fe;margin-bottom:10px}
-    .download-box h3{font-size:12px;font-weight:800;color:#e2e8f0;margin:0 0 6px}
-    .download-box p{font:600 9px var(--mono);color:#64748b;margin:0 0 16px}
-    .dl-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;background:linear-gradient(135deg,#312e81,#1e1b4b);border:1px solid #5865f2;color:#fff;padding:10px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;transition:.3s}
-    .dl-btn:hover{border-color:#00f2fe;box-shadow:0 0 15px rgba(0,242,254,.4)}
-    @media(max-width:600px){.download-grid{grid-template-columns:1fr}}
+    :root {
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    .inner-page-container {
+      width: calc(100% - 40px);
+      max-width: 900px;
+      margin: 40px auto 80px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .inner-header-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .back-btn, .share-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(17, 7, 26, 0.8);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover, .share-btn:hover {
+      background: rgba(157, 0, 255, 0.15);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      box-shadow: 0 0 12px rgba(255, 0, 102, 0.3);
+    }
+
+    .inner-content-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      backdrop-filter: blur(15px);
+      padding: 28px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .video-container {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      background: #000;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .video-container iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    .title-skip-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 24px 0;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .panel-titles h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--text-main);
+      margin: 0 0 6px;
+      letter-spacing: 1px;
+    }
+
+    .panel-titles p {
+      font: 600 12px var(--mono);
+      color: var(--text-muted);
+      margin: 0;
+      letter-spacing: 1.5px;
+    }
+
+    .how-to-skip-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(157, 0, 255, 0.1);
+      border: 1px solid var(--accent-secondary);
+      color: #d8b4fe;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .how-to-skip-btn:hover {
+      background: var(--accent-secondary);
+      color: #fff;
+      box-shadow: 0 0 15px rgba(157, 0, 255, 0.4);
+    }
+
+    .password-section {
+      border: 1px solid rgba(255, 0, 102, 0.3);
+      background: rgba(255, 0, 102, 0.05);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-bottom: 24px;
+    }
+
+    .pass-label {
+      font: 700 11px var(--mono);
+      color: var(--accent-primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 1px;
+    }
+
+    .pass-value-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .password-text {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+
+    .copy-btn {
+      background: rgba(255, 0, 102, 0.1);
+      border: 1px solid var(--accent-primary);
+      color: var(--accent-primary);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .copy-btn:hover {
+      background: var(--accent-primary);
+      color: #fff;
+      box-shadow: 0 0 12px rgba(255, 0, 102, 0.5);
+    }
+
+    .download-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .download-box {
+      background: rgba(8, 3, 13, 0.7);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px 20px;
+      text-align: center;
+      transition: all 0.4s ease;
+    }
+
+    .download-box:hover {
+      border-color: var(--accent-primary);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(255, 0, 102, 0.15);
+    }
+
+    .dl-icon {
+      font-size: 32px;
+      color: var(--accent-primary);
+      margin-bottom: 12px;
+    }
+
+    .download-box h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 0 0 8px;
+      letter-spacing: 1px;
+    }
+
+    .download-box p {
+      font: 600 10px var(--mono);
+      color: var(--text-muted);
+      margin: 0 0 18px;
+      letter-spacing: 1px;
+    }
+
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
+      border: none;
+      color: #fff;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .dl-btn:hover {
+      box-shadow: 0 0 20px rgba(255, 0, 102, 0.5);
+      transform: translateY(-2px);
+    }
+
+    @media(max-width:600px) {
+      .download-grid { grid-template-columns: 1fr; }
+      .inner-content-card { padding: 18px; }
+      .title-skip-row { flex-direction: column; align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
-  <div class="ambient ambient-left"></div>
-  <div class="ambient ambient-right"></div>
-  <div class="mouse-glow"></div>
 
-  <header class="topbar">
-    <a class="brand" href="index.html">
-      <span class="brand-logo"><img src="logo.png" alt="Logo"></span>
-      <span class="brand-text"><strong>BANGLA FF PANEL</strong><small>COMMUNITY • GAMING HUB</small></span>
+  <!-- Mouse Glow Effect -->
+  <div id="mouse-glow"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <img src="logo.png" alt="Logo" class="brand-logo-img">
+      <div class="brand-text">
+        <h2>BANGLA FF PANEL</h2>
+        <span>PREMIUM CORP</span>
+      </div>
+    </div>
+    <a href="index.html" class="btn-nav">
+      &larr; Home
     </a>
-    <nav class="top-actions">
-      <a class="home-btn" href="index.html">Home</a>
-      <a class="discord-btn" href="https://discord.gg/9VGgu48bY" target="_blank"><span class="discord-mark">◉</span> Discord</a>
-    </nav>
   </header>
 
+  <!-- Main Container -->
   <main class="inner-page-container">
     <div class="inner-header-actions">
       <a href="index.html" class="back-btn"><i class='bx bx-left-arrow-alt'></i> Back</a>
-      <button class="share-btn"><i class='bx bx-share-alt'></i> Share</button>
+      <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Page Link Copied!');">
+        <i class='bx bx-share-alt'></i> Share
+      </button>
     </div>
 
     <div class="inner-content-card">
+      <!-- Video Container -->
       <div class="video-container">
         <iframe id="main-video" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
       </div>
 
+      <!-- Title & How to Skip Row -->
       <div class="title-skip-row">
         <div class="panel-titles">
           <h2>FREE PANEL</h2>
@@ -71,6 +298,7 @@
         <a href="#" target="_blank" class="how-to-skip-btn"><i class='bx bx-skip-next-circle'></i> HOW TO SKIP</a>
       </div>
 
+      <!-- Password Section -->
       <div class="password-section">
         <div class="pass-label"><i class='bx bx-lock-alt'></i> RAR PASSWORD</div>
         <div class="pass-value-row">
@@ -79,13 +307,17 @@
         </div>
       </div>
 
+      <!-- Download Grid -->
       <div class="download-grid">
+        <!-- Box 1 -->
         <div class="download-box">
           <div class="dl-icon"><i class='bx bx-shield-quarter'></i></div>
           <h3>HIDDEN INTERNAL LOADER LINK</h3>
           <p>VERSION 4.6</p>
           <a href="#" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
         </div>
+
+        <!-- Box 2 -->
         <div class="download-box">
           <div class="dl-icon"><i class='bx bx-code-alt'></i></div>
           <h3>HIDDEN EXTERNAL C# LOADER LINK</h3>
@@ -96,9 +328,17 @@
     </div>
   </main>
 
-  <!-- Firebase + Script -->
+  <!-- Firebase & Scripts -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
   <script src="script.js"></script>
+
+  <script>
+    function copyPassword() {
+      const passText = document.getElementById('panel-password').innerText;
+      navigator.clipboard.writeText(passText);
+      alert('Password Copied: ' + passText);
+    }
+  </script>
 </body>
 </html>
