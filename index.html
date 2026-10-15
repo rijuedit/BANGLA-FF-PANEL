@@ -4,25 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#080910">
+  <meta name="description" content="BANGLA FF PANEL — Free Fire community panel and support hub.">
   <title>BANGLA FF PANEL</title>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet">
+
+  <!-- CSS File -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- Animated Background Lights -->
   <div class="ambient ambient-left"></div>
   <div class="ambient ambient-right"></div>
+
+  <!-- Mouse Glow Effect -->
   <div class="mouse-glow"></div>
 
+  <!-- ========== TOPBAR / HEADER ========== -->
   <header class="topbar">
     <a class="brand" href="index.html">
-      <span class="brand-logo"><img src="logo.png" alt="BANGLA FF PANEL logo"></span>
+      <span class="brand-logo">
+        <img src="logo.png" alt="BANGLA FF PANEL logo" class="site-logo">
+      </span>
       <span class="brand-text">
         <strong>BANGLA FF PANEL</strong>
         <small>COMMUNITY • GAMING HUB</small>
       </span>
     </a>
+
     <nav class="top-actions">
       <a class="home-btn" href="index.html">Home</a>
       <a class="discord-btn" href="https://discord.gg/9VGgu48bY" target="_blank" rel="noopener noreferrer">
@@ -31,43 +44,69 @@
     </nav>
   </header>
 
+  <!-- ========== MAIN CONTENT ========== -->
   <main id="home">
     <section class="hero frame">
+
+      <!-- System Status -->
       <div class="system-status">
         <span class="status-dot"></span>
         ALL SYSTEMS OPERATIONAL
       </div>
 
+      <!-- Main Title -->
       <h1>BANGLA <span>FF</span> <b>PANEL</b></h1>
-      <p class="tagline">ADVANCED GAMING HUB <i>•</i> FAST <i>•</i> RELIABLE</p>
 
-      <div class="benefits">
-        <div class="benefit"><span class="bolt">ϟ</span> LIGHTNING FAST</div>
-        <div class="benefit"><span class="shield">♢</span> 100% SAFE</div>
-        <div class="benefit"><span class="infinity">∞</span> LIFETIME NO BAN</div>
+      <!-- Tagline -->
+      <p class="tagline">
+        ADVANCED GAMING HUB <i>•</i> FAST <i>•</i> RELIABLE
+      </p>
+
+      <!-- Benefit Chips -->
+      <div class="benefits" aria-label="Features">
+        <div class="benefit">
+          <span class="bolt">ϟ</span> LIGHTNING FAST
+        </div>
+        <div class="benefit">
+          <span class="shield">♢</span> 100% SAFE
+        </div>
+        <div class="benefit">
+          <span class="infinity">∞</span> LIFETIME NO BAN
+        </div>
       </div>
 
+      <!-- Hero Buttons Group -->
       <div class="hero-buttons">
+        <!-- Discord Support Button -->
         <a class="support-btn" href="https://discord.gg/9VGgu48bY" target="_blank" rel="noopener noreferrer">
-          <span class="discord-mark">◉</span> Join Support Discord <span class="arrow">→</span>
+          <span class="discord-mark">◉</span>
+          Join Support Discord
+          <span class="arrow">→</span>
         </a>
+
+        <!-- Diamond Top Up Button -->
         <a class="topup-btn" href="#topup" target="_blank">
-          <span class="diamond-mark">💎</span> DIAMOND TOP UP <span class="arrow">→</span>
+          <span class="diamond-mark">💎</span>
+          DIAMOND TOP UP
+          <span class="arrow">→</span>
         </a>
       </div>
 
+      <!-- Section Label (Auto Dynamic System Count) -->
       <div class="section-label">
         <span>//</span> AVAILABLE <small id="system-count">06 SYSTEMS</small>
       </div>
 
-      <!-- SYSTEM CARDS -->
+      <!-- ========== SYSTEM CARDS ========== -->
       <section class="cards" id="home-cards">
 
-        <!-- 1. FREE PANEL -->
-        <a href="free-panel.html" class="system-card featured" data-card="freePanel" style="text-decoration:none;display:block;">
+        <!-- Card 1: FREE PANEL -->
+        <a href="free-panel.html" class="system-card featured" data-card="freePanel" style="text-decoration: none; display: block;">
           <div class="card-art">
             <span class="featured-badge">FEATURED</span>
-            <div class="icon-frame"><span class="emoji">💻</span></div>
+            <div class="icon-frame">
+              <span class="emoji">💻</span>
+            </div>
           </div>
           <div class="card-info">
             <h2>FREE PANEL</h2>
@@ -76,10 +115,12 @@
           </div>
         </a>
 
-        <!-- 2. FREE BYPASS -->
-        <a href="free-bypass.html" class="system-card" data-card="freeBypass" style="text-decoration:none;display:block;">
+        <!-- Card 2: FREE BYPASS -->
+        <a href="free-bypass.html" class="system-card" data-card="freeBypass" style="text-decoration: none; display: block;">
           <div class="card-art">
-            <div class="icon-frame"><span class="emoji">💻</span></div>
+            <div class="icon-frame">
+              <span class="emoji">💻</span>
+            </div>
           </div>
           <div class="card-info">
             <h2>FREE BYPASS</h2>
@@ -88,10 +129,12 @@
           </div>
         </a>
 
-        <!-- 3. EMULATOR -->
-        <a href="emulator.html" class="system-card" data-card="emulator" style="text-decoration:none;display:block;">
+        <!-- Card 3: EMULATOR -->
+        <a href="emulator.html" class="system-card" data-card="emulator" style="text-decoration: none; display: block;">
           <div class="card-art">
-            <div class="icon-frame"><span class="emoji">💎</span></div>
+            <div class="icon-frame">
+              <span class="emoji">💎</span>
+            </div>
           </div>
           <div class="card-info">
             <h2>EMULATOR</h2>
@@ -100,10 +143,12 @@
           </div>
         </a>
 
-        <!-- 4. FREE FIRE APK -->
-        <a href="free-fire-apk.html" class="system-card" data-card="freeFireApk" style="text-decoration:none;display:block;">
+        <!-- Card 4: FREE FIRE APK -->
+        <a href="free-fire-apk.html" class="system-card" data-card="freeFireApk" style="text-decoration: none; display: block;">
           <div class="card-art">
-            <div class="icon-frame"><span class="emoji">⚡</span></div>
+            <div class="icon-frame">
+              <span class="emoji">⚡</span>
+            </div>
           </div>
           <div class="card-info">
             <h2>FREE FIRE APK</h2>
@@ -112,10 +157,12 @@
           </div>
         </a>
 
-        <!-- 5. BUY PANEL -->
-        <a href="buy-panel.html" class="system-card" data-card="buyPanel" style="text-decoration:none;display:block;">
+        <!-- Card 5: BUY PANEL -->
+        <a href="buy-panel.html" class="system-card" data-card="buyPanel" style="text-decoration: none; display: block;">
           <div class="card-art">
-            <div class="icon-frame"><span class="emoji">🔥</span></div>
+            <div class="icon-frame">
+              <span class="emoji">🔥</span>
+            </div>
           </div>
           <div class="card-info">
             <h2>BUY PANEL</h2>
@@ -124,10 +171,12 @@
           </div>
         </a>
 
-        <!-- 6. MOBILE PANEL (নতুন) -->
-        <a href="mobile-panel.html" class="system-card" data-card="mobilePanel" style="text-decoration:none;display:block;">
+        <!-- Card 6: MOBILE PANEL -->
+        <a href="mobile-panel.html" class="system-card" data-card="mobilePanel" style="text-decoration: none; display: block;">
           <div class="card-art">
-            <div class="icon-frame"><span class="emoji">📱</span></div>
+            <div class="icon-frame">
+              <span class="emoji">📱</span>
+            </div>
           </div>
           <div class="card-info">
             <h2>MOBILE PANEL</h2>
@@ -138,6 +187,7 @@
 
       </section>
 
+      <!-- ========== FOOTER ========== -->
       <footer class="footer">
         <div>
           <strong>BANGLA FF PANEL</strong>
@@ -150,11 +200,15 @@
           </a>
         </div>
       </footer>
+
     </section>
   </main>
 
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+  <!-- JavaScript File -->
   <script src="script.js"></script>
 </body>
 </html>
