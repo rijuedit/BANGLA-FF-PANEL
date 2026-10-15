@@ -1,6 +1,3 @@
-// =========================================
-// BANGLA FF PANEL - MAIN SITE DYNAMIC SCRIPT
-// =========================================
 const firebaseConfig = {
   apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
   authDomain: "bangla-ff-admin.firebaseapp.com",
@@ -29,12 +26,27 @@ if (typeof firebase !== 'undefined') {
       }
     }
 
+    // Homepage Cards Hide/Show
+    if (data.cardVisibility) {
+      const cards = document.querySelectorAll('[data-card]');
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const key = card.getAttribute('data-card');
+        const show = data.cardVisibility[key] !== false; // default true
+        card.style.display = show ? 'block' : 'none';
+        if (show) visibleCount++;
+      });
+      const countEl = document.getElementById('system-count');
+      if (countEl) countEl.innerText = String(visibleCount).padStart(2, '0') + ' SYSTEMS';
+    }
+
     const path = window.location.pathname;
 
     if (path.includes('free-panel') && data.freePanel) applyPageData(data.freePanel);
     else if (path.includes('free-bypass') && data.freeBypass) applyPageData(data.freeBypass);
     else if (path.includes('emulator') && data.emulator) applyPageData(data.emulator);
     else if (path.includes('free-fire-apk') && data.apk) applyPageData(data.apk);
+    else if (path.includes('mobile-panel') && data.mobilePanel) applyPageData(data.mobilePanel);
     else if (path.includes('buy-panel') && data.buyList) {
       const box = document.querySelector('.panel-list');
       if (box && Array.isArray(data.buyList)) {
@@ -67,7 +79,6 @@ function applyPageData(p) {
   if (skip && p.skip) skip.href = p.skip;
   if (pass && p.pass) pass.innerText = p.pass;
 
-  // Dynamic Download Buttons Rendering
   if (dlGrid && p.downloads && Array.isArray(p.downloads)) {
     dlGrid.innerHTML = '';
     p.downloads.forEach(dl => {
@@ -77,8 +88,7 @@ function applyPageData(p) {
           <div class="box-icon"><i class='bx bx-download'></i></div>
           <h3>${dl.title || 'DOWNLOAD LINK'}</h3>
           <a href="${dl.url || '#'}" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
-        </div>
-      `;
+        </div>`;
     });
   }
 }
@@ -91,16 +101,11 @@ function formatYT(url) {
   return url;
 }
 
-// Mouse Glow
 document.addEventListener('mousemove', function(e) {
   const glow = document.querySelector('.mouse-glow');
-  if (glow) {
-    glow.style.left = e.clientX + 'px';
-    glow.style.top = e.clientY + 'px';
-  }
+  if (glow) { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; }
 });
 
-// Copy Password
 function copyPassword() {
   const el = document.getElementById('panel-password');
   if (!el) return;
