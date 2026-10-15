@@ -9,6 +9,15 @@ const firebaseConfig = {
   measurementId: "G-BBL16S84J8"
 };
 
+const PAGE_MAP = {
+  freePanel: 'free-panel.html',
+  freeBypass: 'free-bypass.html',
+  emulator: 'emulator.html',
+  freeFireApk: 'free-fire-apk.html',
+  buyPanel: 'buy-panel.html',
+  mobilePanel: 'mobile-panel.html'
+};
+
 if (typeof firebase !== 'undefined') {
   if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
@@ -18,32 +27,20 @@ if (typeof firebase !== 'undefined') {
 
     // LOGO
     if (data.general?.logo) {
-      document.querySelectorAll('.site-logo, .brand-logo img').forEach(img => {
-        img.src = data.general.logo;
-      });
+      document.querySelectorAll('.site-logo, .brand-logo img').forEach(img => img.src = data.general.logo);
     }
 
-    // Discord + TopUp
-    if (data.general) {
-      if (data.general.discord) {
-        document.querySelectorAll('a[href*="discord"], .discord-btn, .support-btn, .buy-now-btn').forEach(a => a.href = data.general.discord);
-      }
-      if (data.general.topup) {
-        document.querySelectorAll('.topup-btn').forEach(a => a.href = data.general.topup);
-      }
+    // Discord / TopUp
+    if (data.general?.discord) {
+      document.querySelectorAll('a[href*="discord"], .discord-btn, .support-btn, .buy-now-btn').forEach(a => a.href = data.general.discord);
+    }
+    if (data.general?.topup) {
+      document.querySelectorAll('.topup-btn').forEach(a => a.href = data.general.topup);
     }
 
-    // Homepage card visibility
-    if (data.cardVisibility) {
-      let visible = 0;
-      document.querySelectorAll('[data-card]').forEach(card => {
-        const key = card.getAttribute('data-card');
-        const show = data.cardVisibility[key] !== false;
-        card.style.display = show ? 'block' : 'none';
-        if (show) visible++;
-      });
-      const c = document.getElementById('system-count');
-      if (c) c.innerText = String(visible).padStart(2,'0') + ' SYSTEMS';
+    // HOME CARDS (icon, title, subtitle, show/hide, featured)
+    if (data.homeCards && Array.isArray(data.homeCards)) {
+      renderHomeCards(data.homeCards);
     }
 
     const path = window.location.pathname;
@@ -68,14 +65,49 @@ if (typeof firebase !== 'undefined') {
           box.innerHTML += `<div class="panel-list-item">
             <div class="panel-info">
               <div class="panel-icon"><i class='bx bxs-crown'></i></div>
-              <div class="panel-text"><h3>${item.name||'PANEL'}</h3><p>${item.desc||''}</p></div>
+              <div class="panel-text"><h3>${item.name || 'PANEL'}</h3><p>${item.desc || ''}</p></div>
             </div>
-            <div class="panel-price">${item.price||''}</div>
+            <div class="panel-price">${item.price || ''}</div>
           </div>`;
         });
       }
     }
   });
+}
+
+function renderHomeCards(cards) {
+  const container = document.getElementById('home-cards');
+  if (!container) return;
+
+  let html = '';
+  let visibleCount = 0;
+
+  cards.forEach(c => {
+    if (c.visible === false) return;
+    visibleCount++;
+    const href = PAGE_MAP[c.key] || '#';
+    const featuredBadge = c.featured ? '<span class="featured-badge">FEATURED</span>' : '';
+    const iconContent = (c.icon && c.icon.startsWith('http'))
+      ? `<img src="${c.icon}" style="width:28px;height:28px;object-fit:contain;">`
+      : `<span class="emoji">${c.icon || '📦'}</span>`;
+
+    html += `
+      <a href="${href}" class="system-card ${c.featured ? 'featured' : ''}" data-card="${c.key}" style="text-decoration:none;display:block;">
+        <div class="card-art">
+          ${featuredBadge}
+          <div class="icon-frame">${iconContent}</div>
+        </div>
+        <div class="card-info">
+          <h2>${c.title || 'PANEL'}</h2>
+          <p>${c.subtitle || ''}</p>
+          <span class="explore">Explore <b>→</b></span>
+        </div>
+      </a>`;
+  });
+
+  container.innerHTML = html;
+  const countEl = document.getElementById('system-count');
+  if (countEl) countEl.innerText = String(visibleCount).padStart(2, '0') + ' SYSTEMS';
 }
 
 function applyPageData(p) {
@@ -85,7 +117,6 @@ function applyPageData(p) {
   const pass = document.getElementById('panel-password');
   const dlGrid = document.querySelector('.download-grid');
 
-  // Video ON/OFF
   if (videoWrap) {
     if (p.showVideo === false) videoWrap.style.display = 'none';
     else {
@@ -94,7 +125,6 @@ function applyPageData(p) {
     }
   }
 
-  // Skip ON/OFF
   if (skip) {
     if (p.showSkip === false) skip.style.display = 'none';
     else {
@@ -105,15 +135,18 @@ function applyPageData(p) {
 
   if (pass && p.pass) pass.innerText = p.pass;
 
+  // Download boxes with custom LIVE badge
   if (dlGrid && p.downloads && Array.isArray(p.downloads)) {
     dlGrid.innerHTML = '';
     p.downloads.forEach(dl => {
-      dlGrid.innerHTML += `<div class="download-box">
-        <span class="status-badge"><span class="dot"></span> LIVE</span>
-        <div class="box-icon"><i class='bx bx-download'></i></div>
-        <h3>${dl.title||'DOWNLOAD'}</h3>
-        <a href="${dl.url||'#'}" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
-      </div>`;
+      const badgeText = dl.badge || 'LIVE';
+      dlGrid.innerHTML += `
+        <div class="download-box">
+          <span class="status-badge"><span class="dot"></span> ${badgeText}</span>
+          <div class="box-icon"><i class='bx bx-download'></i></div>
+          <h3>${dl.title || 'DOWNLOAD'}</h3>
+          <a href="${dl.url || '#'}" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
+        </div>`;
     });
   }
 }
@@ -128,7 +161,7 @@ function formatYT(url) {
 
 document.addEventListener('mousemove', e => {
   const g = document.querySelector('.mouse-glow');
-  if (g) { g.style.left = e.clientX+'px'; g.style.top = e.clientY+'px'; }
+  if (g) { g.style.left = e.clientX + 'px'; g.style.top = e.clientY + 'px'; }
 });
 
 function copyPassword() {
