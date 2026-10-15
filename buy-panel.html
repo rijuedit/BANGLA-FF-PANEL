@@ -4,220 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BUY Panel - BANGLA FF PANEL</title>
-  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="style.css">
-
   <style>
-    .inner-page-container {
-      width: calc(100% - 40px);
-      max-width: 900px;
-      margin: 40px auto 80px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .inner-header-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 28px;
-    }
-
-    .back-btn, .share-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #cbd5e1;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .back-btn:hover, .share-btn:hover {
-      background: rgba(0, 242, 254, 0.1);
-      border-color: #00f2fe;
-      color: #fff;
-    }
-
-    .page-title-section {
-      text-align: center;
-      margin-bottom: 35px;
-    }
-
-    .page-title-section h1 {
-      font-size: 30px;
-      font-weight: 900;
-      color: #fff;
-      margin: 0 0 8px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .page-title-section p {
-      font: 500 12px var(--mono);
-      color: #94a3b8;
-      margin: 0;
-      letter-spacing: 1.5px;
-    }
-
-    /* PANEL LIST (Admin editable list) */
-    .panel-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 40px;
-    }
-
-    .panel-list-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      background: rgba(13, 15, 26, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 18px 22px;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-    }
-
-    .panel-list-item:hover {
-      border-color: rgba(0, 242, 254, 0.35);
-      box-shadow: 0 0 20px rgba(0, 242, 254, 0.12);
-      transform: translateY(-2px);
-    }
-
-    .panel-info {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      min-width: 0;
-    }
-
-    .panel-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-      background: rgba(0, 242, 254, 0.1);
-      border: 1px solid rgba(0, 242, 254, 0.25);
-      display: grid;
-      place-items: center;
-      color: #00f2fe;
-      font-size: 22px;
-      flex-shrink: 0;
-    }
-
-    .panel-text h3 {
-      margin: 0 0 4px;
-      font-size: 15px;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-    .panel-text p {
-      margin: 0;
-      font: 500 11px var(--mono);
-      color: #94a3b8;
-      letter-spacing: 0.5px;
-    }
-
-    .panel-price {
-      font-size: 18px;
-      font-weight: 900;
-      color: #00f2fe;
-      white-space: nowrap;
-      letter-spacing: 0.5px;
-    }
-
-    .panel-price small {
-      font-size: 11px;
-      color: #64748b;
-      font-weight: 600;
-    }
-
-    /* BOTTOM BUY NOW SECTION */
-    .buy-now-section {
-      text-align: center;
-      padding: 32px 24px;
-      background: rgba(13, 15, 26, 0.7);
-      border: 1px solid rgba(0, 242, 254, 0.2);
-      border-radius: 16px;
-      box-shadow: 0 0 30px rgba(0, 242, 254, 0.08);
-    }
-
-    .buy-now-section h3 {
-      margin: 0 0 8px;
-      font-size: 18px;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: 0.5px;
-    }
-
-    .buy-now-section p {
-      margin: 0 0 20px;
-      font-size: 13px;
-      color: #94a3b8;
-      line-height: 1.5;
-    }
-
-    /* এখানে Buy Now ক্লিক করলে Discord এ যাবে */
-    .buy-now-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: linear-gradient(135deg, rgba(0, 242, 254, 0.2) 0%, rgba(88, 101, 242, 0.25) 100%);
-      border: 1px solid #00f2fe;
-      color: #fff;
-      padding: 14px 32px;
-      border-radius: 12px;
-      font-size: 15px;
-      font-weight: 800;
-      text-decoration: none;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      box-shadow: 0 0 25px rgba(0, 242, 254, 0.25);
-      transition: all 0.3s ease;
-    }
-
-    .buy-now-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 0 35px rgba(0, 242, 254, 0.45);
-      background: linear-gradient(135deg, rgba(0, 242, 254, 0.35) 0%, rgba(88, 101, 242, 0.4) 100%);
-      color: #fff;
-    }
-
-    .buy-now-btn i {
-      font-size: 20px;
-    }
-
-    @media (max-width: 600px) {
-      .panel-list-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
-      .panel-price {
-        align-self: flex-end;
-      }
-      .page-title-section h1 {
-        font-size: 24px;
-      }
-    }
+    .inner-page-container{width:calc(100% - 40px);max-width:900px;margin:40px auto 80px;position:relative;z-index:1}
+    .inner-header-actions{display:flex;justify-content:space-between;margin-bottom:28px}
+    .back-btn,.share-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#cbd5e1;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;cursor:pointer}
+    .back-btn:hover,.share-btn:hover{border-color:#00f2fe;color:#fff}
+    .page-title-section{text-align:center;margin-bottom:35px}
+    .page-title-section h1{font-size:30px;font-weight:900;color:#fff;margin:0 0 8px;text-transform:uppercase}
+    .page-title-section p{font:500 12px var(--mono);color:#94a3b8;margin:0;letter-spacing:1.5px}
+    .panel-list{display:flex;flex-direction:column;gap:14px;margin-bottom:40px}
+    .panel-list-item{display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(13,15,26,.75);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 22px}
+    .panel-info{display:flex;align-items:center;gap:16px}
+    .panel-icon{width:46px;height:46px;border-radius:12px;background:rgba(0,242,254,.1);border:1px solid rgba(0,242,254,.25);display:grid;place-items:center;color:#00f2fe;font-size:22px}
+    .panel-text h3{margin:0 0 4px;font-size:15px;font-weight:800;color:#fff;text-transform:uppercase}
+    .panel-text p{margin:0;font:500 11px var(--mono);color:#94a3b8}
+    .panel-price{font-size:18px;font-weight:900;color:#00f2fe;white-space:nowrap}
+    .buy-now-section{text-align:center;padding:32px 24px;background:rgba(13,15,26,.7);border:1px solid rgba(0,242,254,.2);border-radius:16px}
+    .buy-now-section h3{margin:0 0 8px;font-size:18px;font-weight:800;color:#fff}
+    .buy-now-section p{margin:0 0 20px;font-size:13px;color:#94a3b8}
+    .buy-now-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(0,242,254,.2),rgba(88,101,242,.25));border:1px solid #00f2fe;color:#fff;padding:14px 32px;border-radius:12px;font-size:15px;font-weight:800;text-decoration:none;letter-spacing:1px;text-transform:uppercase}
+    .buy-now-btn:hover{transform:translateY(-3px);box-shadow:0 0 35px rgba(0,242,254,.45)}
   </style>
 </head>
 <body>
-
   <div class="ambient ambient-left"></div>
   <div class="ambient ambient-right"></div>
   <div class="mouse-glow"></div>
@@ -225,10 +37,7 @@
   <header class="topbar">
     <a class="brand" href="index.html">
       <span class="brand-logo"><img src="logo.png" alt="Logo"></span>
-      <span class="brand-text">
-        <strong>BANGLA FF PANEL</strong>
-        <small>COMMUNITY • GAMING HUB</small>
-      </span>
+      <span class="brand-text"><strong>BANGLA FF PANEL</strong><small>COMMUNITY • GAMING HUB</small></span>
     </a>
     <nav class="top-actions">
       <a class="home-btn" href="index.html">Home</a>
@@ -237,7 +46,6 @@
   </header>
 
   <main class="inner-page-container">
-
     <div class="inner-header-actions">
       <a href="index.html" class="back-btn"><i class='bx bx-left-arrow-alt'></i> Back</a>
       <button class="share-btn"><i class='bx bx-share-alt'></i> Share</button>
@@ -248,60 +56,21 @@
       <p>AVAILABLE PREMIUM PANELS</p>
     </div>
 
-    <!-- ========== PANEL LIST (Admin Panel থেকে এডিট করা যাবে) ========== -->
     <div class="panel-list">
-
-      <!-- Item 1 -->
-      <div class="panel-list-item">
-        <div class="panel-info">
-          <div class="panel-icon"><i class='bx bxs-crown'></i></div>
-          <div class="panel-text">
-            <h3>VIP PANEL</h3>
-            <p>Aimbot AI • Anti-Ban • Auto Update</p>
-          </div>
-        </div>
-        <div class="panel-price">৳500 <small>/ month</small></div>
-      </div>
-
-      <!-- Item 2 -->
-      <div class="panel-list-item">
-        <div class="panel-info">
-          <div class="panel-icon"><i class='bx bxs-hot'></i></div>
-          <div class="panel-text">
-            <h3>PREMIUM PANEL</h3>
-            <p>Full Features • Emulator Support • Fast</p>
-          </div>
-        </div>
-        <div class="panel-price">৳800 <small>/ month</small></div>
-      </div>
-
-      <!-- Item 3 -->
-      <div class="panel-list-item">
-        <div class="panel-info">
-          <div class="panel-icon"><i class='bx bxs-diamond'></i></div>
-          <div class="panel-text">
-            <h3>LIFETIME PANEL</h3>
-            <p>All Features • Lifetime Access • Priority Support</p>
-          </div>
-        </div>
-        <div class="panel-price">৳1200 <small>/ lifetime</small></div>
-      </div>
-
+      <!-- Admin panel থেকে অটো লোড হবে -->
     </div>
 
-    <!-- ========== BUY NOW (Discord Link) ========== -->
     <div class="buy-now-section">
       <h3>কিনতে চাইলে Buy Now চাপুন</h3>
-      <p>Discord এ যোগাযোগ করে প্যানেল কিনুন। সাপোর্ট টিম আপনাকে হেল্প করবে।</p>
-      
-      <!-- এখানে আপনার Discord লিংক বসাবেন -->
-      <a href="https://discord.gg/9VGgu48bY" target="_blank" rel="noopener noreferrer" class="buy-now-btn">
+      <p>Discord এ যোগাযোগ করে প্যানেল কিনুন।</p>
+      <a href="https://discord.gg/9VGgu48bY" target="_blank" class="buy-now-btn">
         <i class='bx bxl-discord-alt'></i> Buy Now
       </a>
     </div>
-
   </main>
 
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
