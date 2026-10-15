@@ -6,7 +6,10 @@
 }
 
 body {
-    background-color: #06020a;
+    background-color: #050508;
+    background-image: linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
     color: #ffffff;
     min-height: 100vh;
     overflow-x: hidden;
@@ -18,14 +21,13 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 250px;
-    height: 250px;
-    background: radial-gradient(circle, rgba(138, 43, 226, 0.25) 0%, rgba(0, 0, 0, 0) 70%);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
     border-radius: 50%;
     pointer-events: none;
     transform: translate(-50%, -50%);
     z-index: 9999;
-    transition: width 0.2s, height 0.2s;
 }
 
 /* Navbar */
@@ -33,10 +35,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 18px 5%;
-    background: rgba(13, 7, 20, 0.8);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+    padding: 20px 5%;
+    background: rgba(5, 5, 8, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 240, 255, 0.1);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -45,13 +47,13 @@ body {
 .logo {
     font-family: 'Rajdhani', sans-serif;
     font-size: 26px;
-    font-weight: 700;
+    font-weight: 800;
     color: #fff;
     letter-spacing: 1px;
 }
 
 .logo span {
-    color: #8a2be2;
+    color: #00f0ff;
 }
 
 .nav-links {
@@ -63,193 +65,159 @@ body {
 .nav-links a {
     color: #a0a0b0;
     text-decoration: none;
-    font-size: 15px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
     transition: 0.3s;
 }
 
 .nav-links a:hover, .nav-links a.active {
-    color: #8a2be2;
-    text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+    color: #00f0ff;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
 }
 
 /* Header */
 .hero {
     text-align: center;
-    padding: 60px 20px 30px;
+    padding: 50px 20px 20px;
 }
 
 .glitch-title {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 48px;
-    font-weight: 700;
+    font-size: 42px;
+    font-weight: 800;
     color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
+    text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
 }
 
 .subtitle {
-    color: #8888a0;
-    font-size: 16px;
-    margin-top: 8px;
+    color: #777;
+    font-size: 15px;
+    margin-top: 5px;
 }
 
-/* Container & Grid */
+/* Container & List Layout */
 .container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 30px 20px 80px;
 }
 
-.section-title {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.section-title h2 {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 28px;
-    color: #fff;
-}
-
-.section-title p {
-    color: #666680;
-    font-size: 14px;
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 25px;
-}
-
-/* Panel Card Layout */
-.panel-card {
-    background: rgba(18, 10, 28, 0.6);
-    border: 1px solid rgba(138, 43, 226, 0.25);
-    border-radius: 16px;
-    padding: 22px;
-    position: relative;
-    backdrop-filter: blur(8px);
-    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+.list-container {
     display: flex;
     flex-direction: column;
+    gap: 15px;
 }
 
-.panel-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(138, 43, 226, 0.7);
-    box-shadow: 0 8px 25px rgba(138, 43, 226, 0.3);
-}
-
-.card-header {
+/* Row Item (Matches Screenshot) */
+.panel-row {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    justify-content: space-between;
+    background: #0d1117;
+    border: 1px solid #1f2937;
+    border-radius: 12px;
+    padding: 15px 25px;
+    transition: all 0.3s ease;
 }
 
-.icon-frame {
-    width: 55px;
-    height: 55px;
-    background: rgba(138, 43, 226, 0.15);
-    border: 1px solid rgba(138, 43, 226, 0.4);
-    border-radius: 12px;
+.panel-row:hover {
+    border-color: rgba(0, 240, 255, 0.4);
+    box-shadow: 0 5px 20px rgba(0, 240, 255, 0.05);
+}
+
+/* Left Section: Icon & Title */
+.row-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.icon-box {
+    width: 45px;
+    height: 45px;
+    background: rgba(0, 240, 255, 0.05);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 22px;
+    color: #00f0ff;
 }
 
-.card-img-icon {
-    width: 35px;
-    height: 35px;
-    object-fit: contain;
-}
-
-.emoji-icon {
-    font-size: 28px;
-}
-
-.version-badge {
-    background: rgba(138, 43, 226, 0.2);
-    border: 1px solid #8a2be2;
-    color: #d8b4fe;
-    font-size: 12px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    font-weight: 600;
-}
-
-.card-title {
-    font-size: 20px;
-    font-weight: 600;
-    color: #ffffff;
-    margin-bottom: 6px;
-}
-
-.card-subtitle {
-    font-size: 13px;
-    color: #9999b0;
-    margin-bottom: 20px;
-    flex-grow: 1;
-}
-
-.card-price-tag {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 10px 14px;
+.icon-box img {
+    width: 100%;
+    height: 100%;
     border-radius: 8px;
-    margin-bottom: 18px;
+    object-fit: cover;
 }
 
-.price-label {
-    font-size: 14px;
-    color: #aaaaee;
-}
-
-.price-amount {
-    font-size: 18px;
+.panel-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22px;
     font-weight: 700;
-    color: #00ffcc;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+/* Right Section: Dropdown & Button */
+.row-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Duration Selector */
+.duration-select {
+    background: transparent;
+    border: none;
+    color: #00f0ff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    outline: none;
+    cursor: pointer;
+    text-align: right;
+}
+
+.duration-select option {
+    background: #0d1117;
+    color: #fff;
+    font-size: 16px;
 }
 
 /* Buy Button */
 .buy-btn {
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(135deg, #7000ff, #8a2be2);
-    border: none;
-    border-radius: 10px;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 600;
+    background: transparent;
+    border: 1px solid #00f0ff;
+    border-radius: 8px;
+    padding: 8px 25px;
+    color: #ffffff;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
     cursor: pointer;
     transition: 0.3s;
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 8px;
 }
 
 .buy-btn:hover {
-    background: linear-gradient(135deg, #8a2be2, #a100ff);
-    box-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
+    background: rgba(0, 240, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
 }
 
-/* Loading & Empty state */
-.loading-spinner, .no-data {
-    grid-column: 1 / -1;
+/* Loading */
+.loading-spinner {
     text-align: center;
     padding: 50px 0;
-    color: #8888aa;
+    color: #00f0ff;
 }
 
 .loading-spinner i {
     font-size: 36px;
-    color: #8a2be2;
     margin-bottom: 15px;
 }
 
@@ -257,8 +225,21 @@ body {
 footer {
     text-align: center;
     padding: 25px;
-    background: #040107;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    color: #555577;
+    background: #030305;
+    border-top: 1px solid #111;
+    color: #444;
     font-size: 13px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .panel-row {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    .row-right {
+        width: 100%;
+        justify-content: space-between;
+    }
 }
