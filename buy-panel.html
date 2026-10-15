@@ -15,35 +15,23 @@
     .page-title-section{text-align:center;margin-bottom:35px}
     .page-title-section h1{font-size:30px;font-weight:900;color:#fff;margin:0 0 8px;text-transform:uppercase}
     .page-title-section p{font:500 12px var(--mono);color:#94a3b8;margin:0;letter-spacing:1.5px}
-    
     .panel-list{display:flex;flex-direction:column;gap:14px;margin-bottom:40px}
-    .panel-list-item{
-      display:flex;align-items:center;justify-content:space-between;gap:16px;
-      background:rgba(13,15,26,.75);border:1px solid rgba(255,255,255,.08);
-      border-radius:14px;padding:18px 22px;transition:.3s;
-    }
-    .panel-list-item:hover{border-color:rgba(0,242,254,.35);box-shadow:0 0 18px rgba(0,242,254,.1)}
-    .panel-info{display:flex;align-items:center;gap:16px}
-    .panel-icon{width:46px;height:46px;border-radius:12px;background:rgba(0,242,254,.1);border:1px solid rgba(0,242,254,.25);display:grid;place-items:center;color:#00f2fe;font-size:22px}
+    .panel-list-item{display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(13,15,26,.75);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 22px;transition:.3s;cursor:pointer;flex-wrap:wrap}
+    .panel-list-item:hover{border-color:rgba(0,242,254,.35)}
+    .panel-list-item.selected{border-color:#00f2fe;box-shadow:0 0 20px rgba(0,242,254,.25);background:rgba(0,242,254,.06)}
+    .panel-info{display:flex;align-items:center;gap:16px;flex:1;min-width:0}
+    .panel-icon{width:46px;height:46px;border-radius:12px;background:rgba(0,242,254,.1);border:1px solid rgba(0,242,254,.25);display:grid;place-items:center;color:#00f2fe;font-size:22px;flex-shrink:0}
     .panel-text h3{margin:0 0 4px;font-size:15px;font-weight:800;color:#fff;text-transform:uppercase}
-    .panel-text p{margin:0;font:500 11px var(--mono);color:#94a3b8}
-    .panel-right-group{display:flex;align-items:center;gap:16px}
+    .panel-text p{margin:0;font-size:12px;color:#94a3b8}
+    .panel-right-group{display:flex;align-items:center;gap:14px;flex-shrink:0}
     .panel-price{font-size:16px;font-weight:900;color:#00f2fe;white-space:nowrap}
-
-    /* Individual BUY button per item */
-    .item-buy-btn{
-      display:inline-flex;align-items:center;gap:6px;
-      background:linear-gradient(135deg,rgba(0,242,254,0.2),rgba(88,101,242,0.3));
-      border:1px solid #00f2fe;color:#fff;padding:8px 16px;border-radius:8px;
-      font-size:11px;font-weight:800;text-decoration:none;letter-spacing:0.5px;
-      text-transform:uppercase;transition:.25s;cursor:pointer;
-    }
-    .item-buy-btn:hover{background:#00f2fe;color:#000;box-shadow:0 0 15px rgba(0,242,254,0.4)}
-
+    .item-buy-btn{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,rgba(0,242,254,.2),rgba(88,101,242,.3));border:1px solid #00f2fe;color:#fff;padding:8px 16px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;text-transform:uppercase;transition:.25s}
+    .item-buy-btn:hover{background:#00f2fe;color:#000}
     .buy-now-section{text-align:center;padding:32px 24px;background:rgba(13,15,26,.7);border:1px solid rgba(0,242,254,.2);border-radius:16px}
     .buy-now-section h3{margin:0 0 8px;font-size:18px;font-weight:800;color:#fff}
-    .buy-now-section p{margin:0 0 20px;font-size:13px;color:#94a3b8}
-    .buy-now-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(0,242,254,.2),rgba(88,101,242,.25));border:1px solid #00f2fe;color:#fff;padding:14px 32px;border-radius:12px;font-size:15px;font-weight:800;text-decoration:none;letter-spacing:1px;text-transform:uppercase}
+    .buy-now-section p{margin:0 0 12px;font-size:13px;color:#94a3b8}
+    .selected-hint{font-size:12px;color:#00f2fe;margin-bottom:16px;min-height:18px}
+    .buy-now-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(0,242,254,.2),rgba(88,101,242,.25));border:1px solid #00f2fe;color:#fff;padding:14px 32px;border-radius:12px;font-size:15px;font-weight:800;text-decoration:none;letter-spacing:1px;text-transform:uppercase;cursor:pointer}
     .buy-now-btn:hover{transform:translateY(-3px);box-shadow:0 0 35px rgba(0,242,254,.45)}
   </style>
 </head>
@@ -68,21 +56,18 @@
       <a href="index.html" class="back-btn"><i class='bx bx-left-arrow-alt'></i> Back</a>
       <button class="share-btn"><i class='bx bx-share-alt'></i> Share</button>
     </div>
-
     <div class="page-title-section">
       <h1>BUY PANEL LIST</h1>
-      <p>AVAILABLE PREMIUM PANELS</p>
+      <p>PC PREMIUM PANELS — সিলেক্ট করে BUY করুন</p>
     </div>
-
-    <div class="panel-list"></div>
-
+    <div class="panel-list" id="buy-panel-list"></div>
     <div class="buy-now-section">
-      <h3>কিনতে চাইলে Buy Now চাপুন</h3>
-      <p>Discord এ যোগাযোগ করে প্যানেল কিনুন।</p>
-      <a href="https://discord.gg/9VGgu48bY" target="_blank" class="buy-now-btn" id="buy-now-btn">
+      <h3>কিনতে চাইলে প্যাকেজ সিলেক্ট করে Buy Now চাপুন</h3>
+      <p class="selected-hint" id="buy-selected-hint">কোনো প্যাকেজ সিলেক্ট করা হয়নি</p>
+      <button type="button" class="buy-now-btn" id="buy-now-btn" onclick="buyNowClick('buy')">
         <i class='bx bxl-discord-alt'></i>
         <span id="buy-now-label">BUY NOW</span>
-      </a>
+      </button>
     </div>
   </main>
 
