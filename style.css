@@ -6,7 +6,6 @@
   --accent-secondary: #9d00ff;
   --text-main: #ffffff;
   --text-muted: #9488a6;
-  --badge-bg: rgba(255, 0, 102, 0.1);
 }
 
 * {
@@ -14,7 +13,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Rajdhani', sans-serif;
-  cursor: none;
 }
 
 body {
@@ -25,34 +23,28 @@ body {
   flex-direction: column;
   justify-content: space-between;
   overflow-x: hidden;
+  position: relative;
   background-image: radial-gradient(rgba(157, 0, 255, 0.1) 1px, transparent 1px);
   background-size: 30px 30px;
 }
 
-/* Custom Cursor Glow */
-#cursor-dot {
+/* === Background Mouse Glow Effect === */
+#mouse-glow {
   position: fixed;
-  width: 6px;
-  height: 6px;
-  background-color: var(--accent-primary);
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(157, 0, 255, 0.15) 0%, rgba(255, 0, 102, 0.05) 40%, transparent 70%);
   border-radius: 50%;
-  pointer-events: none;
+  pointer-events: none; /* So it doesn't block clicks */
   transform: translate(-50%, -50%);
-  z-index: 9999;
-  box-shadow: 0 0 10px 2px var(--accent-primary);
+  z-index: 0; /* Keeps it behind everything */
+  filter: blur(20px);
 }
 
-#cursor-aura {
-  position: fixed;
-  width: 40px;
-  height: 40px;
-  border: 1px solid rgba(157, 0, 255, 0.5);
-  background: radial-gradient(circle, rgba(157, 0, 255, 0.2) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 9998;
-  transition: width 0.2s, height 0.2s;
+/* Structure layers to stay above the mouse glow */
+header, main, footer {
+  position: relative;
+  z-index: 10;
 }
 
 /* Header */
@@ -62,8 +54,8 @@ header {
   align-items: center;
   padding: 20px 50px;
   border-bottom: 1px solid rgba(157, 0, 255, 0.15);
-  background: rgba(8, 3, 13, 0.8);
-  backdrop-filter: blur(10px);
+  background: rgba(8, 3, 13, 0.7);
+  backdrop-filter: blur(15px);
 }
 
 .brand {
@@ -72,7 +64,6 @@ header {
   gap: 12px;
 }
 
-/* Logo Image Styling */
 .brand-logo-img {
   width: 35px;
   height: 35px;
@@ -91,6 +82,10 @@ header {
   font-size: 11px;
   color: var(--text-muted);
   letter-spacing: 2px;
+}
+
+.btn-nav, .btn-explore {
+  cursor: pointer;
 }
 
 .btn-nav {
@@ -116,12 +111,10 @@ header {
 
 /* Container */
 .container {
-  max-width: 1100px;
+  max-width: 1050px; /* Perfect width for 3 boxes */
   margin: 0 auto;
   padding: 50px 20px;
   text-align: center;
-  position: relative;
-  z-index: 10;
 }
 
 /* Hero Section */
@@ -161,7 +154,6 @@ header {
   font-weight: 900;
   letter-spacing: 2px;
   margin-bottom: 12px;
-  text-transform: uppercase;
 }
 
 .hero-title span {
@@ -203,25 +195,22 @@ header {
   transform: translateY(-3px);
 }
 
-/* Grid */
 .section-divider {
   color: var(--text-muted);
   font-size: 12px;
   letter-spacing: 4px;
   margin-bottom: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
 }
 
+/* === GRID LAYOUT (FIXED TO 3x2) === */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* Exactly 3 columns */
   gap: 25px;
+  width: 100%;
 }
 
-/* Card */
+/* Card Styling */
 .card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -231,18 +220,9 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s ease;
   overflow: hidden;
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  top: -50%; left: -50%; width: 200%; height: 200%;
-  background: radial-gradient(circle, rgba(157,0,255,0.1) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.4s;
-  pointer-events: none;
+  cursor: pointer;
 }
 
 .card:hover {
@@ -250,7 +230,6 @@ header {
   transform: translateY(-8px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(255, 0, 102, 0.2);
 }
-.card:hover::before { opacity: 1; }
 
 .badge-featured {
   position: absolute;
@@ -290,14 +269,14 @@ header {
 
 .card-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 800;
   letter-spacing: 1px;
   margin-bottom: 8px;
 }
 
 .card-subtitle {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
   letter-spacing: 1.5px;
   margin-bottom: 25px;
@@ -309,7 +288,7 @@ header {
   color: var(--text-main);
   padding: 10px 24px;
   border-radius: 25px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -319,7 +298,7 @@ header {
   text-transform: uppercase;
 }
 
-.btn-explore:hover {
+.card:hover .btn-explore {
   background: var(--accent-secondary);
   color: #fff;
   box-shadow: 0 0 15px rgba(157, 0, 255, 0.5);
@@ -354,22 +333,20 @@ footer {
   color: var(--accent-secondary);
   text-decoration: none;
   font-weight: 600;
-  transition: 0.3s;
 }
 
 .footer-right a:hover {
   color: var(--accent-primary);
 }
 
-a, button {
-  cursor: none;
+/* Responsive Grid Adjustments */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, 1fr); } /* 2 columns for tablets */
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   header, footer { padding: 15px 20px; flex-direction: column; gap: 15px; text-align: center; }
   .hero-title { font-size: 36px; }
-  .grid { grid-template-columns: 1fr; }
-  #cursor-dot, #cursor-aura { display: none; }
-  * { cursor: auto; }
+  .grid { grid-template-columns: 1fr; } /* 1 column for phones */
+  #mouse-glow { display: none; } /* Hide glow on mobile */
 }
