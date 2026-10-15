@@ -10,18 +10,26 @@
   <style>
     .inner-page-container{width:calc(100% - 40px);max-width:800px;margin:40px auto 80px;position:relative;z-index:1}
     .inner-header-actions{display:flex;justify-content:space-between;margin-bottom:24px}
-    .back-btn,.share-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#cbd5e1;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;cursor:pointer}
-    .back-btn:hover,.share-btn:hover{border-color:#00f2fe;color:#fff}
+    .back-btn,.share-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#cbd5e1;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none}
+    
     .mobile-header-card{background:rgba(13,15,26,.8);border:1px solid rgba(0,242,254,.2);border-radius:20px;padding:36px 28px;text-align:center;margin-bottom:28px}
     .mobile-icon{width:70px;height:70px;border-radius:18px;margin:0 auto 20px;background:rgba(0,242,254,.1);border:1px solid rgba(0,242,254,.3);display:grid;place-items:center;font-size:34px;color:#00f2fe}
     .mobile-header-card h2{font-size:26px;font-weight:900;color:#fff;margin:0 0 10px}
     .mobile-msg{font-size:14px;color:#94a3b8;margin:0 0 20px}
-    .ticket-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(0,242,254,.18),rgba(88,101,242,.25));border:1px solid #00f2fe;color:#fff;padding:14px 36px;border-radius:14px;font-size:15px;font-weight:900;text-decoration:none;letter-spacing:1px;text-transform:uppercase;cursor:pointer}
-    .ticket-btn:hover{transform:translateY(-3px);box-shadow:0 0 30px rgba(0,242,254,.4);color:#fff}
+    .ticket-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(0,242,254,.18),rgba(88,101,242,.25));border:1px solid #00f2fe;color:#fff;padding:14px 36px;border-radius:14px;font-size:15px;font-weight:900;text-decoration:none}
+    
+    /* FILTER UI */
+    .filter-container{display:flex;gap:10px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+    .filter-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#94a3b8;padding:10px 24px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;transition:.3s}
+    .filter-btn i{font-size:18px}
+    .filter-btn:hover{background:rgba(0,242,254,.1);color:#fff}
+    .filter-btn.active{background:#00f2fe;color:#000;border-color:#00f2fe;box-shadow:0 0 20px rgba(0,242,254,.4)}
+
     .mp-package-list{display:flex;flex-direction:column;gap:14px;margin-bottom:28px}
     .mp-package-item{display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(13,15,26,.75);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 22px;cursor:pointer;transition:.3s;flex-wrap:wrap}
     .mp-package-item:hover{border-color:rgba(0,242,254,.35)}
     .mp-package-item.selected{border-color:#00f2fe;box-shadow:0 0 20px rgba(0,242,254,.25);background:rgba(0,242,254,.06)}
+    
     .mp-pkg-left{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
     .mp-pkg-icon{width:46px;height:46px;border-radius:12px;background:rgba(0,242,254,.1);border:1px solid rgba(0,242,254,.25);display:grid;place-items:center;color:#00f2fe;font-size:22px;flex-shrink:0}
     .mp-pkg-text h3{margin:0 0 4px;font-size:15px;font-weight:800;color:#fff;text-transform:uppercase}
@@ -30,6 +38,7 @@
     .mp-pkg-price{font-size:16px;font-weight:900;color:#00f2fe;white-space:nowrap}
     .item-buy-btn{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,rgba(0,242,254,.2),rgba(88,101,242,.3));border:1px solid #00f2fe;color:#fff;padding:8px 16px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;text-transform:uppercase}
     .item-buy-btn:hover{background:#00f2fe;color:#000}
+    
     .mp-buy-footer{text-align:center;padding:24px;background:rgba(13,15,26,.7);border:1px solid rgba(0,242,254,.2);border-radius:16px}
     .selected-hint{font-size:12px;color:#00f2fe;margin-bottom:14px;min-height:18px}
   </style>
@@ -53,7 +62,6 @@
   <main class="inner-page-container">
     <div class="inner-header-actions">
       <a href="index.html" class="back-btn"><i class='bx bx-left-arrow-alt'></i> Back</a>
-      <button class="share-btn"><i class='bx bx-share-alt'></i> Share</button>
     </div>
 
     <div class="mobile-header-card">
@@ -61,9 +69,15 @@
       <h2>MOBILE PANEL</h2>
       <p class="mobile-msg" id="mp-message-text">Mobile panel কিনতে প্যাকেজ সিলেক্ট করে BUY করুন</p>
       <a href="#" target="_blank" class="ticket-btn" id="mp-ticket-btn" onclick="return ticketClick(event)">
-        <i class='bx bx-purchase-tag'></i>
-        <span id="mp-btn-label">TICKET</span>
+        <i class='bx bx-purchase-tag'></i> <span id="mp-btn-label">TICKET</span>
       </a>
+    </div>
+
+    <!-- FILTER UI -->
+    <div class="filter-container">
+      <button class="filter-btn active" data-filter="ALL" onclick="filterMobile('ALL')"><i class='bx bx-grid-alt'></i> All</button>
+      <button class="filter-btn" data-filter="ANDROID" onclick="filterMobile('ANDROID')"><i class='bx bxl-android'></i> Android</button>
+      <button class="filter-btn" data-filter="IOS" onclick="filterMobile('IOS')"><i class='bx bxl-apple'></i> iOS</button>
     </div>
 
     <div class="mp-package-list" id="mp-package-list"></div>
