@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Panels - BANGLA FF</title>
+    <title>Free Panel - BANGLA FF</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
@@ -16,68 +16,136 @@
             pointer-events: none; transform: translate(-50%, -50%); z-index: 9999;
         }
 
-        .navbar {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 18px 5%; background: rgba(17, 7, 26, 0.9); border-bottom: 1px solid #2a113d;
-        }
-        .logo { font-size: 26px; font-weight: 700; color: #fff; text-decoration: none; }
-        .logo span { color: #ff0066; }
-        .back-btn {
-            background: #11071a; color: #fff; text-decoration: none; padding: 8px 16px;
-            border: 1px solid #2a113d; border-radius: 8px; font-weight: 600; transition: 0.3s;
-        }
-        .back-btn:hover { border-color: #ff0066; color: #ff0066; }
+        /* Navbar */
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        .logo-img { width: 40px; height: 40px; background: #11071a; border-radius: 8px; border: 1px solid #2a113d; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #ff0066; font-size: 12px; text-align: center; line-height: 1; }
+        .logo-text h1 { font-size: 20px; font-weight: 700; letter-spacing: 1px; color: #fff; }
+        .logo-text p { font-size: 12px; color: #888; letter-spacing: 2px; }
+        .nav-right { display: flex; gap: 15px; }
+        .nav-btn { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .nav-btn:hover { background: rgba(255,255,255,0.05); border-color: #fff; }
 
-        .container { flex: 1; padding: 30px 5%; max-width: 1200px; margin: 0 auto; width: 100%; }
-        .page-title { font-size: 32px; text-transform: uppercase; margin-bottom: 30px; text-align: center; }
-        .page-title span { color: #ff0066; }
+        /* Main Container */
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; width: 100%; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        
-        .card {
-            background: #11071a; border: 1px solid #2a113d; border-radius: 12px;
-            padding: 20px; display: flex; flex-direction: column; gap: 15px; transition: 0.3s;
+        /* Video Header Section */
+        .video-container {
+            width: 100%; aspect-ratio: 16/9; background: #11071a; border-radius: 16px;
+            border: 1px solid #2a113d; overflow: hidden; position: relative; margin-bottom: 20px;
+            display: flex; justify-content: center; align-items: center;
         }
-        .card:hover { border-color: #ff0066; transform: translateY(-5px); box-shadow: 0 5px 20px rgba(255, 0, 102, 0.2); }
-        .thumb-box {
-            width: 100%; height: 150px; background: #05020a; border-radius: 8px;
-            overflow: hidden; display: flex; align-items: center; justify-content: center;
+        .video-container img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: 0.3s; }
+        .video-container:hover img { opacity: 1; transform: scale(1.02); }
+        .play-btn {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 60px; height: 60px; background: rgba(0,0,0,0.6); border: 2px solid #fff;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            color: #fff; font-size: 20px; cursor: pointer; text-decoration: none; transition: 0.3s;
         }
-        .thumb-box img { width: 100%; height: 100%; object-fit: cover; }
-        .thumb-box i { font-size: 50px; color: #ff0066; }
-        
-        .card-title { font-size: 20px; font-weight: 700; color: #fff; text-align: center; }
-        
-        .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
-        .btn {
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 600;
-            font-size: 15px; transition: 0.3s; text-align: center;
-        }
-        .btn-main { background: #ff0066; color: #fff; }
-        .btn-main:hover { background: #d60055; box-shadow: 0 0 15px rgba(255, 0, 102, 0.4); }
-        .btn-yt { background: #ff0000; color: #fff; }
-        .btn-yt:hover { background: #cc0000; }
-        .btn-skip { background: #9d00ff; color: #fff; }
-        .btn-skip:hover { background: #7a00cc; }
+        .video-container:hover .play-btn { background: #ff0066; border-color: #ff0066; transform: translate(-50%, -50%) scale(1.1); }
+        .dummy-video { color: #333; font-size: 100px; }
 
-        #no-data { text-align: center; color: #aaa; font-size: 18px; grid-column: 1 / -1; padding: 50px 0; }
-        #loader { text-align: center; color: #ff0066; font-size: 20px; padding: 50px 0; font-weight: 600; }
+        /* Title & Skip Row */
+        .header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+        .header-titles h2 { font-size: 28px; font-weight: 700; color: #fff; letter-spacing: 1px; text-transform: uppercase; }
+        .header-titles p { font-size: 14px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-top: 5px; }
+        .skip-btn {
+            background: transparent; border: 1px solid #00ff66; color: #00ff66;
+            padding: 8px 16px; border-radius: 8px; font-weight: 700; font-size: 13px;
+            text-transform: uppercase; display: flex; align-items: center; gap: 8px;
+            text-decoration: none; transition: 0.3s;
+        }
+        .skip-btn:hover { background: rgba(0, 255, 102, 0.1); }
+
+        /* Password Box */
+        .password-box {
+            background: #11071a; border: 1px solid #ffaa00; border-radius: 12px;
+            padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 30px; display: none; /* hidden by default */
+        }
+        .pass-info span { font-size: 11px; color: #ffaa00; font-weight: 700; letter-spacing: 1px; }
+        .pass-info h3 { font-size: 18px; color: #fff; margin-top: 4px; letter-spacing: 1px; }
+        .copy-btn {
+            background: transparent; border: 1px solid rgba(255,170,0,0.3); color: #ffaa00;
+            padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px; transition: 0.3s;
+        }
+        .copy-btn:hover { background: rgba(255,170,0,0.1); }
+
+        /* Items List */
+        .items-list { display: flex; flex-direction: column; gap: 15px; }
+        .item-row {
+            background: #0c0514; border: 1px solid #2a113d; border-radius: 12px;
+            padding: 20px; display: flex; justify-content: space-between; align-items: center;
+            transition: 0.3s;
+        }
+        .item-row:hover { border-color: #ff0066; background: #11071a; }
+        .item-left { display: flex; align-items: center; gap: 15px; }
+        .item-icon {
+            width: 50px; height: 50px; background: rgba(255,0,102,0.1); border-radius: 10px;
+            display: flex; justify-content: center; align-items: center; color: #ff0066; font-size: 20px;
+        }
+        .item-left h4 { font-size: 16px; color: #fff; font-weight: 600; letter-spacing: 1px; }
+        .item-btn {
+            background: #ff0066; color: #fff; padding: 10px 20px; border-radius: 8px;
+            text-decoration: none; font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 8px; transition: 0.3s;
+        }
+        .item-btn:hover { background: #d60055; box-shadow: 0 0 15px rgba(255,0,102,0.3); }
+
+        #loader { text-align: center; color: #ff0066; font-size: 16px; padding: 50px 0; font-weight: 600; letter-spacing: 2px; }
     </style>
 </head>
 <body>
     <div id="mouse-glow"></div>
 
     <nav class="navbar">
-        <a href="index.html" class="logo">BANGLA <span>FF</span></a>
-        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Home</a>
+        <div class="logo-area">
+            <div class="logo-img">BFF<br>PNL</div>
+            <div class="logo-text">
+                <h1>BANGLA FF <span style="color:#ff0066">PANEL</span></h1>
+                <p>PREMIUM CORP</p>
+            </div>
+        </div>
+        <div class="nav-right">
+            <a href="index.html" class="nav-btn"><i class="fas fa-home"></i> Home</a>
+            <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="nav-btn"><i class="fab fa-discord"></i> Discord</a>
+        </div>
     </nav>
 
     <main class="container">
-        <h1 class="page-title">Free <span>Panels</span></h1>
-        
-        <div id="loader"><i class="fas fa-spinner fa-spin"></i> Loading Panels...</div>
-        <div class="grid" id="grid-container"></div>
+        <div id="loader"><i class="fas fa-circle-notch fa-spin"></i> SYNCING DATA...</div>
+
+        <div id="content-area" style="display: none;">
+            
+            <!-- Global Video Area -->
+            <div class="video-container" id="videoContainer">
+                <i class="fab fa-youtube dummy-video"></i>
+            </div>
+
+            <!-- Title & Skip Row -->
+            <div class="header-row">
+                <div class="header-titles">
+                    <h2>FREE PANEL</h2>
+                    <p id="subTitle">PREMIUM . FAST . RELIABLE</p>
+                </div>
+                <a href="#" target="_blank" class="skip-btn" id="skipBtn" style="display: none;">
+                    <i class="fas fa-step-forward"></i> HOW TO SKIP
+                </a>
+            </div>
+
+            <!-- Password Box -->
+            <div class="password-box" id="passBox">
+                <div class="pass-info">
+                    <span><i class="fas fa-lock"></i> RAR PASSWORD</span>
+                    <h3 id="rarPassText"></h3>
+                </div>
+                <button class="copy-btn" onclick="copyPassword()"><i class="far fa-copy"></i> Copy</button>
+            </div>
+
+            <!-- Download Items List -->
+            <div class="items-list" id="itemsList"></div>
+
+        </div>
     </main>
 
     <script type="module">
@@ -95,54 +163,84 @@
 
         document.addEventListener('mousemove', (e) => {
             const glow = document.getElementById('mouse-glow');
-            glow.style.left = e.clientX + 'px';
-            glow.style.top = e.clientY + 'px';
+            glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px';
         });
 
-        // Helper: Get YouTube Thumbnail from URL
         function getYoutubeThumb(url) {
             if (!url) return null;
             const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
             const match = url.match(regExp);
-            return (match && match[2].length === 11) ? `https://img.youtube.com/vi/${match[2]}/hqdefault.jpg` : null;
+            return (match && match[2].length === 11) ? `https://img.youtube.com/vi/${match[2]}/maxresdefault.jpg` : null;
         }
 
+        let passValue = "";
+        window.copyPassword = () => {
+            navigator.clipboard.writeText(passValue);
+            const btn = document.querySelector('.copy-btn');
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied';
+            setTimeout(() => btn.innerHTML = '<i class="far fa-copy"></i> Copy', 2000);
+        };
+
+        // Fetch Data
+        onValue(ref(db, 'page_settings/free_panel'), (snapshot) => {
+            const settings = snapshot.val() || {};
+            
+            // Handle Video
+            const vContainer = document.getElementById('videoContainer');
+            if (settings.yt_link) {
+                const thumb = getYoutubeThumb(settings.yt_link);
+                vContainer.innerHTML = `
+                    <img src="${thumb}" alt="Video Thumbnail">
+                    <a href="${settings.yt_link}" target="_blank" class="play-btn"><i class="fas fa-play"></i></a>
+                `;
+            } else {
+                vContainer.innerHTML = `<i class="fab fa-youtube dummy-video"></i>`;
+            }
+
+            // Handle Skip Link
+            const skipBtn = document.getElementById('skipBtn');
+            if (settings.skip_link) {
+                skipBtn.href = settings.skip_link;
+                skipBtn.style.display = 'flex';
+            } else {
+                skipBtn.style.display = 'none';
+            }
+
+            // Handle Password
+            const passBox = document.getElementById('passBox');
+            if (settings.rar_password) {
+                passValue = settings.rar_password;
+                document.getElementById('rarPassText').innerText = passValue;
+                passBox.style.display = 'flex';
+            } else {
+                passBox.style.display = 'none';
+            }
+        });
+
+        // Fetch Items
         onValue(ref(db, 'free_panels'), (snapshot) => {
             document.getElementById('loader').style.display = 'none';
-            const grid = document.getElementById('grid-container');
-            grid.innerHTML = '';
+            document.getElementById('content-area').style.display = 'block';
+            
+            const list = document.getElementById('itemsList');
+            list.innerHTML = '';
 
             if(!snapshot.exists()) {
-                grid.innerHTML = '<div id="no-data">No Free Panels Available Right Now.</div>';
+                list.innerHTML = '<div style="text-align:center; color:#555; padding: 40px;">No panels available currently.</div>';
                 return;
             }
 
             snapshot.forEach((child) => {
                 const item = child.val();
-                
-                // Extract YouTube Thumbnail if Video URL exists
-                const ytThumb = getYoutubeThumb(item.yt_link);
-                let thumbHTML = ytThumb 
-                    ? `<div class="thumb-box"><img src="${ytThumb}" alt="${item.title}"></div>`
-                    : `<div class="thumb-box"><i class="fas fa-laptop-code"></i></div>`;
-
-                // Optional YouTube Video Button
-                let ytBtnHTML = (item.yt_enabled !== false && item.yt_link) 
-                    ? `<a href="${item.yt_link}" target="_blank" class="btn btn-yt"><i class="fab fa-youtube"></i> Watch Tutorial</a>` : '';
-
-                // Optional How To Skip Button
-                let skipBtnHTML = (item.skip_enabled !== false && item.skip_link) 
-                    ? `<a href="${item.skip_link}" target="_blank" class="btn btn-skip"><i class="fas fa-route"></i> How To Skip</a>` : '';
-
-                grid.innerHTML += `
-                    <div class="card">
-                        ${thumbHTML}
-                        <div class="card-title">${item.title}</div>
-                        <div class="btn-group">
-                            <a href="${item.download}" target="_blank" class="btn btn-main"><i class="fas fa-download"></i> ${item.btn_text || 'Download'}</a>
-                            ${ytBtnHTML}
-                            ${skipBtnHTML}
+                list.innerHTML += `
+                    <div class="item-row">
+                        <div class="item-left">
+                            <div class="item-icon"><i class="fas fa-bolt"></i></div>
+                            <h4>${item.title}</h4>
                         </div>
+                        <a href="${item.download}" target="_blank" class="item-btn">
+                            <i class="fas fa-download"></i> ${item.btn_text || 'Download'}
+                        </a>
                     </div>
                 `;
             });
