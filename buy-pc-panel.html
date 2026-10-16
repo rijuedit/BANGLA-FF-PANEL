@@ -1,101 +1,678 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paid PC Panels - BANGLA FF</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
-        body { background-color: #05020a; color: #fff; min-height: 100vh; display: flex; flex-direction: column; }
-        
-        #mouse-glow { position: fixed; width: 50px; height: 50px; border-radius: 50%; background: rgba(157, 0, 255, 0.4); filter: blur(30px); pointer-events: none; transform: translate(-50%, -50%); z-index: 9999; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy PC Panel - BANGLA FF PANEL</title>
+  
+  <!-- Font Awesome & Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 18px 5%; background: rgba(17, 7, 26, 0.9); border-bottom: 1px solid #2a113d; sticky: top; }
-        .logo { font-size: 26px; font-weight: 700; color: #fff; text-decoration: none; }
-        .logo span { color: #9d00ff; }
-        .back-btn { background: #11071a; color: #fff; text-decoration: none; padding: 8px 16px; border: 1px solid #2a113d; border-radius: 8px; font-weight: 600; transition: 0.3s; }
-        .back-btn:hover { border-color: #9d00ff; color: #9d00ff; }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+    }
 
-        .container { flex: 1; padding: 30px 5%; max-width: 1200px; margin: 0 auto; width: 100%; }
-        .page-title { font-size: 32px; text-transform: uppercase; margin-bottom: 30px; text-align: center; }
-        .page-title span { color: #9d00ff; }
+    body {
+      background-color: #05020a;
+      background-image: radial-gradient(circle at 50% -20%, #2a113d 0%, #05020a 80%);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 60px;
+      overflow-x: hidden;
+    }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        .card { background: #11071a; border: 1px solid #2a113d; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 15px; transition: 0.3s; }
-        .card:hover { border-color: #9d00ff; transform: translateY(-5px); box-shadow: 0 5px 20px rgba(157, 0, 255, 0.3); }
-        .card img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; }
-        .card-title { font-size: 22px; font-weight: 700; color: #fff; }
-        
-        .price-box { display: flex; align-items: center; gap: 12px; margin-top: 5px; }
-        .sell-price { font-size: 24px; font-weight: 700; color: #9d00ff; }
-        .old-price { font-size: 16px; color: #666; text-decoration: line-through; }
+    /* Glowing Mouse Effect */
+    #mouse-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 0, 102, 0.15) 0%, rgba(157, 0, 255, 0.05) 50%, transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s;
+      z-index: 0;
+    }
 
-        .btn-buy { background: #9d00ff; color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 16px; transition: 0.3s; margin-top: auto; }
-        .btn-buy:hover { background: #7a00cc; box-shadow: 0 0 15px rgba(157, 0, 255, 0.5); }
+    /* Navigation / Header */
+    header {
+      width: 100%;
+      max-width: 1000px;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
 
-        #no-data { text-align: center; color: #aaa; font-size: 18px; grid-column: 1 / -1; padding: 50px 0; }
-        #loader { text-align: center; color: #9d00ff; font-size: 20px; padding: 50px 0; font-weight: 600; }
-    </style>
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #11071a;
+      border: 1px solid #2a113d;
+      color: #ff0066;
+      padding: 10px 18px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(255, 0, 102, 0.1);
+    }
+
+    .back-btn:hover {
+      background: #ff0066;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(255, 0, 102, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .icon-btn {
+      background: #11071a;
+      border: 1px solid #2a113d;
+      color: #fff;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .icon-btn:hover {
+      border-color: #9d00ff;
+      color: #9d00ff;
+      box-shadow: 0 0 15px rgba(157, 0, 255, 0.3);
+    }
+
+    .badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #ff0066;
+      color: #fff;
+      font-size: 11px;
+      padding: 2px 6px;
+      border-radius: 50%;
+      font-weight: bold;
+    }
+
+    /* Page Title Section */
+    .page-title-card {
+      text-align: center;
+      margin: 20px 0 30px 0;
+      z-index: 10;
+    }
+
+    .page-title-card h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-shadow: 0 0 15px rgba(255, 0, 102, 0.4);
+    }
+
+    .page-title-card p {
+      color: #a090b5;
+      font-size: 0.95rem;
+      margin-top: 6px;
+    }
+
+    /* Content Area */
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      z-index: 10;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    /* Panel Card */
+    .panel-card {
+      background: #11071a;
+      border: 1px solid #2a113d;
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel-card:hover {
+      border-color: #ff0066;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(255, 0, 102, 0.2);
+    }
+
+    .panel-img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 14px;
+      margin-bottom: 15px;
+      border: 2px solid #2a113d;
+      box-shadow: 0 0 15px rgba(157, 0, 255, 0.2);
+    }
+
+    .panel-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .price-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      color: #7a6a8f;
+      font-size: 0.95rem;
+    }
+
+    .sell-price {
+      color: #00cc66;
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-shadow: 0 0 10px rgba(0, 204, 102, 0.3);
+    }
+
+    .buy-now-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #ff0066, #9d00ff);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 0, 102, 0.3);
+    }
+
+    .buy-now-btn:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(157, 0, 255, 0.5);
+    }
+
+    /* Modal Overlay (Shared for Order & Notification) */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(5, 2, 10, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex; justify-content: center; align-items: center;
+      z-index: 9999;
+      opacity: 0; pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1; pointer-events: auto;
+    }
+
+    .modal-card {
+      background: #11071a;
+      border: 1px solid #2a113d;
+      box-shadow: 0 0 30px rgba(255, 0, 102, 0.25);
+      border-radius: 18px;
+      width: 90%; max-width: 440px;
+      padding: 25px;
+      position: relative;
+      color: #fff;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: translateY(0);
+    }
+
+    .close-modal {
+      position: absolute; top: 18px; right: 18px;
+      background: none; border: none; color: #8a7a9e;
+      font-size: 22px; cursor: pointer; transition: 0.2s;
+    }
+    .close-modal:hover { color: #ff0066; }
+
+    .modal-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-header img {
+      width: 75px; height: 75px;
+      border-radius: 14px; object-fit: cover;
+      border: 2px solid #ff0066;
+      margin-bottom: 10px;
+    }
+
+    .modal-header h3 {
+      font-size: 1.3rem;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .plan-title {
+      font-size: 0.9rem;
+      color: #a090b5;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    /* Duration Options */
+    .duration-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .plan-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1a0b28;
+      border: 1px solid #2a113d;
+      padding: 12px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .plan-item:hover, .plan-item.selected {
+      border-color: #ff0066;
+      background: rgba(255, 0, 102, 0.08);
+    }
+
+    .plan-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .plan-left input[type="radio"] {
+      accent-color: #ff0066;
+      width: 18px; height: 18px;
+    }
+
+    .plan-name-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .plan-price-text {
+      color: #00cc66;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .price-total-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 15px;
+      border-top: 1px dashed #2a113d;
+      margin-top: 10px;
+    }
+
+    .total-val {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #ff0066;
+      text-shadow: 0 0 10px rgba(255, 0, 102, 0.4);
+    }
+
+    .confirm-order-btn {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 1.05rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .confirm-order-btn:hover {
+      opacity: 0.95;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+    }
+
+    /* Notification Box Styling */
+    .notif-item {
+      background: #1a0b28;
+      border-left: 4px solid #ff0066;
+      padding: 12px 15px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .notif-title { font-weight: 700; color: #fff; font-size: 0.95rem; }
+    .notif-msg { font-size: 0.85rem; color: #b5a3cb; margin-top: 4px; }
+    .notif-time { font-size: 0.75rem; color: #7a6a8f; margin-top: 6px; text-align: right; }
+
+    .empty-msg {
+      text-align: center;
+      color: #7a6a8f;
+      padding: 30px 0;
+    }
+
+    @media (max-width: 600px) {
+      .grid-container { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <div id="mouse-glow"></div>
 
-    <nav class="navbar">
-        <a href="index.html" class="logo">BANGLA <span>FF</span></a>
-        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Home</a>
-    </nav>
+  <!-- Glowing background cursor light -->
+  <div id="mouse-glow"></div>
 
-    <main class="container">
-        <h1 class="page-title">Paid PC <span>Panels</span></h1>
-        <div id="loader"><i class="fas fa-spinner fa-spin"></i> Loading Panels...</div>
-        <div class="grid" id="grid-container"></div>
-    </main>
+  <!-- Header Navigation -->
+  <header>
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Home</a>
+    <div class="nav-actions">
+      <button class="icon-btn" onclick="openNotifModal()" title="Notifications">
+        <i class="fas fa-bell"></i>
+        <span class="badge" id="notifBadge" style="display:none;">0</span>
+      </button>
+    </div>
+  </header>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+  <!-- Page Title -->
+  <div class="page-title-card">
+    <h1 id="catHeaderTitle"><span id="catHeaderIcon">💻</span> BUY PC PANEL</h1>
+    <p>আপনার পছন্দের PC প্যানেলটি বেছে নিয়ে সরাসরি অর্ডার করুন</p>
+  </div>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
-            authDomain: "bangla-ff-admin.firebaseapp.com",
-            databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "bangla-ff-admin"
-        };
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
+  <!-- Main Grid Content -->
+  <div class="container">
+    <div id="panelGrid" class="grid-container">
+      <div class="empty-msg"><i class="fas fa-spinner fa-spin"></i> লোড হচ্ছে...</div>
+    </div>
+  </div>
 
-        document.addEventListener('mousemove', (e) => {
-            const glow = document.getElementById('mouse-glow');
-            glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px';
+  <!-- BUY NOW POPUP MODAL -->
+  <div id="buyModal" class="modal-overlay">
+    <div class="modal-card">
+      <button class="close-modal" onclick="closeBuyModal()">&times;</button>
+      
+      <div class="modal-header">
+        <img id="mImg" src="" alt="Panel Logo">
+        <h3 id="mTitle">Panel Name</h3>
+      </div>
+
+      <div class="plan-title">প্যাকেজ ও মেয়াদ নির্বাচন করুন:</div>
+
+      <div class="duration-grid">
+        <label class="plan-item selected" onclick="selectPlan(this, 1)">
+          <div class="plan-left">
+            <input type="radio" name="duration" value="1 Day" checked>
+            <span class="plan-name-text">১ দিন (1 Day)</span>
+          </div>
+          <span class="plan-price-text" id="p1">৳0</span>
+        </label>
+
+        <label class="plan-item" onclick="selectPlan(this, 7)">
+          <div class="plan-left">
+            <input type="radio" name="duration" value="7 Days">
+            <span class="plan-name-text">৭ দিন (7 Days)</span>
+          </div>
+          <span class="plan-price-text" id="p7">৳0</span>
+        </label>
+
+        <label class="plan-item" onclick="selectPlan(this, 30)">
+          <div class="plan-left">
+            <input type="radio" name="duration" value="30 Days">
+            <span class="plan-name-text">৩০ দিন (30 Days)</span>
+          </div>
+          <span class="plan-price-text" id="p30">৳0</span>
+        </label>
+      </div>
+
+      <div class="price-total-bar">
+        <span>মোট পে করতে হবে:</span>
+        <div class="total-val" id="totalPriceDisplay">৳0</div>
+      </div>
+
+      <button class="confirm-order-btn" onclick="sendWhatsAppOrder()">
+        <i class="fab fa-whatsapp"></i> Order Now via WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <!-- NOTIFICATION POPUP MODAL -->
+  <div id="notifModal" class="modal-overlay">
+    <div class="modal-card">
+      <button class="close-modal" onclick="closeNotifModal()">&times;</button>
+      <h3 style="margin-bottom:15px; text-align:center; color:#ff0066;"><i class="fas fa-bell"></i> নোটিফিকেশন</h3>
+      <div id="notifListContainer" style="max-height: 350px; overflow-y: auto;">
+        <p class="empty-msg">কোনো নতুন নোটিফিকেশন নেই</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase Integration Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
+      authDomain: "bangla-ff-admin.firebaseapp.com",
+      databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "bangla-ff-admin",
+      storageBucket: "bangla-ff-admin.firebasestorage.app",
+      messagingSenderId: "295013484465",
+      appId: "1:295013484465:web:b6bc2a949e239095761f90"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Dynamic Variables for Modal
+    let selectedPanelName = "";
+    let basePrice = 0;
+    let currentSelectedPrice = 0;
+    let customBuyLink = "";
+
+    // 1. Mouse Glow Tracking
+    const glow = document.getElementById('mouse-glow');
+    window.addEventListener('mousemove', (e) => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+    });
+
+    // 2. Fetch Category Title & Icon Settings
+    onValue(ref(db, 'site_settings/categories/pc_panel'), (snapshot) => {
+      if(snapshot.exists()) {
+        const data = snapshot.val();
+        if(data.title) {
+          document.getElementById('catHeaderTitle').childNodes[1].textContent = " " + data.title.toUpperCase();
+        }
+        if(data.iconValue) {
+          if(data.iconType === 'img') {
+            document.getElementById('catHeaderIcon').innerHTML = `<img src="${data.iconValue}" style="width:28px; height:28px; vertical-align:middle;">`;
+          } else {
+            document.getElementById('catHeaderIcon').textContent = data.iconValue;
+          }
+        }
+      }
+    });
+
+    // 3. Load PC Panels List Live
+    onValue(ref(db, 'pc_panels'), (snapshot) => {
+      const grid = document.getElementById('panelGrid');
+      grid.innerHTML = '';
+
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        Object.keys(data).reverse().forEach(key => {
+          const item = data[key];
+          
+          const card = document.createElement('div');
+          card.className = 'panel-card';
+          card.innerHTML = `
+            <img src="${item.image || 'https://i.ibb.co/L8r1pXw/logo.png'}" alt="Panel Logo" class="panel-img">
+            <div class="panel-name">${item.title}</div>
+            <div class="price-box">
+              ${item.old_price ? `<span class="old-price">৳${item.old_price}</span>` : ''}
+              <span class="sell-price">৳${item.sell_price}</span>
+            </div>
+            <button class="buy-now-btn" onclick="openBuyModal('${escapeQuotes(item.title)}', '${item.image || ''}', ${item.sell_price}, '${item.buy_link || ''}')">
+              <i class="fas fa-shopping-cart"></i> BUY NOW
+            </button>
+          `;
+          grid.appendChild(card);
         });
+      } else {
+        grid.innerHTML = '<div class="empty-msg">কোনো প্যানেল পাওয়া যায়নি!</div>';
+      }
+    });
 
-        onValue(ref(db, 'pc_panels'), (snapshot) => {
-            document.getElementById('loader').style.display = 'none';
-            const grid = document.getElementById('grid-container');
-            grid.innerHTML = '';
+    function escapeQuotes(str) {
+      return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
 
-            if(!snapshot.exists()) {
-                grid.innerHTML = '<div id="no-data">No Paid PC Panels Available Right Now.</div>';
-                return;
-            }
+    // Modal Control Functions
+    window.openBuyModal = function(title, image, price, buyLink) {
+      selectedPanelName = title;
+      basePrice = parseFloat(price) || 0;
+      customBuyLink = buyLink;
 
-            snapshot.forEach((child) => {
-                const item = child.val();
-                grid.innerHTML += `
-                    <div class="card">
-                        <img src="${item.image}" alt="${item.title}">
-                        <div class="card-title">${item.title}</div>
-                        <div class="price-box">
-                            <span class="sell-price">${item.sell_price}</span>
-                            <span class="old-price">${item.old_price}</span>
-                        </div>
-                        <a href="${item.buy_link}" target="_blank" class="btn-buy"><i class="fas fa-shopping-cart"></i> Buy Now</a>
-                    </div>
-                `;
-            });
+      document.getElementById('mTitle').innerText = title;
+      document.getElementById('mImg').src = image || 'https://i.ibb.co/L8r1pXw/logo.png';
+
+      // Price Calculations for Durations
+      const p1 = Math.round(basePrice);
+      const p7 = Math.round(basePrice * 3);
+      const p30 = Math.round(basePrice * 7);
+
+      document.getElementById('p1').innerText = `৳${p1}`;
+      document.getElementById('p7').innerText = `৳${p7}`;
+      document.getElementById('p30').innerText = `৳${p30}`;
+
+      // Reset selection to 1 Day
+      const items = document.querySelectorAll('.plan-item');
+      items.forEach(el => el.classList.remove('selected'));
+      items[0].classList.add('selected');
+      items[0].querySelector('input').checked = true;
+
+      currentSelectedPrice = p1;
+      document.getElementById('totalPriceDisplay').innerText = `৳${currentSelectedPrice}`;
+
+      document.getElementById('buyModal').classList.add('active');
+    };
+
+    window.closeBuyModal = function() {
+      document.getElementById('buyModal').classList.remove('active');
+    };
+
+    window.selectPlan = function(element, multiplier) {
+      document.querySelectorAll('.plan-item').forEach(el => el.classList.remove('selected'));
+      element.classList.add('selected');
+      element.querySelector('input').checked = true;
+
+      if(multiplier === 1) currentSelectedPrice = basePrice;
+      else if(multiplier === 7) currentSelectedPrice = basePrice * 3;
+      else if(multiplier === 30) currentSelectedPrice = basePrice * 7;
+
+      document.getElementById('totalPriceDisplay').innerText = `৳${Math.round(currentSelectedPrice)}`;
+    };
+
+    window.sendWhatsAppOrder = function() {
+      if(customBuyLink && customBuyLink.trim() !== '') {
+        window.open(customBuyLink, '_blank');
+        closeBuyModal();
+        return;
+      }
+
+      const selectedDuration = document.querySelector('input[name="duration"]:checked').value;
+      const adminWhatsApp = "8801700000000"; // Admin Phone Number
+
+      const textMessage = `হ্যালো এডমিন! 👋\nআমি BANGLA FF PANEL থেকে প্যানেল অর্ডার করতে চাই।\n\n📌 *প্যানেল:* ${selectedPanelName}\n⏱️ *মেয়াদ:* ${selectedDuration}\n💰 *মূল্য:* ৳${Math.round(currentSelectedPrice)}\n\nআমাকে প্যানেল কী (Key) দিন।`;
+
+      const finalUrl = `https://wa.me/${adminWhatsApp}?text=${encodeURIComponent(textMessage)}`;
+      window.open(finalUrl, '_blank');
+      closeBuyModal();
+    };
+
+    // 4. Notifications Setup
+    onValue(ref(db, 'notifications'), (snapshot) => {
+      const notifContainer = document.getElementById('notifListContainer');
+      const badge = document.getElementById('notifBadge');
+      
+      if(snapshot.exists()) {
+        const data = snapshot.val();
+        const keys = Object.keys(data);
+        badge.innerText = keys.length;
+        badge.style.display = 'block';
+
+        notifContainer.innerHTML = '';
+        keys.reverse().forEach(key => {
+          const n = data[key];
+          notifContainer.innerHTML += `
+            <div class="notif-item">
+              <div class="notif-title">${n.title}</div>
+              <div class="notif-msg">${n.message}</div>
+              <div class="notif-time">${n.time || ''}</div>
+            </div>
+          `;
         });
-    </script>
+      } else {
+        badge.style.display = 'none';
+        notifContainer.innerHTML = '<p class="empty-msg">কোনো নতুন নোটিফিকেশন নেই</p>';
+      }
+    });
+
+    window.openNotifModal = function() { document.getElementById('notifModal').classList.add('active'); };
+    window.closeNotifModal = function() { document.getElementById('notifModal').classList.remove('active'); };
+  </script>
+
 </body>
 </html>
