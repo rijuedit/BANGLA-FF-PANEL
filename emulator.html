@@ -8,7 +8,7 @@
     <style>
         :root {
             --bg-color: #05020a;
-            --card-bg: #11071a;
+            --card-bg: #0c0514;
             --border-color: #2a113d;
             --neon-pink: #ff0066;
             --neon-purple: #9d00ff;
@@ -36,14 +36,13 @@
         .logo-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--neon-pink); }
         .logo-text { font-size: 20px; font-weight: 800; background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; position: relative; z-index: 1; }
+        .container { max-width: 900px; margin: 30px auto; padding: 0 20px; position: relative; z-index: 1; }
 
         /* Video Section */
         .video-box {
             width: 100%; aspect-ratio: 16/9; background: #000;
-            border: 2px solid var(--border-color); border-radius: 20px;
+            border: 1px solid var(--border-color); border-radius: 15px;
             overflow: hidden; margin-bottom: 25px; position: relative;
-            box-shadow: 0 0 20px rgba(157, 0, 255, 0.2);
         }
         .video-box iframe { width: 100%; height: 100%; border: none; }
         .video-placeholder {
@@ -51,28 +50,54 @@
             align-items: center; justify-content: center; background: #0c0514; color: var(--text-gray);
         }
 
-        .action-row { display: flex; gap: 15px; margin-bottom: 40px; }
-        .skip-btn {
-            flex: 1; background: linear-gradient(45deg, var(--neon-purple), #7b00cc);
-            color: white; text-decoration: none; padding: 15px; border-radius: 12px;
-            text-align: center; font-weight: bold; text-transform: uppercase; cursor: pointer;
+        .section-header { margin-bottom: 15px; }
+        .section-title { font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 5px; }
+        .section-sub { color: var(--text-gray); font-size: 0.9rem; }
+
+        /* RAR Password Box */
+        .password-box {
+            border: 1px solid #ff9900; background: rgba(255, 153, 0, 0.05);
+            border-radius: 10px; padding: 15px 20px; margin-bottom: 30px;
+            display: none; /* Hidden by default */
         }
+        .pass-header { color: #ff9900; font-size: 0.75rem; font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
+        .pass-content { display: flex; justify-content: space-between; align-items: center; }
+        .pass-content span { font-size: 1.2rem; font-weight: bold; color: white; }
+        .copy-btn {
+            background: transparent; border: 1px solid #ff9900; color: #ff9900;
+            padding: 6px 15px; border-radius: 6px; cursor: pointer; transition: 0.3s; font-weight: bold; font-size: 0.85rem;
+        }
+        .copy-btn:hover { background: #ff9900; color: black; }
 
         /* Emulator Grid */
-        .emu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+        .emu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
         .emu-card {
             background: var(--card-bg); border: 1px solid var(--border-color);
-            padding: 25px; border-radius: 20px; text-align: center; transition: 0.3s;
+            padding: 20px; border-radius: 15px; transition: 0.3s;
         }
-        .emu-card:hover { transform: translateY(-5px); border-color: var(--neon-pink); }
-        .emu-icon { width: 70px; height: 70px; object-fit: contain; margin-bottom: 15px; }
-        .emu-emoji { font-size: 50px; display: block; margin-bottom: 15px; }
-        .emu-name { font-size: 1.1rem; font-weight: bold; margin-bottom: 20px; display: block; }
+        .emu-card:hover { border-color: var(--neon-purple); transform: translateY(-3px); }
+        
+        .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
+        .cube-icon {
+            width: 45px; height: 45px; background: rgba(157, 0, 255, 0.1);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center;
+            color: var(--neon-purple); font-size: 22px;
+        }
+        .live-badge {
+            color: #00ff00; font-size: 0.75rem; font-weight: bold;
+            display: flex; align-items: center; gap: 5px;
+        }
+        .live-badge::before { content: ''; width: 6px; height: 6px; background: #00ff00; border-radius: 50%; display: block; }
+
+        .emu-name { font-weight: 800; font-size: 1.1rem; margin-bottom: 15px; display: block; text-transform: uppercase; }
+        
         .download-btn {
-            background: rgba(255, 0, 102, 0.1); color: var(--neon-pink);
-            text-decoration: none; padding: 10px 20px; border-radius: 30px;
-            border: 1px solid var(--neon-pink); font-size: 0.9rem; font-weight: bold; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(157, 0, 255, 0.2); color: var(--neon-purple);
+            text-decoration: none; padding: 8px 15px; border-radius: 8px;
+            font-size: 0.85rem; font-weight: bold; transition: 0.3s; cursor: pointer;
         }
+        .download-btn:hover { background: var(--neon-purple); color: white; }
     </style>
 </head>
 <body>
@@ -95,12 +120,21 @@
             </div>
         </div>
 
-        <div class="action-row" id="skip-row" style="display: none;">
-            <a href="#" id="skip-link" class="skip-btn" target="_blank"><i class="fas fa-play-circle"></i> SKIP LINK / WATCH TUTORIAL</a>
+        <div class="section-header">
+            <h2 class="section-title">EMULATOR</h2>
+            <div class="section-sub">Working Emulator</div>
         </div>
 
-        <h2 style="margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px;">Available Emulators</h2>
+        <!-- RAR Password Box -->
+        <div class="password-box" id="rar-container">
+            <div class="pass-header"><i class="fas fa-lock"></i> RAR PASSWORD</div>
+            <div class="pass-content">
+                <span id="rar-text"></span>
+                <button class="copy-btn" onclick="copyRar()"><i class="far fa-copy"></i> Copy</button>
+            </div>
+        </div>
 
+        <!-- Grid -->
         <div class="emu-grid" id="emu-list">
             <!-- Items from Firebase -->
         </div>
@@ -123,7 +157,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // Load Page Settings (Video)
+        // Load Page Settings (Video & RAR Pass)
         onValue(ref(db, 'page_settings/emulator'), (snap) => {
             if(snap.exists()){
                 const data = snap.val();
@@ -131,12 +165,24 @@
                     const videoId = data.yt_link.split('v=')[1] || data.yt_link.split('/').pop();
                     document.getElementById('yt-container').innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>`;
                 }
-                if(data.skip_link) {
-                    document.getElementById('skip-row').style.display = 'flex';
-                    document.getElementById('skip-link').href = data.skip_link;
+                
+                if(data.rar_password) {
+                    document.getElementById('rar-container').style.display = 'block';
+                    document.getElementById('rar-text').innerText = data.rar_password;
+                } else {
+                    document.getElementById('rar-container').style.display = 'none';
                 }
             }
         });
+
+        // Copy RAR Pass Function
+        window.copyRar = () => {
+            const text = document.getElementById('rar-text').innerText;
+            navigator.clipboard.writeText(text);
+            const btn = document.querySelector('.copy-btn');
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => btn.innerHTML = '<i class="far fa-copy"></i> Copy', 2000);
+        };
 
         // Load Emulators
         onValue(ref(db, 'emulators'), (snapshot) => {
@@ -146,15 +192,15 @@
                 const item = child.val();
                 const card = document.createElement('div');
                 card.className = 'emu-card';
-                
-                let iconHtml = item.iconType === 'image' 
-                    ? `<img src="${item.iconValue}" class="emu-icon">`
-                    : `<span class="emu-emoji">${item.iconValue}</span>`;
-
                 card.innerHTML = `
-                    ${iconHtml}
+                    <div class="card-top">
+                        <div class="cube-icon"><i class="fas fa-cube"></i></div>
+                        <div class="live-badge">LIVE</div>
+                    </div>
                     <span class="emu-name">${item.title}</span>
-                    <a href="${item.download}" class="download-btn" target="_blank">DOWNLOAD NOW</a>
+                    <a href="${item.download}" class="download-btn" target="_blank">
+                        <i class="fas fa-arrow-down"></i> Download
+                    </a>
                 `;
                 list.appendChild(card);
             });
