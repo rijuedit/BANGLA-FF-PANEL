@@ -5,71 +5,472 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mobile Panel - BANGLA FF PANEL</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="style.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <style>
-    .inner-page-container{width:calc(100% - 40px);max-width:800px;margin:40px auto 80px;position:relative;z-index:1}
-    .inner-header-actions{display:flex;justify-content:space-between;margin-bottom:24px}
-    .back-btn,.share-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#cbd5e1;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none}
-    
-    .mobile-header-card{background:rgba(13,15,26,.8);border:1px solid rgba(0,242,254,.2);border-radius:20px;padding:36px 28px;text-align:center;margin-bottom:28px}
-    .mobile-icon{width:70px;height:70px;border-radius:18px;margin:0 auto 20px;background:rgba(0,242,254,.1);border:1px solid rgba(0,242,254,.3);display:grid;place-items:center;font-size:34px;color:#00f2fe}
-    .mobile-header-card h2{font-size:26px;font-weight:900;color:#fff;margin:0 0 10px}
-    .mobile-msg{font-size:14px;color:#94a3b8;margin:0 0 20px}
-    .ticket-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(0,242,254,.18),rgba(88,101,242,.25));border:1px solid #00f2fe;color:#fff;padding:14px 36px;border-radius:14px;font-size:15px;font-weight:900;text-decoration:none}
-    
-    /* FILTER UI */
-    .filter-container{display:flex;gap:10px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
-    .filter-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#94a3b8;padding:10px 24px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;transition:.3s}
-    .filter-btn i{font-size:18px}
-    .filter-btn:hover{background:rgba(0,242,254,.1);color:#fff}
-    .filter-btn.active{background:#00f2fe;color:#000;border-color:#00f2fe;box-shadow:0 0 20px rgba(0,242,254,.4)}
+    :root {
+      --bg: #08030d;
+      --card: #11071a;
+      --border: #2a113d;
+      --pink: #ff0066;
+      --purple: #9d00ff;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --mono: 'JetBrains Mono', monospace;
+    }
 
-    .mp-package-list{display:flex;flex-direction:column;gap:14px;margin-bottom:28px}
-    .mp-package-item{display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(13,15,26,.75);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:18px 22px;cursor:pointer;transition:.3s;flex-wrap:wrap}
-    .mp-package-item:hover{border-color:rgba(0,242,254,.35)}
-    .mp-package-item.selected{border-color:#00f2fe;box-shadow:0 0 20px rgba(0,242,254,.25);background:rgba(0,242,254,.06)}
-    
-    .mp-pkg-left{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
-    .mp-pkg-icon{width:46px;height:46px;border-radius:12px;background:rgba(0,242,254,.1);border:1px solid rgba(0,242,254,.25);display:grid;place-items:center;color:#00f2fe;font-size:22px;flex-shrink:0}
-    .mp-pkg-text h3{margin:0 0 4px;font-size:15px;font-weight:800;color:#fff;text-transform:uppercase}
-    .mp-pkg-text p{margin:0;font-size:12px;color:#94a3b8}
-    .mp-pkg-right{display:flex;align-items:center;gap:14px;flex-shrink:0}
-    .mp-pkg-price{font-size:16px;font-weight:900;color:#00f2fe;white-space:nowrap}
-    .item-buy-btn{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,rgba(0,242,254,.2),rgba(88,101,242,.3));border:1px solid #00f2fe;color:#fff;padding:8px 16px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer;text-transform:uppercase}
-    .item-buy-btn:hover{background:#00f2fe;color:#000}
-    
-    .mp-buy-footer{text-align:center;padding:24px;background:rgba(13,15,26,.7);border:1px solid rgba(0,242,254,.2);border-radius:16px}
-    .selected-hint{font-size:12px;color:#00f2fe;margin-bottom:14px;min-height:18px}
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      cursor: auto;
+    }
+
+    /* Ambient background glow */
+    .ambient {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ambient-left {
+      top: -100px; left: -100px;
+      background: var(--purple);
+    }
+    .ambient-right {
+      bottom: -100px; right: -100px;
+      background: var(--pink);
+    }
+
+    /* Soft Mouse Glow */
+    #mouse-glow {
+      position: fixed;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(157,0,255,0.15) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      transform: translate(-50%, -50%);
+      transition: left 0.08s ease-out, top 0.08s ease-out;
+    }
+
+    /* ── HEADER ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 28px;
+      background: rgba(8, 3, 13, 0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .brand-logo-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 2px solid var(--purple);
+      box-shadow: 0 0 16px rgba(157,0,255,0.4);
+    }
+    .brand-text h2 {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, #fff 30%, var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+    }
+    .brand-text span {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--purple);
+      text-transform: uppercase;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .home-btn {
+      padding: 8px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .home-btn:hover {
+      border-color: var(--purple);
+      color: #fff;
+    }
+    .discord-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 0 18px rgba(157,0,255,0.35);
+      transition: 0.2s;
+    }
+    .discord-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* ── MAIN CONTAINER ── */
+    .inner-page-container {
+      width: calc(100% - 40px);
+      max-width: 850px;
+      margin: 40px auto 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .inner-header-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .back-btn:hover {
+      border-color: var(--purple);
+      color: #fff;
+    }
+
+    /* Header Banner Card */
+    .mobile-header-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 28px;
+      text-align: center;
+      margin-bottom: 28px;
+      box-shadow: 0 0 40px rgba(157,0,255,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .mobile-header-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--purple), var(--pink));
+    }
+
+    .mobile-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 18px;
+      margin: 0 auto 20px;
+      background: rgba(157,0,255,0.12);
+      border: 1px solid rgba(157,0,255,0.3);
+      display: grid;
+      place-items: center;
+      font-size: 34px;
+      color: var(--pink);
+      box-shadow: 0 0 20px rgba(255,0,102,0.2);
+    }
+    .mobile-header-card h2 {
+      font-size: 26px;
+      font-weight: 900;
+      color: #fff;
+      margin: 0 0 10px;
+      background: linear-gradient(90deg, #fff, var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .mobile-msg {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0 0 20px;
+    }
+
+    .ticket-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      border: none;
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: 0 0 24px rgba(157,0,255,0.35);
+      cursor: pointer;
+      transition: 0.25s;
+    }
+    .ticket-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 32px rgba(255,0,102,0.5);
+    }
+
+    /* FILTER UI */
+    .filter-container {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 10px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .filter-btn i { font-size: 18px; }
+    .filter-btn:hover {
+      border-color: var(--purple);
+      color: #fff;
+    }
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 0 20px rgba(157,0,255,0.4);
+    }
+
+    /* Package List */
+    .mp-package-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .mp-package-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 22px;
+      cursor: pointer;
+      transition: 0.25s;
+      flex-wrap: wrap;
+    }
+    .mp-package-item:hover {
+      border-color: var(--purple);
+      box-shadow: 0 0 20px rgba(157,0,255,0.15);
+      transform: translateX(4px);
+    }
+    .mp-package-item.selected {
+      border-color: var(--pink);
+      box-shadow: 0 0 24px rgba(255,0,102,0.3);
+      background: rgba(255,0,102,0.06);
+    }
+
+    .mp-pkg-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 1;
+      min-width: 220px;
+    }
+    .mp-pkg-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: rgba(157,0,255,0.12);
+      border: 1px solid rgba(157,0,255,0.3);
+      display: grid;
+      place-items: center;
+      color: var(--pink);
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .mp-pkg-text h3 {
+      margin: 0 0 4px;
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .mp-pkg-text p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .mp-pkg-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+    .mp-price-box {
+      text-align: right;
+    }
+    .old-price {
+      font-size: 11px;
+      color: #ef4444;
+      text-decoration: line-through;
+      display: block;
+      font-weight: 700;
+    }
+    .mp-pkg-price {
+      font-size: 17px;
+      font-weight: 900;
+      color: #fff;
+      white-space: nowrap;
+      font-family: var(--mono);
+    }
+
+    .item-select-badge {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      text-transform: uppercase;
+      transition: 0.2s;
+    }
+    .mp-package-item.selected .item-select-badge {
+      background: var(--pink);
+      color: #fff;
+      border-color: var(--pink);
+      box-shadow: 0 0 12px rgba(255,0,102,0.4);
+    }
+
+    /* Footer Buy Box */
+    .mp-buy-footer {
+      text-align: center;
+      padding: 24px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(157,0,255,0.06);
+    }
+    .selected-hint {
+      font-size: 13px;
+      color: var(--pink);
+      margin-bottom: 14px;
+      min-height: 20px;
+      font-weight: 700;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      z-index: 999;
+      opacity: 0;
+      transition: 0.35s cubic-bezier(.2,.9,.3,1);
+      pointer-events: none;
+      box-shadow: 0 8px 30px rgba(157,0,255,0.4);
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 600px) {
+      .topbar { padding: 12px 16px; }
+      .brand-text h2 { font-size: 16px; }
+      .brand-logo-img { width: 40px; height: 40px; }
+      .mp-package-item { flex-direction: column; align-items: flex-start; }
+      .mp-pkg-right { width: 100%; justify-content: space-between; margin-top: 10px; }
+    }
   </style>
 </head>
 <body>
+
   <div class="ambient ambient-left"></div>
   <div class="ambient ambient-right"></div>
-  <div class="mouse-glow"></div>
+  <div id="mouse-glow"></div>
 
+  <!-- HEADER -->
   <header class="topbar">
-    <a class="brand" href="index.html">
-      <span class="brand-logo"><img src="logo.png" alt="Logo" class="site-logo"></span>
-      <span class="brand-text"><strong>BANGLA FF PANEL</strong><small>COMMUNITY • GAMING HUB</small></span>
+    <a href="index.html" class="brand">
+      <img src="logo.png" alt="Logo" class="brand-logo-img">
+      <div class="brand-text">
+        <h2>BANGLA FF PANEL</h2>
+        <span>PREMIUM CORP</span>
+      </div>
     </a>
     <nav class="top-actions">
       <a class="home-btn" href="index.html">Home</a>
-      <a class="discord-btn" href="https://discord.gg/9VGgu48bY" target="_blank"><span class="discord-mark">◉</span> Discord</a>
+      <a class="discord-btn" href="https://discord.gg/ZBjSWaF7u" target="_blank">
+        <i class='bx bxl-discord-alt'></i> Discord
+      </a>
     </nav>
   </header>
 
+  <!-- MAIN CONTAINER -->
   <main class="inner-page-container">
     <div class="inner-header-actions">
       <a href="index.html" class="back-btn"><i class='bx bx-left-arrow-alt'></i> Back</a>
     </div>
 
+    <!-- Header Banner -->
     <div class="mobile-header-card">
       <div class="mobile-icon"><i class='bx bx-mobile-alt'></i></div>
-      <h2>MOBILE PANEL</h2>
-      <p class="mobile-msg" id="mp-message-text">Mobile panel কিনতে প্যাকেজ সিলেক্ট করে BUY করুন</p>
-      <a href="#" target="_blank" class="ticket-btn" id="mp-ticket-btn" onclick="return ticketClick(event)">
-        <i class='bx bx-purchase-tag'></i> <span id="mp-btn-label">TICKET</span>
+      <h2>BUY MOBILE PANEL</h2>
+      <p class="mobile-msg" id="mp-message-text">Mobile panel কিনতে নিচের প্যাকেজ সিলেক্ট করে BUY NOW ক্লিক করুন</p>
+      <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="ticket-btn" id="mp-ticket-btn">
+        <i class='bx bx-support'></i> <span id="mp-btn-label">SUPPORT DISCORD</span>
       </a>
     </div>
 
@@ -80,18 +481,178 @@
       <button class="filter-btn" data-filter="IOS" onclick="filterMobile('IOS')"><i class='bx bxl-apple'></i> iOS</button>
     </div>
 
-    <div class="mp-package-list" id="mp-package-list"></div>
+    <!-- PACKAGE LIST -->
+    <div class="mp-package-list" id="mp-package-list">
+      <!-- Dynamic packages render here -->
+    </div>
 
+    <!-- BUY FOOTER -->
     <div class="mp-buy-footer">
       <p class="selected-hint" id="mp-selected-hint">কোনো প্যাকেজ সিলেক্ট করা হয়নি</p>
-      <button type="button" class="ticket-btn" onclick="buyNowClick('mobile')">
+      <button type="button" class="ticket-btn" onclick="buyNowClick()">
         <i class='bx bx-cart'></i> <span>BUY NOW</span>
       </button>
     </div>
   </main>
 
+  <div class="toast" id="toast">Toast Message</div>
+
+  <!-- Firebase Scripts -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-  <script src="script.js"></script>
+  <script>
+    /* ── Mouse Glow ── */
+    const glow = document.getElementById('mouse-glow');
+    document.addEventListener('mousemove', (e) => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top  = e.clientY + 'px';
+    });
+
+    /* ── Toast Alert ── */
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2500);
+    }
+
+    /* ── Demo Packages Fallback ── */
+    let sampleMobilePackages = [
+      {
+        id: "m1",
+        title: "ANDROID VIP HEADSHOT PANEL",
+        platform: "ANDROID",
+        desc: "No Root Required • 100% Anti-Ban • Auto Headshot",
+        old_price: "৳ 1200",
+        price: "৳ 750",
+        buy_url: "https://discord.gg/ZBjSWaF7u"
+      },
+      {
+        id: "m2",
+        title: "IOS INJECTOR PANEL (IPA)",
+        platform: "IOS",
+        desc: "Sideloadly / Scarlet Compatible • Aimbot & Recoil Control",
+        old_price: "৳ 2500",
+        price: "৳ 1500",
+        buy_url: "https://discord.gg/ZBjSWaF7u"
+      },
+      {
+        id: "m3",
+        title: "ANDROID ROOT EXTREME PANEL",
+        platform: "ANDROID",
+        desc: "Magisk Module Included • Tournament Safe • 90 FPS Unlock",
+        old_price: "৳ 1800",
+        price: "৳ 1100",
+        buy_url: "https://discord.gg/ZBjSWaF7u"
+      }
+    ];
+
+    let currentFilter = 'ALL';
+    let selectedPkg = null;
+    let packagesList = sampleMobilePackages;
+
+    /* ── Render Package Items ── */
+    function renderPackages() {
+      const container = document.getElementById('mp-package-list');
+      container.innerHTML = '';
+
+      const filtered = packagesList.filter(item => {
+        if (currentFilter === 'ALL') return true;
+        return (item.platform || '').toUpperCase() === currentFilter;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--muted); font-size: 14px;">No mobile packages found for ${currentFilter}</div>`;
+        return;
+      }
+
+      filtered.forEach(item => {
+        const isSelected = selectedPkg && selectedPkg.id === item.id;
+        const iconClass = (item.platform || '').toUpperCase() === 'IOS' ? 'bxl-apple' : 'bxl-android';
+
+        const card = document.createElement('div');
+        card.className = `mp-package-item ${isSelected ? 'selected' : ''}`;
+        card.onclick = () => selectPackage(item);
+
+        card.innerHTML = `
+          <div class="mp-pkg-left">
+            <div class="mp-pkg-icon"><i class='bx ${iconClass}'></i></div>
+            <div class="mp-pkg-text">
+              <h3>${item.title}</h3>
+              <p>${item.desc || 'Premium Gaming Panel'}</p>
+            </div>
+          </div>
+          <div class="mp-pkg-right">
+            <div class="mp-price-box">
+              ${item.old_price ? `<span class="old-price">${item.old_price}</span>` : ''}
+              <span class="mp-pkg-price">${item.price}</span>
+            </div>
+            <span class="item-select-badge">${isSelected ? 'SELECTED' : 'SELECT'}</span>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    /* ── Select Package Handler ── */
+    function selectPackage(item) {
+      selectedPkg = item;
+      document.getElementById('mp-selected-hint').textContent = `সিলেক্ট করা হয়েছে: ${item.title} (${item.price})`;
+      renderPackages();
+    }
+
+    /* ── Filter Handler ── */
+    function filterMobile(type) {
+      currentFilter = type;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === type);
+      });
+      renderPackages();
+    }
+
+    /* ── Buy Button Handler ── */
+    function buyNowClick() {
+      if (!selectedPkg) {
+        showToast('দয়া করে প্রথমে একটি প্যাকেজ সিলেক্ট করুন!');
+        return;
+      }
+      const targetUrl = selectedPkg.buy_url || "https://discord.gg/ZBjSWaF7u";
+      window.open(targetUrl, '_blank');
+    }
+
+    /* ── Initial Render ── */
+    renderPackages();
+
+    /* ── Firebase Realtime Integration ── */
+    const firebaseConfig = {
+      // ⚠️ এখানে আপনার Firebase Config বসান (index.html থেকে কপি করুন)
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      databaseURL: "YOUR_DATABASE_URL",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    try {
+      if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // mobile_products node থেকে ডাটা লোড
+        db.ref('mobile_products').on('value', (snap) => {
+          const data = snap.val();
+          if (data) {
+            packagesList = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+            renderPackages();
+          }
+        });
+      }
+    } catch (e) {
+      console.log('Firebase not configured yet, showing demo packages.');
+    }
+  </script>
 </body>
 </html>
