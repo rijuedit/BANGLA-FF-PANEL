@@ -16,10 +16,16 @@
             pointer-events: none; transform: translate(-50%, -50%); z-index: 9999;
         }
 
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 18px 5%; background: rgba(17, 7, 26, 0.9); border-bottom: 1px solid #2a113d; sticky: top; }
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 18px 5%; background: rgba(17, 7, 26, 0.9); border-bottom: 1px solid #2a113d;
+        }
         .logo { font-size: 26px; font-weight: 700; color: #fff; text-decoration: none; }
         .logo span { color: #ff0066; }
-        .back-btn { background: #11071a; color: #fff; text-decoration: none; padding: 8px 16px; border: 1px solid #2a113d; border-radius: 8px; font-weight: 600; transition: 0.3s; }
+        .back-btn {
+            background: #11071a; color: #fff; text-decoration: none; padding: 8px 16px;
+            border: 1px solid #2a113d; border-radius: 8px; font-weight: 600; transition: 0.3s;
+        }
         .back-btn:hover { border-color: #ff0066; color: #ff0066; }
 
         .container { flex: 1; padding: 30px 5%; max-width: 1200px; margin: 0 auto; width: 100%; }
@@ -28,15 +34,28 @@
 
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
         
-        .card { background: #11071a; border: 1px solid #2a113d; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 15px; transition: 0.3s; position: relative; }
+        .card {
+            background: #11071a; border: 1px solid #2a113d; border-radius: 12px;
+            padding: 20px; display: flex; flex-direction: column; gap: 15px; transition: 0.3s;
+        }
         .card:hover { border-color: #ff0066; transform: translateY(-5px); box-shadow: 0 5px 20px rgba(255, 0, 102, 0.2); }
-        .card img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; }
-        .card-title { font-size: 20px; font-weight: 700; color: #fff; }
+        .thumb-box {
+            width: 100%; height: 150px; background: #05020a; border-radius: 8px;
+            overflow: hidden; display: flex; align-items: center; justify-content: center;
+        }
+        .thumb-box img { width: 100%; height: 100%; object-fit: cover; }
+        .thumb-box i { font-size: 50px; color: #ff0066; }
+        
+        .card-title { font-size: 20px; font-weight: 700; color: #fff; text-align: center; }
         
         .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
-        .btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; transition: 0.3s; text-align: center; }
+        .btn {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 600;
+            font-size: 15px; transition: 0.3s; text-align: center;
+        }
         .btn-main { background: #ff0066; color: #fff; }
-        .btn-main:hover { background: #d60055; }
+        .btn-main:hover { background: #d60055; box-shadow: 0 0 15px rgba(255, 0, 102, 0.4); }
         .btn-yt { background: #ff0000; color: #fff; }
         .btn-yt:hover { background: #cc0000; }
         .btn-skip { background: #9d00ff; color: #fff; }
@@ -76,8 +95,17 @@
 
         document.addEventListener('mousemove', (e) => {
             const glow = document.getElementById('mouse-glow');
-            glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px';
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
         });
+
+        // Helper: Get YouTube Thumbnail from URL
+        function getYoutubeThumb(url) {
+            if (!url) return null;
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? `https://img.youtube.com/vi/${match[2]}/hqdefault.jpg` : null;
+        }
 
         onValue(ref(db, 'free_panels'), (snapshot) => {
             document.getElementById('loader').style.display = 'none';
@@ -92,16 +120,23 @@
             snapshot.forEach((child) => {
                 const item = child.val();
                 
-                // Optional Buttons Logic
+                // Extract YouTube Thumbnail if Video URL exists
+                const ytThumb = getYoutubeThumb(item.yt_link);
+                let thumbHTML = ytThumb 
+                    ? `<div class="thumb-box"><img src="${ytThumb}" alt="${item.title}"></div>`
+                    : `<div class="thumb-box"><i class="fas fa-laptop-code"></i></div>`;
+
+                // Optional YouTube Video Button
                 let ytBtnHTML = (item.yt_enabled !== false && item.yt_link) 
                     ? `<a href="${item.yt_link}" target="_blank" class="btn btn-yt"><i class="fab fa-youtube"></i> Watch Tutorial</a>` : '';
 
+                // Optional How To Skip Button
                 let skipBtnHTML = (item.skip_enabled !== false && item.skip_link) 
                     ? `<a href="${item.skip_link}" target="_blank" class="btn btn-skip"><i class="fas fa-route"></i> How To Skip</a>` : '';
 
                 grid.innerHTML += `
                     <div class="card">
-                        <img src="${item.image}" alt="${item.title}">
+                        ${thumbHTML}
                         <div class="card-title">${item.title}</div>
                         <div class="btn-group">
                             <a href="${item.download}" target="_blank" class="btn btn-main"><i class="fas fa-download"></i> ${item.btn_text || 'Download'}</a>
