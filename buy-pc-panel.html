@@ -1,139 +1,239 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buy PC Panel - BANGLA FF PANEL</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    body { background-color: #05020a; color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding-bottom: 60px; }
-    header { width: 100%; max-width: 1000px; padding: 20px; display: flex; justify-content: space-between; align-items: center; z-index: 10; }
-    .back-btn { background: #11071a; border: 1px solid #2a113d; color: #ff0066; padding: 10px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; box-shadow: 0 0 15px rgba(255,0,102,0.1); }
-    .page-title { text-align: center; margin: 20px 0 30px 0; z-index: 10; }
-    .page-title h1 { font-size: 2rem; color: #fff; text-shadow: 0 0 15px rgba(255,0,102,0.4); }
-    .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; width: 90%; max-width: 1000px; z-index: 10; }
-    .panel-card { background: #11071a; border: 1px solid #2a113d; border-radius: 16px; padding: 20px; text-align: center; transition: 0.3s; position: relative; }
-    .panel-card:hover { border-color: #ff0066; transform: translateY(-5px); box-shadow: 0 8px 25px rgba(255,0,102,0.2); }
-    .panel-img { width: 100px; height: 100px; border-radius: 14px; object-fit: cover; margin-bottom: 15px; border: 2px solid #2a113d; }
-    .panel-name { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; }
-    .sell-price { color: #00cc66; font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; display: block; }
-    .buy-now-btn { width: 100%; padding: 12px; background: linear-gradient(135deg, #ff0066, #9d00ff); color: #fff; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; }
-    
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5,2,10,0.85); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 9999; }
-    .modal-card { background: #11071a; border: 1px solid #2a113d; box-shadow: 0 0 30px rgba(255,0,102,0.25); border-radius: 18px; width: 90%; max-width: 440px; padding: 25px; position: relative; }
-    .close-modal { position: absolute; top: 18px; right: 18px; background: none; border: none; color: #8a7a9e; font-size: 22px; cursor: pointer; }
-    .modal-header { text-align: center; margin-bottom: 20px; }
-    .modal-header img { width: 75px; height: 75px; border-radius: 14px; border: 2px solid #ff0066; margin-bottom: 10px; }
-    .duration-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-    .plan-item { display: flex; justify-content: space-between; align-items: center; background: #1a0b28; border: 1px solid #2a113d; padding: 12px 16px; border-radius: 12px; cursor: pointer; }
-    .plan-item.selected { border-color: #ff0066; background: rgba(255,0,102,0.08); }
-    .plan-price-text { color: #00cc66; font-weight: 700; font-size: 1.05rem; }
-    .plan-old { text-decoration: line-through; color: #7a6a8f; font-size: 0.85rem; margin-right: 8px; }
-    .price-total-bar { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px dashed #2a113d; margin-top: 10px; }
-    .total-val { font-size: 1.6rem; font-weight: 800; color: #ff0066; }
-    .confirm-btn { width: 100%; margin-top: 20px; padding: 14px; background: linear-gradient(135deg, #7289da, #5865F2); color: #fff; border: none; border-radius: 12px; font-weight: bold; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 15px rgba(88,101,242,0.4); }
-    .confirm-btn:hover { opacity: 0.9; transform: translateY(-2px); }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy PC Panel - BANGLA FF PANEL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-main: #05020a;
+            --card-bg: #0b0512;
+            --border-color: #1a0b2e;
+            --neon-pink: #ff0066;
+            --neon-purple: #9d00ff;
+            --text-light: #ffffff;
+            --text-gray: #777777;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-light); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
+
+        .bg-glow {
+            position: absolute; top: 10%; left: 30%; width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(157, 0, 255, 0.1) 0%, transparent 70%);
+            z-index: -1; pointer-events: none;
+        }
+
+        .header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 50px; background: rgba(5, 2, 10, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px);
+        }
+
+        .brand { display: flex; align-items: center; gap: 15px; text-decoration: none; cursor: pointer; }
+        .site-logo { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; border: 1px solid var(--neon-pink); }
+        .brand-text h2 { font-size: 16px; color: white; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+        .brand-text p { font-size: 9px; color: var(--text-gray); letter-spacing: 3px; text-transform: uppercase; }
+
+        .nav-btns { display: flex; gap: 12px; }
+        .header-btn {
+            background: transparent; border: 1px solid #333; color: white;
+            padding: 8px 15px; border-radius: 6px; font-size: 12px; text-decoration: none;
+            display: flex; align-items: center; gap: 8px; transition: 0.3s;
+        }
+        .header-btn:hover { border-color: white; }
+
+        .content-container { max-width: 1000px; margin: 40px auto 60px; padding: 0 20px; flex: 1; width: 100%; }
+
+        .page-title { font-size: 24px; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; text-align: center; }
+        .page-subtitle { font-size: 10px; color: var(--text-gray); letter-spacing: 2px; margin-bottom: 35px; text-transform: uppercase; text-align: center; }
+
+        .product-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;
+        }
+
+        .product-card {
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 20px; text-align: center; transition: 0.3s; position: relative;
+        }
+        .product-card:hover { border-color: var(--neon-purple); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(157, 0, 255, 0.15); }
+
+        .product-img {
+            width: 100%; height: 160px; border-radius: 8px; object-fit: cover; margin-bottom: 15px; border: 1px solid var(--border-color);
+        }
+
+        .product-name { font-size: 16px; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
+        .product-price-start { font-size: 12px; color: var(--neon-pink); font-weight: bold; margin-bottom: 20px; }
+
+        .buy-btn {
+            width: 100%; background: var(--neon-pink); color: white; border: none; padding: 10px;
+            border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 12px; text-transform: uppercase;
+        }
+        .buy-btn:hover { box-shadow: 0 0 12px var(--neon-pink); }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px);
+            display: none; justify-content: center; align-items: center; z-index: 1000;
+        }
+        .modal {
+            background: var(--card-bg); border: 2px solid var(--neon-purple);
+            width: 420px; padding: 25px; border-radius: 12px; box-shadow: 0 0 30px rgba(157, 0, 255, 0.3);
+        }
+        .modal-title { font-size: 18px; font-weight: bold; color: var(--neon-pink); margin-bottom: 20px; text-transform: uppercase; }
+        .pkg-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; max-height: 250px; overflow-y: auto; }
+        .pkg-item {
+            background: #06020c; border: 1px solid var(--border-color); padding: 12px;
+            border-radius: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.3s;
+        }
+        .pkg-item:hover, .pkg-item.selected { border-color: var(--neon-pink); background: rgba(255, 0, 102, 0.05); }
+        .pkg-dur { font-weight: bold; font-size: 13px; }
+        .pkg-price { color: var(--neon-pink); font-weight: bold; font-size: 13px; }
+
+        .modal-footer { display: flex; gap: 10px; }
+        .confirm-btn { background: var(--neon-purple); color: white; border: none; padding: 12px; flex: 1; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        .cancel-btn { background: transparent; border: 1px solid var(--text-gray); color: var(--text-gray); padding: 12px; flex: 1; border-radius: 6px; cursor: pointer; }
+
+        @media (max-width: 768px) { .header { padding: 15px 20px; } }
+    </style>
 </head>
 <body>
-  <header><a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Home</a></header>
-  <div class="page-title"><h1>💻 BUY PC PANEL</h1></div>
-  <div id="panelGrid" class="grid-container"><div style="text-align:center; width:100%;">লোড হচ্ছে...</div></div>
 
-  <div id="buyModal" class="modal-overlay">
-    <div class="modal-card">
-      <button class="close-modal" onclick="closeModal()">&times;</button>
-      <div class="modal-header"><img id="mImg" src=""><h3 id="mTitle">Title</h3></div>
-      <div style="color:#a090b5; margin-bottom:10px; font-size:0.9rem;">প্যাকেজ ও মেয়াদ নির্বাচন করুন:</div>
-      <div class="duration-grid" id="modalPackagesGrid"></div>
-      <div class="price-total-bar"><span>মোট পে করতে হবে:</span><div class="total-val" id="totalPriceDisplay">৳0</div></div>
-      <button class="confirm-btn" onclick="processOrder()"><i class="fab fa-discord"></i> Order Now</button>
-    </div>
-  </div>
+    <div class="bg-glow"></div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-app.js";
-    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/11.3.0/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
-      authDomain: "bangla-ff-admin.firebaseapp.com",
-      databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "bangla-ff-admin"
-    };
-    const db = getDatabase(initializeApp(firebaseConfig));
-
-    let currentPanelName = "", selectedDuration = "", selectedPrice = 0, globalBuyLink = "";
-
-    // Fetch Global Buy Link
-    onValue(ref(db, 'site_settings/pc_panel/buy_link'), (snapshot) => {
-      globalBuyLink = snapshot.exists() ? snapshot.val() : "";
-    });
-
-    // Load PC Panels Live
-    onValue(ref(db, 'pc_panels'), (snapshot) => {
-      const grid = document.getElementById('panelGrid'); grid.innerHTML = '';
-      if(snapshot.exists()) {
-        const data = snapshot.val();
-        Object.keys(data).reverse().forEach(key => {
-          const item = data[key];
-          let lowestPrice = item.packages ? Math.min(...item.packages.map(p => p.sell_price)) : 0;
-          const encodedData = encodeURIComponent(JSON.stringify(item));
-          grid.innerHTML += `
-            <div class="panel-card">
-              <img src="${item.image || 'https://i.ibb.co/L8r1pXw/logo.png'}" class="panel-img">
-              <div class="panel-name">${item.title}</div>
-              <span class="sell-price">Starts at ৳${lowestPrice}</span>
-              <button class="buy-now-btn" onclick="openModal('${encodedData}')"><i class="fas fa-shopping-cart"></i> BUY NOW</button>
+    <header class="header">
+        <a href="index.html" class="brand">
+            <img src="logo.png" alt="Logo" class="site-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/888/888879.png'">
+            <div class="brand-text">
+                <h2>BANGLA FF PANEL</h2>
+                <p>PREMIUM CORP</p>
             </div>
-          `;
+        </a>
+        <div class="nav-btns">
+            <a href="index.html" class="header-btn"><i class="fas fa-home"></i> Home</a>
+            <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="header-btn"><i class="fab fa-discord"></i> Discord</a>
+        </div>
+    </header>
+
+    <div class="content-container">
+        <h2 class="page-title">Paid PC Panels</h2>
+        <div class="page-subtitle">VIP SOLUTIONS FOR PC PLAYERS</div>
+
+        <div class="product-grid" id="product-grid"></div>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div class="modal-overlay" id="orderModal">
+        <div class="modal">
+            <div class="modal-title" id="mProductTitle">Order Panel</div>
+            <div style="font-size:12px; color:var(--text-gray); margin-bottom:10px;">Select Duration Package:</div>
+            <div class="pkg-list" id="mPkgList"></div>
+            <div class="modal-footer">
+                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+                <button class="confirm-btn" id="mConfirmBtn">Proceed to Buy</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
+            authDomain: "bangla-ff-admin.firebaseapp.com",
+            databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "bangla-ff-admin",
+            storageBucket: "bangla-ff-admin.firebasestorage.app",
+            messagingSenderId: "295013484465",
+            appId: "1:295013484465:web:b6bc2a949e239095761f90"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        let globalBuyLink = "https://discord.gg/ZBjSWaF7u";
+        let activePanels = {};
+
+        // Fetch Global Buy Link
+        get(ref(db, 'site_settings/pc_panel/buy_link')).then(s => {
+            if (s.exists() && s.val()) globalBuyLink = s.val();
         });
-      } else grid.innerHTML = '<div style="text-align:center; width:100%; color:#7a6a8f;">কোনো PC প্যানেল পাওয়া যায়নি!</div>';
-    });
 
-    window.openModal = function(encodedData) {
-      const item = JSON.parse(decodeURIComponent(encodedData));
-      currentPanelName = item.title;
-      document.getElementById('mTitle').innerText = item.title;
-      document.getElementById('mImg').src = item.image || 'https://i.ibb.co/L8r1pXw/logo.png';
-      
-      const pGrid = document.getElementById('modalPackagesGrid'); pGrid.innerHTML = '';
-      if(item.packages) {
-        item.packages.forEach((pkg, index) => {
-          const isSelected = index === 0 ? 'selected' : '', isChecked = index === 0 ? 'checked' : '';
-          if(index === 0) { selectedDuration = pkg.duration; selectedPrice = pkg.sell_price; }
-          pGrid.innerHTML += `
-            <label class="plan-item ${isSelected}" onclick="selectPlan(this, '${pkg.duration}', ${pkg.sell_price})">
-              <div><input type="radio" name="dur" ${isChecked} style="accent-color:#ff0066;"><span style="font-weight:600; margin-left:8px;">${pkg.duration}</span></div>
-              <div>${pkg.old_price ? `<span class="plan-old">৳${pkg.old_price}</span>` : ''}<span class="plan-price-text">৳${pkg.sell_price}</span></div>
-            </label>
-          `;
+        // Fetch PC Panels
+        onValue(ref(db, 'pc_panels'), (snapshot) => {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = "";
+            activePanels = snapshot.val() || {};
+
+            snapshot.forEach(child => {
+                const item = child.val();
+                const key = child.key;
+                let minPrice = "N/A";
+
+                if (item.packages && item.packages.length > 0) {
+                    minPrice = "৳ " + item.packages[0].sell_price;
+                }
+
+                grid.innerHTML += `
+                    <div class="product-card">
+                        <img src="${item.image}" class="product-img" onerror="this.src='https://via.placeholder.com/300x160?text=PC+Panel'">
+                        <div class="product-name">${item.title}</div>
+                        <div class="product-price-start">Starts at ${minPrice}</div>
+                        <button class="buy-btn" onclick="openOrderModal('${key}')">Buy Panel</button>
+                    </div>
+                `;
+            });
         });
-      }
-      document.getElementById('totalPriceDisplay').innerText = `৳${selectedPrice}`;
-      document.getElementById('buyModal').style.display = 'flex';
-    };
 
-    window.selectPlan = function(el, dur, price) {
-      document.querySelectorAll('.plan-item').forEach(i => i.classList.remove('selected'));
-      el.classList.add('selected'); el.querySelector('input').checked = true;
-      selectedDuration = dur; selectedPrice = price;
-      document.getElementById('totalPriceDisplay').innerText = `৳${price}`;
-    };
+        let selectedPkg = null;
 
-    window.closeModal = function() { document.getElementById('buyModal').style.display = 'none'; };
+        window.openOrderModal = function(key) {
+            const item = activePanels[key];
+            if (!item) return;
 
-    window.processOrder = function() {
-      if(globalBuyLink && globalBuyLink.trim() !== '') {
-        window.open(globalBuyLink, '_blank');
-      } else {
-        const textMessage = `হ্যালো! 👋\nআমি PC প্যানেল অর্ডার করতে চাই।\n📌 প্যানেল: ${currentPanelName}\n⏱️ মেয়াদ: ${selectedDuration}\n💰 মূল্য: ৳${selectedPrice}`;
-        window.open(`https://wa.me/8801700000000?text=${encodeURIComponent(textMessage)}`, '_blank');
-      }
-      closeModal();
-    };
-  </script>
+            document.getElementById('mProductTitle').innerText = item.title;
+            const pkgList = document.getElementById('mPkgList');
+            pkgList.innerHTML = "";
+            selectedPkg = null;
+
+            if (item.packages && item.packages.length > 0) {
+                item.packages.forEach((pkg, idx) => {
+                    pkgList.innerHTML += `
+                        <div class="pkg-item ${idx===0?'selected':''}" onclick="selectPackage(this, ${idx}, '${key}')">
+                            <span class="pkg-dur">${pkg.duration}</span>
+                            <span class="pkg-price">৳ ${pkg.sell_price}</span>
+                        </div>
+                    `;
+                });
+                selectedPkg = item.packages[0];
+            } else {
+                pkgList.innerHTML = `<div style="color:#777; font-size:12px;">No packages available.</div>`;
+            }
+
+            document.getElementById('orderModal').style.display = 'flex';
+        };
+
+        window.selectPackage = function(el, idx, key) {
+            document.querySelectorAll('.pkg-item').forEach(i => i.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedPkg = activePanels[key].packages[idx];
+        };
+
+        window.closeModal = function() {
+            document.getElementById('orderModal').style.display = 'none';
+        };
+
+        document.getElementById('mConfirmBtn').addEventListener('click', () => {
+            if (globalBuyLink) {
+                window.open(globalBuyLink, '_blank');
+            } else {
+                alert("Redirecting to support...");
+                window.open("https://discord.gg/ZBjSWaF7u", '_blank');
+            }
+        });
+    </script>
 </body>
 </html>
