@@ -1,658 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mobile Panel - BANGLA FF PANEL</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #08030d;
-      --card: #11071a;
-      --border: #2a113d;
-      --pink: #ff0066;
-      --purple: #9d00ff;
-      --text: #e2e8f0;
-      --muted: #94a3b8;
-      --mono: 'JetBrains Mono', monospace;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paid Mobile Panels - BANGLA FF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
+        body { background-color: #05020a; color: #fff; min-height: 100vh; display: flex; flex-direction: column; }
+        
+        #mouse-glow { position: fixed; width: 50px; height: 50px; border-radius: 50%; background: rgba(0, 204, 255, 0.4); filter: blur(30px); pointer-events: none; transform: translate(-50%, -50%); z-index: 9999; }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 18px 5%; background: rgba(17, 7, 26, 0.9); border-bottom: 1px solid #2a113d; sticky: top; }
+        .logo { font-size: 26px; font-weight: 700; color: #fff; text-decoration: none; }
+        .logo span { color: #00ccff; }
+        .back-btn { background: #11071a; color: #fff; text-decoration: none; padding: 8px 16px; border: 1px solid #2a113d; border-radius: 8px; font-weight: 600; transition: 0.3s; }
+        .back-btn:hover { border-color: #00ccff; color: #00ccff; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-      cursor: auto;
-    }
+        .container { flex: 1; padding: 30px 5%; max-width: 1200px; margin: 0 auto; width: 100%; }
+        .page-title { font-size: 32px; text-transform: uppercase; margin-bottom: 30px; text-align: center; }
+        .page-title span { color: #00ccff; }
 
-    /* Ambient background glow */
-    .ambient {
-      position: fixed;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.18;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .ambient-left {
-      top: -100px; left: -100px;
-      background: var(--purple);
-    }
-    .ambient-right {
-      bottom: -100px; right: -100px;
-      background: var(--pink);
-    }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .card { background: #11071a; border: 1px solid #2a113d; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 15px; transition: 0.3s; }
+        .card:hover { border-color: #00ccff; transform: translateY(-5px); box-shadow: 0 5px 20px rgba(0, 204, 255, 0.3); }
+        .card img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; }
+        .card-title { font-size: 22px; font-weight: 700; color: #fff; }
+        
+        .price-box { display: flex; align-items: center; gap: 12px; margin-top: 5px; }
+        .sell-price { font-size: 24px; font-weight: 700; color: #00ccff; }
+        .old-price { font-size: 16px; color: #666; text-decoration: line-through; }
 
-    /* Soft Mouse Glow */
-    #mouse-glow {
-      position: fixed;
-      width: 250px;
-      height: 250px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(157,0,255,0.15) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-      transform: translate(-50%, -50%);
-      transition: left 0.08s ease-out, top 0.08s ease-out;
-    }
+        .btn-buy { background: #00ccff; color: #000; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 16px; transition: 0.3s; margin-top: auto; }
+        .btn-buy:hover { background: #0099cc; color: #fff; box-shadow: 0 0 15px rgba(0, 204, 255, 0.5); }
 
-    /* ── HEADER ── */
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 28px;
-      background: rgba(8, 3, 13, 0.85);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-      color: #fff;
-    }
-    .brand-logo-img {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      object-fit: cover;
-      border: 2px solid var(--purple);
-      box-shadow: 0 0 16px rgba(157,0,255,0.4);
-    }
-    .brand-text h2 {
-      font-size: 20px;
-      font-weight: 900;
-      letter-spacing: 0.5px;
-      background: linear-gradient(135deg, #fff 30%, var(--pink));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1.1;
-    }
-    .brand-text span {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--purple);
-      text-transform: uppercase;
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .home-btn {
-      padding: 8px 18px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.04);
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: 0.2s;
-    }
-    .home-btn:hover {
-      border-color: var(--purple);
-      color: #fff;
-    }
-    .discord-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 18px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, var(--purple), var(--pink));
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow: 0 0 18px rgba(157,0,255,0.35);
-      transition: 0.2s;
-    }
-    .discord-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-
-    /* ── MAIN CONTAINER ── */
-    .inner-page-container {
-      width: calc(100% - 40px);
-      max-width: 850px;
-      margin: 40px auto 80px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .inner-header-actions {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 24px;
-    }
-    .back-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: 0.2s;
-    }
-    .back-btn:hover {
-      border-color: var(--purple);
-      color: #fff;
-    }
-
-    /* Header Banner Card */
-    .mobile-header-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 36px 28px;
-      text-align: center;
-      margin-bottom: 28px;
-      box-shadow: 0 0 40px rgba(157,0,255,0.08);
-      position: relative;
-      overflow: hidden;
-    }
-    .mobile-header-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--purple), var(--pink));
-    }
-
-    .mobile-icon {
-      width: 70px;
-      height: 70px;
-      border-radius: 18px;
-      margin: 0 auto 20px;
-      background: rgba(157,0,255,0.12);
-      border: 1px solid rgba(157,0,255,0.3);
-      display: grid;
-      place-items: center;
-      font-size: 34px;
-      color: var(--pink);
-      box-shadow: 0 0 20px rgba(255,0,102,0.2);
-    }
-    .mobile-header-card h2 {
-      font-size: 26px;
-      font-weight: 900;
-      color: #fff;
-      margin: 0 0 10px;
-      background: linear-gradient(90deg, #fff, var(--pink));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .mobile-msg {
-      font-size: 14px;
-      color: var(--muted);
-      margin: 0 0 20px;
-    }
-
-    .ticket-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(135deg, var(--purple), var(--pink));
-      border: none;
-      color: #fff;
-      padding: 14px 36px;
-      border-radius: 14px;
-      font-size: 15px;
-      font-weight: 900;
-      text-decoration: none;
-      box-shadow: 0 0 24px rgba(157,0,255,0.35);
-      cursor: pointer;
-      transition: 0.25s;
-    }
-    .ticket-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 32px rgba(255,0,102,0.5);
-    }
-
-    /* FILTER UI */
-    .filter-container {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-    }
-    .filter-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 10px 24px;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .filter-btn i { font-size: 18px; }
-    .filter-btn:hover {
-      border-color: var(--purple);
-      color: #fff;
-    }
-    .filter-btn.active {
-      background: linear-gradient(135deg, var(--purple), var(--pink));
-      color: #fff;
-      border-color: transparent;
-      box-shadow: 0 0 20px rgba(157,0,255,0.4);
-    }
-
-    /* Package List */
-    .mp-package-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 28px;
-    }
-
-    .mp-package-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 18px 22px;
-      cursor: pointer;
-      transition: 0.25s;
-      flex-wrap: wrap;
-    }
-    .mp-package-item:hover {
-      border-color: var(--purple);
-      box-shadow: 0 0 20px rgba(157,0,255,0.15);
-      transform: translateX(4px);
-    }
-    .mp-package-item.selected {
-      border-color: var(--pink);
-      box-shadow: 0 0 24px rgba(255,0,102,0.3);
-      background: rgba(255,0,102,0.06);
-    }
-
-    .mp-pkg-left {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex: 1;
-      min-width: 220px;
-    }
-    .mp-pkg-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
-      background: rgba(157,0,255,0.12);
-      border: 1px solid rgba(157,0,255,0.3);
-      display: grid;
-      place-items: center;
-      color: var(--pink);
-      font-size: 22px;
-      flex-shrink: 0;
-    }
-    .mp-pkg-text h3 {
-      margin: 0 0 4px;
-      font-size: 15px;
-      font-weight: 800;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .mp-pkg-text p {
-      margin: 0;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .mp-pkg-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      flex-shrink: 0;
-    }
-    .mp-price-box {
-      text-align: right;
-    }
-    .old-price {
-      font-size: 11px;
-      color: #ef4444;
-      text-decoration: line-through;
-      display: block;
-      font-weight: 700;
-    }
-    .mp-pkg-price {
-      font-size: 17px;
-      font-weight: 900;
-      color: #fff;
-      white-space: nowrap;
-      font-family: var(--mono);
-    }
-
-    .item-select-badge {
-      padding: 6px 14px;
-      border-radius: 8px;
-      font-size: 11px;
-      font-weight: 800;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.05);
-      color: var(--muted);
-      text-transform: uppercase;
-      transition: 0.2s;
-    }
-    .mp-package-item.selected .item-select-badge {
-      background: var(--pink);
-      color: #fff;
-      border-color: var(--pink);
-      box-shadow: 0 0 12px rgba(255,0,102,0.4);
-    }
-
-    /* Footer Buy Box */
-    .mp-buy-footer {
-      text-align: center;
-      padding: 24px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      box-shadow: 0 0 30px rgba(157,0,255,0.06);
-    }
-    .selected-hint {
-      font-size: 13px;
-      color: var(--pink);
-      margin-bottom: 14px;
-      min-height: 20px;
-      font-weight: 700;
-    }
-
-    /* Toast */
-    .toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: linear-gradient(135deg, var(--purple), var(--pink));
-      color: #fff;
-      padding: 12px 28px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      z-index: 999;
-      opacity: 0;
-      transition: 0.35s cubic-bezier(.2,.9,.3,1);
-      pointer-events: none;
-      box-shadow: 0 8px 30px rgba(157,0,255,0.4);
-    }
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    @media (max-width: 600px) {
-      .topbar { padding: 12px 16px; }
-      .brand-text h2 { font-size: 16px; }
-      .brand-logo-img { width: 40px; height: 40px; }
-      .mp-package-item { flex-direction: column; align-items: flex-start; }
-      .mp-pkg-right { width: 100%; justify-content: space-between; margin-top: 10px; }
-    }
-  </style>
+        #no-data { text-align: center; color: #aaa; font-size: 18px; grid-column: 1 / -1; padding: 50px 0; }
+        #loader { text-align: center; color: #00ccff; font-size: 20px; padding: 50px 0; font-weight: 600; }
+    </style>
 </head>
 <body>
+    <div id="mouse-glow"></div>
 
-  <div class="ambient ambient-left"></div>
-  <div class="ambient ambient-right"></div>
-  <div id="mouse-glow"></div>
-
-  <!-- HEADER -->
-  <header class="topbar">
-    <a href="index.html" class="brand">
-      <img src="logo.png" alt="Logo" class="brand-logo-img">
-      <div class="brand-text">
-        <h2>BANGLA FF PANEL</h2>
-        <span>PREMIUM CORP</span>
-      </div>
-    </a>
-    <nav class="top-actions">
-      <a class="home-btn" href="index.html">Home</a>
-      <a class="discord-btn" href="https://discord.gg/ZBjSWaF7u" target="_blank">
-        <i class='bx bxl-discord-alt'></i> Discord
-      </a>
+    <nav class="navbar">
+        <a href="index.html" class="logo">BANGLA <span>FF</span></a>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Home</a>
     </nav>
-  </header>
 
-  <!-- MAIN CONTAINER -->
-  <main class="inner-page-container">
-    <div class="inner-header-actions">
-      <a href="index.html" class="back-btn"><i class='bx bx-left-arrow-alt'></i> Back</a>
-    </div>
+    <main class="container">
+        <h1 class="page-title">Paid Mobile <span>Panels</span></h1>
+        <div id="loader"><i class="fas fa-spinner fa-spin"></i> Loading Panels...</div>
+        <div class="grid" id="grid-container"></div>
+    </main>
 
-    <!-- Header Banner -->
-    <div class="mobile-header-card">
-      <div class="mobile-icon"><i class='bx bx-mobile-alt'></i></div>
-      <h2>BUY MOBILE PANEL</h2>
-      <p class="mobile-msg" id="mp-message-text">Mobile panel কিনতে নিচের প্যাকেজ সিলেক্ট করে BUY NOW ক্লিক করুন</p>
-      <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="ticket-btn" id="mp-ticket-btn">
-        <i class='bx bx-support'></i> <span id="mp-btn-label">SUPPORT DISCORD</span>
-      </a>
-    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-    <!-- FILTER UI -->
-    <div class="filter-container">
-      <button class="filter-btn active" data-filter="ALL" onclick="filterMobile('ALL')"><i class='bx bx-grid-alt'></i> All</button>
-      <button class="filter-btn" data-filter="ANDROID" onclick="filterMobile('ANDROID')"><i class='bx bxl-android'></i> Android</button>
-      <button class="filter-btn" data-filter="IOS" onclick="filterMobile('IOS')"><i class='bx bxl-apple'></i> iOS</button>
-    </div>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
+            authDomain: "bangla-ff-admin.firebaseapp.com",
+            databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "bangla-ff-admin"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
 
-    <!-- PACKAGE LIST -->
-    <div class="mp-package-list" id="mp-package-list">
-      <!-- Dynamic packages render here -->
-    </div>
-
-    <!-- BUY FOOTER -->
-    <div class="mp-buy-footer">
-      <p class="selected-hint" id="mp-selected-hint">কোনো প্যাকেজ সিলেক্ট করা হয়নি</p>
-      <button type="button" class="ticket-btn" onclick="buyNowClick()">
-        <i class='bx bx-cart'></i> <span>BUY NOW</span>
-      </button>
-    </div>
-  </main>
-
-  <div class="toast" id="toast">Toast Message</div>
-
-  <!-- Firebase Scripts -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-  <script>
-    /* ── Mouse Glow ── */
-    const glow = document.getElementById('mouse-glow');
-    document.addEventListener('mousemove', (e) => {
-      glow.style.left = e.clientX + 'px';
-      glow.style.top  = e.clientY + 'px';
-    });
-
-    /* ── Toast Alert ── */
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2500);
-    }
-
-    /* ── Demo Packages Fallback ── */
-    let sampleMobilePackages = [
-      {
-        id: "m1",
-        title: "ANDROID VIP HEADSHOT PANEL",
-        platform: "ANDROID",
-        desc: "No Root Required • 100% Anti-Ban • Auto Headshot",
-        old_price: "৳ 1200",
-        price: "৳ 750",
-        buy_url: "https://discord.gg/ZBjSWaF7u"
-      },
-      {
-        id: "m2",
-        title: "IOS INJECTOR PANEL (IPA)",
-        platform: "IOS",
-        desc: "Sideloadly / Scarlet Compatible • Aimbot & Recoil Control",
-        old_price: "৳ 2500",
-        price: "৳ 1500",
-        buy_url: "https://discord.gg/ZBjSWaF7u"
-      },
-      {
-        id: "m3",
-        title: "ANDROID ROOT EXTREME PANEL",
-        platform: "ANDROID",
-        desc: "Magisk Module Included • Tournament Safe • 90 FPS Unlock",
-        old_price: "৳ 1800",
-        price: "৳ 1100",
-        buy_url: "https://discord.gg/ZBjSWaF7u"
-      }
-    ];
-
-    let currentFilter = 'ALL';
-    let selectedPkg = null;
-    let packagesList = sampleMobilePackages;
-
-    /* ── Render Package Items ── */
-    function renderPackages() {
-      const container = document.getElementById('mp-package-list');
-      container.innerHTML = '';
-
-      const filtered = packagesList.filter(item => {
-        if (currentFilter === 'ALL') return true;
-        return (item.platform || '').toUpperCase() === currentFilter;
-      });
-
-      if (filtered.length === 0) {
-        container.innerHTML = `<div style="text-align:center; padding: 40px; color: var(--muted); font-size: 14px;">No mobile packages found for ${currentFilter}</div>`;
-        return;
-      }
-
-      filtered.forEach(item => {
-        const isSelected = selectedPkg && selectedPkg.id === item.id;
-        const iconClass = (item.platform || '').toUpperCase() === 'IOS' ? 'bxl-apple' : 'bxl-android';
-
-        const card = document.createElement('div');
-        card.className = `mp-package-item ${isSelected ? 'selected' : ''}`;
-        card.onclick = () => selectPackage(item);
-
-        card.innerHTML = `
-          <div class="mp-pkg-left">
-            <div class="mp-pkg-icon"><i class='bx ${iconClass}'></i></div>
-            <div class="mp-pkg-text">
-              <h3>${item.title}</h3>
-              <p>${item.desc || 'Premium Gaming Panel'}</p>
-            </div>
-          </div>
-          <div class="mp-pkg-right">
-            <div class="mp-price-box">
-              ${item.old_price ? `<span class="old-price">${item.old_price}</span>` : ''}
-              <span class="mp-pkg-price">${item.price}</span>
-            </div>
-            <span class="item-select-badge">${isSelected ? 'SELECTED' : 'SELECT'}</span>
-          </div>
-        `;
-
-        container.appendChild(card);
-      });
-    }
-
-    /* ── Select Package Handler ── */
-    function selectPackage(item) {
-      selectedPkg = item;
-      document.getElementById('mp-selected-hint').textContent = `সিলেক্ট করা হয়েছে: ${item.title} (${item.price})`;
-      renderPackages();
-    }
-
-    /* ── Filter Handler ── */
-    function filterMobile(type) {
-      currentFilter = type;
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.filter === type);
-      });
-      renderPackages();
-    }
-
-    /* ── Buy Button Handler ── */
-    function buyNowClick() {
-      if (!selectedPkg) {
-        showToast('দয়া করে প্রথমে একটি প্যাকেজ সিলেক্ট করুন!');
-        return;
-      }
-      const targetUrl = selectedPkg.buy_url || "https://discord.gg/ZBjSWaF7u";
-      window.open(targetUrl, '_blank');
-    }
-
-    /* ── Initial Render ── */
-    renderPackages();
-
-    /* ── Firebase Realtime Integration ── */
-    const firebaseConfig = {
-      // ⚠️ এখানে আপনার Firebase Config বসান (index.html থেকে কপি করুন)
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      databaseURL: "YOUR_DATABASE_URL",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_STORAGE_BUCKET",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
-
-    try {
-      if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
-
-        // mobile_products node থেকে ডাটা লোড
-        db.ref('mobile_products').on('value', (snap) => {
-          const data = snap.val();
-          if (data) {
-            packagesList = Object.keys(data).map(key => ({ id: key, ...data[key] }));
-            renderPackages();
-          }
+        document.addEventListener('mousemove', (e) => {
+            const glow = document.getElementById('mouse-glow');
+            glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px';
         });
-      }
-    } catch (e) {
-      console.log('Firebase not configured yet, showing demo packages.');
-    }
-  </script>
+
+        onValue(ref(db, 'mobile_panels'), (snapshot) => {
+            document.getElementById('loader').style.display = 'none';
+            const grid = document.getElementById('grid-container');
+            grid.innerHTML = '';
+
+            if(!snapshot.exists()) {
+                grid.innerHTML = '<div id="no-data">No Mobile Panels Available Right Now.</div>';
+                return;
+            }
+
+            snapshot.forEach((child) => {
+                const item = child.val();
+                grid.innerHTML += `
+                    <div class="card">
+                        <img src="${item.image}" alt="${item.title}">
+                        <div class="card-title">${item.title}</div>
+                        <div class="price-box">
+                            <span class="sell-price">${item.sell_price}</span>
+                            <span class="old-price">${item.old_price}</span>
+                        </div>
+                        <a href="${item.buy_link}" target="_blank" class="btn-buy"><i class="fas fa-shopping-cart"></i> Buy Now</a>
+                    </div>
+                `;
+            });
+        });
+    </script>
 </body>
 </html>
