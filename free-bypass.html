@@ -5,70 +5,455 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free Bypass - BANGLA FF PANEL</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="style.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <style>
-    .inner-page-container{width:calc(100% - 40px);max-width:900px;margin:40px auto 80px;position:relative;z-index:1}
-    .inner-header-actions{display:flex;justify-content:space-between;margin-bottom:20px}
-    .back-btn,.share-btn{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#cbd5e1;padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;cursor:pointer}
-    .back-btn:hover,.share-btn:hover{border-color:#00f2fe;color:#fff}
-    .inner-content-card{background:rgba(13,15,26,.75);border:1px solid rgba(0,242,254,.15);border-radius:16px;padding:24px}
-    .video-container{width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#000}
-    .video-container iframe{width:100%;height:100%}
-    .title-skip-row{display:flex;justify-content:space-between;align-items:center;margin:24px 0;flex-wrap:wrap;gap:15px}
-    .panel-titles h2{font-size:24px;font-weight:900;color:#fff;margin:0 0 5px}
-    .panel-titles p{font:600 11px var(--mono);color:#94a3b8;margin:0}
-    .how-to-skip-btn{display:flex;align-items:center;gap:8px;background:rgba(16,185,129,.1);border:1px solid #10b981;color:#34d399;padding:10px 18px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none}
-    .password-section{border:1px solid rgba(234,179,8,.3);background:rgba(234,179,8,.05);border-radius:12px;padding:16px 20px;margin-bottom:24px}
-    .pass-label{font:700 10px var(--mono);color:#facc15;margin-bottom:8px}
-    .pass-value-row{display:flex;justify-content:space-between;align-items:center}
-    .password-text{font-size:20px;font-weight:800;color:#fff}
-    .copy-btn{background:transparent;border:1px solid rgba(234,179,8,.5);color:#facc15;padding:6px 14px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer}
-    .download-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    .download-box{position:relative;background:rgba(6,7,12,.6);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:22px 20px}
-    .status-badge{position:absolute;top:14px;right:14px;font:700 9px var(--mono);padding:3px 8px;border-radius:10px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.4);color:#4ade80;display:flex;align-items:center;gap:5px}
-    .status-badge .dot{width:5px;height:5px;border-radius:50%;background:#22c55e}
-    .box-icon{width:44px;height:44px;border-radius:12px;background:rgba(0,242,254,.1);border:1px solid rgba(0,242,254,.25);display:grid;place-items:center;font-size:22px;color:#00f2fe;margin-bottom:16px}
-    .download-box h3{font-size:13px;font-weight:800;color:#fff;margin:0 0 16px}
-    .dl-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#312e81,#1e1b4b);border:1px solid #5865f2;color:#fff;padding:9px 18px;border-radius:8px;font-size:11px;font-weight:700;text-decoration:none}
-    @media(max-width:600px){.download-grid{grid-template-columns:1fr}}
+    :root {
+      --bg: #08030d;
+      --card: #11071a;
+      --border: #2a113d;
+      --pink: #ff0066;
+      --purple: #9d00ff;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      cursor: auto;
+    }
+
+    /* Ambient glow */
+    .ambient {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ambient-left {
+      top: -100px; left: -100px;
+      background: var(--purple);
+    }
+    .ambient-right {
+      bottom: -100px; right: -100px;
+      background: var(--pink);
+    }
+
+    /* Mouse glow */
+    #mouse-glow {
+      position: fixed;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(157,0,255,0.15) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      transform: translate(-50%, -50%);
+      transition: left 0.08s ease-out, top 0.08s ease-out;
+    }
+
+    /* ── HEADER ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 28px;
+      background: rgba(8, 3, 13, 0.85);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: #fff;
+    }
+    .brand-logo-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 2px solid var(--purple);
+      box-shadow: 0 0 16px rgba(157,0,255,0.4);
+    }
+    .brand-text h2 {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, #fff 30%, var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+    }
+    .brand-text span {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--purple);
+      text-transform: uppercase;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .home-btn {
+      padding: 8px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .home-btn:hover {
+      border-color: var(--purple);
+      color: #fff;
+    }
+    .discord-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 0 18px rgba(157,0,255,0.35);
+      transition: 0.2s;
+    }
+    .discord-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* ── MAIN ── */
+    .inner-page-container {
+      width: calc(100% - 40px);
+      max-width: 900px;
+      margin: 40px auto 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .inner-header-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .back-btn, .share-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .back-btn:hover, .share-btn:hover {
+      border-color: var(--purple);
+      color: #fff;
+    }
+
+    .inner-content-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 0 40px rgba(157,0,255,0.08);
+    }
+
+    /* Video */
+    .video-container {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid var(--border);
+    }
+    .video-container iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Title row */
+    .title-skip-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 24px 0;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    .panel-titles h2 {
+      font-size: 24px;
+      font-weight: 900;
+      color: #fff;
+      margin: 0 0 5px;
+      background: linear-gradient(90deg, #fff, var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .panel-titles p {
+      font: 600 11px var(--mono);
+      color: var(--muted);
+      margin: 0;
+      letter-spacing: 1px;
+    }
+    .how-to-skip-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,0,102,0.1);
+      border: 1px solid var(--pink);
+      color: var(--pink);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .how-to-skip-btn:hover {
+      background: rgba(255,0,102,0.2);
+      box-shadow: 0 0 16px rgba(255,0,102,0.3);
+    }
+
+    /* Password */
+    .password-section {
+      border: 1px solid rgba(157,0,255,0.35);
+      background: rgba(157,0,255,0.06);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+    }
+    .pass-label {
+      font: 700 10px var(--mono);
+      color: var(--purple);
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+    .pass-value-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .password-text {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      font-family: var(--mono);
+    }
+    .copy-btn {
+      background: transparent;
+      border: 1px solid rgba(157,0,255,0.5);
+      color: var(--purple);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .copy-btn:hover {
+      background: rgba(157,0,255,0.15);
+      box-shadow: 0 0 12px rgba(157,0,255,0.3);
+    }
+
+    /* Download grid */
+    .download-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .download-box {
+      position: relative;
+      background: rgba(8,3,13,0.6);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 20px;
+      transition: 0.25s;
+    }
+    .download-box:hover {
+      border-color: var(--purple);
+      box-shadow: 0 0 24px rgba(157,0,255,0.2);
+      transform: translateY(-3px);
+    }
+
+    .status-badge {
+      position: absolute;
+      top: 14px; right: 14px;
+      font: 700 9px var(--mono);
+      padding: 3px 8px;
+      border-radius: 10px;
+      background: rgba(34,197,94,0.15);
+      border: 1px solid rgba(34,197,94,0.4);
+      color: #4ade80;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .status-badge .dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .box-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: rgba(157,0,255,0.12);
+      border: 1px solid rgba(157,0,255,0.3);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      color: var(--purple);
+      margin-bottom: 16px;
+    }
+    .box-icon img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+    }
+
+    .download-box h3 {
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 16px;
+      letter-spacing: 0.5px;
+    }
+
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      border: none;
+      color: #fff;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 0 14px rgba(157,0,255,0.3);
+      transition: 0.2s;
+    }
+    .dl-btn:hover {
+      opacity: 0.9;
+      box-shadow: 0 0 22px rgba(255,0,102,0.4);
+      transform: translateY(-1px);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      z-index: 999;
+      opacity: 0;
+      transition: 0.35s cubic-bezier(.2,.9,.3,1);
+      pointer-events: none;
+      box-shadow: 0 8px 30px rgba(157,0,255,0.4);
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 600px) {
+      .download-grid { grid-template-columns: 1fr; }
+      .brand-text h2 { font-size: 16px; }
+      .brand-logo-img { width: 40px; height: 40px; }
+      .topbar { padding: 12px 16px; }
+      .panel-titles h2 { font-size: 20px; }
+    }
   </style>
 </head>
 <body>
+
   <div class="ambient ambient-left"></div>
   <div class="ambient ambient-right"></div>
-  <div class="mouse-glow"></div>
+  <div id="mouse-glow"></div>
 
+  <!-- HEADER -->
   <header class="topbar">
-    <a class="brand" href="index.html">
-      <span class="brand-logo"><img src="logo.png" alt="Logo"></span>
-      <span class="brand-text"><strong>BANGLA FF PANEL</strong><small>COMMUNITY • GAMING HUB</small></span>
+    <a href="index.html" class="brand">
+      <img src="logo.png" alt="Logo" class="brand-logo-img">
+      <div class="brand-text">
+        <h2>BANGLA FF PANEL</h2>
+        <span>PREMIUM CORP</span>
+      </div>
     </a>
     <nav class="top-actions">
       <a class="home-btn" href="index.html">Home</a>
-      <a class="discord-btn" href="https://discord.gg/9VGgu48bY" target="_blank"><span class="discord-mark">◉</span> Discord</a>
+      <a class="discord-btn" href="https://discord.gg/ZBjSWaF7u" target="_blank">
+        <i class='bx bxl-discord-alt'></i> Discord
+      </a>
     </nav>
   </header>
 
+  <!-- MAIN -->
   <main class="inner-page-container">
     <div class="inner-header-actions">
       <a href="index.html" class="back-btn"><i class='bx bx-left-arrow-alt'></i> Back</a>
-      <button class="share-btn"><i class='bx bx-share-alt'></i> Share</button>
+      <button class="share-btn" onclick="sharePage()"><i class='bx bx-share-alt'></i> Share</button>
     </div>
 
     <div class="inner-content-card">
+      <!-- Video -->
       <div class="video-container">
-        <iframe id="main-video" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+        <iframe id="main-video" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
       </div>
 
+      <!-- Title -->
       <div class="title-skip-row">
         <div class="panel-titles">
           <h2>FREE BYPASS</h2>
           <p>PREMIUM • FAST • RELIABLE</p>
         </div>
-        <a href="#" target="_blank" class="how-to-skip-btn"><i class='bx bx-skip-next-circle'></i> HOW TO SKIP</a>
+        <a href="#" target="_blank" class="how-to-skip-btn" id="how-to-skip-link">
+          <i class='bx bx-skip-next-circle'></i> HOW TO SKIP
+        </a>
       </div>
 
+      <!-- Password -->
       <div class="password-section">
         <div class="pass-label"><i class='bx bx-lock-alt'></i> RAR PASSWORD</div>
         <div class="pass-value-row">
@@ -77,25 +462,107 @@
         </div>
       </div>
 
-      <div class="download-grid">
+      <!-- Downloads -->
+      <div class="download-grid" id="download-grid">
         <div class="download-box">
           <span class="status-badge"><span class="dot"></span> LIVE</span>
           <div class="box-icon"><i class='bx bx-cube-alt'></i></div>
           <h3>EMULATOR BYPASS</h3>
-          <a href="#" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
+          <a href="#" target="_blank" class="dl-btn" id="dl-emulator">
+            <i class='bx bx-download'></i> Download
+          </a>
         </div>
         <div class="download-box">
           <span class="status-badge"><span class="dot"></span> LIVE</span>
           <div class="box-icon"><i class='bx bx-wifi-off'></i></div>
           <h3>PROXY DISCONNECT</h3>
-          <a href="#" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
+          <a href="#" target="_blank" class="dl-btn" id="dl-proxy">
+            <i class='bx bx-download'></i> Download
+          </a>
         </div>
       </div>
     </div>
   </main>
 
+  <div class="toast" id="toast">Copied!</div>
+
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-  <script src="script.js"></script>
+  <script>
+    /* ── Mouse Glow ── */
+    const glow = document.getElementById('mouse-glow');
+    document.addEventListener('mousemove', (e) => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top  = e.clientY + 'px';
+    });
+
+    /* ── Toast ── */
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    /* ── Copy Password ── */
+    function copyPassword() {
+      const pass = document.getElementById('panel-password').textContent;
+      navigator.clipboard.writeText(pass).then(() => showToast('Password Copied!'));
+    }
+
+    /* ── Share ── */
+    function sharePage() {
+      if (navigator.share) {
+        navigator.share({ title: 'Free Bypass - BANGLA FF PANEL', url: window.location.href });
+      } else {
+        navigator.clipboard.writeText(window.location.href).then(() => showToast('Link Copied!'));
+      }
+    }
+
+    /* ── Firebase Config (same as your other pages) ── */
+    const firebaseConfig = {
+      // ⚠️ এখানে আপনার Firebase config বসান (index.html থেকে কপি করুন)
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      databaseURL: "YOUR_DATABASE_URL",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // Firebase init (config থাকলে)
+    try {
+      if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // free_bypass node থেকে ডাটা লোড
+        db.ref('free_bypass').on('value', (snap) => {
+          const data = snap.val();
+          if (!data) return;
+
+          if (data.password) {
+            document.getElementById('panel-password').textContent = data.password;
+          }
+          if (data.video_url) {
+            document.getElementById('main-video').src = data.video_url;
+          }
+          if (data.how_to_skip) {
+            document.getElementById('how-to-skip-link').href = data.how_to_skip;
+          }
+          if (data.emulator_link) {
+            document.getElementById('dl-emulator').href = data.emulator_link;
+          }
+          if (data.proxy_link) {
+            document.getElementById('dl-proxy').href = data.proxy_link;
+          }
+        });
+      }
+    } catch (e) {
+      console.log('Firebase not configured yet');
+    }
+  </script>
 </body>
 </html>
