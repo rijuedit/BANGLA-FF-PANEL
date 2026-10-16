@@ -1,845 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buy PC Panel - BANGLA FF PANEL</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #08030d;
-      --card: #11071a;
-      --border: #2a113d;
-      --pink: #ff0066;
-      --purple: #9d00ff;
-      --text: #e2e8f0;
-      --muted: #94a3b8;
-      --mono: 'JetBrains Mono', monospace;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paid PC Panels - BANGLA FF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
+        body { background-color: #05020a; color: #fff; min-height: 100vh; display: flex; flex-direction: column; }
+        
+        #mouse-glow { position: fixed; width: 50px; height: 50px; border-radius: 50%; background: rgba(157, 0, 255, 0.4); filter: blur(30px); pointer-events: none; transform: translate(-50%, -50%); z-index: 9999; }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 18px 5%; background: rgba(17, 7, 26, 0.9); border-bottom: 1px solid #2a113d; sticky: top; }
+        .logo { font-size: 26px; font-weight: 700; color: #fff; text-decoration: none; }
+        .logo span { color: #9d00ff; }
+        .back-btn { background: #11071a; color: #fff; text-decoration: none; padding: 8px 16px; border: 1px solid #2a113d; border-radius: 8px; font-weight: 600; transition: 0.3s; }
+        .back-btn:hover { border-color: #9d00ff; color: #9d00ff; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-      cursor: auto;
-    }
+        .container { flex: 1; padding: 30px 5%; max-width: 1200px; margin: 0 auto; width: 100%; }
+        .page-title { font-size: 32px; text-transform: uppercase; margin-bottom: 30px; text-align: center; }
+        .page-title span { color: #9d00ff; }
 
-    /* Ambient */
-    .ambient {
-      position: fixed;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.18;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .ambient-left { top: -100px; left: -100px; background: var(--purple); }
-    .ambient-right { bottom: -100px; right: -100px; background: var(--pink); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .card { background: #11071a; border: 1px solid #2a113d; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 15px; transition: 0.3s; }
+        .card:hover { border-color: #9d00ff; transform: translateY(-5px); box-shadow: 0 5px 20px rgba(157, 0, 255, 0.3); }
+        .card img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; }
+        .card-title { font-size: 22px; font-weight: 700; color: #fff; }
+        
+        .price-box { display: flex; align-items: center; gap: 12px; margin-top: 5px; }
+        .sell-price { font-size: 24px; font-weight: 700; color: #9d00ff; }
+        .old-price { font-size: 16px; color: #666; text-decoration: line-through; }
 
-    /* Mouse glow */
-    #mouse-glow {
-      position: fixed;
-      width: 250px;
-      height: 250px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(157,0,255,0.15) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-      transform: translate(-50%, -50%);
-      transition: left 0.08s ease-out, top 0.08s ease-out;
-    }
+        .btn-buy { background: #9d00ff; color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 16px; transition: 0.3s; margin-top: auto; }
+        .btn-buy:hover { background: #7a00cc; box-shadow: 0 0 15px rgba(157, 0, 255, 0.5); }
 
-    /* ── HEADER ── */
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 28px;
-      background: rgba(8, 3, 13, 0.85);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-      color: #fff;
-    }
-    .brand-logo-img {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      object-fit: cover;
-      border: 2px solid var(--purple);
-      box-shadow: 0 0 16px rgba(157,0,255,0.4);
-    }
-    .brand-text h2 {
-      font-size: 20px;
-      font-weight: 900;
-      letter-spacing: 0.5px;
-      background: linear-gradient(135deg, #fff 30%, var(--pink));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1.1;
-    }
-    .brand-text span {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--purple);
-      text-transform: uppercase;
-    }
-    .top-actions { display: flex; align-items: center; gap: 12px; }
-    .home-btn {
-      padding: 8px 18px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.04);
-      color: var(--text);
-      font-size: 13px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: 0.2s;
-    }
-    .home-btn:hover { border-color: var(--purple); color: #fff; }
-    .discord-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 18px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, var(--purple), var(--pink));
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      text-decoration: none;
-      box-shadow: 0 0 18px rgba(157,0,255,0.35);
-      transition: 0.2s;
-    }
-    .discord-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-
-    /* ── MAIN ── */
-    .page-wrap {
-      width: calc(100% - 40px);
-      max-width: 1100px;
-      margin: 36px auto 80px;
-      position: relative;
-      z-index: 1;
-    }
-    .page-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 28px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: 0.2s;
-    }
-    .back-btn:hover { border-color: var(--purple); color: #fff; }
-    .page-title-block h1 {
-      font-size: 26px;
-      font-weight: 900;
-      background: linear-gradient(90deg, #fff, var(--pink));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .page-title-block p {
-      font-size: 12px;
-      color: var(--muted);
-      font-family: var(--mono);
-      margin-top: 4px;
-      letter-spacing: 1px;
-    }
-
-    /* ── PRODUCT GRID ── */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 22px;
-    }
-
-    .product-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: 0.3s;
-      position: relative;
-    }
-    .product-card:hover {
-      border-color: var(--purple);
-      box-shadow: 0 0 30px rgba(157,0,255,0.25);
-      transform: translateY(-5px);
-    }
-
-    .product-img-wrap {
-      width: 100%;
-      height: 160px;
-      background: linear-gradient(135deg, rgba(157,0,255,0.15), rgba(255,0,102,0.1));
-      display: grid;
-      place-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .product-img-wrap img {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 12px rgba(157,0,255,0.5));
-    }
-    .product-tag {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      background: linear-gradient(135deg, var(--purple), var(--pink));
-      color: #fff;
-      font-size: 10px;
-      font-weight: 800;
-      padding: 4px 10px;
-      border-radius: 6px;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-    .product-sales {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: rgba(0,0,0,0.5);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 10px;
-      font-weight: 700;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-family: var(--mono);
-    }
-
-    .product-body { padding: 18px; }
-
-    .product-rating {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-bottom: 8px;
-    }
-    .product-rating i { color: #fbbf24; font-size: 14px; }
-    .product-rating span {
-      font-size: 12px;
-      color: var(--muted);
-      margin-left: 4px;
-      font-weight: 600;
-    }
-
-    .product-name {
-      font-size: 16px;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 6px;
-      line-height: 1.3;
-    }
-    .product-desc {
-      font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 14px;
-      line-height: 1.5;
-    }
-
-    .product-price-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    .old-price {
-      font-size: 13px;
-      color: #ef4444;
-      text-decoration: line-through;
-      font-weight: 700;
-    }
-    .sell-price {
-      font-size: 20px;
-      font-weight: 900;
-      color: #fff;
-      font-family: var(--mono);
-    }
-    .duration-badge {
-      margin-left: auto;
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--purple);
-      background: rgba(157,0,255,0.12);
-      border: 1px solid rgba(157,0,255,0.3);
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-family: var(--mono);
-    }
-
-    .btn-view {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--purple), var(--pink));
-      color: #fff;
-      font-size: 13px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: 0.25s;
-      box-shadow: 0 0 16px rgba(157,0,255,0.3);
-    }
-    .btn-view:hover {
-      opacity: 0.92;
-      box-shadow: 0 0 28px rgba(255,0,102,0.45);
-      transform: translateY(-2px);
-    }
-
-    /* ── MODAL OVERLAY ── */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.75);
-      backdrop-filter: blur(8px);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: 0.3s;
-      padding: 20px;
-    }
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .subs-modal {
-      background: #0e0615;
-      border: 2px solid var(--purple);
-      border-radius: 20px;
-      width: 100%;
-      max-width: 400px;
-      padding: 28px 24px 24px;
-      position: relative;
-      box-shadow: 0 0 60px rgba(157,0,255,0.35), 0 0 100px rgba(255,0,102,0.15);
-      transform: scale(0.9) translateY(20px);
-      transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    .modal-overlay.active .subs-modal {
-      transform: scale(1) translateY(0);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.05);
-      color: var(--muted);
-      font-size: 18px;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .modal-close:hover {
-      border-color: var(--pink);
-      color: var(--pink);
-      background: rgba(255,0,102,0.1);
-    }
-
-    .modal-title {
-      font-size: 18px;
-      font-weight: 900;
-      color: #fff;
-      text-align: center;
-      margin-bottom: 22px;
-      padding: 0 30px;
-      line-height: 1.3;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    /* ── SUBS LIST + HOVER ANIMATION ── */
-    .subs-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin-bottom: 20px;
-    }
-
-    .subs-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 18px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      cursor: pointer;
-      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-                  border-color 0.25s ease,
-                  box-shadow 0.25s ease,
-                  background 0.25s ease;
-      margin-bottom: 10px;
-    }
-
-    /* 🚀 Hover → button grows */
-    .subs-item:hover {
-      transform: scale(1.03) translateY(-2px);
-      border-color: var(--pink);
-      background: rgba(255, 0, 102, 0.08);
-      box-shadow: 0 0 20px rgba(255, 0, 102, 0.35);
-    }
-
-    .subs-item:active {
-      transform: scale(0.98);
-    }
-
-    .subs-item.selected {
-      border-color: var(--purple);
-      background: rgba(157, 0, 255, 0.15);
-      box-shadow: 0 0 22px rgba(157, 0, 255, 0.4);
-      transform: scale(1.02);
-    }
-
-    .subs-item .plan-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .subs-item .plan-radio {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 2px solid var(--border);
-      display: grid;
-      place-items: center;
-      transition: 0.2s;
-      flex-shrink: 0;
-    }
-    .subs-item.selected .plan-radio {
-      border-color: var(--purple);
-      background: var(--purple);
-      box-shadow: 0 0 8px rgba(157,0,255,0.5);
-    }
-    .subs-item.selected .plan-radio::after {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #fff;
-    }
-
-    .subs-item .plan-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #fff;
-    }
-    .subs-item .plan-price {
-      font-size: 16px;
-      font-weight: 900;
-      color: var(--pink);
-      font-family: var(--mono);
-    }
-
-    /* Total */
-    .total-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 14px 4px;
-      border-top: 1px solid var(--border);
-      margin-bottom: 16px;
-    }
-    .total-label {
-      font-size: 13px;
-      color: var(--muted);
-      font-weight: 600;
-    }
-    .total-amount {
-      font-size: 22px;
-      font-weight: 900;
-      color: #fff;
-      font-family: var(--mono);
-    }
-
-    .btn-checkout {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: #fff;
-      font-size: 15px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: 0.25s;
-      box-shadow: 0 0 20px rgba(16,185,129,0.35);
-      text-decoration: none;
-    }
-    .btn-checkout:hover {
-      opacity: 0.92;
-      box-shadow: 0 0 30px rgba(16,185,129,0.5);
-      transform: translateY(-2px);
-    }
-
-    /* Toast */
-    .toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: linear-gradient(135deg, var(--purple), var(--pink));
-      color: #fff;
-      padding: 12px 28px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 700;
-      z-index: 2000;
-      opacity: 0;
-      transition: 0.35s cubic-bezier(.2,.9,.3,1);
-      pointer-events: none;
-      box-shadow: 0 8px 30px rgba(157,0,255,0.4);
-    }
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .empty-state {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    @media (max-width: 600px) {
-      .topbar { padding: 12px 16px; }
-      .brand-text h2 { font-size: 16px; }
-      .brand-logo-img { width: 40px; height: 40px; }
-      .page-title-block h1 { font-size: 20px; }
-      .products-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+        #no-data { text-align: center; color: #aaa; font-size: 18px; grid-column: 1 / -1; padding: 50px 0; }
+        #loader { text-align: center; color: #9d00ff; font-size: 20px; padding: 50px 0; font-weight: 600; }
+    </style>
 </head>
 <body>
+    <div id="mouse-glow"></div>
 
-  <div class="ambient ambient-left"></div>
-  <div class="ambient ambient-right"></div>
-  <div id="mouse-glow"></div>
-
-  <!-- HEADER -->
-  <header class="topbar">
-    <a href="index.html" class="brand">
-      <img src="logo.png" alt="Logo" class="brand-logo-img">
-      <div class="brand-text">
-        <h2>BANGLA FF PANEL</h2>
-        <span>PREMIUM CORP</span>
-      </div>
-    </a>
-    <nav class="top-actions">
-      <a class="home-btn" href="index.html">Home</a>
-      <a class="discord-btn" href="https://discord.gg/ZBjSWaF7u" target="_blank">
-        <i class='bx bxl-discord-alt'></i> Discord
-      </a>
+    <nav class="navbar">
+        <a href="index.html" class="logo">BANGLA <span>FF</span></a>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Home</a>
     </nav>
-  </header>
 
-  <!-- MAIN -->
-  <div class="page-wrap">
-    <div class="page-top">
-      <a href="index.html" class="back-btn"><i class='bx bx-left-arrow-alt'></i> Back</a>
-      <div class="page-title-block" style="text-align:right;">
-        <h1>BUY PC PANEL</h1>
-        <p>PREMIUM • ANTI-BAN • INSTANT DELIVERY</p>
-      </div>
-    </div>
+    <main class="container">
+        <h1 class="page-title">Paid PC <span>Panels</span></h1>
+        <div id="loader"><i class="fas fa-spinner fa-spin"></i> Loading Panels...</div>
+        <div class="grid" id="grid-container"></div>
+    </main>
 
-    <div class="products-grid" id="products-grid">
-      <!-- Dynamic products render here -->
-    </div>
-  </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-  <!-- SUBSCRIPTION MODAL -->
-  <div class="modal-overlay" id="subsModal">
-    <div class="subs-modal">
-      <button class="modal-close" onclick="closeModal()"><i class='bx bx-x'></i></button>
-      <h2 class="modal-title" id="modal-title">PRODUCT NAME</h2>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
+            authDomain: "bangla-ff-admin.firebaseapp.com",
+            databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "bangla-ff-admin"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
 
-      <div class="subs-list" id="subs-list">
-        <!-- Plans render here -->
-      </div>
-
-      <div class="total-row">
-        <span class="total-label">Total Amount:</span>
-        <span class="total-amount" id="total-amount">৳ 0</span>
-      </div>
-
-      <a href="#" target="_blank" class="btn-checkout" id="btn-checkout">
-        <i class='bx bx-shield-quarter'></i> Buy Now via Bot
-      </a>
-    </div>
-  </div>
-
-  <div class="toast" id="toast"></div>
-
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-  <script>
-    /* ── Mouse Glow ── */
-    const glow = document.getElementById('mouse-glow');
-    document.addEventListener('mousemove', e => {
-      glow.style.left = e.clientX + 'px';
-      glow.style.top  = e.clientY + 'px';
-    });
-
-    /* ── Toast ── */
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.classList.add('show');
-      setTimeout(() => t.classList.remove('show'), 2500);
-    }
-
-    /* ── Demo Products (Firebase না থাকলে) ── */
-    let products = [
-      {
-        id: 'p1',
-        name: 'NEW OBB55 BYPASS PRO',
-        desc: 'Premium PC Bypass • Anti-Ban • Instant Login',
-        icon: 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png',
-        tag: 'HOT',
-        sales: '1.2K+ Sold',
-        rating: 4.9,
-        old_price: '৳ 800',
-        sell_price: '৳ 50',
-        duration_label: 'From 2H',
-        buy_link: 'https://discord.gg/ZBjSWaF7u',
-        plans: [
-          { label: '2 Hours Access', price: 50 },
-          { label: '5 Days Access',  price: 250 },
-          { label: '30 Days Access', price: 700 },
-          { label: 'Life Time Access', price: 1400 }
-        ]
-      },
-      {
-        id: 'p2',
-        name: 'PC AIMBOT ELITE',
-        desc: 'Silent Aim • No Recoil • ESP Included',
-        icon: 'https://cdn-icons-png.flaticon.com/512/785/785116.png',
-        tag: 'NEW',
-        sales: '890+ Sold',
-        rating: 4.8,
-        old_price: '৳ 1500',
-        sell_price: '৳ 100',
-        duration_label: 'From 1D',
-        buy_link: 'https://discord.gg/ZBjSWaF7u',
-        plans: [
-          { label: '1 Day Access',   price: 100 },
-          { label: '7 Days Access',  price: 400 },
-          { label: '30 Days Access', price: 900 },
-          { label: 'Life Time Access', price: 1800 }
-        ]
-      },
-      {
-        id: 'p3',
-        name: 'REGEDIT ULTRA PRO',
-        desc: 'GFX Tool + Headshot Config • Tournament Safe',
-        icon: 'https://cdn-icons-png.flaticon.com/512/2920/2920277.png',
-        tag: 'PRO',
-        sales: '2.5K+ Sold',
-        rating: 5.0,
-        old_price: '৳ 600',
-        sell_price: '৳ 80',
-        duration_label: 'From 2H',
-        buy_link: 'https://discord.gg/ZBjSWaF7u',
-        plans: [
-          { label: '2 Hours Access', price: 80 },
-          { label: '1 Day Access',   price: 150 },
-          { label: '15 Days Access', price: 500 },
-          { label: 'Life Time Access', price: 1200 }
-        ]
-      }
-    ];
-
-    let currentProduct = null;
-    let selectedPlanIndex = 0;
-
-    /* ── Render Product Cards ── */
-    function renderProducts() {
-      const grid = document.getElementById('products-grid');
-      grid.innerHTML = '';
-
-      if (!products.length) {
-        grid.innerHTML = '<div class="empty-state">No PC panels available right now.</div>';
-        return;
-      }
-
-      products.forEach(p => {
-        const stars = Math.round(p.rating || 5);
-        let starHTML = '';
-        for (let i = 0; i < 5; i++) {
-          starHTML += `<i class='bx ${i < stars ? 'bxs-star' : 'bx-star'}'></i>`;
-        }
-
-        const card = document.createElement('div');
-        card.className = 'product-card';
-        card.innerHTML = `
-          <div class="product-img-wrap">
-            ${p.tag ? `<span class="product-tag">${p.tag}</span>` : ''}
-            ${p.sales ? `<span class="product-sales">${p.sales}</span>` : ''}
-            <img src="${p.icon || 'https://cdn-icons-png.flaticon.com/512/1055/1055687.png'}" alt="${p.name}">
-          </div>
-          <div class="product-body">
-            <div class="product-rating">${starHTML}<span>${p.rating || '5.0'}</span></div>
-            <div class="product-name">${p.name}</div>
-            <div class="product-desc">${p.desc || ''}</div>
-            <div class="product-price-row">
-              ${p.old_price ? `<span class="old-price">${p.old_price}</span>` : ''}
-              <span class="sell-price">${p.sell_price || '৳ 0'}</span>
-              ${p.duration_label ? `<span class="duration-badge">${p.duration_label}</span>` : ''}
-            </div>
-            <button class="btn-view" onclick='openModal(${JSON.stringify(p).replace(/'/g, "&#39;")})'>
-              <i class='bx bx-show'></i> View Product
-            </button>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
-    /* ── Open Modal ── */
-    function openModal(product) {
-      currentProduct = product;
-      selectedPlanIndex = 0;
-
-      document.getElementById('modal-title').textContent = product.name || 'PC PANEL';
-      const list = document.getElementById('subs-list');
-      list.innerHTML = '';
-
-      const plans = product.plans || [
-        { label: '2 Hours Access', price: 50 },
-        { label: '1 Day Access', price: 100 },
-        { label: '30 Days Access', price: 700 },
-        { label: 'Life Time Access', price: 1400 }
-      ];
-
-      plans.forEach((plan, i) => {
-        const item = document.createElement('div');
-        item.className = 'subs-item' + (i === 0 ? ' selected' : '');
-        item.onclick = () => selectPlan(i, plan.price);
-        item.innerHTML = `
-          <div class="plan-left">
-            <div class="plan-radio"></div>
-            <span class="plan-title">${plan.label}</span>
-          </div>
-          <span class="plan-price">৳ ${plan.price}</span>
-        `;
-        list.appendChild(item);
-      });
-
-      updateTotal(plans[0].price);
-      document.getElementById('btn-checkout').href = product.buy_link || 'https://discord.gg/ZBjSWaF7u';
-      document.getElementById('subsModal').classList.add('active');
-    }
-
-    /* ── Select Plan ── */
-    function selectPlan(index, price) {
-      selectedPlanIndex = index;
-      document.querySelectorAll('.subs-item').forEach((el, i) => {
-        el.classList.toggle('selected', i === index);
-      });
-      updateTotal(price);
-    }
-
-    function updateTotal(price) {
-      document.getElementById('total-amount').textContent = '৳ ' + price;
-    }
-
-    /* ── Close Modal ── */
-    function closeModal() {
-      document.getElementById('subsModal').classList.remove('active');
-    }
-
-    /* Overlay click to close */
-    document.getElementById('subsModal').addEventListener('click', function(e) {
-      if (e.target === this) closeModal();
-    });
-
-    /* ESC to close */
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeModal();
-    });
-
-    /* ── Initial Render ── */
-    renderProducts();
-
-    /* ── Firebase ── */
-    const firebaseConfig = {
-      // ⚠️ এখানে আপনার Firebase config বসান
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      databaseURL: "YOUR_DATABASE_URL",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_STORAGE_BUCKET",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
-
-    try {
-      if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
-        firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
-
-        db.ref('pc_products').on('value', snap => {
-          const data = snap.val();
-          if (data) {
-            products = Object.keys(data).map(key => ({ id: key, ...data[key] }));
-            renderProducts();
-          }
+        document.addEventListener('mousemove', (e) => {
+            const glow = document.getElementById('mouse-glow');
+            glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px';
         });
-      }
-    } catch (e) {
-      console.log('Firebase not configured — showing demo products.');
-    }
-  </script>
+
+        onValue(ref(db, 'pc_panels'), (snapshot) => {
+            document.getElementById('loader').style.display = 'none';
+            const grid = document.getElementById('grid-container');
+            grid.innerHTML = '';
+
+            if(!snapshot.exists()) {
+                grid.innerHTML = '<div id="no-data">No Paid PC Panels Available Right Now.</div>';
+                return;
+            }
+
+            snapshot.forEach((child) => {
+                const item = child.val();
+                grid.innerHTML += `
+                    <div class="card">
+                        <img src="${item.image}" alt="${item.title}">
+                        <div class="card-title">${item.title}</div>
+                        <div class="price-box">
+                            <span class="sell-price">${item.sell_price}</span>
+                            <span class="old-price">${item.old_price}</span>
+                        </div>
+                        <a href="${item.buy_link}" target="_blank" class="btn-buy"><i class="fas fa-shopping-cart"></i> Buy Now</a>
+                    </div>
+                `;
+            });
+        });
+    </script>
 </body>
 </html>
