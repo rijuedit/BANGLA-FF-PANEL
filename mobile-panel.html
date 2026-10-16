@@ -9,19 +9,16 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
     body { background-color: #05020a; color: #ffffff; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding-bottom: 60px; }
-    
     header { width: 100%; max-width: 1000px; padding: 20px; display: flex; justify-content: space-between; align-items: center; z-index: 10; }
     .back-btn { background: #11071a; border: 1px solid #2a113d; color: #ff0066; padding: 10px 18px; border-radius: 10px; text-decoration: none; font-weight: 600; box-shadow: 0 0 15px rgba(255,0,102,0.1); }
     .page-title { text-align: center; margin: 20px 0 30px 0; z-index: 10; }
     .page-title h1 { font-size: 2rem; color: #fff; text-shadow: 0 0 15px rgba(255,0,102,0.4); }
-    
     .grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; width: 90%; max-width: 1000px; z-index: 10; }
     .panel-card { background: #11071a; border: 1px solid #2a113d; border-radius: 16px; padding: 20px; text-align: center; transition: 0.3s; position: relative; }
     .panel-card:hover { border-color: #ff0066; transform: translateY(-5px); box-shadow: 0 8px 25px rgba(255,0,102,0.2); }
     .panel-img { width: 100px; height: 100px; border-radius: 14px; object-fit: cover; margin-bottom: 15px; border: 2px solid #2a113d; }
     .panel-name { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; }
     .sell-price { color: #00cc66; font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; display: block; }
-    
     .buy-now-btn { width: 100%; padding: 12px; background: linear-gradient(135deg, #ff0066, #9d00ff); color: #fff; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; }
     
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5,2,10,0.85); backdrop-filter: blur(8px); display: none; justify-content: center; align-items: center; z-index: 9999; }
@@ -29,44 +26,30 @@
     .close-modal { position: absolute; top: 18px; right: 18px; background: none; border: none; color: #8a7a9e; font-size: 22px; cursor: pointer; }
     .modal-header { text-align: center; margin-bottom: 20px; }
     .modal-header img { width: 75px; height: 75px; border-radius: 14px; border: 2px solid #ff0066; margin-bottom: 10px; }
-    
     .duration-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
     .plan-item { display: flex; justify-content: space-between; align-items: center; background: #1a0b28; border: 1px solid #2a113d; padding: 12px 16px; border-radius: 12px; cursor: pointer; }
     .plan-item.selected { border-color: #ff0066; background: rgba(255,0,102,0.08); }
     .plan-price-text { color: #00cc66; font-weight: 700; font-size: 1.05rem; }
     .plan-old { text-decoration: line-through; color: #7a6a8f; font-size: 0.85rem; margin-right: 8px; }
-    
     .price-total-bar { display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px dashed #2a113d; margin-top: 10px; }
     .total-val { font-size: 1.6rem; font-weight: 800; color: #ff0066; }
-    .confirm-btn { width: 100%; margin-top: 20px; padding: 14px; background: linear-gradient(135deg, #25D366, #128C7E); color: #fff; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; }
+    .confirm-btn { width: 100%; margin-top: 20px; padding: 14px; background: linear-gradient(135deg, #7289da, #5865F2); color: #fff; border: none; border-radius: 12px; font-weight: bold; font-size: 1.1rem; cursor: pointer; box-shadow: 0 4px 15px rgba(88,101,242,0.4); }
+    .confirm-btn:hover { opacity: 0.9; transform: translateY(-2px); }
   </style>
 </head>
 <body>
   <header><a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Home</a></header>
-  
-  <div class="page-title">
-    <h1><span id="catHeaderIcon">📱</span> BUY MOBILE PANEL</h1>
-  </div>
-
+  <div class="page-title"><h1>📱 BUY MOBILE PANEL</h1></div>
   <div id="panelGrid" class="grid-container"><div style="text-align:center; width:100%;">লোড হচ্ছে...</div></div>
 
-  <!-- Dynamic Custom Modal -->
   <div id="buyModal" class="modal-overlay">
     <div class="modal-card">
       <button class="close-modal" onclick="closeModal()">&times;</button>
-      <div class="modal-header">
-        <img id="mImg" src="">
-        <h3 id="mTitle">Title</h3>
-      </div>
+      <div class="modal-header"><img id="mImg" src=""><h3 id="mTitle">Title</h3></div>
       <div style="color:#a090b5; margin-bottom:10px; font-size:0.9rem;">প্যাকেজ ও মেয়াদ নির্বাচন করুন:</div>
-      
       <div class="duration-grid" id="modalPackagesGrid"></div>
-
-      <div class="price-total-bar">
-        <span>মোট পে করতে হবে:</span>
-        <div class="total-val" id="totalPriceDisplay">৳0</div>
-      </div>
-      <button class="confirm-btn" onclick="sendWhatsApp()"><i class="fab fa-whatsapp"></i> Order Now</button>
+      <div class="price-total-bar"><span>মোট পে করতে হবে:</span><div class="total-val" id="totalPriceDisplay">৳0</div></div>
+      <button class="confirm-btn" onclick="processOrder()"><i class="fab fa-discord"></i> Order Now</button>
     </div>
   </div>
 
@@ -82,51 +65,37 @@
     };
     const db = getDatabase(initializeApp(firebaseConfig));
 
-    let currentPanelName = "", currentCustomLink = "", selectedDuration = "", selectedPrice = 0;
+    let currentPanelName = "", selectedDuration = "", selectedPrice = 0, globalBuyLink = "";
+
+    // Fetch Global Buy Link for Mobile
+    onValue(ref(db, 'site_settings/mobile_panel/buy_link'), (snapshot) => {
+      globalBuyLink = snapshot.exists() ? snapshot.val() : "";
+    });
 
     onValue(ref(db, 'mobile_panels'), (snapshot) => {
-      const grid = document.getElementById('panelGrid');
-      grid.innerHTML = '';
+      const grid = document.getElementById('panelGrid'); grid.innerHTML = '';
       if(snapshot.exists()) {
         const data = snapshot.val();
         Object.keys(data).reverse().forEach(key => {
           const item = data[key];
-          let lowestPrice = 0;
-          if(item.packages && item.packages.length > 0) lowestPrice = Math.min(...item.packages.map(p => p.sell_price));
+          let lowestPrice = item.packages ? Math.min(...item.packages.map(p => p.sell_price)) : 0;
           const encodedData = encodeURIComponent(JSON.stringify(item));
-          
-          grid.innerHTML += `
-            <div class="panel-card">
-              <img src="${item.image || 'https://i.ibb.co/L8r1pXw/logo.png'}" class="panel-img">
-              <div class="panel-name">${item.title}</div>
-              <span class="sell-price">Starts at ৳${lowestPrice}</span>
-              <button class="buy-now-btn" onclick="openModal('${encodedData}')"><i class="fas fa-shopping-cart"></i> BUY NOW</button>
-            </div>
-          `;
+          grid.innerHTML += `<div class="panel-card"><img src="${item.image || 'https://i.ibb.co/L8r1pXw/logo.png'}" class="panel-img"><div class="panel-name">${item.title}</div><span class="sell-price">Starts at ৳${lowestPrice}</span><button class="buy-now-btn" onclick="openModal('${encodedData}')"><i class="fas fa-shopping-cart"></i> BUY NOW</button></div>`;
         });
       } else grid.innerHTML = '<div>কোনো প্যানেল নেই!</div>';
     });
 
     window.openModal = function(encodedData) {
       const item = JSON.parse(decodeURIComponent(encodedData));
-      currentPanelName = item.title; currentCustomLink = item.buy_link || "";
-      document.getElementById('mTitle').innerText = item.title;
-      document.getElementById('mImg').src = item.image || 'https://i.ibb.co/L8r1pXw/logo.png';
+      currentPanelName = item.title;
+      document.getElementById('mTitle').innerText = item.title; document.getElementById('mImg').src = item.image || 'https://i.ibb.co/L8r1pXw/logo.png';
       
-      const pGrid = document.getElementById('modalPackagesGrid');
-      pGrid.innerHTML = '';
-
-      if(item.packages && item.packages.length > 0) {
+      const pGrid = document.getElementById('modalPackagesGrid'); pGrid.innerHTML = '';
+      if(item.packages) {
         item.packages.forEach((pkg, index) => {
           const isSelected = index === 0 ? 'selected' : '', isChecked = index === 0 ? 'checked' : '';
           if(index === 0) { selectedDuration = pkg.duration; selectedPrice = pkg.sell_price; }
-
-          pGrid.innerHTML += `
-            <label class="plan-item ${isSelected}" onclick="selectPlan(this, '${pkg.duration}', ${pkg.sell_price})">
-              <div><input type="radio" name="dur" ${isChecked} style="accent-color:#ff0066;"><span style="font-weight:600; margin-left:8px;">${pkg.duration}</span></div>
-              <div>${pkg.old_price ? `<span class="plan-old">৳${pkg.old_price}</span>` : ''}<span class="plan-price-text">৳${pkg.sell_price}</span></div>
-            </label>
-          `;
+          pGrid.innerHTML += `<label class="plan-item ${isSelected}" onclick="selectPlan(this, '${pkg.duration}', ${pkg.sell_price})"><div><input type="radio" name="dur" ${isChecked} style="accent-color:#ff0066;"><span style="font-weight:600; margin-left:8px;">${pkg.duration}</span></div><div>${pkg.old_price ? `<span class="plan-old">৳${pkg.old_price}</span>` : ''}<span class="plan-price-text">৳${pkg.sell_price}</span></div></label>`;
         });
       }
       document.getElementById('totalPriceDisplay').innerText = `৳${selectedPrice}`;
@@ -142,10 +111,13 @@
 
     window.closeModal = function() { document.getElementById('buyModal').style.display = 'none'; };
 
-    window.sendWhatsApp = function() {
-      if(currentCustomLink) { window.open(currentCustomLink, '_blank'); closeModal(); return; }
-      const textMessage = `হ্যালো! 👋\nআমি প্যানেল অর্ডার করতে চাই।\n📌 প্যানেল: ${currentPanelName}\n⏱️ মেয়াদ: ${selectedDuration}\n💰 মূল্য: ৳${selectedPrice}`;
-      window.open(`https://wa.me/8801700000000?text=${encodeURIComponent(textMessage)}`, '_blank');
+    window.processOrder = function() {
+      if(globalBuyLink && globalBuyLink.trim() !== '') {
+        window.open(globalBuyLink, '_blank');
+      } else {
+        const textMessage = `হ্যালো! 👋\nআমি প্যানেল অর্ডার করতে চাই।\n📌 প্যানেল: ${currentPanelName}\n⏱️ মেয়াদ: ${selectedDuration}\n💰 মূল্য: ৳${selectedPrice}`;
+        window.open(`https://wa.me/8801700000000?text=${encodeURIComponent(textMessage)}`, '_blank');
+      }
       closeModal();
     };
   </script>
