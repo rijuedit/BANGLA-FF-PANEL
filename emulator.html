@@ -17,10 +17,8 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; cursor: default; }
-
         body { background-color: var(--bg-color); color: white; min-height: 100vh; overflow-x: hidden; }
 
-        /* Mouse Glow */
         #mouse-glow {
             position: fixed; width: 300px; height: 300px;
             background: radial-gradient(circle, rgba(157, 0, 255, 0.15) 0%, transparent 70%);
@@ -28,13 +26,13 @@
         }
 
         .header {
-            padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 5%; display: flex; align-items: center;
             background: rgba(12, 5, 20, 0.8); backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100;
         }
         .logo-box { display: flex; align-items: center; gap: 15px; text-decoration: none; cursor: pointer; }
-        .logo-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--neon-pink); }
-        .logo-text { font-size: 20px; font-weight: 800; background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .logo-img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--neon-pink); }
+        .logo-text { font-size: 18px; font-weight: 900; background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; }
 
         .container { max-width: 900px; margin: 30px auto; padding: 0 20px; position: relative; z-index: 1; }
 
@@ -42,7 +40,7 @@
         .video-box {
             width: 100%; aspect-ratio: 16/9; background: #000;
             border: 1px solid var(--border-color); border-radius: 15px;
-            overflow: hidden; margin-bottom: 25px; position: relative;
+            overflow: hidden; margin-bottom: 25px;
         }
         .video-box iframe { width: 100%; height: 100%; border: none; }
         .video-placeholder {
@@ -50,52 +48,53 @@
             align-items: center; justify-content: center; background: #0c0514; color: var(--text-gray);
         }
 
-        .section-header { margin-bottom: 15px; }
-        .section-title { font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 5px; }
-        .section-sub { color: var(--text-gray); font-size: 0.9rem; }
+        .section-header { margin-bottom: 20px; }
+        .section-title { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; }
+        .section-sub { color: var(--text-gray); font-size: 0.85rem; margin-top: 5px; }
 
-        /* RAR Password Box */
+        /* RAR Password Box (Orange Theme) */
         .password-box {
-            border: 1px solid #ff9900; background: rgba(255, 153, 0, 0.05);
+            border: 1px solid #d48a00; background: rgba(212, 138, 0, 0.05);
             border-radius: 10px; padding: 15px 20px; margin-bottom: 30px;
-            display: none; /* Hidden by default */
+            display: none;
         }
-        .pass-header { color: #ff9900; font-size: 0.75rem; font-weight: bold; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
+        .pass-header { color: #d48a00; font-size: 0.7rem; font-weight: bold; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 1px; }
         .pass-content { display: flex; justify-content: space-between; align-items: center; }
-        .pass-content span { font-size: 1.2rem; font-weight: bold; color: white; }
+        .pass-content span { font-size: 1.2rem; font-weight: 800; color: white; }
         .copy-btn {
-            background: transparent; border: 1px solid #ff9900; color: #ff9900;
-            padding: 6px 15px; border-radius: 6px; cursor: pointer; transition: 0.3s; font-weight: bold; font-size: 0.85rem;
+            background: transparent; border: 1px solid #d48a00; color: #d48a00;
+            padding: 6px 15px; border-radius: 6px; cursor: pointer; transition: 0.3s; font-weight: bold; font-size: 0.8rem;
         }
-        .copy-btn:hover { background: #ff9900; color: black; }
+        .copy-btn:hover { background: #d48a00; color: black; }
 
         /* Emulator Grid */
-        .emu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .emu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
         .emu-card {
             background: var(--card-bg); border: 1px solid var(--border-color);
-            padding: 20px; border-radius: 15px; transition: 0.3s;
+            padding: 20px; border-radius: 15px; position: relative; transition: 0.3s;
         }
         .emu-card:hover { border-color: var(--neon-purple); transform: translateY(-3px); }
         
         .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
         .cube-icon {
-            width: 45px; height: 45px; background: rgba(157, 0, 255, 0.1);
+            width: 42px; height: 42px; background: rgba(157, 0, 255, 0.1);
             border-radius: 10px; display: flex; align-items: center; justify-content: center;
-            color: var(--neon-purple); font-size: 22px;
+            color: var(--neon-purple); font-size: 20px; border: 1px solid rgba(157, 0, 255, 0.2);
         }
         .live-badge {
-            color: #00ff00; font-size: 0.75rem; font-weight: bold;
-            display: flex; align-items: center; gap: 5px;
+            color: #00ff00; font-size: 0.65rem; font-weight: bold;
+            display: flex; align-items: center; gap: 5px; padding-top: 5px;
         }
-        .live-badge::before { content: ''; width: 6px; height: 6px; background: #00ff00; border-radius: 50%; display: block; }
+        .live-badge::before { content: ''; width: 5px; height: 5px; background: #00ff00; border-radius: 50%; display: block; }
 
-        .emu-name { font-weight: 800; font-size: 1.1rem; margin-bottom: 15px; display: block; text-transform: uppercase; }
+        .emu-name { font-weight: 800; font-size: 1rem; margin-bottom: 15px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
         
         .download-btn {
             display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(157, 0, 255, 0.2); color: var(--neon-purple);
+            background: rgba(157, 0, 255, 0.15); color: var(--neon-purple);
             text-decoration: none; padding: 8px 15px; border-radius: 8px;
-            font-size: 0.85rem; font-weight: bold; transition: 0.3s; cursor: pointer;
+            font-size: 0.8rem; font-weight: 800; transition: 0.3s; cursor: pointer;
+            border: 1px solid rgba(157, 0, 255, 0.3);
         }
         .download-btn:hover { background: var(--neon-purple); color: white; }
     </style>
@@ -112,10 +111,10 @@
     </header>
 
     <div class="container">
-        <!-- Tutorial Video -->
+        <!-- Video Box -->
         <div class="video-box" id="yt-container">
             <div class="video-placeholder">
-                <i class="fas fa-video-slash fa-3x" style="margin-bottom: 15px;"></i>
+                <i class="fas fa-video-slash fa-2x" style="margin-bottom: 10px;"></i>
                 <p>Tutorial Video Coming Soon...</p>
             </div>
         </div>
@@ -134,9 +133,9 @@
             </div>
         </div>
 
-        <!-- Grid -->
+        <!-- Emulator Grid -->
         <div class="emu-grid" id="emu-list">
-            <!-- Items from Firebase -->
+            <!-- Items -->
         </div>
     </div>
 
@@ -157,15 +156,14 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // Load Page Settings (Video & RAR Pass)
+        // Load Settings
         onValue(ref(db, 'page_settings/emulator'), (snap) => {
             if(snap.exists()){
                 const data = snap.val();
-                if(data.yt_link) {
-                    const videoId = data.yt_link.split('v=')[1] || data.yt_link.split('/').pop();
-                    document.getElementById('yt-container').innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>`;
+                if(data.yt_link && data.yt_link.includes('youtube.com')) {
+                    const videoId = data.yt_link.split('v=')[1]?.split('&')[0];
+                    if(videoId) document.getElementById('yt-container').innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>`;
                 }
-                
                 if(data.rar_password) {
                     document.getElementById('rar-container').style.display = 'block';
                     document.getElementById('rar-text').innerText = data.rar_password;
@@ -175,13 +173,13 @@
             }
         });
 
-        // Copy RAR Pass Function
+        // Copy
         window.copyRar = () => {
             const text = document.getElementById('rar-text').innerText;
             navigator.clipboard.writeText(text);
             const btn = document.querySelector('.copy-btn');
-            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-            setTimeout(() => btn.innerHTML = '<i class="far fa-copy"></i> Copy', 2000);
+            btn.innerText = 'Copied!';
+            setTimeout(() => btn.innerText = 'Copy', 2000);
         };
 
         // Load Emulators
