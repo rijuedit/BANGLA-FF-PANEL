@@ -313,8 +313,9 @@
         .input-group label {
             display: block;
             margin-bottom: 8px;
-            font-size: 0.9rem;
-            color: var(--text-gray);
+            font-size: 0.95rem;
+            color: #ffffff;
+            font-weight: 600;
         }
 
         .input-group input {
@@ -335,14 +336,9 @@
         }
 
         .id-help-text {
-            font-size: 0.75rem;
-            color: #777;
+            font-size: 0.78rem;
+            color: #888;
             margin-top: 6px;
-        }
-
-        .id-help-text a {
-            color: var(--neon-purple);
-            text-decoration: none;
         }
 
         .btn-modal-action {
@@ -378,7 +374,7 @@
 
     <div id="mouse-glow"></div>
 
-    <!-- Top Navigation Header -->
+    <!-- Header Navigation -->
     <header class="header">
         <a href="index.html" class="logo-box">
             <img src="logo.png" alt="OXI Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/42/ff0066/ffffff?text=OXI'">
@@ -386,7 +382,7 @@
         </a>
     </header>
 
-    <!-- Main Content Container -->
+    <!-- Main Container -->
     <div class="container">
         <h1 class="page-header-title"><i class="fa-solid fa-desktop"></i> PC PANEL PREMIUM</h1>
         
@@ -409,15 +405,15 @@
                 <button class="btn-modal-action" id="btnNextStep">NEXT: ORDER TICKET</button>
             </div>
 
-            <!-- Step 2: Customer User ID -->
+            <!-- Step 2: Customer Name Input -->
             <div id="step-user-id" class="user-id-step">
                 <div class="modal-header">
                     <h2 class="modal-title">CUSTOMER DETAILS</h2>
                 </div>
                 <div class="input-group">
-                    <label for="discordIdInput"><i class="fa-brands fa-discord"></i> Enter Discord User ID (Optional):</label>
-                    <input type="text" id="discordIdInput" placeholder="e.g. 845623154879541258">
-                    <p class="id-help-text">If you don't know your ID, leave it blank or enter your Discord Username.</p>
+                    <label for="discordIdInput"><i class="fa-solid fa-user"></i> আপনার নাম লিখুন:</label>
+                    <input type="text" id="discordIdInput" placeholder="এখানে আপনার নাম লিখুন...">
+                    <p class="id-help-text">(আপনার ডিসকর্ড ইউজারনেম বা সাধারণ নাম দিতে পারেন)</p>
                 </div>
                 <button class="btn-modal-action" id="btnConfirmOrder">PROCEED TO DISCORD TICKET</button>
             </div>
@@ -428,7 +424,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-        // Firebase Configuration
+        // Firebase Setup
         const firebaseConfig = {
             apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
             authDomain: "bangla-ff-admin.firebaseapp.com",
@@ -442,7 +438,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // --- Render Bot Server API URL ---
+        // Render Bot Server URL
         const BOT_SERVER_URL = "https://bangla-ff-bot-server.onrender.com";
 
         const pcGrid = document.getElementById('pc-grid');
@@ -460,18 +456,18 @@
         let selectedPackageData = null;
         let globalBuyLink = "";
 
-        // Load Global Buy Link as Fallback
+        // Global Buy Link Fallback
         get(ref(db, 'site_settings/pc_panel/buy_link')).then(snapshot => {
             if (snapshot.exists() && snapshot.val()) {
                 globalBuyLink = snapshot.val();
             }
         });
 
-        // Load Products Realtime
+        // Realtime Products Load
         onValue(ref(db, 'pc_panels'), (snapshot) => {
             pcGrid.innerHTML = '';
             if (!snapshot.exists()) {
-                pcGrid.innerHTML = '<div class="no-data"><i class="fa-solid fa-folder-open"></i> No Products Available At This Time.</div>';
+                pcGrid.innerHTML = '<div class="no-data"><i class="fa-solid fa-folder-open"></i> No Products Available.</div>';
                 return;
             }
 
@@ -492,7 +488,6 @@
             });
         });
 
-        // Open Modal Function
         window.openOrderModal = (itemKey) => {
             get(ref(db, `pc_panels/${itemKey}`)).then((snapshot) => {
                 if (!snapshot.exists()) return;
@@ -504,7 +499,7 @@
                 packageContainer.innerHTML = '';
 
                 if (data.packages && data.packages.length > 0) {
-                    data.packages.forEach((pkg, idx) => {
+                    data.packages.forEach((pkg) => {
                         const pkgDiv = document.createElement('div');
                         pkgDiv.className = 'package-item';
                         pkgDiv.innerHTML = `
@@ -531,7 +526,6 @@
             });
         };
 
-        // Modal Step Navigation
         btnNextStep.onclick = () => {
             if (!selectedPackageData) {
                 alert("দয়া করে যেকোনো একটি প্যাকেজ সিলেক্ট করুন!");
@@ -541,7 +535,6 @@
             stepUserId.style.display = 'block';
         };
 
-        // Confirm Order and Create Discord Private Ticket
         btnConfirmOrder.onclick = async () => {
             const userInputId = discordIdInput.value.trim();
 
@@ -549,12 +542,12 @@
             btnConfirmOrder.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> CREATING PRIVATE TICKET...';
 
             try {
-                // Call Bot API to create ticket
                 const response = await fetch(`${BOT_SERVER_URL}/create-ticket`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         discordUserId: userInputId,
+                        discordUsername: userInputId,
                         productTitle: selectedProductTitle,
                         packageName: selectedPackageData.duration,
                         price: selectedPackageData.sell_price,
@@ -565,18 +558,15 @@
                 const result = await response.json();
 
                 if (result.success && result.url) {
-                    window.location.href = result.url; // টিকেটে রিডাইরেক্ট করবে
+                    window.location.href = result.url;
                 } else {
-                    alert("Ticket Created! Redirecting to Discord Server...");
                     if (globalBuyLink) window.location.href = globalBuyLink;
                 }
             } catch (error) {
-                console.error("Bot Server Connection Error:", error);
-                // Fallback to global buy link if API fails
+                console.error("Bot Connection Error:", error);
                 if (globalBuyLink) {
                     window.location.href = globalBuyLink;
                 } else {
-                    alert("Order logged! Opening Discord...");
                     window.location.href = "https://discord.gg/ZBjSWaF7u";
                 }
             } finally {
@@ -585,17 +575,9 @@
             }
         };
 
-        closeModal.onclick = () => {
-            purchaseModal.style.display = 'none';
-        };
+        closeModal.onclick = () => purchaseModal.style.display = 'none';
+        window.onclick = (e) => { if (e.target === purchaseModal) purchaseModal.style.display = 'none'; };
 
-        window.onclick = (e) => {
-            if (e.target === purchaseModal) {
-                purchaseModal.style.display = 'none';
-            }
-        };
-
-        // Mouse Glow Animation
         const mouseGlow = document.getElementById('mouse-glow');
         document.addEventListener('mousemove', (e) => {
             mouseGlow.style.left = e.clientX + 'px';
