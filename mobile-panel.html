@@ -1,139 +1,421 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buy Mobile Panel - BANGLA FF PANEL</title>
+    <title>BANGLA FF PANEL - MOBILE PANEL</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-main: #05020a;
-            --card-bg: #0b0512;
-            --border-color: #1a0b2e;
+            --bg-color: #05020a;
+            --card-bg: #11071a;
+            --border-color: #2a113d;
             --neon-pink: #ff0066;
             --neon-purple: #9d00ff;
-            --text-light: #ffffff;
-            --text-gray: #777777;
+            --neon-green: #00cc66;
+            --text-gray: #b0b0b0;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg-main); color: var(--text-light); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
-
-        .bg-glow {
-            position: absolute; top: 10%; left: 30%; width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(157, 0, 255, 0.1) 0%, transparent 70%);
-            z-index: -1; pointer-events: none;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
+        body {
+            background-color: var(--bg-color);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Mouse Glow Effect */
+        #mouse-glow {
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(157, 0, 255, 0.18) 0%, rgba(255, 0, 102, 0.05) 50%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s;
+            border-radius: 50%;
+        }
+
+        /* Header Layout */
         .header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 50px; background: rgba(5, 2, 10, 0.95);
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(12, 5, 20, 0.85);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
-            position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .brand { display: flex; align-items: center; gap: 15px; text-decoration: none; cursor: pointer; }
-        .site-logo { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; border: 1px solid var(--neon-pink); }
-        .brand-text h2 { font-size: 16px; color: white; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
-        .brand-text p { font-size: 9px; color: var(--text-gray); letter-spacing: 3px; text-transform: uppercase; }
-
-        .nav-btns { display: flex; gap: 12px; }
-        .header-btn {
-            background: transparent; border: 1px solid #333; color: white;
-            padding: 8px 15px; border-radius: 6px; font-size: 12px; text-decoration: none;
-            display: flex; align-items: center; gap: 8px; transition: 0.3s;
-        }
-        .header-btn:hover { border-color: white; }
-
-        .content-container { max-width: 1000px; margin: 40px auto 60px; padding: 0 20px; flex: 1; width: 100%; }
-
-        .page-title { font-size: 24px; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; text-align: center; }
-        .page-subtitle { font-size: 10px; color: var(--text-gray); letter-spacing: 2px; margin-bottom: 35px; text-transform: uppercase; text-align: center; }
-
-        .product-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px;
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            cursor: pointer;
         }
 
-        .product-card {
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 12px; padding: 20px; text-align: center; transition: 0.3s; position: relative;
+        .logo-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-pink);
+            box-shadow: 0 0 10px rgba(255, 0, 102, 0.5);
+            object-fit: cover;
         }
-        .product-card:hover { border-color: var(--neon-purple); transform: translateY(-5px); box-shadow: 0 10px 25px rgba(157, 0, 255, 0.15); }
 
-        .product-img {
-            width: 100%; height: 160px; border-radius: 8px; object-fit: cover; margin-bottom: 15px; border: 1px solid var(--border-color);
+        .logo-text {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
         }
 
-        .product-name { font-size: 16px; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
-        .product-price-start { font-size: 12px; color: var(--neon-pink); font-weight: bold; margin-bottom: 20px; }
-
-        .buy-btn {
-            width: 100%; background: var(--neon-pink); color: white; border: none; padding: 10px;
-            border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 12px; text-transform: uppercase;
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
         }
-        .buy-btn:hover { box-shadow: 0 0 12px var(--neon-pink); }
 
-        /* Modal */
+        .page-header-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 35px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 0, 102, 0.6);
+        }
+
+        .page-header-title i {
+            color: var(--neon-pink);
+            margin-right: 10px;
+        }
+
+        /* Grid Layout */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon-pink);
+            box-shadow: 0 8px 25px rgba(255, 0, 102, 0.25);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-buy {
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
+            color: #ffffff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(157, 0, 255, 0.4);
+        }
+
+        .btn-buy:hover {
+            opacity: 0.95;
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(255, 0, 102, 0.6);
+        }
+
+        /* Loading & Empty state */
+        .no-data {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px;
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            background: var(--card-bg);
+            border: 1px dashed var(--border-color);
+            border-radius: 15px;
+        }
+
+        /* Purchase Modal */
         .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px);
-            display: none; justify-content: center; align-items: center; z-index: 1000;
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
         }
-        .modal {
-            background: var(--card-bg); border: 2px solid var(--neon-purple);
-            width: 420px; padding: 25px; border-radius: 12px; box-shadow: 0 0 30px rgba(157, 0, 255, 0.3);
-        }
-        .modal-title { font-size: 18px; font-weight: bold; color: var(--neon-pink); margin-bottom: 20px; text-transform: uppercase; }
-        .pkg-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; max-height: 250px; overflow-y: auto; }
-        .pkg-item {
-            background: #06020c; border: 1px solid var(--border-color); padding: 12px;
-            border-radius: 8px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.3s;
-        }
-        .pkg-item:hover, .pkg-item.selected { border-color: var(--neon-pink); background: rgba(255, 0, 102, 0.05); }
-        .pkg-dur { font-weight: bold; font-size: 13px; }
-        .pkg-price { color: var(--neon-pink); font-weight: bold; font-size: 13px; }
 
-        .modal-footer { display: flex; gap: 10px; }
-        .confirm-btn { background: var(--neon-purple); color: white; border: none; padding: 12px; flex: 1; border-radius: 6px; font-weight: bold; cursor: pointer; }
-        .cancel-btn { background: transparent; border: 1px solid var(--text-gray); color: var(--text-gray); padding: 12px; flex: 1; border-radius: 6px; cursor: pointer; }
+        .modal-box {
+            background: var(--card-bg);
+            border: 2px solid var(--neon-pink);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 480px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 0 35px rgba(255, 0, 102, 0.4);
+            animation: modalFadeIn 0.3s ease-out;
+        }
 
-        @media (max-width: 768px) { .header { padding: 15px 20px; } }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .modal-close:hover {
+            color: var(--neon-pink);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--neon-pink);
+            text-transform: uppercase;
+        }
+
+        .package-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 280px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding-right: 5px;
+        }
+
+        .package-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 14px 18px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .package-item:hover {
+            border-color: var(--neon-purple);
+            background: rgba(157, 0, 255, 0.1);
+        }
+
+        .package-item.selected {
+            border-color: var(--neon-pink);
+            background: rgba(255, 0, 102, 0.15);
+            box-shadow: 0 0 10px rgba(255, 0, 102, 0.3);
+        }
+
+        .pkg-duration {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #ffffff;
+        }
+
+        .pkg-price-box {
+            text-align: right;
+        }
+
+        .pkg-old-price {
+            text-decoration: line-through;
+            color: #777;
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+
+        .pkg-sell-price {
+            color: var(--neon-green);
+            font-weight: 800;
+            font-size: 1.15rem;
+        }
+
+        .user-id-step {
+            display: none;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 14px;
+            background: #080312;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 10px rgba(255, 0, 102, 0.3);
+        }
+
+        .id-help-text {
+            font-size: 0.78rem;
+            color: #888;
+            margin-top: 6px;
+        }
+
+        .btn-modal-action {
+            width: 100%;
+            background: linear-gradient(45deg, var(--neon-green), #00ff88);
+            color: #000000;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-modal-action:hover {
+            box-shadow: 0 0 20px rgba(0, 204, 102, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-modal-action:disabled {
+            background: #333;
+            color: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
+    <div id="mouse-glow"></div>
 
+    <!-- Header -->
     <header class="header">
-        <a href="index.html" class="brand">
-            <img src="logo.png" alt="Logo" class="site-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/888/888879.png'">
-            <div class="brand-text">
-                <h2>BANGLA FF PANEL</h2>
-                <p>PREMIUM CORP</p>
-            </div>
+        <a href="index.html" class="logo-box">
+            <img src="logo.png" alt="OXI Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/42/ff0066/ffffff?text=OXI'">
+            <span class="logo-text">BANGLA FF PANEL</span>
         </a>
-        <div class="nav-btns">
-            <a href="index.html" class="header-btn"><i class="fas fa-home"></i> Home</a>
-            <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="header-btn"><i class="fab fa-discord"></i> Discord</a>
-        </div>
     </header>
 
-    <div class="content-container">
-        <h2 class="page-title">Paid Mobile Panels</h2>
-        <div class="page-subtitle">SAFE VIP SOLUTIONS FOR ANDROID & IOS</div>
-
-        <div class="product-grid" id="product-grid"></div>
+    <!-- Container -->
+    <div class="container">
+        <h1 class="page-header-title"><i class="fa-solid fa-mobile-screen-button"></i> MOBILE PANEL PREMIUM</h1>
+        
+        <div class="grid-container" id="mobile-grid">
+            <div class="no-data"><i class="fa-solid fa-spinner fa-spin"></i> Loading Products...</div>
+        </div>
     </div>
 
     <!-- Purchase Modal -->
-    <div class="modal-overlay" id="orderModal">
-        <div class="modal">
-            <div class="modal-title" id="mProductTitle">Order Mobile Panel</div>
-            <div style="font-size:12px; color:var(--text-gray); margin-bottom:10px;">Select Duration Package:</div>
-            <div class="pkg-list" id="mPkgList"></div>
-            <div class="modal-footer">
-                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
-                <button class="confirm-btn" id="mConfirmBtn">Proceed to Buy</button>
+    <div class="modal-overlay" id="purchaseModal">
+        <div class="modal-box">
+            <span class="modal-close" id="closeModal">&times;</span>
+            
+            <!-- Step 1: Packages -->
+            <div id="step-packages">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="modalProductName">SELECT PACKAGE</h2>
+                </div>
+                <div class="package-list" id="packageContainer"></div>
+                <button class="btn-modal-action" id="btnNextStep">NEXT: ORDER TICKET</button>
+            </div>
+
+            <!-- Step 2: Customer Name Input -->
+            <div id="step-user-id" class="user-id-step">
+                <div class="modal-header">
+                    <h2 class="modal-title">CUSTOMER DETAILS</h2>
+                </div>
+                <div class="input-group">
+                    <label for="discordIdInput"><i class="fa-solid fa-user"></i> আপনার নাম লিখুন:</label>
+                    <input type="text" id="discordIdInput" placeholder="এখানে আপনার নাম লিখুন...">
+                    <p class="id-help-text">(আপনার ডিসকর্ড ইউজারনেম বা সাধারণ নাম দিতে পারেন)</p>
+                </div>
+                <button class="btn-modal-action" id="btnConfirmOrder">PROCEED TO DISCORD TICKET</button>
             </div>
         </div>
     </div>
@@ -142,6 +424,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
+        // Firebase Setup
         const firebaseConfig = {
             apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
             authDomain: "bangla-ff-admin.firebaseapp.com",
@@ -151,88 +434,154 @@
             messagingSenderId: "295013484465",
             appId: "1:295013484465:web:b6bc2a949e239095761f90"
         };
+
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        let globalBuyLink = "https://discord.gg/ZBjSWaF7u";
-        let activePanels = {};
+        // Render Bot Server URL
+        const BOT_SERVER_URL = "https://bangla-ff-bot-server.onrender.com";
 
-        // Fetch Global Buy Link
-        get(ref(db, 'site_settings/mobile_panel/buy_link')).then(s => {
-            if (s.exists() && s.val()) globalBuyLink = s.val();
+        const mobileGrid = document.getElementById('mobile-grid');
+        const purchaseModal = document.getElementById('purchaseModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalProductName = document.getElementById('modalProductName');
+        const packageContainer = document.getElementById('packageContainer');
+        const stepPackages = document.getElementById('step-packages');
+        const stepUserId = document.getElementById('step-user-id');
+        const btnNextStep = document.getElementById('btnNextStep');
+        const btnConfirmOrder = document.getElementById('btnConfirmOrder');
+        const discordIdInput = document.getElementById('discordIdInput');
+
+        let selectedProductTitle = "";
+        let selectedPackageData = null;
+        let globalBuyLink = "";
+
+        // Global Buy Link Fallback
+        get(ref(db, 'site_settings/mobile_panel/buy_link')).then(snapshot => {
+            if (snapshot.exists() && snapshot.val()) {
+                globalBuyLink = snapshot.val();
+            }
         });
 
-        // Fetch Mobile Panels
+        // Realtime Load
         onValue(ref(db, 'mobile_panels'), (snapshot) => {
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = "";
-            activePanels = snapshot.val() || {};
+            mobileGrid.innerHTML = '';
+            if (!snapshot.exists()) {
+                mobileGrid.innerHTML = '<div class="no-data"><i class="fa-solid fa-folder-open"></i> No Products Available.</div>';
+                return;
+            }
 
-            snapshot.forEach(child => {
-                const item = child.val();
-                const key = child.key;
-                let minPrice = "N/A";
+            snapshot.forEach((childSnapshot) => {
+                const itemKey = childSnapshot.key;
+                const item = childSnapshot.val();
 
-                if (item.packages && item.packages.length > 0) {
-                    minPrice = "৳ " + item.packages[0].sell_price;
-                }
-
-                grid.innerHTML += `
-                    <div class="product-card">
-                        <img src="${item.image}" class="product-img" onerror="this.src='https://via.placeholder.com/300x160?text=Mobile+Panel'">
-                        <div class="product-name">${item.title}</div>
-                        <div class="product-price-start">Starts at ${minPrice}</div>
-                        <button class="buy-btn" onclick="openOrderModal('${key}')">Buy Panel</button>
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div>
+                        <img src="${item.image || 'https://via.placeholder.com/300x170/11071a/ff0066?text=MOBILE+PANEL'}" class="card-img" alt="${item.title}">
+                        <h3 class="card-title">${item.title}</h3>
                     </div>
+                    <button class="btn-buy" onclick="openOrderModal('${itemKey}')"><i class="fa-solid fa-cart-shopping"></i> BUY NOW</button>
                 `;
+                mobileGrid.appendChild(card);
             });
         });
 
-        let selectedPkg = null;
+        window.openOrderModal = (itemKey) => {
+            get(ref(db, `mobile_panels/${itemKey}`)).then((snapshot) => {
+                if (!snapshot.exists()) return;
+                const data = snapshot.val();
+                selectedProductTitle = data.title;
+                selectedPackageData = null;
 
-        window.openOrderModal = function(key) {
-            const item = activePanels[key];
-            if (!item) return;
+                modalProductName.innerText = data.title;
+                packageContainer.innerHTML = '';
 
-            document.getElementById('mProductTitle').innerText = item.title;
-            const pkgList = document.getElementById('mPkgList');
-            pkgList.innerHTML = "";
-            selectedPkg = null;
+                if (data.packages && data.packages.length > 0) {
+                    data.packages.forEach((pkg) => {
+                        const pkgDiv = document.createElement('div');
+                        pkgDiv.className = 'package-item';
+                        pkgDiv.innerHTML = `
+                            <span class="pkg-duration">${pkg.duration}</span>
+                            <div class="pkg-price-box">
+                                ${pkg.old_price ? `<span class="pkg-old-price">${pkg.old_price}</span>` : ''}
+                                <span class="pkg-sell-price">${pkg.sell_price}</span>
+                            </div>
+                        `;
+                        pkgDiv.onclick = () => {
+                            document.querySelectorAll('.package-item').forEach(el => el.classList.remove('selected'));
+                            pkgDiv.classList.add('selected');
+                            selectedPackageData = pkg;
+                        };
+                        packageContainer.appendChild(pkgDiv);
+                    });
+                } else {
+                    packageContainer.innerHTML = '<div style="text-align:center; color:#777; padding:20px;">No packages configured.</div>';
+                }
 
-            if (item.packages && item.packages.length > 0) {
-                item.packages.forEach((pkg, idx) => {
-                    pkgList.innerHTML += `
-                        <div class="pkg-item ${idx===0?'selected':''}" onclick="selectPackage(this, ${idx}, '${key}')">
-                            <span class="pkg-dur">${pkg.duration}</span>
-                            <span class="pkg-price">৳ ${pkg.sell_price}</span>
-                        </div>
-                    `;
+                stepPackages.style.display = 'block';
+                stepUserId.style.display = 'none';
+                purchaseModal.style.display = 'flex';
+            });
+        };
+
+        btnNextStep.onclick = () => {
+            if (!selectedPackageData) {
+                alert("দয়া করে যেকোনো একটি প্যাকেজ সিলেক্ট করুন!");
+                return;
+            }
+            stepPackages.style.display = 'none';
+            stepUserId.style.display = 'block';
+        };
+
+        btnConfirmOrder.onclick = async () => {
+            const userInputId = discordIdInput.value.trim();
+
+            btnConfirmOrder.disabled = true;
+            btnConfirmOrder.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> CREATING PRIVATE TICKET...';
+
+            try {
+                const response = await fetch(`${BOT_SERVER_URL}/create-ticket`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        discordUserId: userInputId,
+                        discordUsername: userInputId,
+                        productTitle: selectedProductTitle,
+                        packageName: selectedPackageData.duration,
+                        price: selectedPackageData.sell_price,
+                        category: "BUY MOBILE PANEL"
+                    })
                 });
-                selectedPkg = item.packages[0];
-            } else {
-                pkgList.innerHTML = `<div style="color:#777; font-size:12px;">No packages available.</div>`;
+
+                const result = await response.json();
+
+                if (result.success && result.url) {
+                    window.location.href = result.url;
+                } else {
+                    if (globalBuyLink) window.location.href = globalBuyLink;
+                }
+            } catch (error) {
+                console.error("Bot Connection Error:", error);
+                if (globalBuyLink) {
+                    window.location.href = globalBuyLink;
+                } else {
+                    window.location.href = "https://discord.gg/ZBjSWaF7u";
+                }
+            } finally {
+                btnConfirmOrder.disabled = false;
+                btnConfirmOrder.innerHTML = 'PROCEED TO DISCORD TICKET';
             }
-
-            document.getElementById('orderModal').style.display = 'flex';
         };
 
-        window.selectPackage = function(el, idx, key) {
-            document.querySelectorAll('.pkg-item').forEach(i => i.classList.remove('selected'));
-            el.classList.add('selected');
-            selectedPkg = activePanels[key].packages[idx];
-        };
+        closeModal.onclick = () => purchaseModal.style.display = 'none';
+        window.onclick = (e) => { if (e.target === purchaseModal) purchaseModal.style.display = 'none'; };
 
-        window.closeModal = function() {
-            document.getElementById('orderModal').style.display = 'none';
-        };
-
-        document.getElementById('mConfirmBtn').addEventListener('click', () => {
-            if (globalBuyLink) {
-                window.open(globalBuyLink, '_blank');
-            } else {
-                alert("Redirecting to support...");
-                window.open("https://discord.gg/ZBjSWaF7u", '_blank');
-            }
+        const mouseGlow = document.getElementById('mouse-glow');
+        document.addEventListener('mousemove', (e) => {
+            mouseGlow.style.left = e.clientX + 'px';
+            mouseGlow.style.top = e.clientY + 'px';
         });
     </script>
 </body>
