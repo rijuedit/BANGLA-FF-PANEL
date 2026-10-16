@@ -1,122 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Panel - BANGLA FF PANEL</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Panels - BANGLA FF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
+        body { background-color: #05020a; color: #fff; min-height: 100vh; display: flex; flex-direction: column; }
+        
+        #mouse-glow {
+            position: fixed; width: 50px; height: 50px; border-radius: 50%;
+            background: rgba(255, 0, 102, 0.4); filter: blur(30px);
+            pointer-events: none; transform: translate(-50%, -50%); z-index: 9999;
+        }
 
-  <style>
-    :root { --mono: 'JetBrains Mono', monospace; }
-    .inner-page-container { width: calc(100% - 40px); max-width: 900px; margin: 40px auto 80px; position: relative; z-index: 10; }
-    .inner-header-actions { display: flex; justify-content: space-between; margin-bottom: 20px; }
-    .back-btn, .share-btn { display: flex; align-items: center; gap: 6px; background: rgba(17, 7, 26, 0.8); border: 1px solid var(--card-border); color: var(--text-main); padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; cursor: pointer; transition: all 0.3s ease; }
-    .back-btn:hover, .share-btn:hover { background: rgba(157, 0, 255, 0.15); border-color: var(--accent-primary); color: var(--accent-primary); box-shadow: 0 0 12px rgba(255, 0, 102, 0.3); }
-    .inner-content-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; backdrop-filter: blur(15px); padding: 28px; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); }
-    .video-container { width: 100%; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); background: #000; box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); }
-    .video-container iframe { width: 100%; height: 100%; }
-    .title-skip-row { display: flex; justify-content: space-between; align-items: center; margin: 24px 0; flex-wrap: wrap; gap: 15px; }
-    .panel-titles h2 { font-family: 'Orbitron', sans-serif; font-size: 26px; font-weight: 900; color: var(--text-main); margin: 0 0 6px; letter-spacing: 1px; }
-    .panel-titles p { font: 600 12px var(--mono); color: var(--text-muted); margin: 0; letter-spacing: 1.5px; }
-    .how-to-skip-btn { display: flex; align-items: center; gap: 8px; background: rgba(157, 0, 255, 0.1); border: 1px solid var(--accent-secondary); color: #d8b4fe; padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none; transition: all 0.3s ease; }
-    .how-to-skip-btn:hover { background: var(--accent-secondary); color: #fff; box-shadow: 0 0 15px rgba(157, 0, 255, 0.4); }
-    .password-section { border: 1px solid rgba(255, 0, 102, 0.3); background: rgba(255, 0, 102, 0.05); border-radius: 12px; padding: 18px 22px; margin-bottom: 24px; }
-    .pass-label { font: 700 11px var(--mono); color: var(--accent-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; letter-spacing: 1px; }
-    .pass-value-row { display: flex; justify-content: space-between; align-items: center; }
-    .password-text { font-family: 'Orbitron', sans-serif; font-size: 22px; font-weight: 800; color: #fff; letter-spacing: 2px; }
-    .copy-btn { background: rgba(255, 0, 102, 0.1); border: 1px solid var(--accent-primary); color: var(--accent-primary); padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.3s ease; }
-    .copy-btn:hover { background: var(--accent-primary); color: #fff; box-shadow: 0 0 12px rgba(255, 0, 102, 0.5); }
-    .download-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .download-box { background: rgba(8, 3, 13, 0.7); border: 1px solid var(--card-border); border-radius: 14px; padding: 24px 20px; text-align: center; transition: all 0.4s ease; }
-    .download-box:hover { border-color: var(--accent-primary); transform: translateY(-4px); box-shadow: 0 10px 25px rgba(255, 0, 102, 0.15); }
-    .dl-icon { font-size: 32px; color: var(--accent-primary); margin-bottom: 12px; }
-    .download-box h3 { font-family: 'Orbitron', sans-serif; font-size: 13px; font-weight: 800; color: var(--text-main); margin: 0 0 8px; letter-spacing: 1px; }
-    .download-box p { font: 600 10px var(--mono); color: var(--text-muted); margin: 0 0 18px; letter-spacing: 1px; }
-    .dl-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary)); border: none; color: #fff; padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; }
-    .dl-btn:hover { box-shadow: 0 0 20px rgba(255, 0, 102, 0.5); transform: translateY(-2px); }
-    @media(max-width:600px) { .download-grid { grid-template-columns: 1fr; } .inner-content-card { padding: 18px; } .title-skip-row { flex-direction: column; align-items: flex-start; } }
-  </style>
+        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 18px 5%; background: rgba(17, 7, 26, 0.9); border-bottom: 1px solid #2a113d; sticky: top; }
+        .logo { font-size: 26px; font-weight: 700; color: #fff; text-decoration: none; }
+        .logo span { color: #ff0066; }
+        .back-btn { background: #11071a; color: #fff; text-decoration: none; padding: 8px 16px; border: 1px solid #2a113d; border-radius: 8px; font-weight: 600; transition: 0.3s; }
+        .back-btn:hover { border-color: #ff0066; color: #ff0066; }
+
+        .container { flex: 1; padding: 30px 5%; max-width: 1200px; margin: 0 auto; width: 100%; }
+        .page-title { font-size: 32px; text-transform: uppercase; margin-bottom: 30px; text-align: center; }
+        .page-title span { color: #ff0066; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        
+        .card { background: #11071a; border: 1px solid #2a113d; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 15px; transition: 0.3s; position: relative; }
+        .card:hover { border-color: #ff0066; transform: translateY(-5px); box-shadow: 0 5px 20px rgba(255, 0, 102, 0.2); }
+        .card img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; }
+        .card-title { font-size: 20px; font-weight: 700; color: #fff; }
+        
+        .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
+        .btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; transition: 0.3s; text-align: center; }
+        .btn-main { background: #ff0066; color: #fff; }
+        .btn-main:hover { background: #d60055; }
+        .btn-yt { background: #ff0000; color: #fff; }
+        .btn-yt:hover { background: #cc0000; }
+        .btn-skip { background: #9d00ff; color: #fff; }
+        .btn-skip:hover { background: #7a00cc; }
+
+        #no-data { text-align: center; color: #aaa; font-size: 18px; grid-column: 1 / -1; padding: 50px 0; }
+        #loader { text-align: center; color: #ff0066; font-size: 20px; padding: 50px 0; font-weight: 600; }
+    </style>
 </head>
 <body>
+    <div id="mouse-glow"></div>
 
-  <div id="mouse-glow"></div>
+    <nav class="navbar">
+        <a href="index.html" class="logo">BANGLA <span>FF</span></a>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Home</a>
+    </nav>
 
-  <!-- Header -->
-  <header>
-    <!-- Clickable Brand directly to Home -->
-    <a href="index.html" class="brand">
-      <img src="logo.png" alt="Logo" class="brand-logo-img">
-      <div class="brand-text">
-        <h2>BANGLA FF PANEL</h2>
-        <span>PREMIUM CORP</span>
-      </div>
-    </a>
-    <a href="index.html" class="btn-nav">&larr; Home</a>
-  </header>
+    <main class="container">
+        <h1 class="page-title">Free <span>Panels</span></h1>
+        
+        <div id="loader"><i class="fas fa-spinner fa-spin"></i> Loading Panels...</div>
+        <div class="grid" id="grid-container"></div>
+    </main>
 
-  <main class="inner-page-container">
-    <div class="inner-header-actions">
-      <a href="index.html" class="back-btn"><i class='bx bx-left-arrow-alt'></i> Back</a>
-      <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Page Link Copied!');"><i class='bx bx-share-alt'></i> Share</button>
-    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-    <div class="inner-content-card">
-      <div class="video-container">
-        <!-- Admin Panel Video URL Goes Here -->
-        <iframe id="main-video" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" frameborder="0" allowfullscreen></iframe>
-      </div>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
+            authDomain: "bangla-ff-admin.firebaseapp.com",
+            databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "bangla-ff-admin"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
 
-      <div class="title-skip-row">
-        <div class="panel-titles">
-          <!-- Admin Panel Title -->
-          <h2>FREE PANEL</h2>
-          <p>NEW PC PANEL UPDATED OB55</p>
-        </div>
-        <a href="#" target="_blank" class="how-to-skip-btn"><i class='bx bx-skip-next-circle'></i> HOW TO SKIP</a>
-      </div>
+        document.addEventListener('mousemove', (e) => {
+            const glow = document.getElementById('mouse-glow');
+            glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px';
+        });
 
-      <div class="password-section">
-        <div class="pass-label"><i class='bx bx-lock-alt'></i> RAR PASSWORD</div>
-        <div class="pass-value-row">
-          <!-- Admin Panel Password -->
-          <span class="password-text" id="panel-password">1</span>
-          <button class="copy-btn" onclick="copyPassword()"><i class='bx bx-copy'></i> Copy</button>
-        </div>
-      </div>
+        onValue(ref(db, 'free_panels'), (snapshot) => {
+            document.getElementById('loader').style.display = 'none';
+            const grid = document.getElementById('grid-container');
+            grid.innerHTML = '';
 
-      <div class="download-grid">
-        <div class="download-box">
-          <div class="dl-icon"><i class='bx bx-shield-quarter'></i></div>
-          <!-- Admin Panel Link Name 1 -->
-          <h3>HIDDEN INTERNAL LOADER LINK</h3>
-          <p>VERSION 4.6</p>
-          <a href="#" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
-        </div>
+            if(!snapshot.exists()) {
+                grid.innerHTML = '<div id="no-data">No Free Panels Available Right Now.</div>';
+                return;
+            }
 
-        <div class="download-box">
-          <div class="dl-icon"><i class='bx bx-code-alt'></i></div>
-          <!-- Admin Panel Link Name 2 -->
-          <h3>HIDDEN EXTERNAL C# LOADER LINK</h3>
-          <p>VERSION 4.6</p>
-          <a href="#" target="_blank" class="dl-btn"><i class='bx bx-download'></i> Download</a>
-        </div>
-      </div>
-    </div>
-  </main>
+            snapshot.forEach((child) => {
+                const item = child.val();
+                
+                // Optional Buttons Logic
+                let ytBtnHTML = (item.yt_enabled !== false && item.yt_link) 
+                    ? `<a href="${item.yt_link}" target="_blank" class="btn btn-yt"><i class="fab fa-youtube"></i> Watch Tutorial</a>` : '';
 
-  <script src="script.js"></script>
-  <script>
-    function copyPassword() {
-      const passText = document.getElementById('panel-password').innerText;
-      navigator.clipboard.writeText(passText);
-      alert('Password Copied: ' + passText);
-    }
-  </script>
+                let skipBtnHTML = (item.skip_enabled !== false && item.skip_link) 
+                    ? `<a href="${item.skip_link}" target="_blank" class="btn btn-skip"><i class="fas fa-route"></i> How To Skip</a>` : '';
+
+                grid.innerHTML += `
+                    <div class="card">
+                        <img src="${item.image}" alt="${item.title}">
+                        <div class="card-title">${item.title}</div>
+                        <div class="btn-group">
+                            <a href="${item.download}" target="_blank" class="btn btn-main"><i class="fas fa-download"></i> ${item.btn_text || 'Download'}</a>
+                            ${ytBtnHTML}
+                            ${skipBtnHTML}
+                        </div>
+                    </div>
+                `;
+            });
+        });
+    </script>
 </body>
 </html>
