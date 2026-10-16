@@ -10,27 +10,52 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
         body { background-color: #05020a; color: #fff; min-height: 100vh; display: flex; flex-direction: column; }
         
-        #mouse-glow { position: fixed; width: 50px; height: 50px; border-radius: 50%; background: rgba(157, 0, 255, 0.4); filter: blur(30px); pointer-events: none; transform: translate(-50%, -50%); z-index: 9999; }
+        #mouse-glow {
+            position: fixed; width: 50px; height: 50px; border-radius: 50%;
+            background: rgba(157, 0, 255, 0.4); filter: blur(30px);
+            pointer-events: none; transform: translate(-50%, -50%); z-index: 9999;
+        }
 
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 18px 5%; background: rgba(17, 7, 26, 0.9); border-bottom: 1px solid #2a113d; sticky: top; }
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 18px 5%; background: rgba(17, 7, 26, 0.9); border-bottom: 1px solid #2a113d;
+        }
         .logo { font-size: 26px; font-weight: 700; color: #fff; text-decoration: none; }
         .logo span { color: #9d00ff; }
-        .back-btn { background: #11071a; color: #fff; text-decoration: none; padding: 8px 16px; border: 1px solid #2a113d; border-radius: 8px; font-weight: 600; transition: 0.3s; }
+        .back-btn {
+            background: #11071a; color: #fff; text-decoration: none; padding: 8px 16px;
+            border: 1px solid #2a113d; border-radius: 8px; font-weight: 600; transition: 0.3s;
+        }
         .back-btn:hover { border-color: #9d00ff; color: #9d00ff; }
 
         .container { flex: 1; padding: 30px 5%; max-width: 1200px; margin: 0 auto; width: 100%; }
         .page-title { font-size: 32px; text-transform: uppercase; margin-bottom: 30px; text-align: center; }
         .page-title span { color: #9d00ff; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        .card { background: #11071a; border: 1px solid #2a113d; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 12px; transition: 0.3s; text-align: center; }
-        .card:hover { border-color: #9d00ff; transform: translateY(-5px); box-shadow: 0 5px 20px rgba(157, 0, 255, 0.2); }
-        .card img { width: 100%; height: 140px; object-fit: contain; background: #05020a; border-radius: 8px; padding: 10px; }
-        .card-title { font-size: 22px; font-weight: 700; color: #fff; }
-        .version-badge { color: #9d00ff; font-weight: 600; font-size: 14px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
+        
+        .card {
+            background: #11071a; border: 1px solid #2a113d; border-radius: 12px; padding: 25px 20px;
+            display: flex; flex-direction: column; gap: 14px; transition: 0.3s; text-align: center;
+        }
+        .card:hover {
+            border-color: #9d00ff; transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(157, 0, 255, 0.25);
+        }
+        .card-icon {
+            width: 100%; height: 120px; background: #05020a; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; font-size: 52px;
+            overflow: hidden;
+        }
+        .card-icon img { width: 100%; height: 100%; object-fit: contain; padding: 12px; }
+        .card-title { font-size: 20px; font-weight: 700; color: #fff; }
 
-        .btn-download { background: #9d00ff; color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 15px; transition: 0.3s; margin-top: auto; }
-        .btn-download:hover { background: #7a00cc; }
+        .btn-download {
+            background: #9d00ff; color: #fff; display: flex; align-items: center;
+            justify-content: center; gap: 8px; padding: 12px; border-radius: 8px;
+            text-decoration: none; font-weight: 600; font-size: 15px; transition: 0.3s; margin-top: auto;
+        }
+        .btn-download:hover { background: #7a00cc; box-shadow: 0 0 15px rgba(157,0,255,0.4); }
 
         #no-data { text-align: center; color: #aaa; font-size: 18px; grid-column: 1 / -1; padding: 50px 0; }
         #loader { text-align: center; color: #9d00ff; font-size: 20px; padding: 50px 0; font-weight: 600; }
@@ -65,7 +90,8 @@
 
         document.addEventListener('mousemove', (e) => {
             const glow = document.getElementById('mouse-glow');
-            glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px';
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
         });
 
         onValue(ref(db, 'emulators'), (snapshot) => {
@@ -73,19 +99,32 @@
             const grid = document.getElementById('grid-container');
             grid.innerHTML = '';
 
-            if(!snapshot.exists()) {
+            if (!snapshot.exists()) {
                 grid.innerHTML = '<div id="no-data">No Emulators Available Right Now.</div>';
                 return;
             }
 
             snapshot.forEach((child) => {
                 const item = child.val();
+
+                // Icon: image URL or emoji (supports old "image" field too)
+                let iconHTML = '';
+                const iconType = item.iconType || (item.image ? 'image' : 'emoji');
+                const iconValue = item.iconValue || item.image || '💻';
+
+                if (iconType === 'image') {
+                    iconHTML = `<img src="${iconValue}" alt="${item.title}">`;
+                } else {
+                    iconHTML = iconValue;
+                }
+
                 grid.innerHTML += `
                     <div class="card">
-                        <img src="${item.image}" alt="${item.title}">
+                        <div class="card-icon">${iconHTML}</div>
                         <div class="card-title">${item.title}</div>
-                        <div class="version-badge">Version: ${item.version}</div>
-                        <a href="${item.download}" target="_blank" class="btn-download"><i class="fas fa-download"></i> Download</a>
+                        <a href="${item.download}" target="_blank" class="btn-download">
+                            <i class="fas fa-download"></i> Download
+                        </a>
                     </div>
                 `;
             });
