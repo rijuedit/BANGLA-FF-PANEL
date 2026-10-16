@@ -3,229 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BANGLA FF PANEL - Premium Corp</title>
+    <title>BANGLA FF PANEL</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
-        body { background-color: #05020a; color: #fff; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
-        
-        body::before {
-            content: ''; position: absolute; top: 20%; left: 20%; width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(255, 0, 102, 0.05) 0%, transparent 70%);
-            z-index: -1; pointer-events: none;
+        :root {
+            --bg-dark: #05020a;
+            --bg-card: #11071a;
+            --border-color: #2a113d;
+            --neon-pink: #ff0066;
+            --neon-purple: #9d00ff;
+            --text-gray: #b0b0b0;
+            --text-light: #ffffff;
         }
 
-        /* Navbar */
-        .navbar { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
-        .logo-area { display: flex; align-items: center; gap: 15px; }
-        .logo-img { width: 40px; height: 40px; background: #11071a; border-radius: 8px; border: 1px solid #2a113d; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #ff0066; font-size: 12px; text-align: center; line-height: 1; }
-        .logo-text h1 { font-size: 20px; font-weight: 700; letter-spacing: 1px; color: #fff; }
-        .logo-text p { font-size: 12px; color: #888; letter-spacing: 2px; }
-        .discord-btn-top { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
-        .discord-btn-top:hover { background: rgba(255,255,255,0.05); border-color: #fff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-light); min-height: 100vh; overflow-x: hidden; }
 
-        /* Hero */
-        .hero { text-align: center; padding: 60px 20px 40px; }
-        .status-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 255, 102, 0.1); border: 1px solid rgba(0, 255, 102, 0.2); color: #00ff66; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 1px; margin-bottom: 25px; text-transform: uppercase; }
-        .status-badge .dot { width: 8px; height: 8px; background: #00ff66; border-radius: 50%; box-shadow: 0 0 10px #00ff66; animation: blink 1.5s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-        
-        .hero h2 { font-size: 48px; font-weight: 700; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; }
-        .hero h2 span { color: #ff0066; text-shadow: 0 0 20px rgba(255, 0, 102, 0.4); }
-        .hero p { color: #888; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 35px; }
-
-        .hero-actions { display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap; }
-        .action-btn { background: rgba(255,255,255,0.03); color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 12px 24px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
-        .action-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); }
-        
-        .notif-btn { background: rgba(255, 0, 102, 0.1); color: #ff0066; border: 1px solid rgba(255, 0, 102, 0.2); width: 42px; height: 42px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; position: relative; }
-        .notif-btn:hover { background: #ff0066; color: #fff; }
-        .notif-badge {
-            position: absolute; top: -5px; right: -5px; background: #ff0066; color: #fff;
-            font-size: 10px; font-weight: 700; width: 18px; height: 18px; border-radius: 50%;
-            display: none; align-items: center; justify-content: center; border: 2px solid #05020a;
+        #mouse-glow {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(157, 0, 255, 0.15) 0%, transparent 70%);
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
         }
 
-        .divider { text-align: center; color: #555; font-size: 12px; letter-spacing: 4px; margin: 30px 0 50px; font-weight: 600; }
+        /* Header Styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: rgba(12, 5, 20, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px 80px; width: 100%; }
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        /* Clickable Brand Logo Section */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
 
-        .card { background: #0c0514; border: 1px solid #1a0a29; border-radius: 16px; padding: 40px 30px; text-align: center; text-decoration: none; transition: 0.4s; position: relative; display: none; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
-        .card:hover { border-color: rgba(255, 0, 102, 0.5); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255, 0, 102, 0.08); }
-        
-        .badge { position: absolute; top: 15px; right: 15px; padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; letter-spacing: 1px; }
-        .badge-hot { background: #ff0066; color: #fff; }
-        .badge-premium { background: #ff6600; color: #fff; }
-        .badge-vip { background: #0066ff; color: #fff; }
+        .logo-container:hover {
+            transform: scale(1.03);
+        }
 
-        .card-icon { font-size: 35px; color: #ff0066; margin-bottom: 25px; height: 50px; display: flex; align-items: center; justify-content: center; }
-        .card-icon img { width: 45px; height: 45px; object-fit: contain; }
-        .card h3 { font-size: 20px; font-weight: 700; color: #fff; letter-spacing: 1px; margin-bottom: 10px; text-transform: uppercase; }
-        .card p { color: #666; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 25px; }
-        .explore-btn { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 8px 25px; border-radius: 20px; font-size: 12px; font-weight: 600; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase; }
-        .card:hover .explore-btn { border-color: #ff0066; color: #ff0066; }
+        .site-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid var(--neon-pink);
+            box-shadow: 0 0 12px rgba(255, 0, 102, 0.5);
+            background: #000;
+        }
 
-        #loader { text-align: center; color: #ff0066; font-size: 16px; margin: 50px 0; font-weight: 600; letter-spacing: 2px; }
+        .logo-text h1 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
 
-        /* ========== NOTIFICATION PANEL ========== */
-        .notif-overlay {
-            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
-            z-index: 1000; justify-content: center; align-items: flex-start; padding-top: 80px;
+        .logo-text p {
+            font-size: 10px;
+            color: var(--neon-pink);
+            letter-spacing: 2px;
+            font-weight: 600;
         }
-        .notif-overlay.show { display: flex; }
-        .notif-panel {
-            background: #0c0514; border: 1px solid #2a113d; border-radius: 16px;
-            width: 90%; max-width: 420px; max-height: 70vh; overflow: hidden;
-            display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            animation: slideDown 0.3s ease;
-        }
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .notif-panel-header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 18px 20px; border-bottom: 1px solid #2a113d;
-        }
-        .notif-panel-header h3 { font-size: 18px; color: #fff; }
-        .notif-panel-header h3 i { color: #ff0066; margin-right: 8px; }
-        .notif-close {
-            background: transparent; border: none; color: #888; font-size: 20px;
-            cursor: pointer; transition: 0.3s;
-        }
-        .notif-close:hover { color: #ff0066; }
-        .notif-panel-body { overflow-y: auto; padding: 10px; flex: 1; }
-        .notif-empty { text-align: center; color: #555; padding: 40px 20px; font-size: 14px; }
-        .notif-card {
-            background: #11071a; border: 1px solid #1a0a29; border-radius: 10px;
-            padding: 14px 16px; margin-bottom: 10px; transition: 0.3s;
-        }
-        .notif-card:hover { border-color: #2a113d; }
-        .notif-card h4 { font-size: 15px; color: #ff0066; margin-bottom: 6px; font-weight: 700; }
-        .notif-card p { font-size: 13px; color: #ccc; line-height: 1.4; margin-bottom: 8px; }
-        .notif-card .n-time { font-size: 11px; color: #666; }
-        .notif-card .n-time i { margin-right: 4px; }
 
-        @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) {
-            .grid { grid-template-columns: 1fr; }
-            .hero h2 { font-size: 32px; }
-            .hero-actions { flex-direction: column; }
-            .action-btn { width: 100%; justify-content: center; }
+        /* Nav Buttons */
+        .nav-btns { display: flex; gap: 12px; }
+        .btn-nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #0c0514;
+            color: white;
+            border: 1px solid var(--border-color);
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.3s;
         }
+        .btn-nav:hover { border-color: var(--neon-pink); background: rgba(255, 0, 102, 0.1); box-shadow: 0 0 10px rgba(255, 0, 102, 0.2); }
+
+        /* Main Body */
+        .hero { text-align: center; padding: 50px 20px 30px; }
+        .hero h2 { font-size: 32px; color: white; margin-bottom: 8px; }
+        .hero h2 span { color: var(--neon-pink); text-shadow: 0 0 15px var(--neon-pink); }
+        .hero p { color: var(--text-gray); font-size: 13px; max-width: 550px; margin: 0 auto; }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 0 5%;
+            max-width: 1200px;
+            margin: 20px auto 60px;
+        }
+
+        .category-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            transition: 0.3s;
+            display: none;
+        }
+        .category-card.visible { display: block; }
+        .category-card:hover {
+            border-color: var(--neon-purple);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(157, 0, 255, 0.15);
+        }
+
+        .cat-icon { font-size: 40px; color: var(--neon-purple); margin-bottom: 15px; }
+        .cat-icon img { width: 50px; height: 50px; object-fit: contain; margin-bottom: 10px; }
+        .cat-title { font-size: 20px; font-weight: bold; margin-bottom: 8px; }
+        .cat-desc { font-size: 12px; color: var(--text-gray); }
+
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo-area">
-            <div class="logo-img">BFF<br>PNL</div>
+    <div id="mouse-glow"></div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <!-- LOGO + BRAND NAME (CLICKS TO HOME index.html) -->
+        <a href="index.html" class="logo-container">
+            <img src="logo.png" alt="BANGLA FF LOGO" class="site-logo">
             <div class="logo-text">
-                <h1>BANGLA FF <span style="color:#ff0066">PANEL</span></h1>
+                <h1>BANGLA FF PANEL</h1>
                 <p>PREMIUM CORP</p>
             </div>
-        </div>
-        <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="discord-btn-top">
-            <i class="fab fa-discord"></i> Join Discord
         </a>
-    </nav>
 
-    <!-- Hero -->
-    <header class="hero">
-        <div class="status-badge">
-            <span class="dot"></span> LIVE SERVER ACTIVE
-        </div>
-        <h2>BANGLA FF <span>PANEL</span></h2>
-        <p>NEXT GEN PRIVATE SOLUTIONS &bull; SECURE &bull; RELIABLE</p>
-        
-        <div class="hero-actions">
-            <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="action-btn">
-                <i class="fab fa-discord"></i> Join Support Discord &rarr;
-            </a>
-            <a href="https://rijuedit.github.io/oxi-topup/" target="_blank" class="action-btn">
-                <i class="far fa-gem"></i> Free Fire Diamond Topup &rarr;
-            </a>
-            <!-- Bell Button -->
-            <div class="notif-btn" id="notifBtn" onclick="openNotifPanel()" title="Notifications">
-                <i class="far fa-bell"></i>
-                <span class="notif-badge" id="notifBadge">0</span>
-            </div>
+        <div class="nav-btns">
+            <a href="index.html" class="btn-nav"><i class="fas fa-home"></i> Home</a>
+            <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="btn-nav"><i class="fab fa-discord"></i> Discord</a>
         </div>
     </header>
 
-    <div class="divider">// AVAILABLE SYSTEMS //</div>
+    <div class="hero">
+        <h2>Welcome to <span>BANGLA FF</span></h2>
+        <p>Select a category below to access premium panels, tools, and bypasses.</p>
+    </div>
 
-    <main class="container">
-        <div id="loader"><i class="fas fa-circle-notch fa-spin"></i> SYNCING DATABASE...</div>
-
-        <div class="grid" id="main-grid">
-            <a href="free-panel.html" class="card" id="box-free_panel">
-                <div class="badge badge-hot">HOT</div>
-                <div class="card-icon" id="icon-free_panel"><i class="fas fa-laptop"></i></div>
-                <h3 id="title-free_panel">FREE PANEL</h3>
-                <p>NEW PC PANEL UPDATED OB55</p>
-                <div class="explore-btn">EXPLORE &rarr;</div>
-            </a>
-
-            <a href="free-bypass.html" class="card" id="box-free_bypass">
-                <div class="card-icon" id="icon-free_bypass"><i class="fas fa-desktop"></i></div>
-                <h3 id="title-free_bypass">FREE BYPASS</h3>
-                <p>FAST & RELIABLE MATCHMAKING</p>
-                <div class="explore-btn">EXPLORE &rarr;</div>
-            </a>
-
-            <a href="emulator.html" class="card" id="box-emulator">
-                <div class="card-icon" id="icon-emulator"><i class="far fa-star"></i></div>
-                <h3 id="title-emulator">EMULATOR</h3>
-                <p>BEST WORKING EMULATOR</p>
-                <div class="explore-btn">EXPLORE &rarr;</div>
-            </a>
-
-            <a href="free-fire-apk.html" class="card" id="box-apk">
-                <div class="card-icon" id="icon-apk"><i class="fas fa-bolt"></i></div>
-                <h3 id="title-apk">FREE FIRE APK</h3>
-                <p>DOWNLOAD LATEST APK V2.0</p>
-                <div class="explore-btn">EXPLORE &rarr;</div>
-            </a>
-
-            <a href="buy-pc-panel.html" class="card" id="box-pc_panel">
-                <div class="badge badge-premium">PREMIUM</div>
-                <div class="card-icon" id="icon-pc_panel"><i class="fas fa-tv"></i></div>
-                <h3 id="title-pc_panel">BUY PC PANEL</h3>
-                <p>ADVANCED VIP FEATURES FOR PC</p>
-                <div class="explore-btn">PURCHASE &rarr;</div>
-            </a>
-
-            <a href="mobile-panel.html" class="card" id="box-mobile_panel">
-                <div class="badge badge-vip">VIP</div>
-                <div class="card-icon" id="icon-mobile_panel"><i class="fas fa-mobile-alt"></i></div>
-                <h3 id="title-mobile_panel">BUY MOBILE PANEL</h3>
-                <p>SAFE VIP PANEL FOR ANDROID/IOS</p>
-                <div class="explore-btn">PURCHASE &rarr;</div>
-            </a>
-        </div>
-    </main>
-
-    <!-- NOTIFICATION PANEL -->
-    <div class="notif-overlay" id="notifOverlay" onclick="closeNotifOutside(event)">
-        <div class="notif-panel">
-            <div class="notif-panel-header">
-                <h3><i class="fas fa-bell"></i> Notifications</h3>
-                <button class="notif-close" onclick="closeNotifPanel()">&times;</button>
-            </div>
-            <div class="notif-panel-body" id="notifPanelBody">
-                <div class="notif-empty">Loading...</div>
-            </div>
-        </div>
+    <!-- Category Grid -->
+    <div class="categories" id="category-grid">
+        <a href="free-panel.html" class="category-card" id="card_free_panel">
+            <div class="cat-icon" id="icon_free_panel"><i class="fas fa-laptop-code"></i></div>
+            <div class="cat-title" id="title_free_panel">Free Panel</div>
+            <div class="cat-desc">Free cheats and mod tools</div>
+        </a>
+        <a href="free-bypass.html" class="category-card" id="card_free_bypass">
+            <div class="cat-icon" id="icon_free_bypass"><i class="fas fa-shield-virus"></i></div>
+            <div class="cat-title" id="title_free_bypass">Free Bypass</div>
+            <div class="cat-desc">Anti-ban scripts & protection</div>
+        </a>
+        <a href="emulator.html" class="category-card" id="card_emulator">
+            <div class="cat-icon" id="icon_emulator"><i class="fas fa-microchip"></i></div>
+            <div class="cat-title" id="title_emulator">Emulator</div>
+            <div class="cat-desc">Smart emulator tweaks</div>
+        </a>
+        <a href="free-fire-apk.html" class="category-card" id="card_apk">
+            <div class="cat-icon" id="icon_apk"><i class="fas fa-mobile"></i></div>
+            <div class="cat-title" id="title_apk">Free Fire APK</div>
+            <div class="cat-desc">Modified APK downloads</div>
+        </a>
+        <a href="buy-pc-panel.html" class="category-card" id="card_pc_panel">
+            <div class="cat-icon" id="icon_pc_panel"><i class="fas fa-desktop"></i></div>
+            <div class="cat-title" id="title_pc_panel">Paid PC Panels</div>
+            <div class="cat-desc">Exclusive paid PC panels</div>
+        </a>
+        <a href="mobile-panel.html" class="category-card" id="card_mobile_panel">
+            <div class="cat-icon" id="icon_mobile_panel"><i class="fas fa-mobile-alt"></i></div>
+            <div class="cat-title" id="title_mobile_panel">Paid Mobile Panels</div>
+            <div class="cat-desc">Exclusive paid Mobile panels</div>
+        </a>
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
@@ -236,94 +213,38 @@
             messagingSenderId: "295013484465",
             appId: "1:295013484465:web:b6bc2a949e239095761f90"
         };
-
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
+        // Mouse glow
+        const glow = document.getElementById('mouse-glow');
+        window.addEventListener('mousemove', e => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
+
+        // Sync Category Box Visibility and Custom Icons/Titles
         const keys = ['free_panel', 'free_bypass', 'emulator', 'apk', 'pc_panel', 'mobile_panel'];
-        let visibilityLoaded = false;
-        let categoriesLoaded = false;
-
-        function checkLoader() {
-            if (visibilityLoaded && categoriesLoaded) {
-                document.getElementById('loader').style.display = 'none';
-            }
-        }
-
-        // 1. Visibility
-        onValue(ref(db, 'site_visibility'), (snapshot) => {
-            const data = snapshot.val() || {};
-            keys.forEach(key => {
-                const box = document.getElementById('box-' + key);
-                if (box) box.style.display = (data[key] === true) ? 'flex' : 'none';
+        keys.forEach(key => {
+            onValue(ref(db, `site_visibility/${key}`), s => {
+                const isVisible = !s.exists() || s.val() === true;
+                const card = document.getElementById(`card_${key}`);
+                if (card) {
+                    if (isVisible) card.classList.add('visible');
+                    else card.classList.remove('visible');
+                }
             });
-            visibilityLoaded = true;
-            checkLoader();
-        });
 
-        // 2. Categories name/icon
-        onValue(ref(db, 'site_settings/categories'), (snapshot) => {
-            const cats = snapshot.val() || {};
-            keys.forEach(key => {
-                const cat = cats[key];
-                if (!cat) return;
-                const titleEl = document.getElementById('title-' + key);
-                const iconEl = document.getElementById('icon-' + key);
-                if (titleEl && cat.title) titleEl.textContent = cat.title;
-                if (iconEl && cat.iconValue) {
-                    if (cat.iconType === 'image') {
-                        iconEl.innerHTML = `<img src="${cat.iconValue}" alt="">`;
-                    } else {
-                        iconEl.style.fontSize = '40px';
-                        iconEl.textContent = cat.iconValue;
+            onValue(ref(db, `site_settings/categories/${key}`), s => {
+                if(s.exists()){
+                    const data = s.val();
+                    if(data.title) document.getElementById(`title_${key}`).innerText = data.title;
+                    const iconDiv = document.getElementById(`icon_${key}`);
+                    if(data.iconType === 'icon' && data.iconValue) {
+                        iconDiv.innerHTML = `<i class="${data.iconValue}"></i>`;
+                    } else if(data.iconType === 'image' && data.iconValue) {
+                        iconDiv.innerHTML = `<img src="${data.iconValue}">`;
                     }
                 }
             });
-            categoriesLoaded = true;
-            checkLoader();
         });
-
-        // 3. NOTIFICATIONS — live from Firebase
-        onValue(ref(db, 'notifications'), (snapshot) => {
-            const body = document.getElementById('notifPanelBody');
-            const badge = document.getElementById('notifBadge');
-            body.innerHTML = '';
-
-            if (!snapshot.exists()) {
-                body.innerHTML = '<div class="notif-empty"><i class="far fa-bell-slash"></i><br>No notifications yet</div>';
-                badge.style.display = 'none';
-                return;
-            }
-
-            const items = [];
-            snapshot.forEach(child => items.push(child.val()));
-            items.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-
-            // Badge count
-            badge.textContent = items.length > 9 ? '9+' : items.length;
-            badge.style.display = 'flex';
-
-            items.forEach(item => {
-                body.innerHTML += `
-                    <div class="notif-card">
-                        <h4>${item.title || 'Notice'}</h4>
-                        <p>${item.message || ''}</p>
-                        <div class="n-time"><i class="far fa-clock"></i> ${item.time || ''}</div>
-                    </div>
-                `;
-            });
-        });
-
-        // Panel open/close
-        window.openNotifPanel = () => {
-            document.getElementById('notifOverlay').classList.add('show');
-        };
-        window.closeNotifPanel = () => {
-            document.getElementById('notifOverlay').classList.remove('show');
-        };
-        window.closeNotifOutside = (e) => {
-            if (e.target.id === 'notifOverlay') closeNotifPanel();
-        };
     </script>
 </body>
 </html>
