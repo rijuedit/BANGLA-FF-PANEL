@@ -41,6 +41,42 @@
             margin: 0 auto;
         }
 
+        /* Header Navigation */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .back-btn {
+            background: rgba(157, 0, 255, 0.15);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: var(--accent-purple);
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 15px rgba(157, 0, 255, 0.4);
+            transform: translateX(-3px);
+        }
+
+        .page-title {
+            color: var(--accent-pink);
+            font-size: 22px;
+            margin: 0;
+            font-weight: bold;
+        }
+
         /* Video Section */
         .video-box {
             background: var(--card-bg);
@@ -179,6 +215,12 @@
     <div id="mouse-glow"></div>
 
     <div class="container">
+        <!-- Top Nav with Back Button -->
+        <div class="top-nav">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            <h2 class="page-title">EMULATOR HUB</h2>
+        </div>
+
         <!-- Video Box -->
         <div class="video-box" id="videoBox">
             <div class="video-placeholder" id="videoPlaceholder">
@@ -225,27 +267,19 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        // Convert Link into Embed URL (Supports YouTube & Google Drive)
         function formatEmbedUrl(url) {
             if (!url) return '';
-            
-            // Google Drive Link
             if (url.includes('drive.google.com')) {
                 return url.replace(/\/view(\?.*)?$/, '/preview');
             }
-
-            // YouTube Shorts
             if (url.includes('youtube.com/shorts/')) {
                 let id = url.split('shorts/')[1].split('?')[0];
                 return 'https://www.youtube.com/embed/' + id;
             }
-
-            // YouTube standard & short link
             if (url.includes('youtu.be/')) {
                 let id = url.split('youtu.be/')[1].split('?')[0];
                 return 'https://www.youtube.com/embed/' + id;
             }
-
             if (url.includes('youtube.com/watch')) {
                 let parts = url.split('v=');
                 if (parts.length > 1) {
@@ -253,11 +287,9 @@
                     return 'https://www.youtube.com/embed/' + id;
                 }
             }
-
             return url;
         }
 
-        // Load Settings (Video & Password)
         db.ref('page_settings/emulator').on('value', (snapshot) => {
             const data = snapshot.val();
             if (data && data.yt_link) {
@@ -276,14 +308,12 @@
             }
         });
 
-        // Copy Password Handler
         function copyPassword() {
             const pass = document.getElementById('rarPassValue').innerText;
             navigator.clipboard.writeText(pass);
             alert("Password copied: " + pass);
         }
 
-        // Load Emulators
         db.ref('emulators').on('value', (snapshot) => {
             const grid = document.getElementById('emulatorGrid');
             grid.innerHTML = '';
