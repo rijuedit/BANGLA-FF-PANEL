@@ -49,28 +49,50 @@
         }
         .header-btn:hover { border-color: white; }
 
-        /* Main Content */
-        .content-container { max-width: 850px; margin: 40px auto 60px; padding: 0 20px; flex: 1; width: 100%; }
+        /* Main Content Container */
+        .content-container { max-width: 850px; margin: 30px auto 60px; padding: 0 20px; flex: 1; width: 100%; }
 
-        /* Video Box */
+        /* Video Box Styling - ALWAYS VISIBLE */
         .video-box {
-            width: 100%; aspect-ratio: 16/9; background: var(--card-bg);
-            border: 1px solid var(--border-color); border-radius: 12px;
-            overflow: hidden; margin-bottom: 30px; box-shadow: 0 0 20px rgba(157, 0, 255, 0.1);
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 0 25px rgba(157, 0, 255, 0.12);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+        
         .video-box iframe { width: 100%; height: 100%; border: none; }
 
+        .no-video-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #444;
+            gap: 10px;
+        }
+        .no-video-placeholder i { font-size: 50px; color: #221133; }
+        .no-video-placeholder span { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+
+        /* Section Titles */
         .page-title { font-size: 22px; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; }
         .page-subtitle { font-size: 10px; color: var(--text-gray); letter-spacing: 2px; margin-bottom: 25px; text-transform: uppercase; }
 
-        /* RAR Password Box - Matched with Screenshot */
+        /* RAR Password Box */
         .rar-box {
             background: var(--card-bg);
             border: 1px solid #ff9900;
             border-radius: 8px;
             padding: 15px 20px;
             margin-bottom: 25px;
-            display: none; /* Controlled by JS */
+            display: none;
         }
         .rar-header {
             display: flex; justify-content: space-between; align-items: center;
@@ -85,7 +107,7 @@
         }
         .copy-btn:hover { background: #ff9900; color: black; }
 
-        /* Items List */
+        /* Download Items List */
         .item-list { display: flex; flex-direction: column; gap: 15px; }
         .item-card {
             background: var(--card-bg); border: 1px solid var(--border-color);
@@ -116,7 +138,6 @@
 
         @media (max-width: 768px) {
             .header { padding: 15px 20px; }
-            .nav-btns { display: none; } /* On very small screens hide discord btn */
         }
     </style>
 </head>
@@ -124,7 +145,7 @@
 
     <div class="bg-glow"></div>
 
-    <!-- Header -->
+    <!-- Header Section -->
     <header class="header">
         <a href="index.html" class="brand">
             <img src="logo.png" alt="Logo" class="site-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/888/888879.png'">
@@ -139,12 +160,15 @@
         </div>
     </header>
 
-    <!-- Main Content -->
+    <!-- Main Content Container -->
     <div class="content-container">
         
-        <!-- Video Box -->
+        <!-- Video Box Frame (Always Present) -->
         <div class="video-box" id="video-container">
-            <div style="display:flex; align-items:center; justify-content:center; height:100%; color:#555;">Loading video...</div>
+            <div class="no-video-placeholder">
+                <i class="fab fa-youtube"></i>
+                <span>Loading Video...</span>
+            </div>
         </div>
 
         <h2 class="page-title">Free Panel</h2>
@@ -159,9 +183,9 @@
             <div class="rar-password" id="rar-password">...</div>
         </div>
 
-        <!-- Download Items -->
+        <!-- Download Items List -->
         <div class="item-list" id="item-list">
-            <!-- Loading from DB -->
+            <!-- Loading from Database -->
         </div>
 
     </div>
@@ -187,33 +211,49 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // Fetch Global Video & RAR
+        // Helper function to extract YouTube Embed URL safely
+        function getYouTubeEmbedUrl(url) {
+            if (!url) return null;
+            let match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+            return (match && match[1]) ? `https://www.youtube.com/embed/${match[1]}` : null;
+        }
+
+        // Fetch Global Video & RAR Password
         onValue(ref(db, 'page_settings/free_panel'), (snapshot) => {
             const data = snapshot.val();
-            if(data) {
-                // Video setup
-                if (data.yt_link) {
-                    let videoId = data.yt_link.split('v=')[1] || data.yt_link.split('youtu.be/')[1];
-                    if(videoId) {
-                        let amp = videoId.indexOf('&');
-                        if(amp !== -1) videoId = videoId.substring(0, amp);
-                        document.getElementById('video-container').innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>`;
-                    }
-                } else {
-                    document.getElementById('video-container').style.display = 'none';
-                }
+            const videoContainer = document.getElementById('video-container');
 
-                // RAR Box Setup
-                if (data.rar_password && data.rar_password.trim() !== "") {
-                    document.getElementById('rar-box').style.display = 'block';
-                    document.getElementById('rar-password').innerText = data.rar_password;
+            if (data && data.yt_link) {
+                const embedUrl = getYouTubeEmbedUrl(data.yt_link);
+                if (embedUrl) {
+                    videoContainer.innerHTML = `<iframe src="${embedUrl}" allowfullscreen></iframe>`;
                 } else {
-                    document.getElementById('rar-box').style.display = 'none';
+                    videoContainer.innerHTML = `
+                        <div class="no-video-placeholder">
+                            <i class="fab fa-youtube"></i>
+                            <span>Invalid Video URL</span>
+                        </div>
+                    `;
                 }
+            } else {
+                videoContainer.innerHTML = `
+                    <div class="no-video-placeholder">
+                        <i class="fab fa-youtube"></i>
+                        <span>No Video Available</span>
+                    </div>
+                `;
+            }
+
+            // RAR Password Logic
+            if (data && data.rar_password && data.rar_password.trim() !== "") {
+                document.getElementById('rar-box').style.display = 'block';
+                document.getElementById('rar-password').innerText = data.rar_password;
+            } else {
+                document.getElementById('rar-box').style.display = 'none';
             }
         });
 
-        // Copy Password Function
+        // Copy Password Action
         window.copyPassword = function() {
             const pwd = document.getElementById('rar-password').innerText;
             navigator.clipboard.writeText(pwd).then(() => {
@@ -223,7 +263,7 @@
             });
         };
 
-        // Fetch Items
+        // Fetch Download Items
         onValue(ref(db, 'free_panels'), (snapshot) => {
             const list = document.getElementById('item-list');
             list.innerHTML = "";
