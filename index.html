@@ -17,7 +17,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg-main); color: var(--text-light); min-height: 100vh; overflow-x: hidden; position: relative; }
+        body { background-color: var(--bg-main); color: var(--text-light); min-height: 100vh; overflow-x: hidden; position: relative; display: flex; flex-direction: column; }
 
         /* Background Glow Effect */
         .bg-glow {
@@ -55,7 +55,6 @@
             height: 40px;
             border-radius: 8px;
             object-fit: cover;
-            /* আপনি চাইলে বর্ডার রাখতে পারেন, না চাইলে মুছে দিতে পারেন */
             border: 1px solid var(--neon-pink); 
         }
 
@@ -188,7 +187,7 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             max-width: 1000px;
-            margin: 0 auto 100px;
+            margin: 0 auto;
             padding: 0 20px;
             position: relative;
             z-index: 10;
@@ -203,7 +202,7 @@
             text-decoration: none;
             position: relative;
             transition: 0.3s;
-            display: none; /* Controlled by JS */
+            display: none;
         }
         .card.visible { display: block; }
         
@@ -232,7 +231,7 @@
         .card-icon {
             font-size: 35px;
             margin-bottom: 20px;
-            color: #ff3366; /* Default icon color based on image */
+            color: #ff3366;
         }
         .card-icon img { width: 50px; height: 50px; object-fit: contain; }
 
@@ -267,11 +266,23 @@
         }
         .card:hover .explore-btn { background: white; color: black; border-color: white; }
 
-        /* Responsiveness */
+        /* Footer Styling */
+        .footer {
+            margin-top: auto;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            background: #030107;
+            font-size: 12px;
+            color: var(--text-gray);
+            letter-spacing: 1px;
+        }
+
         @media (max-width: 768px) {
             .hero h1 { font-size: 30px; }
             .hero-actions { flex-direction: column; }
             .action-btn { width: 100%; justify-content: center; }
+            .header { padding: 20px 20px; }
         }
     </style>
 </head>
@@ -281,7 +292,6 @@
 
     <!-- Header Section -->
     <header class="header">
-        <!-- Clickable Logo pointing to Home -->
         <a href="index.html" class="brand">
             <img src="logo.png" alt="Logo" class="site-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/888/888879.png'">
             <div class="brand-text">
@@ -375,6 +385,11 @@
 
     </div>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 OXI. All rights reserved.</p>
+    </footer>
+
     <!-- Firebase Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -395,7 +410,6 @@
         const keys = ['free_panel', 'free_bypass', 'emulator', 'apk', 'pc_panel', 'mobile_panel'];
         
         keys.forEach(key => {
-            // ১. Visibility Check
             onValue(ref(db, `site_visibility/${key}`), s => {
                 const isVisible = !s.exists() || s.val() === true;
                 const card = document.getElementById(`card_${key}`);
@@ -405,7 +419,6 @@
                 }
             });
 
-            // ২. Dynamic Custom Title & Icon update (Optional from admin)
             onValue(ref(db, `site_settings/categories/${key}`), s => {
                 if(s.exists()){
                     const data = s.val();
