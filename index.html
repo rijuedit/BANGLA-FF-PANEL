@@ -13,26 +13,26 @@
 </head>
 <body>
 
-  <!-- Background Mouse Glow Effect -->
   <div id="mouse-glow"></div>
 
   <!-- Header -->
   <header>
-    <div class="brand">
+    <!-- Make Brand Clickable to Home -->
+    <a href="index.html" class="brand">
       <img src="logo.png" alt="Logo" class="brand-logo-img">
       <div class="brand-text">
         <h2>BANGLA FF PANEL</h2>
         <span>PREMIUM CORP</span>
       </div>
-    </div>
-    <!-- Top Nav Discord link -->
-    <a href="#" class="btn-nav">
+    </a>
+    
+    <!-- Updated Discord Link -->
+    <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="btn-nav">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028z"/></svg>
       Join Discord
     </a>
   </header>
 
-  <!-- Hero Section -->
   <main class="container">
     <div class="status-badge">
       <span class="status-dot"></span> LIVE SERVER ACTIVE
@@ -41,41 +41,32 @@
     <h1 class="hero-title">BANGLA FF <span>PANEL</span></h1>
     <p class="hero-subtitle">NEXT GEN PRIVATE SOLUTIONS · SECURE · RELIABLE</p>
 
-    <!-- Center Action Buttons (Discord, Topup, Notification) -->
     <div class="action-buttons-wrapper">
       
-      <!-- Join Discord Button -->
-      <a href="#" class="btn-action">
+      <!-- Updated Discord Link -->
+      <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="btn-action">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028z"/></svg>
         Join Support Discord &rarr;
       </a>
 
-      <!-- Diamond Topup Button -->
-      <a href="#" class="btn-action">
+      <!-- Updated Topup Link -->
+      <a href="https://rijuedit.github.io/oxi-topup/" target="_blank" class="btn-action">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9l4-6z"></path></svg>
         Free Fire Diamond Topup &rarr;
       </a>
 
-      <!-- Notification Bell Button -->
       <div class="notification-container">
         <button class="btn-notification" id="notif-btn">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
           <span class="notif-dot"></span>
         </button>
 
-        <!-- Notification Dropdown Box (For Admin Panel Data) -->
         <div class="notif-dropdown" id="notif-dropdown">
           <div class="notif-header">System Notifications</div>
           <div class="notif-body">
-            <!-- Dummy Notification 1 -->
             <div class="notif-item">
-              <div class="notif-date">24 Oct 2023 • 10:30 AM</div>
-              <div class="notif-msg">New OB55 Panel Update is now live! Please download the latest version to avoid ban.</div>
-            </div>
-            <!-- Dummy Notification 2 -->
-            <div class="notif-item">
-              <div class="notif-date">20 Oct 2023 • 08:15 PM</div>
-              <div class="notif-msg">Server maintenance completed. Matchmaking is fast and reliable now.</div>
+              <div class="notif-date">Admin Panel Date</div>
+              <div class="notif-msg">Dynamic messages from database will show here.</div>
             </div>
           </div>
         </div>
@@ -85,15 +76,17 @@
 
     <div class="section-divider">// AVAILABLE SYSTEMS //</div>
 
-    <!-- 6 Boxes Grid (3x2 Layout) -->
+    <!-- Admin Ready Grid -->
     <div class="grid">
       
       <!-- Box 1 -->
       <div class="card" onclick="window.location.href='free-panel.html';">
         <span class="badge-featured">HOT</span>
         <div class="icon-wrapper">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 16V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12m16 0h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1h2m16 0H4"></path></svg>
+          <!-- Admin Panel Image URL -->
+          <img src="https://cdn-icons-png.flaticon.com/512/3067/3067258.png" alt="Icon" class="box-icon-img">
         </div>
+        <!-- Admin Panel Title & Subtitle -->
         <h3 class="card-title">FREE PANEL</h3>
         <p class="card-subtitle">NEW PC PANEL UPDATED OB55</p>
         <a href="free-panel.html" class="btn-explore">Explore &rarr;</a>
@@ -102,7 +95,7 @@
       <!-- Box 2 -->
       <div class="card" onclick="window.location.href='free-bypass.html';">
         <div class="icon-wrapper">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z"></path></svg>
+          <img src="https://cdn-icons-png.flaticon.com/512/8367/8367804.png" alt="Icon" class="box-icon-img">
         </div>
         <h3 class="card-title">FREE BYPASS</h3>
         <p class="card-subtitle">FAST & RELIABLE MATCHMAKING</p>
@@ -112,7 +105,7 @@
       <!-- Box 3 -->
       <div class="card" onclick="window.location.href='emulator.html';">
         <div class="icon-wrapper">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          <img src="https://cdn-icons-png.flaticon.com/512/875/875068.png" alt="Icon" class="box-icon-img">
         </div>
         <h3 class="card-title">EMULATOR</h3>
         <p class="card-subtitle">BEST WORKING EMULATOR</p>
@@ -122,7 +115,7 @@
       <!-- Box 4 -->
       <div class="card" onclick="window.location.href='free-fire-apk.html';">
         <div class="icon-wrapper">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          <img src="https://cdn-icons-png.flaticon.com/512/5738/5738077.png" alt="Icon" class="box-icon-img">
         </div>
         <h3 class="card-title">FREE FIRE APK</h3>
         <p class="card-subtitle">DOWNLOAD LATEST APK V2.0</p>
@@ -133,7 +126,7 @@
       <div class="card" onclick="window.location.href='buy-pc-panel.html';">
         <span class="badge-featured" style="background: linear-gradient(90deg, #f59e0b, #ef4444);">PREMIUM</span>
         <div class="icon-wrapper">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          <img src="https://cdn-icons-png.flaticon.com/512/3254/3254054.png" alt="Icon" class="box-icon-img">
         </div>
         <h3 class="card-title">BUY PC PANEL</h3>
         <p class="card-subtitle">ADVANCED VIP FEATURES FOR PC</p>
@@ -144,7 +137,7 @@
       <div class="card" onclick="window.location.href='mobile-panel.html';">
         <span class="badge-featured" style="background: linear-gradient(90deg, #3b82f6, #06b6d4);">VIP</span>
         <div class="icon-wrapper">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+          <img src="https://cdn-icons-png.flaticon.com/512/2838/2838838.png" alt="Icon" class="box-icon-img">
         </div>
         <h3 class="card-title">BUY MOBILE PANEL</h3>
         <p class="card-subtitle">SAFE VIP PANEL FOR ANDROID/IOS</p>
@@ -154,7 +147,6 @@
     </div>
   </main>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-left">
       <h4>BANGLA FF PANEL</h4>
@@ -162,7 +154,7 @@
     </div>
     <div class="footer-right">
       <span>Version 3.1</span>
-      <a href="#">Contact Admin</a>
+      <a href="https://discord.gg/ZBjSWaF7u" target="_blank">Contact Admin</a>
     </div>
   </footer>
 
