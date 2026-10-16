@@ -11,7 +11,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
         body { background-color: #05020a; color: #fff; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
         
-        /* Background Glow */
         body::before {
             content: ''; position: absolute; top: 20%; left: 20%; width: 400px; height: 400px;
             background: radial-gradient(circle, rgba(255, 0, 102, 0.05) 0%, transparent 70%);
@@ -27,7 +26,7 @@
         .discord-btn-top { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
         .discord-btn-top:hover { background: rgba(255,255,255,0.05); border-color: #fff; }
 
-        /* Hero Section */
+        /* Hero */
         .hero { text-align: center; padding: 60px 20px 40px; }
         .status-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 255, 102, 0.1); border: 1px solid rgba(0, 255, 102, 0.2); color: #00ff66; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; letter-spacing: 1px; margin-bottom: 25px; text-transform: uppercase; }
         .status-badge .dot { width: 8px; height: 8px; background: #00ff66; border-radius: 50%; box-shadow: 0 0 10px #00ff66; animation: blink 1.5s infinite; }
@@ -37,21 +36,24 @@
         .hero h2 span { color: #ff0066; text-shadow: 0 0 20px rgba(255, 0, 102, 0.4); }
         .hero p { color: #888; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 35px; }
 
-        .hero-actions { display: flex; justify-content: center; align-items: center; gap: 15px; }
+        .hero-actions { display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap; }
         .action-btn { background: rgba(255,255,255,0.03); color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 12px 24px; border-radius: 8px; text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
         .action-btn:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); }
-        .notif-btn { background: rgba(255, 0, 102, 0.1); color: #ff0066; border: 1px solid rgba(255, 0, 102, 0.2); width: 42px; height: 42px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
+        
+        .notif-btn { background: rgba(255, 0, 102, 0.1); color: #ff0066; border: 1px solid rgba(255, 0, 102, 0.2); width: 42px; height: 42px; border-radius: 8px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; position: relative; }
         .notif-btn:hover { background: #ff0066; color: #fff; }
+        .notif-badge {
+            position: absolute; top: -5px; right: -5px; background: #ff0066; color: #fff;
+            font-size: 10px; font-weight: 700; width: 18px; height: 18px; border-radius: 50%;
+            display: none; align-items: center; justify-content: center; border: 2px solid #05020a;
+        }
 
-        /* Divider */
         .divider { text-align: center; color: #555; font-size: 12px; letter-spacing: 4px; margin: 30px 0 50px; font-weight: 600; }
 
-        /* Grid System */
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px 80px; width: 100%; }
         .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
 
-        /* Original Card Design */
-        .card { background: #0c0514; border: 1px solid #1a0a29; border-radius: 16px; padding: 40px 30px; text-align: center; text-decoration: none; transition: 0.4s; position: relative; display: none; /* Firebase will make it flex */ flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+        .card { background: #0c0514; border: 1px solid #1a0a29; border-radius: 16px; padding: 40px 30px; text-align: center; text-decoration: none; transition: 0.4s; position: relative; display: none; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
         .card:hover { border-color: rgba(255, 0, 102, 0.5); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(255, 0, 102, 0.08); }
         
         .badge { position: absolute; top: 15px; right: 15px; padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; letter-spacing: 1px; }
@@ -61,17 +63,59 @@
 
         .card-icon { font-size: 35px; color: #ff0066; margin-bottom: 25px; height: 50px; display: flex; align-items: center; justify-content: center; }
         .card-icon img { width: 45px; height: 45px; object-fit: contain; }
-        
         .card h3 { font-size: 20px; font-weight: 700; color: #fff; letter-spacing: 1px; margin-bottom: 10px; text-transform: uppercase; }
         .card p { color: #666; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 25px; }
-
         .explore-btn { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 8px 25px; border-radius: 20px; font-size: 12px; font-weight: 600; letter-spacing: 1px; transition: 0.3s; text-transform: uppercase; }
         .card:hover .explore-btn { border-color: #ff0066; color: #ff0066; }
 
         #loader { text-align: center; color: #ff0066; font-size: 16px; margin: 50px 0; font-weight: 600; letter-spacing: 2px; }
 
+        /* ========== NOTIFICATION PANEL ========== */
+        .notif-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+            z-index: 1000; justify-content: center; align-items: flex-start; padding-top: 80px;
+        }
+        .notif-overlay.show { display: flex; }
+        .notif-panel {
+            background: #0c0514; border: 1px solid #2a113d; border-radius: 16px;
+            width: 90%; max-width: 420px; max-height: 70vh; overflow: hidden;
+            display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .notif-panel-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 18px 20px; border-bottom: 1px solid #2a113d;
+        }
+        .notif-panel-header h3 { font-size: 18px; color: #fff; }
+        .notif-panel-header h3 i { color: #ff0066; margin-right: 8px; }
+        .notif-close {
+            background: transparent; border: none; color: #888; font-size: 20px;
+            cursor: pointer; transition: 0.3s;
+        }
+        .notif-close:hover { color: #ff0066; }
+        .notif-panel-body { overflow-y: auto; padding: 10px; flex: 1; }
+        .notif-empty { text-align: center; color: #555; padding: 40px 20px; font-size: 14px; }
+        .notif-card {
+            background: #11071a; border: 1px solid #1a0a29; border-radius: 10px;
+            padding: 14px 16px; margin-bottom: 10px; transition: 0.3s;
+        }
+        .notif-card:hover { border-color: #2a113d; }
+        .notif-card h4 { font-size: 15px; color: #ff0066; margin-bottom: 6px; font-weight: 700; }
+        .notif-card p { font-size: 13px; color: #ccc; line-height: 1.4; margin-bottom: 8px; }
+        .notif-card .n-time { font-size: 11px; color: #666; }
+        .notif-card .n-time i { margin-right: 4px; }
+
         @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } .hero h2 { font-size: 32px; } .hero-actions { flex-direction: column; } .action-btn { width: 100%; justify-content: center; } }
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+            .hero h2 { font-size: 32px; }
+            .hero-actions { flex-direction: column; }
+            .action-btn { width: 100%; justify-content: center; }
+        }
     </style>
 </head>
 <body>
@@ -81,7 +125,7 @@
         <div class="logo-area">
             <div class="logo-img">BFF<br>PNL</div>
             <div class="logo-text">
-                <h1>BANGLA FF <span>PANEL</span></h1>
+                <h1>BANGLA FF <span style="color:#ff0066">PANEL</span></h1>
                 <p>PREMIUM CORP</p>
             </div>
         </div>
@@ -90,7 +134,7 @@
         </a>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <header class="hero">
         <div class="status-badge">
             <span class="dot"></span> LIVE SERVER ACTIVE
@@ -105,22 +149,20 @@
             <a href="https://rijuedit.github.io/oxi-topup/" target="_blank" class="action-btn">
                 <i class="far fa-gem"></i> Free Fire Diamond Topup &rarr;
             </a>
-            <div class="notif-btn">
+            <!-- Bell Button -->
+            <div class="notif-btn" id="notifBtn" onclick="openNotifPanel()" title="Notifications">
                 <i class="far fa-bell"></i>
+                <span class="notif-badge" id="notifBadge">0</span>
             </div>
         </div>
     </header>
 
     <div class="divider">// AVAILABLE SYSTEMS //</div>
 
-    <!-- Main Grid -->
     <main class="container">
-        
         <div id="loader"><i class="fas fa-circle-notch fa-spin"></i> SYNCING DATABASE...</div>
 
         <div class="grid" id="main-grid">
-            
-            <!-- Free Panel -->
             <a href="free-panel.html" class="card" id="box-free_panel">
                 <div class="badge badge-hot">HOT</div>
                 <div class="card-icon" id="icon-free_panel"><i class="fas fa-laptop"></i></div>
@@ -129,7 +171,6 @@
                 <div class="explore-btn">EXPLORE &rarr;</div>
             </a>
 
-            <!-- Free Bypass -->
             <a href="free-bypass.html" class="card" id="box-free_bypass">
                 <div class="card-icon" id="icon-free_bypass"><i class="fas fa-desktop"></i></div>
                 <h3 id="title-free_bypass">FREE BYPASS</h3>
@@ -137,7 +178,6 @@
                 <div class="explore-btn">EXPLORE &rarr;</div>
             </a>
 
-            <!-- Emulator -->
             <a href="emulator.html" class="card" id="box-emulator">
                 <div class="card-icon" id="icon-emulator"><i class="far fa-star"></i></div>
                 <h3 id="title-emulator">EMULATOR</h3>
@@ -145,7 +185,6 @@
                 <div class="explore-btn">EXPLORE &rarr;</div>
             </a>
 
-            <!-- Free Fire APK -->
             <a href="free-fire-apk.html" class="card" id="box-apk">
                 <div class="card-icon" id="icon-apk"><i class="fas fa-bolt"></i></div>
                 <h3 id="title-apk">FREE FIRE APK</h3>
@@ -153,7 +192,6 @@
                 <div class="explore-btn">EXPLORE &rarr;</div>
             </a>
 
-            <!-- Paid PC Panels -->
             <a href="buy-pc-panel.html" class="card" id="box-pc_panel">
                 <div class="badge badge-premium">PREMIUM</div>
                 <div class="card-icon" id="icon-pc_panel"><i class="fas fa-tv"></i></div>
@@ -162,7 +200,6 @@
                 <div class="explore-btn">PURCHASE &rarr;</div>
             </a>
 
-            <!-- Paid Mobile Panels -->
             <a href="mobile-panel.html" class="card" id="box-mobile_panel">
                 <div class="badge badge-vip">VIP</div>
                 <div class="card-icon" id="icon-mobile_panel"><i class="fas fa-mobile-alt"></i></div>
@@ -170,11 +207,22 @@
                 <p>SAFE VIP PANEL FOR ANDROID/IOS</p>
                 <div class="explore-btn">PURCHASE &rarr;</div>
             </a>
-
         </div>
     </main>
 
-    <!-- Firebase SDK & Logic -->
+    <!-- NOTIFICATION PANEL -->
+    <div class="notif-overlay" id="notifOverlay" onclick="closeNotifOutside(event)">
+        <div class="notif-panel">
+            <div class="notif-panel-header">
+                <h3><i class="fas fa-bell"></i> Notifications</h3>
+                <button class="notif-close" onclick="closeNotifPanel()">&times;</button>
+            </div>
+            <div class="notif-panel-body" id="notifPanelBody">
+                <div class="notif-empty">Loading...</div>
+            </div>
+        </div>
+    </div>
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
@@ -197,48 +245,36 @@
         let categoriesLoaded = false;
 
         function checkLoader() {
-            if(visibilityLoaded && categoriesLoaded) {
+            if (visibilityLoaded && categoriesLoaded) {
                 document.getElementById('loader').style.display = 'none';
             }
         }
 
-        // 1. LIVE VISIBILITY CHECK (Hide/Show Boxes)
+        // 1. Visibility
         onValue(ref(db, 'site_visibility'), (snapshot) => {
             const data = snapshot.val() || {};
             keys.forEach(key => {
                 const box = document.getElementById('box-' + key);
-                if (box) {
-                    if (data[key] === true) {
-                        box.style.display = 'flex';
-                    } else {
-                        box.style.display = 'none';
-                    }
-                }
+                if (box) box.style.display = (data[key] === true) ? 'flex' : 'none';
             });
             visibilityLoaded = true;
             checkLoader();
         });
 
-        // 2. LIVE NAME & ICON UPDATE
+        // 2. Categories name/icon
         onValue(ref(db, 'site_settings/categories'), (snapshot) => {
             const cats = snapshot.val() || {};
             keys.forEach(key => {
                 const cat = cats[key];
                 if (!cat) return;
-
                 const titleEl = document.getElementById('title-' + key);
-                const iconEl  = document.getElementById('icon-' + key);
-
-                if (titleEl && cat.title) {
-                    titleEl.textContent = cat.title;
-                }
-                
+                const iconEl = document.getElementById('icon-' + key);
+                if (titleEl && cat.title) titleEl.textContent = cat.title;
                 if (iconEl && cat.iconValue) {
                     if (cat.iconType === 'image') {
-                        iconEl.innerHTML = `<img src="${cat.iconValue}" alt="Icon">`;
+                        iconEl.innerHTML = `<img src="${cat.iconValue}" alt="">`;
                     } else {
-                        // Keep font size matching original design if Emoji is used
-                        iconEl.style.fontSize = "40px";
+                        iconEl.style.fontSize = '40px';
                         iconEl.textContent = cat.iconValue;
                     }
                 }
@@ -246,6 +282,48 @@
             categoriesLoaded = true;
             checkLoader();
         });
+
+        // 3. NOTIFICATIONS — live from Firebase
+        onValue(ref(db, 'notifications'), (snapshot) => {
+            const body = document.getElementById('notifPanelBody');
+            const badge = document.getElementById('notifBadge');
+            body.innerHTML = '';
+
+            if (!snapshot.exists()) {
+                body.innerHTML = '<div class="notif-empty"><i class="far fa-bell-slash"></i><br>No notifications yet</div>';
+                badge.style.display = 'none';
+                return;
+            }
+
+            const items = [];
+            snapshot.forEach(child => items.push(child.val()));
+            items.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+
+            // Badge count
+            badge.textContent = items.length > 9 ? '9+' : items.length;
+            badge.style.display = 'flex';
+
+            items.forEach(item => {
+                body.innerHTML += `
+                    <div class="notif-card">
+                        <h4>${item.title || 'Notice'}</h4>
+                        <p>${item.message || ''}</p>
+                        <div class="n-time"><i class="far fa-clock"></i> ${item.time || ''}</div>
+                    </div>
+                `;
+            });
+        });
+
+        // Panel open/close
+        window.openNotifPanel = () => {
+            document.getElementById('notifOverlay').classList.add('show');
+        };
+        window.closeNotifPanel = () => {
+            document.getElementById('notifOverlay').classList.remove('show');
+        };
+        window.closeNotifOutside = (e) => {
+            if (e.target.id === 'notifOverlay') closeNotifPanel();
+        };
     </script>
 </body>
 </html>
