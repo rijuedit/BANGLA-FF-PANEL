@@ -67,11 +67,12 @@
 
     let currentPanelName = "", selectedDuration = "", selectedPrice = 0, globalBuyLink = "";
 
-    // Fetch Global Buy Link for Mobile
+    // Fetch Global Buy Link
     onValue(ref(db, 'site_settings/mobile_panel/buy_link'), (snapshot) => {
       globalBuyLink = snapshot.exists() ? snapshot.val() : "";
     });
 
+    // Load Mobile Panels Live
     onValue(ref(db, 'mobile_panels'), (snapshot) => {
       const grid = document.getElementById('panelGrid'); grid.innerHTML = '';
       if(snapshot.exists()) {
@@ -80,22 +81,35 @@
           const item = data[key];
           let lowestPrice = item.packages ? Math.min(...item.packages.map(p => p.sell_price)) : 0;
           const encodedData = encodeURIComponent(JSON.stringify(item));
-          grid.innerHTML += `<div class="panel-card"><img src="${item.image || 'https://i.ibb.co/L8r1pXw/logo.png'}" class="panel-img"><div class="panel-name">${item.title}</div><span class="sell-price">Starts at ৳${lowestPrice}</span><button class="buy-now-btn" onclick="openModal('${encodedData}')"><i class="fas fa-shopping-cart"></i> BUY NOW</button></div>`;
+          grid.innerHTML += `
+            <div class="panel-card">
+              <img src="${item.image || 'https://i.ibb.co/L8r1pXw/logo.png'}" class="panel-img">
+              <div class="panel-name">${item.title}</div>
+              <span class="sell-price">Starts at ৳${lowestPrice}</span>
+              <button class="buy-now-btn" onclick="openModal('${encodedData}')"><i class="fas fa-shopping-cart"></i> BUY NOW</button>
+            </div>
+          `;
         });
-      } else grid.innerHTML = '<div>কোনো প্যানেল নেই!</div>';
+      } else grid.innerHTML = '<div style="text-align:center; width:100%; color:#7a6a8f;">কোনো Mobile প্যানেল পাওয়া যায়নি!</div>';
     });
 
     window.openModal = function(encodedData) {
       const item = JSON.parse(decodeURIComponent(encodedData));
       currentPanelName = item.title;
-      document.getElementById('mTitle').innerText = item.title; document.getElementById('mImg').src = item.image || 'https://i.ibb.co/L8r1pXw/logo.png';
+      document.getElementById('mTitle').innerText = item.title;
+      document.getElementById('mImg').src = item.image || 'https://i.ibb.co/L8r1pXw/logo.png';
       
       const pGrid = document.getElementById('modalPackagesGrid'); pGrid.innerHTML = '';
       if(item.packages) {
         item.packages.forEach((pkg, index) => {
           const isSelected = index === 0 ? 'selected' : '', isChecked = index === 0 ? 'checked' : '';
           if(index === 0) { selectedDuration = pkg.duration; selectedPrice = pkg.sell_price; }
-          pGrid.innerHTML += `<label class="plan-item ${isSelected}" onclick="selectPlan(this, '${pkg.duration}', ${pkg.sell_price})"><div><input type="radio" name="dur" ${isChecked} style="accent-color:#ff0066;"><span style="font-weight:600; margin-left:8px;">${pkg.duration}</span></div><div>${pkg.old_price ? `<span class="plan-old">৳${pkg.old_price}</span>` : ''}<span class="plan-price-text">৳${pkg.sell_price}</span></div></label>`;
+          pGrid.innerHTML += `
+            <label class="plan-item ${isSelected}" onclick="selectPlan(this, '${pkg.duration}', ${pkg.sell_price})">
+              <div><input type="radio" name="dur" ${isChecked} style="accent-color:#ff0066;"><span style="font-weight:600; margin-left:8px;">${pkg.duration}</span></div>
+              <div>${pkg.old_price ? `<span class="plan-old">৳${pkg.old_price}</span>` : ''}<span class="plan-price-text">৳${pkg.sell_price}</span></div>
+            </label>
+          `;
         });
       }
       document.getElementById('totalPriceDisplay').innerText = `৳${selectedPrice}`;
@@ -115,7 +129,7 @@
       if(globalBuyLink && globalBuyLink.trim() !== '') {
         window.open(globalBuyLink, '_blank');
       } else {
-        const textMessage = `হ্যালো! 👋\nআমি প্যানেল অর্ডার করতে চাই।\n📌 প্যানেল: ${currentPanelName}\n⏱️ মেয়াদ: ${selectedDuration}\n💰 মূল্য: ৳${selectedPrice}`;
+        const textMessage = `হ্যালো! 👋\nআমি Mobile প্যানেল অর্ডার করতে চাই।\n📌 প্যানেল: ${currentPanelName}\n⏱️ মেয়াদ: ${selectedDuration}\n💰 মূল্য: ৳${selectedPrice}`;
         window.open(`https://wa.me/8801700000000?text=${encodeURIComponent(textMessage)}`, '_blank');
       }
       closeModal();
