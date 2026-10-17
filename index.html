@@ -300,7 +300,8 @@
             </div>
         </a>
 
-        <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="header-btn">
+        <!-- এখানে dynamic-discord ক্লাস যোগ করা হয়েছে -->
+        <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="header-btn dynamic-discord">
             <i class="fab fa-discord"></i> Join Discord
         </a>
     </header>
@@ -315,7 +316,8 @@
         <p class="hero-subtitle">NEXT GEN PRIVATE SOLUTIONS • SECURE • RELIABLE</p>
 
         <div class="hero-actions">
-            <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="action-btn">
+            <!-- এখানে dynamic-discord ক্লাস যোগ করা হয়েছে -->
+            <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="action-btn dynamic-discord">
                 <i class="fab fa-discord"></i> Join Support Discord →
             </a>
             <a href="https://rijuedit.github.io/oxi-topup/" target="_blank" class="action-btn">
@@ -406,6 +408,17 @@
         };
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
+
+        // --- নতুন যোগ করা Discord Auto Link Fetcher ---
+        onValue(ref(db, 'global_settings/discord_link'), (snapshot) => {
+            if (snapshot.exists()) {
+                const link = snapshot.val();
+                document.querySelectorAll('.dynamic-discord').forEach(btn => {
+                    btn.href = link;
+                });
+            }
+        });
+        // ----------------------------------------------
 
         const keys = ['free_panel', 'free_bypass', 'emulator', 'apk', 'pc_panel', 'mobile_panel'];
         
