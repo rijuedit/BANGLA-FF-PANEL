@@ -4,670 +4,247 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BANGLA FF PANEL - FREE PANEL</title>
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: #05020a; color: #ffffff; min-height: 100vh; padding-bottom: 40px; }
 
-        body {
-            background-color: #05020a;
-            color: #ffffff;
-            min-height: 100vh;
-            padding-bottom: 40px;
-            background-image: 
-                radial-gradient(circle at 10% 10%, rgba(157, 0, 255, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(255, 0, 102, 0.08) 0%, transparent 40%);
-        }
-
-        /* Top Header Navigation */
+        /* Navbar */
         .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            background: rgba(10, 5, 18, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #1a0b2e;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; background: rgba(10, 5, 18, 0.8);
+            backdrop-filter: blur(10px); border-bottom: 1px solid #1a0b2e;
+            position: sticky; top: 0; z-index: 100;
         }
+        .brand-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .brand-logo img { width: 38px; height: 38px; border-radius: 8px; border: 1px solid #9d00ff; }
+        .brand-text h1 { font-size: 16px; font-weight: 800; color: #fff; line-height: 1.2; }
+        .brand-text span { font-size: 10px; color: #ff0066; letter-spacing: 1.5px; font-weight: 600; display: block; }
 
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .brand-logo img {
-            width: 38px;
-            height: 38px;
-            border-radius: 8px;
-            border: 1px solid #9d00ff;
-        }
-
-        .brand-text h1 {
-            font-size: 16px;
-            font-weight: 800;
-            color: #fff;
-            letter-spacing: 0.5px;
-            line-height: 1.2;
-        }
-
-        .brand-text span {
-            font-size: 10px;
-            color: #ff0066;
-            letter-spacing: 1.5px;
-            font-weight: 600;
-            display: block;
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
+        .nav-actions { display: flex; gap: 12px; }
         .nav-btn {
-            background: rgba(255, 255, 255, 0.05);
-            color: #ccc;
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05); color: #ccc; text-decoration: none;
+            padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.1); display: inline-flex; align-items: center; gap: 6px;
         }
+        .nav-btn.discord-btn { color: #5865F2; border-color: rgba(88, 101, 242, 0.4); }
 
-        .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-            border-color: rgba(255, 255, 255, 0.3);
-        }
+        /* Container */
+        .main-container { max-width: 850px; margin: 25px auto; padding: 0 20px; }
 
-        .nav-btn.discord-btn {
-            background: rgba(88, 101, 242, 0.15);
-            border-color: rgba(88, 101, 242, 0.4);
-            color: #5865F2;
-        }
-
-        .nav-btn.discord-btn:hover {
-            background: #5865F2;
-            color: #fff;
-            box-shadow: 0 0 15px rgba(88, 101, 242, 0.4);
-        }
-
-        /* Container Layout */
-        .main-container {
-            max-width: 850px;
-            margin: 25px auto;
-            padding: 0 20px;
-        }
-
-        /* Back Button Top Left */
         .btn-back {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #11071a;
-            color: #ccc;
-            text-decoration: none;
-            padding: 8px 18px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 600;
-            border: 1px solid #2a113d;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
+            display: inline-flex; align-items: center; gap: 8px; background: #11071a;
+            color: #ccc; text-decoration: none; padding: 8px 18px; border-radius: 6px;
+            font-size: 13px; font-weight: 600; border: 1px solid #2a113d; margin-bottom: 20px;
         }
 
-        .btn-back:hover {
-            background: #1a0b2b;
-            color: #fff;
-            border-color: #9d00ff;
-        }
-
-        /* Video Container Box */
+        /* Video Box */
         .video-box {
-            position: relative;
-            width: 100%;
-            height: 420px;
-            background: #0d0614;
-            border: 1px solid #2a113d;
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative; width: 100%; height: 420px; background: #0d0614;
+            border: 1px solid #2a113d; border-radius: 12px; overflow: hidden;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 25px;
         }
-
-        /* YouTube Click Card */
         .yt-card {
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            position: relative;
+            width: 100%; height: 100%; background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center; text-decoration: none; position: relative;
         }
-
-        .yt-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(5, 2, 10, 0.4);
-            transition: background 0.3s ease;
-        }
-
-        .yt-card:hover::before {
-            background: rgba(5, 2, 10, 0.2);
-        }
-
         .play-btn-circle {
-            width: 70px;
-            height: 70px;
-            background: rgba(255, 0, 102, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 26px;
-            z-index: 2;
-            box-shadow: 0 0 25px rgba(255, 0, 102, 0.8);
-            transition: all 0.3s ease;
-            padding-left: 4px;
+            width: 70px; height: 70px; background: rgba(255, 0, 102, 0.9);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 26px; z-index: 2; box-shadow: 0 0 25px rgba(255, 0, 102, 0.8);
         }
 
-        .yt-card:hover .play-btn-circle {
-            transform: scale(1.15);
-            background: #ff0066;
-            box-shadow: 0 0 35px rgba(255, 0, 102, 1);
-        }
-
-        /* Iframe for Drive / Fallback */
-        .video-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Placeholder when no video */
-        .video-placeholder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #554866;
-            gap: 12px;
-        }
-
-        .video-placeholder i {
-            font-size: 48px;
-        }
-
-        .video-placeholder span {
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-        }
-
-        /* Title Row & How to Skip Button */
+        /* TITLE & SKIP BUTTON ROW (এটিই আপনার মেইন ফিক্স) */
         .title-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 4px;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 5px; width: 100%;
         }
+        .section-title { font-size: 24px; font-weight: 800; color: #fff; text-transform: uppercase; }
 
-        .section-title {
-            font-size: 22px;
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .section-subtitle {
-            color: #77688a;
-            font-size: 13px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Neon Green HOW TO SKIP Button */
         .skip-btn {
-            background: transparent;
-            color: #00cc66;
-            border: 1px solid #00cc66;
-            padding: 7px 16px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 204, 102, 0.15);
+            background: transparent; color: #00cc66; border: 1px solid #00cc66;
+            padding: 6px 14px; border-radius: 5px; text-decoration: none;
+            font-size: 12px; font-weight: 700; display: none; align-items: center; gap: 6px;
+            transition: 0.3s; box-shadow: 0 0 10px rgba(0, 204, 102, 0.2);
         }
+        .skip-btn:hover { background: #00cc66; color: #000; box-shadow: 0 0 15px rgba(0, 204, 102, 0.5); }
 
-        .skip-btn:hover {
-            background: #00cc66;
-            color: #05020a;
-            box-shadow: 0 0 20px rgba(0, 204, 102, 0.5);
-        }
+        .section-subtitle { color: #888; font-size: 13px; margin-bottom: 20px; display: block; }
 
-        /* RAR Password Box */
+        /* RAR Box */
         .rar-box {
-            background: rgba(255, 153, 0, 0.04);
-            border: 1px solid rgba(255, 153, 0, 0.3);
-            border-radius: 8px;
-            padding: 15px 20px;
-            margin-bottom: 25px;
+            background: rgba(255, 153, 0, 0.05); border: 1px solid rgba(255, 153, 0, 0.2);
+            border-radius: 8px; padding: 15px 20px; margin-bottom: 25px;
         }
-
-        .rar-header {
-            color: #ff9900;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .rar-body {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .rar-pass-val {
-            font-size: 16px;
-            font-weight: 700;
-            color: #ffffff;
-            letter-spacing: 1px;
-        }
-
+        .rar-header { color: #ff9900; font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+        .rar-body { display: flex; justify-content: space-between; align-items: center; }
         .btn-copy {
-            background: transparent;
-            border: 1px solid #ff9900;
-            color: #ff9900;
-            padding: 6px 14px;
-            border-radius: 5px;
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
+            background: transparent; border: 1px solid #ff9900; color: #ff9900;
+            padding: 5px 12px; border-radius: 4px; font-size: 12px; cursor: pointer;
         }
 
-        .btn-copy:hover {
-            background: #ff9900;
-            color: #000;
-        }
-
-        /* Download Items List */
-        .items-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
+        /* Items */
+        .items-container { display: flex; flex-direction: column; gap: 12px; }
         .item-card {
-            background: #11071a;
-            border: 1px solid #2a113d;
-            border-radius: 10px;
-            padding: 16px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
+            background: #11071a; border: 1px solid #2a113d; border-radius: 10px;
+            padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
         }
-
-        .item-card:hover {
-            border-color: #9d00ff;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(157, 0, 255, 0.15);
-        }
-
-        .item-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .item-icon {
-            width: 44px;
-            height: 44px;
-            background: rgba(157, 0, 255, 0.1);
-            border: 1px solid rgba(157, 0, 255, 0.3);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #9d00ff;
-            font-size: 18px;
-        }
-
-        .item-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .badge-latest {
-            background: #ff0066;
-            color: #fff;
-            font-size: 9px;
-            font-weight: 800;
-            padding: 2px 7px;
-            border-radius: 4px;
-            letter-spacing: 0.5px;
-        }
-
-        .item-sub {
-            font-size: 12px;
-            color: #77688a;
-            margin-top: 2px;
-        }
-
         .btn-download {
             background: linear-gradient(135deg, #9d00ff 0%, #ff0066 100%);
-            color: #fff;
-            text-decoration: none;
-            padding: 9px 20px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 0, 102, 0.3);
+            color: #fff; text-decoration: none; padding: 8px 18px; border-radius: 6px;
+            font-size: 13px; font-weight: 700;
         }
-
-        .btn-download:hover {
-            opacity: 0.9;
-            transform: scale(1.03);
-            box-shadow: 0 6px 20px rgba(255, 0, 102, 0.5);
-        }
-
-        /* Empty State */
-        .empty-state {
-            background: #11071a;
-            border: 1px dashed #2a113d;
-            border-radius: 10px;
-            padding: 40px;
-            text-align: center;
-            color: #66557a;
-            font-size: 14px;
-            font-weight: 600;
-        }
+        .empty-state { text-align: center; padding: 40px; color: #555; border: 1px dashed #222; border-radius: 10px; }
 
         @media (max-width: 600px) {
-            .video-box {
-                height: 240px;
-            }
-            .title-row {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
+            .video-box { height: 220px; }
+            .title-row { flex-direction: row; }
+            .section-title { font-size: 18px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header / Navbar -->
     <header class="navbar">
         <a href="index.html" class="brand-logo">
-            <img src="https://i.ibb.co/L8xX0xT/logo.jpg" alt="Logo" onerror="this.style.display='none'">
-            <div class="brand-text">
-                <h1>BANGLA FF PANEL</h1>
-                <span>PREMIUM CORP</span>
-            </div>
+            <img src="https://i.ibb.co/L8xX0xT/logo.jpg" alt="Logo">
+            <div class="brand-text"><h1>BANGLA FF PANEL</h1><span>PREMIUM CORP</span></div>
         </a>
         <div class="nav-actions">
             <a href="index.html" class="nav-btn"><i class="fas fa-home"></i> Home</a>
-            <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="nav-btn discord-btn dynamic-discord"><i class="fab fa-discord"></i> Discord</a>
+            <a href="#" target="_blank" class="nav-btn discord-btn dynamic-discord"><i class="fab fa-discord"></i> Discord</a>
         </div>
     </header>
 
-    <!-- Main Container -->
     <main class="main-container">
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back</a>
 
-        <!-- Top Back Button -->
-        <a href="index.html" class="btn-back">
-            <i class="fas fa-arrow-left"></i> Back
-        </a>
-
-        <!-- Video Box -->
+        <!-- Video Section -->
         <div class="video-box">
-            <!-- YouTube Direct Click Card -->
             <a href="#" id="ytCard" target="_blank" class="yt-card" style="display: none;">
-                <div class="play-btn-circle">
-                    <i class="fas fa-play"></i>
-                </div>
+                <div class="play-btn-circle"><i class="fas fa-play"></i></div>
             </a>
-
-            <!-- Google Drive / Other Video Iframe Fallback -->
-            <iframe id="videoIframe" class="video-iframe" style="display: none;" allow="autoplay"></iframe>
-
-            <!-- Placeholder (No Video) -->
-            <div id="videoPlaceholder" class="video-placeholder">
-                <i class="fas fa-play-circle"></i>
-                <span>NO VIDEO AVAILABLE</span>
+            <iframe id="videoIframe" style="width:100%; height:100%; border:none; display:none;"></iframe>
+            <div id="videoPlaceholder" class="video-placeholder" style="color:#444; text-align:center;">
+                <i class="fas fa-play-circle" style="font-size:50px;"></i><br><span>NO VIDEO AVAILABLE</span>
             </div>
         </div>
 
-        <!-- Section Title & HOW TO SKIP Button -->
+        <!-- Title Row & How to Skip -->
         <div class="title-row">
             <h2 class="section-title">FREE PANEL</h2>
-            
-            <!-- Neon Green HOW TO SKIP Button -->
-            <a href="#" id="skipBtn" target="_blank" class="skip-btn" style="display: none;">
+            <a href="#" id="skipBtn" target="_blank" class="skip-btn">
                 <i class="fas fa-question-circle"></i> HOW TO SKIP
             </a>
         </div>
-        <p class="section-subtitle">NEW PC PANEL UPDATED OB55</p>
+        <span class="section-subtitle">NEW PC PANEL UPDATED OB55</span>
 
-        <!-- RAR Password Box -->
+        <!-- RAR Password -->
         <div class="rar-box">
-            <div class="rar-header">
-                <i class="fas fa-lock"></i> RAR PASSWORD
-            </div>
+            <div class="rar-header"><i class="fas fa-lock"></i> RAR PASSWORD</div>
             <div class="rar-body">
-                <span id="rarPasswordVal" class="rar-pass-val">1</span>
-                <button class="btn-copy" id="copyPassBtn" onclick="copyPassword()">
-                    <i class="fas fa-copy"></i> Copy
-                </button>
+                <span id="rarPasswordVal" style="font-weight:bold; font-size:18px;">1</span>
+                <button class="btn-copy" onclick="copyPassword()"><i class="fas fa-copy"></i> Copy</button>
             </div>
         </div>
 
-        <!-- Download Items Grid / List -->
+        <!-- Items -->
         <div id="itemsContainer" class="items-container">
-            <!-- Dynamically populated from Firebase -->
-            <div class="empty-state">
-                <i class="fas fa-spinner fa-spin" style="font-size: 24px; margin-bottom: 8px;"></i>
-                <p>Loading Panel Data...</p>
-            </div>
+            <div class="empty-state">Loading...</div>
         </div>
-
     </main>
 
-    <!-- JavaScript Logic -->
     <script>
-        // Firebase Configuration
-        const firebaseConfig = {
-            databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app"
-        };
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
+        const firebaseConfig = { databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app" };
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        // Extract YouTube Video ID
         function getYoutubeId(url) {
             if (!url) return null;
-            if (url.includes('youtube.com/shorts/')) return url.split('shorts/')[1].split('?')[0];
-            if (url.includes('youtu.be/')) return url.split('youtu.be/')[1].split('?')[0];
-            if (url.includes('youtube.com/watch')) return url.split('v=')[1].split('&')[0];
-            if (url.includes('youtube.com/embed/')) return url.split('embed/')[1].split('?')[0];
-            return null;
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
         }
 
-        // Handle Video Display Logic
-        function handleVideo(vUrl, vEnabled) {
-            const ytCard = document.getElementById('ytCard');
-            const iframe = document.getElementById('videoIframe');
-            const placeholder = document.getElementById('videoPlaceholder');
-
-            ytCard.style.display = 'none';
-            iframe.style.display = 'none';
-            placeholder.style.display = 'flex';
-
-            if (!vEnabled || !vUrl) return;
-
-            const ytId = getYoutubeId(vUrl);
-            if (ytId) {
-                ytCard.href = vUrl;
-                ytCard.style.backgroundImage = `url('https://img.youtube.com/vi/${ytId}/hqdefault.jpg')`;
-                ytCard.style.display = 'flex';
-                placeholder.style.display = 'none';
-            } else if (vUrl.includes('drive.google.com')) {
-                iframe.src = vUrl.replace(/\/view(\?.*)?$/, '/preview');
-                iframe.style.display = 'block';
-                placeholder.style.display = 'none';
-            }
-        }
-
-        // Fetch Page Settings (Video, RAR Password & HOW TO SKIP Button)
+        // Fetch Page Settings (Video, Skip, Password)
         db.ref('page_settings/free_panel').on('value', (snapshot) => {
             const data = snapshot.val() || {};
             
-            // 1. Video Support
-            handleVideo(data.video_url, data.video_enabled);
+            // Handle Video
+            const ytCard = document.getElementById('ytCard');
+            const iframe = document.getElementById('videoIframe');
+            const placeholder = document.getElementById('videoPlaceholder');
             
-            // 2. RAR Password
+            if (data.video_enabled && data.video_url) {
+                const ytId = getYoutubeId(data.video_url);
+                if (ytId) {
+                    ytCard.style.display = 'flex';
+                    ytCard.style.backgroundImage = `url('https://img.youtube.com/vi/${ytId}/hqdefault.jpg')`;
+                    ytCard.href = data.video_url;
+                    placeholder.style.display = 'none';
+                } else if (data.video_url.includes('drive.google.com')) {
+                    iframe.style.display = 'block';
+                    iframe.src = data.video_url.replace('/view', '/preview');
+                    placeholder.style.display = 'none';
+                }
+            }
+
+            // Handle Password
             document.getElementById('rarPasswordVal').innerText = data.rar_password || '1';
-            
-            // 3. HOW TO SKIP Button Logic
+
+            // Handle HOW TO SKIP Button
             const skipBtn = document.getElementById('skipBtn');
             const skipUrl = data.how_to_skip || '';
-            const skipEnabled = data.skip_enabled !== false; // Default true if enabled
+            const skipEnabled = data.skip_enabled !== false;
 
             if (skipEnabled && skipUrl.trim() !== '') {
                 skipBtn.href = skipUrl;
-                skipBtn.style.display = 'inline-flex';
+                skipBtn.style.display = 'inline-flex'; // Link থাকলে শো করবে
             } else {
-                skipBtn.style.display = 'none';
+                skipBtn.style.display = 'none'; // না থাকলে হাইড থাকবে
             }
         });
 
-        // Fetch Downloadable Items from `free_panels`
+        // Fetch Download Items
         db.ref('free_panels').on('value', (snapshot) => {
             const container = document.getElementById('itemsContainer');
             container.innerHTML = '';
-            
-            if (!snapshot.exists() || !snapshot.val()) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-box-open" style="font-size: 28px; margin-bottom: 8px; opacity: 0.5;"></i>
-                        <p>No Free Panel Available</p>
-                    </div>`;
+            if (!snapshot.exists()) {
+                container.innerHTML = '<div class="empty-state">No Free Panel Available</div>';
                 return;
             }
-
-            const items = [];
             snapshot.forEach((child) => {
-                items.push({ id: child.key, ...child.val() });
-            });
-
-            // Sort newest items first
-            items.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-
-            items.forEach((item, index) => {
-                const isLatest = index === 0;
+                const item = child.val();
                 const card = document.createElement('div');
                 card.className = 'item-card';
                 card.innerHTML = `
-                    <div class="item-left">
-                        <div class="item-icon">
+                    <div style="display:flex; align-items:center; gap:15px;">
+                        <div style="width:40px; height:40px; background:rgba(157,0,255,0.1); border-radius:8px; display:flex; align-items:center; justify-content:center; color:#9d00ff;">
                             <i class="fas fa-shield-alt"></i>
                         </div>
-                        <div class="item-info">
-                            <div class="item-title">
-                                ${item.title || 'Free Panel'}
-                                ${isLatest ? '<span class="badge-latest">LATEST</span>' : ''}
-                            </div>
-                            <div class="item-sub">OB55 Safe & Anti-Ban Panel</div>
+                        <div>
+                            <div style="font-weight:700;">${item.title}</div>
+                            <div style="font-size:11px; color:#666;">Latest Update</div>
                         </div>
                     </div>
-                    <a href="${item.download || '#'}" target="_blank" class="btn-download">
-                        <i class="fas fa-download"></i> Download
-                    </a>
+                    <a href="${item.download}" target="_blank" class="btn-download">Download</a>
                 `;
                 container.appendChild(card);
             });
         });
 
-        // Copy RAR Password
         function copyPassword() {
-            const passText = document.getElementById('rarPasswordVal').innerText;
-            navigator.clipboard.writeText(passText).then(() => {
-                const copyBtn = document.getElementById('copyPassBtn');
-                const origHTML = copyBtn.innerHTML;
-                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                copyBtn.style.borderColor = '#00cc66';
-                copyBtn.style.color = '#00cc66';
-                setTimeout(() => {
-                    copyBtn.innerHTML = origHTML;
-                    copyBtn.style.borderColor = '#ff9900';
-                    copyBtn.style.color = '#ff9900';
-                }, 2000);
-            }).catch(() => {
-                alert('Password: ' + passText);
-            });
+            const txt = document.getElementById('rarPasswordVal').innerText;
+            navigator.clipboard.writeText(txt);
+            alert('Password Copied: ' + txt);
         }
 
-        // Global Discord Link Sync
-        db.ref('global_settings/discord_link').on('value', (snapshot) => {
-            const link = snapshot.val() || 'https://discord.gg/ZBjSWaF7u';
-            document.querySelectorAll('.dynamic-discord').forEach(el => {
-                el.href = link;
-            });
+        db.ref('global_settings/discord_link').on('value', s => {
+            if(s.val()) document.querySelectorAll('.dynamic-discord').forEach(a => a.href = s.val());
         });
     </script>
 </body>
