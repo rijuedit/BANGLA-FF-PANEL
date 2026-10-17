@@ -58,6 +58,46 @@
             z-index: 100;
         }
 
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(157, 0, 255, 0.2);
+            border-color: var(--neon-purple);
+            transform: translateY(-2px);
+        }
+
+        .discord-btn {
+            background: rgba(88, 101, 242, 0.1);
+            border-color: #5865F2;
+            color: #5865F2;
+        }
+
+        .discord-btn:hover {
+            background: #5865F2;
+            color: #fff;
+            border-color: #5865F2;
+            box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
+        }
+
         .logo-box {
             display: flex;
             align-items: center;
@@ -83,6 +123,16 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
+        }
+
+        /* Responsive Logo text hide for mobile to fit buttons */
+        @media (max-width: 600px) {
+            .logo-text {
+                display: none;
+            }
+            .nav-btn span {
+                display: none;
+            }
         }
 
         .container {
@@ -376,9 +426,20 @@
 
     <!-- Header Navigation -->
     <header class="header">
-        <a href="index.html" class="logo-box">
-            <img src="logo.png" alt="OXI Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/42/ff0066/ffffff?text=OXI'">
-            <span class="logo-text">BANGLA FF PANEL</span>
+        <!-- Left Side: Back Button & Logo -->
+        <div class="header-left">
+            <a href="index.html" class="nav-btn">
+                <i class="fa-solid fa-arrow-left"></i> <span>BACK</span>
+            </a>
+            <a href="index.html" class="logo-box">
+                <img src="logo.png" alt="OXI Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/42/ff0066/ffffff?text=OXI'">
+                <span class="logo-text">BANGLA FF PANEL</span>
+            </a>
+        </div>
+        
+        <!-- Right Side: Discord Button (Dynamic) -->
+        <a href="#" class="nav-btn discord-btn dynamic-discord" target="_blank">
+            <i class="fa-brands fa-discord"></i> <span>DISCORD</span>
         </a>
     </header>
 
@@ -437,6 +498,14 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
+
+        // Global Discord Link Dynamic Update
+        onValue(ref(db, 'global_settings/discord_link'), (snapshot) => {
+            const link = snapshot.val() || "https://discord.gg/ZBjSWaF7u";
+            document.querySelectorAll('.dynamic-discord').forEach(btn => {
+                btn.href = link;
+            });
+        });
 
         // Render Bot Server URL
         const BOT_SERVER_URL = "https://bangla-ff-bot-server.onrender.com";
