@@ -30,7 +30,7 @@
                 radial-gradient(circle at 90% 90%, rgba(255, 0, 102, 0.08) 0%, transparent 40%);
         }
 
-        /* Fixed Top Header (No broken external image) */
+        /* Top Header Navigation */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -51,17 +51,12 @@
             text-decoration: none;
         }
 
-        .logo-box {
+        .brand-logo img {
             width: 38px;
             height: 38px;
-            background: linear-gradient(135deg, #9d00ff 0%, #ff0066 100%);
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #ffffff;
-            font-size: 18px;
-            box-shadow: 0 0 12px rgba(255, 0, 102, 0.4);
+            border: 1px solid #9d00ff;
+            object-fit: cover;
         }
 
         .brand-text h1 {
@@ -119,14 +114,14 @@
             box-shadow: 0 0 15px rgba(88, 101, 242, 0.4);
         }
 
-        /* Main Content Container */
+        /* Container Layout */
         .main-container {
             max-width: 850px;
             margin: 25px auto;
             padding: 0 20px;
         }
 
-        /* Top Back Button Left */
+        /* Back Button Top Left */
         .btn-back {
             display: inline-flex;
             align-items: center;
@@ -149,7 +144,7 @@
             border-color: #9d00ff;
         }
 
-        /* Video Container Box */
+        /* Video Box */
         .video-box {
             position: relative;
             width: 100%;
@@ -235,7 +230,7 @@
             letter-spacing: 1.5px;
         }
 
-        /* Title Row & Neon Green HOW TO SKIP Button */
+        /* Title Row & HOW TO SKIP Button */
         .title-row {
             display: flex;
             justify-content: space-between;
@@ -339,7 +334,7 @@
             color: #000;
         }
 
-        /* Download List */
+        /* Download Items List */
         .items-container {
             display: flex;
             flex-direction: column;
@@ -448,9 +443,7 @@
     <!-- Top Navbar -->
     <header class="navbar">
         <a href="index.html" class="brand-logo">
-            <div class="logo-box">
-                <i class="fas fa-shield-alt"></i>
-            </div>
+            <img src="logo.png" alt="Logo" onerror="this.style.display='none'">
             <div class="brand-text">
                 <h1>BANGLA FF PANEL</h1>
                 <span>PREMIUM CORP</span>
@@ -566,7 +559,6 @@
             }
         }
 
-        // Apply Page Settings Function
         function applySettings(data) {
             if (!data) return;
             handleVideo(data.video_url, data.video_enabled);
@@ -585,7 +577,7 @@
             }
         }
 
-        // DB Listeners for Page Settings
+        // DB Listeners for Settings
         db.ref('page_settings/free_panel').on('value', (s) => { if (s.exists()) applySettings(s.val()); });
         db.ref('page_settings/free-panel').on('value', (s) => { if (s.exists()) applySettings(s.val()); });
 
