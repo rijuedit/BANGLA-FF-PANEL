@@ -3,140 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Fire APK - BANGLA FF PANEL</title>
+    <title>FREE FIRE APK - BANGLA FF PANEL</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
     <style>
         :root {
-            --bg-main: #05020a;
-            --card-bg: #0b0512;
-            --border-color: #1a0b2e;
-            --neon-pink: #ff0066;
-            --text-light: #ffffff;
-            --text-gray: #777777;
+            --bg-main: #05020a; --card-bg: #0b0512; --border-color: #1a0b2e;
+            --neon-pink: #ff0066; --neon-purple: #9d00ff; --orange-color: #ffaa00;
+            --text-light: #ffffff; --text-gray: #777777;
         }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-light); min-height: 100vh; overflow-x: hidden; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg-main); color: var(--text-light); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
-
-        .bg-glow {
-            position: absolute; top: 10%; left: 30%; width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(255, 0, 102, 0.1) 0%, transparent 70%);
-            z-index: -1; pointer-events: none;
+        #mouse-glow-global {
+            position: fixed; width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(157, 0, 255, 0.15) 0%, transparent 70%);
+            pointer-events: none; transform: translate(-50%, -50%); z-index: 99999;
         }
 
         .header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 50px; background: rgba(5, 2, 10, 0.95);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px);
+            padding: 20px 40px; border-bottom: 1px solid var(--border-color);
+            background: rgba(5, 2, 10, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000;
         }
-
-        .brand { display: flex; align-items: center; gap: 15px; text-decoration: none; cursor: pointer; }
-        .site-logo { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; border: 1px solid var(--neon-pink); }
-        .brand-text h2 { font-size: 16px; color: white; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px; }
+        .brand { display: flex; align-items: center; gap: 15px; text-decoration: none; }
+        .site-logo { width: 35px; height: 35px; border-radius: 8px; border: 1px solid var(--neon-pink); }
+        .brand-text h2 { font-size: 15px; color: white; font-weight: 800; text-transform: uppercase; margin-bottom: 2px; }
         .brand-text p { font-size: 9px; color: var(--text-gray); letter-spacing: 3px; text-transform: uppercase; }
+        .header-right { display: flex; gap: 15px; }
+        .nav-btn { background: transparent; border: 1px solid #333; color: white; padding: 8px 18px; border-radius: 6px; font-size: 12px; text-decoration: none; display: flex; align-items: center; gap: 8px; font-weight: bold; transition: 0.3s; }
+        .nav-btn:hover { border-color: white; background: rgba(255,255,255,0.05); }
 
-        .nav-btns { display: flex; gap: 12px; }
-        .header-btn {
-            background: transparent; border: 1px solid #333; color: white;
-            padding: 8px 15px; border-radius: 6px; font-size: 12px; text-decoration: none;
-            display: flex; align-items: center; gap: 8px; transition: 0.3s;
-        }
-        .header-btn:hover { border-color: white; }
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        .top-controls { margin-bottom: 15px; display: flex; }
+        .back-btn { background: transparent; border: 1px solid #333; color: white; padding: 8px 20px; border-radius: 6px; font-size: 13px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .back-btn:hover { border-color: white; }
 
-        .content-container { max-width: 850px; margin: 40px auto 60px; padding: 0 20px; flex: 1; width: 100%; }
+        .video-box { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; margin-bottom: 30px; position: relative; padding-top: 56.25%; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .video-placeholder { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--text-gray); font-size: 16px; font-weight: bold; flex-direction: column; gap: 15px; }
+        .video-placeholder i { font-size: 40px; color: #333; }
 
-        .video-box {
-            width: 100%; aspect-ratio: 16/9; background: var(--card-bg);
-            border: 1px solid var(--border-color); border-radius: 12px;
-            overflow: hidden; margin-bottom: 30px; box-shadow: 0 0 20px rgba(255, 0, 102, 0.1);
-        }
-        .video-box iframe { width: 100%; height: 100%; border: none; }
+        .section-title { margin-bottom: 25px; }
+        .section-title h2 { font-size: 24px; font-weight: 900; text-transform: uppercase; color: white; margin-bottom: 5px; }
+        .section-title p { font-size: 10px; color: var(--text-gray); letter-spacing: 2px; text-transform: uppercase; }
 
-        .page-title { font-size: 22px; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; }
-        .page-subtitle { font-size: 10px; color: var(--text-gray); letter-spacing: 2px; margin-bottom: 25px; text-transform: uppercase; }
+        .rar-box { background: rgba(255, 170, 0, 0.05); border: 1px solid rgba(255, 170, 0, 0.3); padding: 15px 20px; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; }
+        .rar-info { display: flex; flex-direction: column; gap: 8px; }
+        .rar-title { display: flex; align-items: center; gap: 8px; color: var(--orange-color); font-size: 11px; font-weight: bold; text-transform: uppercase; }
+        .rar-pass { font-size: 16px; color: #fff; font-weight: bold; }
+        .copy-btn { background: transparent; color: var(--orange-color); border: 1px solid var(--orange-color); padding: 6px 15px; border-radius: 6px; font-size: 12px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+        .copy-btn:hover { background: var(--orange-color); color: #000; }
 
-        .rar-box {
-            background: var(--card-bg); border: 1px solid #ff9900;
-            border-radius: 8px; padding: 15px 20px; margin-bottom: 25px; display: none;
-        }
-        .rar-header {
-            display: flex; justify-content: space-between; align-items: center;
-            color: #ff9900; font-size: 10px; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px;
-        }
-        .rar-password { color: white; font-size: 16px; font-weight: bold; }
-        .copy-btn {
-            background: transparent; border: 1px solid #ff9900; color: #ff9900;
-            padding: 5px 12px; border-radius: 4px; font-size: 10px; font-weight: bold;
-            cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 5px;
-        }
-        .copy-btn:hover { background: #ff9900; color: black; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .emu-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; position: relative; display: flex; flex-direction: column; align-items: flex-start; transition: 0.3s; }
+        .emu-card:hover { border-color: var(--neon-purple); transform: translateY(-3px); box-shadow: 0 5px 20px rgba(157, 0, 255, 0.1); }
+        .emu-badge { position: absolute; top: 20px; right: 20px; background: rgba(157, 0, 255, 0.1); color: var(--neon-purple); border: 1px solid rgba(157, 0, 255, 0.3); font-size: 9px; padding: 4px 10px; border-radius: 20px; font-weight: bold; }
+        .emu-icon { width: 45px; height: 45px; background: rgba(157, 0, 255, 0.05); border: 1px solid rgba(157, 0, 255, 0.2); color: var(--neon-purple); display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 20px; margin-bottom: 20px; }
+        .emu-title { font-size: 13px; font-weight: 800; color: white; margin-bottom: 20px; text-transform: uppercase; }
+        .download-btn { background: #6b4cff; color: white; padding: 8px 20px; border-radius: 6px; font-size: 12px; font-weight: bold; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .download-btn:hover { background: #5a3ee0; box-shadow: 0 0 15px rgba(107, 76, 255, 0.4); }
 
-        .item-list { display: flex; flex-direction: column; gap: 15px; }
-        .item-card {
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            padding: 15px 20px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; transition: 0.3s;
-        }
-        .item-card:hover { border-color: var(--neon-pink); transform: translateX(5px); }
-
-        .item-info { display: flex; align-items: center; gap: 15px; }
-        .item-icon {
-            background: rgba(255, 0, 102, 0.05); color: var(--neon-pink);
-            width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
-            border-radius: 6px; font-size: 18px; border: 1px solid rgba(255, 0, 102, 0.1);
-        }
-        .item-title { font-size: 14px; font-weight: bold; color: white; text-transform: uppercase; }
-
-        .download-btn {
-            background: var(--neon-pink); color: white; padding: 8px 20px;
-            border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: bold;
-            transition: 0.3s; display: flex; align-items: center; gap: 8px;
-        }
-        .download-btn:hover { box-shadow: 0 0 10px var(--neon-pink); }
-
-        @media (max-width: 768px) { .header { padding: 15px 20px; } }
+        .footer { margin-top: 50px; padding: 30px; text-align: center; font-size: 11px; color: var(--text-gray); border-top: 1px solid var(--border-color); }
+        @media (max-width: 768px) { .header { padding: 15px 20px; } .nav-btn span { display: none; } }
     </style>
 </head>
 <body>
-
-    <div class="bg-glow"></div>
+    <div id="mouse-glow-global"></div>
 
     <header class="header">
         <a href="index.html" class="brand">
             <img src="logo.png" alt="Logo" class="site-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/888/888879.png'">
-            <div class="brand-text">
-                <h2>BANGLA FF PANEL</h2>
-                <p>PREMIUM CORP</p>
-            </div>
+            <div class="brand-text"><h2>BANGLA FF PANEL</h2><p>PREMIUM CORP</p></div>
         </a>
-        <div class="nav-btns">
-            <a href="index.html" class="header-btn"><i class="fas fa-home"></i> Home</a>
-            <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="header-btn"><i class="fab fa-discord"></i> Discord</a>
+        <div class="header-right">
+            <a href="index.html" class="nav-btn"><i class="fas fa-home"></i> <span>Home</span></a>
+            <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="nav-btn dynamic-discord"><i class="fab fa-discord"></i> <span>Discord</span></a>
         </div>
     </header>
 
-    <div class="content-container">
-        <div class="video-box" id="video-container">
-            <div style="display:flex; align-items:center; justify-content:center; height:100%; color:#555;">Loading video...</div>
+    <div class="container">
+        <div class="top-controls">
+            <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
         </div>
 
-        <h2 class="page-title">Free Fire APK</h2>
-        <div class="page-subtitle">MODIFIED . LATEST . SAFE</div>
-
-        <div class="rar-box" id="rar-box">
-            <div class="rar-header">
-                <span><i class="fas fa-lock"></i> RAR PASSWORD</span>
-                <button class="copy-btn" id="copyBtn" onclick="copyPassword()"><i class="far fa-copy"></i> Copy</button>
+        <div class="video-box" id="videoBox">
+            <div class="video-placeholder" id="videoPlaceholder">
+                <i class="fas fa-play-circle"></i> NO VIDEO AVAILABLE
             </div>
-            <div class="rar-password" id="rar-password">...</div>
+            <iframe id="videoIframe" src="" style="display: none;" allowfullscreen></iframe>
         </div>
 
-        <div class="item-list" id="item-list"></div>
+        <div class="section-title">
+            <h2>FREE FIRE APK</h2>
+            <p>DOWNLOAD LATEST APK V2.0</p>
+        </div>
+
+        <div class="rar-box" id="rarBox" style="display: none;">
+            <div class="rar-info">
+                <div class="rar-title"><i class="fas fa-lock"></i> RAR PASSWORD</div>
+                <div class="rar-pass" id="rarPassValue">---</div>
+            </div>
+            <button class="copy-btn" onclick="copyPassword()"><i class="far fa-copy"></i> Copy</button>
+        </div>
+
+        <div class="grid" id="dataGrid">
+            <!-- Items Loaded Here via Firebase -->
+        </div>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    <div class="footer">© 2026 BANGLA FF PANEL. All rights reserved.</div>
+
+    <script>
+        const glow = document.getElementById('mouse-glow-global');
+        window.addEventListener('mousemove', (e) => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; });
 
         const firebaseConfig = {
             apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
@@ -147,55 +130,49 @@
             messagingSenderId: "295013484465",
             appId: "1:295013484465:web:b6bc2a949e239095761f90"
         };
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
 
-        onValue(ref(db, 'page_settings/apk'), (snapshot) => {
-            const data = snapshot.val();
-            if(data) {
-                if (data.yt_link) {
-                    let videoId = data.yt_link.split('v=')[1] || data.yt_link.split('youtu.be/')[1];
-                    if(videoId) {
-                        let amp = videoId.indexOf('&');
-                        if(amp !== -1) videoId = videoId.substring(0, amp);
-                        document.getElementById('video-container').innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>`;
-                    }
-                } else {
-                    document.getElementById('video-container').style.display = 'none';
-                }
+        db.ref('global_settings/discord_link').on('value', (s) => {
+            if(s.exists()) { document.querySelectorAll('.dynamic-discord').forEach(btn => btn.href = s.val()); }
+        });
 
-                if (data.rar_password && data.rar_password.trim() !== "") {
-                    document.getElementById('rar-box').style.display = 'block';
-                    document.getElementById('rar-password').innerText = data.rar_password;
-                } else {
-                    document.getElementById('rar-box').style.display = 'none';
-                }
+        function formatEmbedUrl(url) {
+            if (!url) return '';
+            if (url.includes('drive.google.com')) return url.replace(/\/view(\?.*)?$/, '/preview');
+            if (url.includes('youtube.com/shorts/')) return 'https://www.youtube.com/embed/' + url.split('shorts/')[1].split('?')[0];
+            if (url.includes('youtu.be/')) return 'https://www.youtube.com/embed/' + url.split('youtu.be/')[1].split('?')[0];
+            if (url.includes('youtube.com/watch')) return 'https://www.youtube.com/embed/' + url.split('v=')[1].split('&')[0];
+            return url;
+        }
+
+        db.ref('page_settings/apk').on('value', (s) => {
+            const data = s.val();
+            if (data && data.yt_link) {
+                const iframe = document.getElementById('videoIframe');
+                iframe.src = formatEmbedUrl(data.yt_link); iframe.style.display = 'block'; document.getElementById('videoPlaceholder').style.display = 'none';
+            }
+            if (data && data.rar_password) {
+                document.getElementById('rarPassValue').innerText = data.rar_password; document.getElementById('rarBox').style.display = 'flex';
             }
         });
 
         window.copyPassword = function() {
-            const pwd = document.getElementById('rar-password').innerText;
-            navigator.clipboard.writeText(pwd).then(() => {
-                const btn = document.getElementById('copyBtn');
-                btn.innerHTML = `<i class="fas fa-check"></i> Copied!`;
-                setTimeout(() => { btn.innerHTML = `<i class="far fa-copy"></i> Copy`; }, 2000);
-            });
-        };
+            navigator.clipboard.writeText(document.getElementById('rarPassValue').innerText);
+            alert("Password Copied!");
+        }
 
-        onValue(ref(db, 'free_fire_apks'), (snapshot) => {
-            const list = document.getElementById('item-list');
-            list.innerHTML = "";
-            snapshot.forEach(child => {
-                const data = child.val();
-                list.innerHTML += `
-                    <div class="item-card">
-                        <div class="item-info">
-                            <div class="item-icon"><i class="fas fa-bolt"></i></div>
-                            <div class="item-title">${data.title}</div>
-                        </div>
-                        <a href="${data.download}" target="_blank" class="download-btn">
-                            <i class="fas fa-download"></i> ${data.btn_text || 'Download'}
-                        </a>
+        db.ref('apks').on('value', (snapshot) => {
+            const grid = document.getElementById('dataGrid');
+            grid.innerHTML = '';
+            snapshot.forEach((child) => {
+                const item = child.val();
+                grid.innerHTML += `
+                    <div class="emu-card">
+                        <div class="emu-badge">LATEST</div>
+                        <div class="emu-icon"><i class="fas fa-bolt"></i></div>
+                        <div class="emu-title">${item.title}</div>
+                        <a href="${item.download}" target="_blank" class="download-btn"><i class="fas fa-arrow-down"></i> Download</a>
                     </div>
                 `;
             });
