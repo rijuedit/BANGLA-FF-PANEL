@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PC PANEL PREMIUM - BANGLA FF PANEL</title>
-    <!-- Font Awesome Icons -->
+    <title>BANGLA FF PANEL - PC PANEL</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Firebase SDK v8 -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
 
@@ -24,6 +19,21 @@
             background-color: #07030b;
             color: #ffffff;
             min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Mouse Glow Effect */
+        #mouse-glow {
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(157, 0, 255, 0.18) 0%, rgba(255, 0, 102, 0.05) 50%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s;
+            border-radius: 50%;
         }
 
         /* ----- Navbar ----- */
@@ -94,6 +104,8 @@
             max-width: 1100px;
             margin: 0 auto;
             padding: 30px 20px;
+            position: relative;
+            z-index: 1;
         }
 
         /* ----- Video Section (Auto Hidden if Empty) ----- */
@@ -238,6 +250,14 @@
             transform: scale(1.02);
         }
 
+        .no-data {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px;
+            color: #888;
+            font-size: 1.1rem;
+        }
+
         /* ----- Two-Step Purchase Modal ----- */
         .modal-overlay {
             position: fixed;
@@ -286,7 +306,7 @@
         }
 
         /* Step 1: Packages List */
-        .pkg-list {
+        .package-list {
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -295,7 +315,7 @@
             overflow-y: auto;
         }
 
-        .pkg-item {
+        .package-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -307,7 +327,7 @@
             transition: 0.3s;
         }
 
-        .pkg-item:hover, .pkg-item.selected {
+        .package-item:hover, .package-item.selected {
             border-color: #ff007f;
             background: #1e0b33;
             box-shadow: 0 0 10px rgba(255, 0, 127, 0.2);
@@ -319,31 +339,31 @@
             color: #ffffff;
         }
 
-        .pkg-prices {
+        .pkg-price-box {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .pkg-old {
+        .pkg-old-price {
             color: #777777;
             text-decoration: line-through;
             font-size: 0.88rem;
             font-weight: 600;
         }
 
-        .pkg-new {
+        .pkg-sell-price {
             color: #00ff7f; /* Bright Neon Green */
             font-weight: 800;
             font-size: 1.15rem;
         }
 
         /* Step 2: Customer Details Form */
-        .form-group-custom {
+        .input-group {
             margin-bottom: 20px;
         }
 
-        .form-label-custom {
+        .input-group label {
             display: block;
             color: #ffffff;
             font-size: 0.95rem;
@@ -351,7 +371,7 @@
             margin-bottom: 10px;
         }
 
-        .form-input-custom {
+        .input-group input {
             width: 100%;
             background: #180a29;
             border: 1px solid #2a113d;
@@ -363,11 +383,11 @@
             transition: 0.3s;
         }
 
-        .form-input-custom:focus {
+        .input-group input:focus {
             border-color: #ff007f;
         }
 
-        .form-subtext-custom {
+        .id-help-text {
             display: block;
             font-size: 0.78rem;
             color: #888888;
@@ -376,7 +396,7 @@
         }
 
         /* Neon Action Buttons */
-        .btn-neon {
+        .btn-modal-action {
             background: #00ff7f;
             color: #000000;
             width: 100%;
@@ -391,27 +411,29 @@
             letter-spacing: 0.5px;
         }
 
-        .btn-neon:hover {
+        .btn-modal-action:hover {
             box-shadow: 0 0 20px rgba(0, 255, 127, 0.6);
             transform: translateY(-2px);
         }
 
-        .loading {
-            text-align: center;
-            color: #ff007f;
-            grid-column: 1/-1;
-            font-size: 1.1rem;
-            padding: 40px;
+        .btn-modal-action:disabled {
+            background: #333;
+            color: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
         }
     </style>
 </head>
 <body>
 
+    <div id="mouse-glow"></div>
+
     <!-- Header / Navbar -->
     <nav class="navbar">
         <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> BACK</a>
         <div class="nav-logo">BANGLA FF PANEL</div>
-        <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="btn-discord">
+        <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="btn-discord dynamic-discord">
             <i class="fab fa-discord"></i> DISCORD
         </a>
     </nav>
@@ -419,10 +441,10 @@
     <!-- Main Content Container -->
     <div class="container">
         
-        <!-- Video Tutorial Section (Auto-Hidden if Empty) -->
+        <!-- Video Tutorial Section -->
         <div class="video-container" id="videoContainer">
             <img src="https://via.placeholder.com/800x450/11071a/ff007f?text=Loading+Thumbnail..." id="vidThumb" class="video-thumbnail" alt="Video Tutorial">
-            <button class="play-btn" onclick="playVideo()"><i class="fas fa-play"></i></button>
+            <button class="play-btn" id="playBtn"><i class="fas fa-play"></i></button>
             <iframe id="vidIframe" class="video-iframe" allowfullscreen></iframe>
         </div>
 
@@ -432,8 +454,8 @@
         </h2>
 
         <!-- Product Grid -->
-        <div class="grid" id="productGrid">
-            <div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading Products...</div>
+        <div class="grid" id="pc-grid">
+            <div class="no-data"><i class="fas fa-spinner fa-spin"></i> Loading Products...</div>
         </div>
 
     </div>
@@ -441,46 +463,73 @@
     <!-- Purchase Modal (Two-Step Flow) -->
     <div class="modal-overlay" id="purchaseModal">
         <div class="modal-box">
-            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
             
-            <!-- STEP 1 VIEW: Package Selection -->
-            <div id="step1View">
-                <h3 class="modal-title" id="mTitleStep1">PRODUCT NAME</h3>
-                <div class="pkg-list" id="pkgList">
+            <!-- STEP 1: Package Selection -->
+            <div id="step-packages">
+                <h3 class="modal-title" id="modalProductName">PRODUCT NAME</h3>
+                <div class="package-list" id="packageContainer">
                     <!-- Dynamic Packages -->
                 </div>
-                <button class="btn-neon" onclick="goToStep2()">NEXT: ORDER TICKET</button>
+                <button class="btn-modal-action" id="btnNextStep">NEXT: ORDER TICKET</button>
             </div>
 
-            <!-- STEP 2 VIEW: Customer Details -->
-            <div id="step2View" style="display: none;">
+            <!-- STEP 2: Customer Details -->
+            <div id="step-user-id" style="display: none;">
                 <h3 class="modal-title">CUSTOMER DETAILS</h3>
-                <div class="form-group-custom">
-                    <label class="form-label-custom">👤 আপনার নাম লিখুন:</label>
-                    <input type="text" id="userNameInput" class="form-input-custom" placeholder="এখানে আপনার নাম লিখুন..." required>
-                    <span class="form-subtext-custom">(আপনার ডিসকর্ড ইউজারনেম বা সাধারণ নাম দিতে পারেন)</span>
+                <div class="input-group">
+                    <label for="discordIdInput">👤 আপনার নাম লিখুন:</label>
+                    <input type="text" id="discordIdInput" placeholder="এখানে আপনার নাম লিখুন...">
+                    <span class="id-help-text">(আপনার ডিসকর্ড ইউজারনেম বা সাধারণ নাম দিতে পারেন)</span>
                 </div>
-                <button class="btn-neon" id="btnSubmitTicket" onclick="submitDiscordTicket()">PROCEED TO DISCORD TICKET</button>
+                <button class="btn-modal-action" id="btnConfirmOrder">PROCEED TO DISCORD TICKET</button>
             </div>
 
         </div>
     </div>
 
-    <script>
-        // Firebase Config
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        // Firebase Setup (Your Original Setup)
         const firebaseConfig = {
-            databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app"
+            apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
+            authDomain: "bangla-ff-admin.firebaseapp.com",
+            databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "bangla-ff-admin",
+            storageBucket: "bangla-ff-admin.firebasestorage.app",
+            messagingSenderId: "295013484465",
+            appId: "1:295013484465:web:b6bc2a949e239095761f90"
         };
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
 
-        let productsData = {};
-        let selectedProduct = null;
-        let selectedPackageInfo = null;
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const BOT_SERVER_URL = "https://bangla-ff-bot-server.onrender.com";
 
-        // Fetch Setup Video Setting
-        database.ref('settings/video_pc').on('value', snap => {
-            const url = snap.val();
+        // Global Link Fallbacks
+        let globalBuyLink = "";
+        get(ref(db, 'site_settings/pc_panel/buy_link')).then(snapshot => {
+            if (snapshot.exists() && snapshot.val()) globalBuyLink = snapshot.val();
+        });
+
+        onValue(ref(db, 'global_settings/discord_link'), (snapshot) => {
+            const link = snapshot.val() || "https://discord.gg/ZBjSWaF7u";
+            document.querySelectorAll('.dynamic-discord').forEach(btn => {
+                btn.href = link;
+            });
+        });
+
+        // Mouse Glow Effect
+        const mouseGlow = document.getElementById('mouse-glow');
+        document.addEventListener('mousemove', (e) => {
+            mouseGlow.style.left = e.clientX + 'px';
+            mouseGlow.style.top = e.clientY + 'px';
+        });
+
+        // Setup Video Auto-Load (V10 format)
+        onValue(ref(db, 'settings/video_pc'), (snapshot) => {
+            const url = snapshot.val();
             const container = document.getElementById('videoContainer');
             const iframe = document.getElementById('vidIframe');
             const thumb = document.getElementById('vidThumb');
@@ -509,179 +558,154 @@
             }
         });
 
-        function playVideo() {
+        document.getElementById('playBtn').onclick = () => {
             document.getElementById('vidThumb').style.display = 'none';
-            document.querySelector('.play-btn').style.display = 'none';
+            document.getElementById('playBtn').style.display = 'none';
             document.getElementById('vidIframe').style.display = 'block';
-        }
+        };
 
-        // Fetch Products from RTDB 'pc_panels'
-        database.ref('pc_panels').on('value', snap => {
-            productsData = snap.val() || {};
-            const grid = document.getElementById('productGrid');
-            grid.innerHTML = '';
+        // Modal Variables
+        const pcGrid = document.getElementById('pc-grid');
+        const purchaseModal = document.getElementById('purchaseModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const modalProductName = document.getElementById('modalProductName');
+        const packageContainer = document.getElementById('packageContainer');
+        const stepPackages = document.getElementById('step-packages');
+        const stepUserId = document.getElementById('step-user-id');
+        const btnNextStep = document.getElementById('btnNextStep');
+        const btnConfirmOrder = document.getElementById('btnConfirmOrder');
+        const discordIdInput = document.getElementById('discordIdInput');
 
-            const keys = Object.keys(productsData);
-            if (keys.length === 0) {
-                grid.innerHTML = '<div class="loading">No PC Panels available at the moment.</div>';
+        let selectedProductTitle = "";
+        let selectedPackageData = null;
+
+        // Load Products
+        onValue(ref(db, 'pc_panels'), (snapshot) => {
+            pcGrid.innerHTML = '';
+            if (!snapshot.exists()) {
+                pcGrid.innerHTML = '<div class="no-data"><i class="fa-solid fa-folder-open"></i> No Products Available.</div>';
                 return;
             }
 
-            keys.forEach(key => {
-                const item = productsData[key];
-                const pName = item.name || item.title || item.productName || 'PC PANEL';
-                const pImg = item.image || item.img || 'https://via.placeholder.com/300x175/11071a/ff007f?text=PC+Panel';
+            snapshot.forEach((childSnapshot) => {
+                const itemKey = childSnapshot.key;
+                const item = childSnapshot.val();
 
-                const cardHTML = `
-                    <div class="card">
-                        <img src="${pImg}" class="card-img" alt="${pName}" onerror="this.src='https://via.placeholder.com/300x175/11071a/ff007f?text=No+Image'">
-                        <h3 class="card-title">${pName}</h3>
-                        <button class="btn-buy" onclick="openModal('${key}')">
-                            <i class="fas fa-shopping-cart"></i> BUY NOW
-                        </button>
-                    </div>
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${item.image || 'https://via.placeholder.com/300x175/11071a/ff007f?text=PC+PANEL'}" class="card-img" alt="${item.title}" onerror="this.src='https://via.placeholder.com/300x175/11071a/ff007f?text=No+Image'">
+                    <h3 class="card-title">${item.title}</h3>
+                    <button class="btn-buy" onclick="openOrderModal('${itemKey}')"><i class="fas fa-shopping-cart"></i> BUY NOW</button>
                 `;
-                grid.innerHTML += cardHTML;
+                pcGrid.appendChild(card);
             });
         });
 
-        // Open Modal - Step 1
-        function openModal(key) {
-            selectedProduct = productsData[key];
-            if (!selectedProduct) return;
+        // Open Modal
+        window.openOrderModal = (itemKey) => {
+            get(ref(db, `pc_panels/${itemKey}`)).then((snapshot) => {
+                if (!snapshot.exists()) return;
+                const data = snapshot.val();
+                selectedProductTitle = data.title;
+                selectedPackageData = null;
 
-            const pName = selectedProduct.name || selectedProduct.title || selectedProduct.productName || 'BASIC PANEL';
-            document.getElementById('mTitleStep1').innerText = pName;
-            
-            const pkgList = document.getElementById('pkgList');
-            pkgList.innerHTML = '';
-            selectedPackageInfo = null;
+                modalProductName.innerText = data.title;
+                packageContainer.innerHTML = '';
+                discordIdInput.value = '';
 
-            // Reset Views
-            document.getElementById('step1View').style.display = 'block';
-            document.getElementById('step2View').style.display = 'none';
-            document.getElementById('userNameInput').value = '';
-
-            let packages = selectedProduct.packages || selectedProduct.package || selectedProduct.prices || {};
-            let parsedPackages = [];
-
-            // Smart Parser for package entries to prevent [object Object]
-            if (typeof packages === 'object' && packages !== null) {
-                Object.keys(packages).forEach(pkgKey => {
-                    let val = packages[pkgKey];
-                    if (typeof val === 'object' && val !== null) {
-                        parsedPackages.push({
-                            name: val.name || pkgKey,
-                            oldPrice: val.oldPrice || val.old || '',
-                            price: val.price || val.salePrice || val.amount || 0
-                        });
-                    } else {
-                        // Estimate nice crossed oldPrice matching screenshot ratios if not explicit
-                        let numericSale = parseInt(val) || 0;
-                        let defaultOld = numericSale > 0 ? Math.round(numericSale * 1.25 / 5) * 5 : '';
+                // Read packages EXACTLY like your old code
+                if (data.packages && data.packages.length > 0) {
+                    data.packages.forEach((pkg, index) => {
+                        const isSelected = index === 0; // Auto-select first item
+                        const pkgDiv = document.createElement('div');
+                        pkgDiv.className = `package-item ${isSelected ? 'selected' : ''}`;
+                        pkgDiv.innerHTML = `
+                            <span class="pkg-duration">${pkg.duration}</span>
+                            <div class="pkg-price-box">
+                                ${pkg.old_price ? `<span class="pkg-old-price">${pkg.old_price}</span>` : ''}
+                                <span class="pkg-sell-price">${pkg.sell_price}</span>
+                            </div>
+                        `;
                         
-                        parsedPackages.push({
-                            name: pkgKey,
-                            oldPrice: selectedProduct.oldPrice || defaultOld,
-                            price: val
-                        });
-                    }
-                });
-            }
+                        if (isSelected) selectedPackageData = pkg;
 
-            // Fallback if no packages exist
-            if (parsedPackages.length === 0) {
-                const sPrice = selectedProduct.salePrice || selectedProduct.price || '0';
-                const oPrice = selectedProduct.oldPrice || '';
-                parsedPackages.push({
-                    name: 'Standard License',
-                    oldPrice: oPrice,
-                    price: sPrice
-                });
-            }
-
-            // Render Package items (Strictly like Screenshot #1)
-            parsedPackages.forEach((pkg, index) => {
-                const isSelected = index === 0;
-                let oldPriceHTML = pkg.oldPrice ? `<span class="pkg-old">${pkg.oldPrice}</span>` : '';
-                
-                const itemHTML = `
-                    <div class="pkg-item ${isSelected ? 'selected' : ''}" onclick="selectPackage(this, '${pkg.name}', '${pkg.price}')">
-                        <span class="pkg-duration">${pkg.name}</span>
-                        <div class="pkg-prices">
-                            ${oldPriceHTML}
-                            <span class="pkg-new">${pkg.price}</span>
-                        </div>
-                    </div>
-                `;
-                pkgList.innerHTML += itemHTML;
-
-                if (isSelected) {
-                    selectedPackageInfo = { duration: pkg.name, price: pkg.price };
+                        pkgDiv.onclick = () => {
+                            document.querySelectorAll('.package-item').forEach(el => el.classList.remove('selected'));
+                            pkgDiv.classList.add('selected');
+                            selectedPackageData = pkg;
+                        };
+                        packageContainer.appendChild(pkgDiv);
+                    });
+                } else {
+                    packageContainer.innerHTML = '<div style="text-align:center; color:#777; padding:20px;">No packages configured.</div>';
                 }
+
+                stepPackages.style.display = 'block';
+                stepUserId.style.display = 'none';
+                purchaseModal.style.display = 'flex';
             });
+        };
 
-            document.getElementById('purchaseModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('purchaseModal').style.display = 'none';
-        }
-
-        function selectPackage(el, duration, price) {
-            document.querySelectorAll('.pkg-item').forEach(item => item.classList.remove('selected'));
-            el.classList.add('selected');
-            selectedPackageInfo = { duration, price };
-        }
-
-        // Switch to Step 2
-        function goToStep2() {
-            if (!selectedPackageInfo) {
-                alert("দয়া করে একটি প্যাকেজ সিলেক্ট করুন!");
+        // Go to Step 2
+        btnNextStep.onclick = () => {
+            if (!selectedPackageData) {
+                alert("দয়া করে যেকোনো একটি প্যাকেজ সিলেক্ট করুন!");
                 return;
             }
-            document.getElementById('step1View').style.display = 'none';
-            document.getElementById('step2View').style.display = 'block';
-        }
+            stepPackages.style.display = 'none';
+            stepUserId.style.display = 'block';
+        };
 
-        // Submit Discord Ticket
-        function submitDiscordTicket() {
-            const userName = document.getElementById('userNameInput').value.trim();
-            if (!userName) {
-                alert("দয়া করে আপনার নাম বা ডিসকর্ড ইউজারনেম লিখুন!");
+        // Submit to Bot Server
+        btnConfirmOrder.onclick = async () => {
+            const userInputId = discordIdInput.value.trim();
+            if (!userInputId) {
+                alert("দয়া করে আপনার নাম লিখুন!");
                 return;
             }
 
-            const btn = document.getElementById('btnSubmitTicket');
-            btn.innerText = 'PROCESSING...';
-            btn.style.opacity = '0.7';
+            btnConfirmOrder.disabled = true;
+            btnConfirmOrder.innerHTML = '<i class="fas fa-spinner fa-spin"></i> CREATING TICKET...';
 
-            const payload = {
-                type: 'PC Panel Order Request',
-                productName: selectedProduct.name || selectedProduct.title || 'PC Panel',
-                package: selectedPackageInfo.duration,
-                price: selectedPackageInfo.price,
-                userName: userName,
-                timestamp: new Date().toISOString()
-            };
+            try {
+                const response = await fetch(`${BOT_SERVER_URL}/create-ticket`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        discordUserId: userInputId,
+                        discordUsername: userInputId,
+                        productTitle: selectedProductTitle,
+                        packageName: selectedPackageData.duration,
+                        price: selectedPackageData.sell_price,
+                        category: "BUY PC PANEL"
+                    })
+                });
 
-            // Send payload to Render bot server
-            fetch('https://bangla-ff-bot-server.onrender.com/send-ticket', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            }).then(() => {
-                closeModal();
-                btn.innerText = 'PROCEED TO DISCORD TICKET';
-                btn.style.opacity = '1';
-                window.open("https://discord.gg/ZBjSWaF7u", "_blank");
-            }).catch(() => {
-                closeModal();
-                btn.innerText = 'PROCEED TO DISCORD TICKET';
-                btn.style.opacity = '1';
-                window.open("https://discord.gg/ZBjSWaF7u", "_blank");
-            });
-        }
+                const result = await response.json();
+
+                if (result.success && result.url) {
+                    window.location.href = result.url;
+                } else {
+                    if (globalBuyLink) window.location.href = globalBuyLink;
+                }
+            } catch (error) {
+                console.error("Bot Connection Error:", error);
+                if (globalBuyLink) {
+                    window.location.href = globalBuyLink;
+                } else {
+                    window.location.href = "https://discord.gg/ZBjSWaF7u";
+                }
+            } finally {
+                btnConfirmOrder.disabled = false;
+                btnConfirmOrder.innerHTML = 'PROCEED TO DISCORD TICKET';
+                purchaseModal.style.display = 'none';
+            }
+        };
+
+        // Close Modals
+        closeModalBtn.onclick = () => purchaseModal.style.display = 'none';
+        window.onclick = (e) => { if (e.target === purchaseModal) purchaseModal.style.display = 'none'; };
     </script>
 </body>
 </html>
