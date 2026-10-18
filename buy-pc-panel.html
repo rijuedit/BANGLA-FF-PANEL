@@ -3,655 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BANGLA FF PANEL - PC PANEL</title>
+    <title>PC Panel Premium - BANGLA FF PANEL</title>
+    
+    <!-- Bootstrap 5 & FontAwesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        :root {
-            --bg-color: #05020a;
-            --card-bg: #11071a;
-            --border-color: #2a113d;
-            --neon-pink: #ff0066;
-            --neon-purple: #9d00ff;
-            --neon-green: #00cc66;
-            --text-gray: #b0b0b0;
-        }
+        /* Base Theme */
+        body { background-color: #05020a; color: #ffffff; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; min-height: 100vh; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #05020a; }
+        ::-webkit-scrollbar-thumb { background: #9d00ff; border-radius: 4px; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
+        /* Navbar Header */
+        .navbar-custom { background: #0c0514; border-bottom: 1px solid #2a113d; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .logo-img { width: 38px; height: 38px; border-radius: 8px; border: 1px solid #9d00ff; object-fit: cover; }
+        
+        .btn-back { background: rgba(157, 0, 255, 0.15); border: 1px solid #9d00ff; color: white; padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: bold; text-decoration: none; transition: 0.3s; }
+        .btn-back:hover { background: #9d00ff; color: white; }
+        .btn-discord { background: #ff0066; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: bold; text-decoration: none; transition: 0.3s; }
+        .btn-discord:hover { background: #cc0052; color: white; }
 
-        body {
-            background-color: var(--bg-color);
-            color: #ffffff;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
+        /* Page Container */
+        .container-custom { max-width: 1100px; margin: 30px auto; padding: 0 15px; }
+        .page-title { text-align: center; color: #ffffff; font-size: 24px; font-weight: 800; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Mouse Glow Effect */
-        #mouse-glow {
-            position: fixed;
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(157, 0, 255, 0.18) 0%, rgba(255, 0, 102, 0.05) 50%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-            transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s;
-            border-radius: 50%;
-        }
+        /* Product Card Grid */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .product-card { background: #11071a; border: 1px solid #2a113d; border-radius: 12px; padding: 15px; text-align: center; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-card:hover { border-color: #9d00ff; transform: translateY(-5px); box-shadow: 0 5px 20px rgba(157, 0, 255, 0.25); }
+        .product-img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 1px solid #9d00ff; margin-bottom: 15px; background: #05020a; }
+        .product-title { color: #ffffff; font-size: 16px; font-weight: bold; text-transform: uppercase; margin-bottom: 15px; }
+        
+        .btn-buy { background: #9d00ff; color: white; border: none; font-weight: bold; padding: 10px; border-radius: 8px; width: 100%; font-size: 14px; transition: 0.3s; }
+        .btn-buy:hover { background: #ff0066; }
 
-        /* Header Layout */
-        .header {
-            padding: 18px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(12, 5, 20, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+        /* Modal Purchase UI */
+        .modal-content { background-color: #11071a; border: 1px solid #ff0066; border-radius: 16px; color: white; box-shadow: 0 0 25px rgba(255, 0, 102, 0.3); }
+        .modal-header { border-bottom: 1px solid #2a113d; padding: 15px 20px; }
+        .modal-title { color: #ff0066; font-size: 18px; font-weight: 800; width: 100%; text-align: center; text-transform: uppercase; }
+        
+        .pkg-option { background: #0c0514; border: 1px solid #2a113d; border-radius: 10px; padding: 12px 15px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+        .pkg-option:hover, .pkg-option.selected { border-color: #00cc66; background: rgba(0, 204, 102, 0.08); }
+        .pkg-duration { color: #ffffff; font-weight: bold; font-size: 14px; }
+        .pkg-price { color: #00cc66; font-weight: 800; font-size: 15px; }
+        
+        .user-id-input { background: #05020a; border: 1px solid #2a113d; color: white; border-radius: 8px; padding: 10px; font-size: 13px; width: 100%; margin-top: 15px; }
+        .user-id-input:focus { border-color: #9d00ff; outline: none; }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .nav-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            color: #fff;
-            padding: 8px 15px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.3s;
-        }
-
-        .nav-btn:hover {
-            background: rgba(157, 0, 255, 0.2);
-            border-color: var(--neon-purple);
-            transform: translateY(-2px);
-        }
-
-        .discord-btn {
-            background: rgba(88, 101, 242, 0.1);
-            border-color: #5865F2;
-            color: #5865F2;
-        }
-
-        .discord-btn:hover {
-            background: #5865F2;
-            color: #fff;
-            border-color: #5865F2;
-            box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
-        }
-
-        .logo-box {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .logo-img {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            border: 2px solid var(--neon-pink);
-            box-shadow: 0 0 10px rgba(255, 0, 102, 0.5);
-            object-fit: cover;
-        }
-
-        .logo-text {
-            font-size: 22px;
-            font-weight: 900;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-        }
-
-        /* Responsive Logo text hide for mobile to fit buttons */
-        @media (max-width: 600px) {
-            .logo-text {
-                display: none;
-            }
-            .nav-btn span {
-                display: none;
-            }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .page-header-title {
-            text-align: center;
-            font-size: 2.2rem;
-            font-weight: 800;
-            margin-bottom: 35px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(157, 0, 255, 0.6);
-        }
-
-        .page-header-title i {
-            color: var(--neon-pink);
-            margin-right: 10px;
-        }
-
-        /* Grid Layout */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: var(--neon-pink);
-            box-shadow: 0 8px 25px rgba(255, 0, 102, 0.25);
-        }
-
-        .card-img {
-            width: 100%;
-            height: 170px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 20px;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-buy {
-            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));
-            color: #ffffff;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(157, 0, 255, 0.4);
-        }
-
-        .btn-buy:hover {
-            opacity: 0.95;
-            transform: scale(1.02);
-            box-shadow: 0 6px 20px rgba(255, 0, 102, 0.6);
-        }
-
-        /* Loading & Empty state */
-        .no-data {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 50px;
-            color: var(--text-gray);
-            font-size: 1.1rem;
-            background: var(--card-bg);
-            border: 1px dashed var(--border-color);
-            border-radius: 15px;
-        }
-
-        /* Purchase Modal */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-box {
-            background: var(--card-bg);
-            border: 2px solid var(--neon-pink);
-            border-radius: 20px;
-            width: 90%;
-            max-width: 480px;
-            padding: 30px;
-            position: relative;
-            box-shadow: 0 0 35px rgba(255, 0, 102, 0.4);
-            animation: modalFadeIn 0.3s ease-out;
-        }
-
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 24px;
-            color: var(--text-gray);
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .modal-close:hover {
-            color: var(--neon-pink);
-        }
-
-        .modal-header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .modal-title {
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--neon-pink);
-            text-transform: uppercase;
-        }
-
-        .package-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            max-height: 280px;
-            overflow-y: auto;
-            margin-bottom: 20px;
-            padding-right: 5px;
-        }
-
-        .package-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            padding: 14px 18px;
-            border-radius: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .package-item:hover {
-            border-color: var(--neon-purple);
-            background: rgba(157, 0, 255, 0.1);
-        }
-
-        .package-item.selected {
-            border-color: var(--neon-pink);
-            background: rgba(255, 0, 102, 0.15);
-            box-shadow: 0 0 10px rgba(255, 0, 102, 0.3);
-        }
-
-        .pkg-duration {
-            font-weight: 700;
-            font-size: 1rem;
-            color: #ffffff;
-        }
-
-        .pkg-price-box {
-            text-align: right;
-        }
-
-        .pkg-old-price {
-            text-decoration: line-through;
-            color: #777;
-            font-size: 0.8rem;
-            margin-right: 5px;
-        }
-
-        .pkg-sell-price {
-            color: var(--neon-green);
-            font-weight: 800;
-            font-size: 1.15rem;
-        }
-
-        .user-id-step {
-            display: none;
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-            color: #ffffff;
-            font-weight: 600;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 14px;
-            background: #080312;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            color: #fff;
-            font-size: 0.95rem;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .input-group input:focus {
-            border-color: var(--neon-pink);
-            box-shadow: 0 0 10px rgba(255, 0, 102, 0.3);
-        }
-
-        .id-help-text {
-            font-size: 0.78rem;
-            color: #888;
-            margin-top: 6px;
-        }
-
-        .btn-modal-action {
-            width: 100%;
-            background: linear-gradient(45deg, var(--neon-green), #00ff88);
-            color: #000000;
-            border: none;
-            padding: 15px;
-            border-radius: 12px;
-            font-weight: 900;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-modal-action:hover {
-            box-shadow: 0 0 20px rgba(0, 204, 102, 0.6);
-            transform: translateY(-2px);
-        }
-
-        .btn-modal-action:disabled {
-            background: #333;
-            color: #666;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
+        .btn-order-ticket { background: #00cc66; color: #000000; border: none; font-weight: 800; padding: 12px; border-radius: 8px; width: 100%; font-size: 15px; margin-top: 15px; transition: 0.3s; }
+        .btn-order-ticket:hover { background: #00ff80; transform: scale(1.02); }
     </style>
 </head>
 <body>
 
-    <div id="mouse-glow"></div>
-
     <!-- Header Navigation -->
-    <header class="header">
-        <!-- Left Side: Back Button & Logo -->
-        <div class="header-left">
-            <a href="index.html" class="nav-btn">
-                <i class="fa-solid fa-arrow-left"></i> <span>BACK</span>
-            </a>
-            <a href="index.html" class="logo-box">
-                <img src="logo.png" alt="OXI Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/42/ff0066/ffffff?text=OXI'">
-                <span class="logo-text">BANGLA FF PANEL</span>
-            </a>
-        </div>
+    <div class="navbar-custom d-flex justify-content-between align-items-center">
+        <a href="index.html" class="btn-back"><i class="fa-solid fa-arrow-left me-1"></i> Back</a>
         
-        <!-- Right Side: Discord Button (Dynamic) -->
-        <a href="#" class="nav-btn discord-btn dynamic-discord" target="_blank">
-            <i class="fa-brands fa-discord"></i> <span>DISCORD</span>
+        <div class="d-flex align-items-center gap-2">
+            <img src="logo.png" alt="Logo" class="logo-img">
+            <span style="font-weight: 800; color: #ffffff; font-size: 16px;">BANGLA FF PANEL</span>
+        </div>
+
+        <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="btn-discord dynamic-discord">
+            <i class="fa-fab fa-discord me-1"></i> Discord
         </a>
-    </header>
+    </div>
 
     <!-- Main Container -->
-    <div class="container">
-        <h1 class="page-header-title"><i class="fa-solid fa-desktop"></i> PC PANEL PREMIUM</h1>
+    <div class="container-custom">
+        <h2 class="page-title"><i class="fa-solid fa-desktop text-danger me-2"></i> PC PANEL PREMIUM</h2>
         
-        <div class="grid-container" id="pc-grid">
-            <div class="no-data"><i class="fa-solid fa-spinner fa-spin"></i> Loading Products...</div>
+        <div id="productGrid" class="product-grid">
+            <!-- Loading products via JavaScript -->
         </div>
     </div>
 
     <!-- Purchase Modal -->
-    <div class="modal-overlay" id="purchaseModal">
-        <div class="modal-box">
-            <span class="modal-close" id="closeModal">&times;</span>
-            
-            <!-- Step 1: Select Package -->
-            <div id="step-packages">
+    <div class="modal fade" id="buyModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="modalProductName">SELECT PACKAGE</h2>
+                    <h5 class="modal-title" id="modalProductName">PRODUCT NAME</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="package-list" id="packageContainer"></div>
-                <button class="btn-modal-action" id="btnNextStep">NEXT: ORDER TICKET</button>
-            </div>
+                
+                <div class="modal-body">
+                    <div id="modalPackagesList">
+                        <!-- Package Options Loaded Here -->
+                    </div>
 
-            <!-- Step 2: Customer Name Input -->
-            <div id="step-user-id" class="user-id-step">
-                <div class="modal-header">
-                    <h2 class="modal-title">CUSTOMER DETAILS</h2>
+                    <div>
+                        <input type="text" id="discordUserIdInput" class="user-id-input" placeholder="আপনার Discord Username অথবা ID দিন (Optional)">
+                    </div>
+
+                    <button type="button" id="btnSubmitTicket" class="btn-order-ticket" onclick="submitOrder()">
+                        NEXT: ORDER TICKET
+                    </button>
                 </div>
-                <div class="input-group">
-                    <label for="discordIdInput"><i class="fa-solid fa-user"></i> আপনার নাম লিখুন:</label>
-                    <input type="text" id="discordIdInput" placeholder="এখানে আপনার নাম লিখুন...">
-                    <p class="id-help-text">(আপনার ডিসকর্ড ইউজারনেম বা সাধারণ নাম দিতে পারেন)</p>
-                </div>
-                <button class="btn-modal-action" id="btnConfirmOrder">PROCEED TO DISCORD TICKET</button>
             </div>
         </div>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
-        // Firebase Setup
+    <script>
         const firebaseConfig = {
-            apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
-            authDomain: "bangla-ff-admin.firebaseapp.com",
-            databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "bangla-ff-admin",
-            storageBucket: "bangla-ff-admin.firebasestorage.app",
-            messagingSenderId: "295013484465",
-            appId: "1:295013484465:web:b6bc2a949e239095761f90"
+            databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app"
         };
+        
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const database = firebase.database();
+        const buyModal = new bootstrap.Modal(document.getElementById('buyModal'));
 
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
+        let selectedProduct = null;
+        let selectedPkg = null;
 
-        // Global Discord Link Dynamic Update
-        onValue(ref(db, 'global_settings/discord_link'), (snapshot) => {
-            const link = snapshot.val() || "https://discord.gg/ZBjSWaF7u";
-            document.querySelectorAll('.dynamic-discord').forEach(btn => {
-                btn.href = link;
-            });
-        });
+        // 🌟 স্মার্ট প্রাইস ডিটেক্টর (মেলাবে newPrice, price, salePrice, oldPrice)
+        function getPackagePrice(pkg) {
+            if (!pkg) return 0;
+            if (pkg.newPrice !== undefined && pkg.newPrice !== null && pkg.newPrice !== '') return pkg.newPrice;
+            if (pkg.price !== undefined && pkg.price !== null && pkg.price !== '') return pkg.price;
+            if (pkg.salePrice !== undefined && pkg.salePrice !== null && pkg.salePrice !== '') return pkg.salePrice;
+            if (pkg.oldPrice !== undefined && pkg.oldPrice !== null && pkg.oldPrice !== '') return pkg.oldPrice;
+            if (pkg.resellPrice !== undefined && pkg.resellPrice !== null && pkg.resellPrice !== '') return pkg.resellPrice;
+            return 0;
+        }
 
-        // Render Bot Server URL
-        const BOT_SERVER_URL = "https://bangla-ff-bot-server.onrender.com";
-
-        const pcGrid = document.getElementById('pc-grid');
-        const purchaseModal = document.getElementById('purchaseModal');
-        const closeModal = document.getElementById('closeModal');
-        const modalProductName = document.getElementById('modalProductName');
-        const packageContainer = document.getElementById('packageContainer');
-        const stepPackages = document.getElementById('step-packages');
-        const stepUserId = document.getElementById('step-user-id');
-        const btnNextStep = document.getElementById('btnNextStep');
-        const btnConfirmOrder = document.getElementById('btnConfirmOrder');
-        const discordIdInput = document.getElementById('discordIdInput');
-
-        let selectedProductTitle = "";
-        let selectedPackageData = null;
-        let globalBuyLink = "";
-
-        // Global Buy Link Fallback
-        get(ref(db, 'site_settings/pc_panel/buy_link')).then(snapshot => {
-            if (snapshot.exists() && snapshot.val()) {
-                globalBuyLink = snapshot.val();
-            }
-        });
-
-        // Realtime Products Load
-        onValue(ref(db, 'pc_panels'), (snapshot) => {
-            pcGrid.innerHTML = '';
-            if (!snapshot.exists()) {
-                pcGrid.innerHTML = '<div class="no-data"><i class="fa-solid fa-folder-open"></i> No Products Available.</div>';
-                return;
-            }
-
-            snapshot.forEach((childSnapshot) => {
-                const itemKey = childSnapshot.key;
-                const item = childSnapshot.val();
-
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <div>
-                        <img src="${item.image || 'https://via.placeholder.com/300x170/11071a/ff0066?text=PC+PANEL'}" class="card-img" alt="${item.title}">
-                        <h3 class="card-title">${item.title}</h3>
-                    </div>
-                    <button class="btn-buy" onclick="openOrderModal('${itemKey}')"><i class="fa-solid fa-cart-shopping"></i> BUY NOW</button>
-                `;
-                pcGrid.appendChild(card);
-            });
-        });
-
-        window.openOrderModal = (itemKey) => {
-            get(ref(db, `pc_panels/${itemKey}`)).then((snapshot) => {
-                if (!snapshot.exists()) return;
-                const data = snapshot.val();
-                selectedProductTitle = data.title;
-                selectedPackageData = null;
-
-                modalProductName.innerText = data.title;
-                packageContainer.innerHTML = '';
-
-                if (data.packages && data.packages.length > 0) {
-                    data.packages.forEach((pkg) => {
-                        const pkgDiv = document.createElement('div');
-                        pkgDiv.className = 'package-item';
-                        pkgDiv.innerHTML = `
-                            <span class="pkg-duration">${pkg.duration}</span>
-                            <div class="pkg-price-box">
-                                ${pkg.old_price ? `<span class="pkg-old-price">${pkg.old_price}</span>` : ''}
-                                <span class="pkg-sell-price">${pkg.sell_price}</span>
-                            </div>
-                        `;
-                        pkgDiv.onclick = () => {
-                            document.querySelectorAll('.package-item').forEach(el => el.classList.remove('selected'));
-                            pkgDiv.classList.add('selected');
-                            selectedPackageData = pkg;
-                        };
-                        packageContainer.appendChild(pkgDiv);
-                    });
-                } else {
-                    packageContainer.innerHTML = '<div style="text-align:center; color:#777; padding:20px;">No packages configured.</div>';
-                }
-
-                stepPackages.style.display = 'block';
-                stepUserId.style.display = 'none';
-                purchaseModal.style.display = 'flex';
-            });
-        };
-
-        btnNextStep.onclick = () => {
-            if (!selectedPackageData) {
-                alert("দয়া করে যেকোনো একটি প্যাকেজ সিলেক্ট করুন!");
-                return;
-            }
-            stepPackages.style.display = 'none';
-            stepUserId.style.display = 'block';
-        };
-
-        btnConfirmOrder.onclick = async () => {
-            const userInputId = discordIdInput.value.trim();
-
-            btnConfirmOrder.disabled = true;
-            btnConfirmOrder.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> CREATING PRIVATE TICKET...';
-
-            try {
-                const response = await fetch(`${BOT_SERVER_URL}/create-ticket`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        discordUserId: userInputId,
-                        discordUsername: userInputId,
-                        productTitle: selectedProductTitle,
-                        packageName: selectedPackageData.duration,
-                        price: selectedPackageData.sell_price,
-                        category: "BUY PC PANEL"
-                    })
+        // 1. Database থেকে প্রোডাক্ট আনা
+        function loadPCPanels() {
+            database.ref('pc_panels').on('value', (snapshot) => {
+                const grid = document.getElementById('productGrid');
+                grid.innerHTML = '';
+                
+                snapshot.forEach((child) => {
+                    const id = child.key;
+                    const product = child.val();
+                    
+                    const pName = product.name || product.title || 'PC Panel';
+                    const pImg = product.imageUrl || product.image || 'logo.png';
+                    
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.innerHTML = `
+                        <div>
+                            <img src="${pImg}" class="product-img" alt="${pName}" onerror="this.src='logo.png'">
+                            <div class="product-title">${pName}</div>
+                        </div>
+                        <button class="btn-buy" onclick="openBuyModal('${id}')">
+                            <i class="fa-solid fa-cart-shopping me-1"></i> BUY NOW
+                        </button>
+                    `;
+                    grid.appendChild(card);
                 });
+            });
+        }
 
-                const result = await response.json();
+        let allProducts = {};
+        database.ref('pc_panels').on('value', snap => { allProducts = snap.val() || {}; });
 
-                if (result.success && result.url) {
-                    window.location.href = result.url;
-                } else {
-                    if (globalBuyLink) window.location.href = globalBuyLink;
-                }
-            } catch (error) {
-                console.error("Bot Connection Error:", error);
-                if (globalBuyLink) {
-                    window.location.href = globalBuyLink;
-                } else {
-                    window.location.href = "https://discord.gg/ZBjSWaF7u";
-                }
-            } finally {
-                btnConfirmOrder.disabled = false;
-                btnConfirmOrder.innerHTML = 'PROCEED TO DISCORD TICKET';
+        // 2. মোডাল ওপেন করা ও প্যাকেজ সিলেক্ট করা
+        function openBuyModal(id) {
+            selectedProduct = allProducts[id];
+            if (!selectedProduct) return;
+
+            const pName = selectedProduct.name || selectedProduct.title || 'PC Panel';
+            document.getElementById('modalProductName').innerText = pName;
+
+            const pkgListDiv = document.getElementById('modalPackagesList');
+            pkgListDiv.innerHTML = '';
+
+            const pkgs = Array.isArray(selectedProduct.packages) 
+                ? selectedProduct.packages 
+                : (selectedProduct.packages ? Object.values(selectedProduct.packages) : []);
+
+            selectedPkg = null;
+
+            if (pkgs.length > 0) {
+                pkgs.forEach((pkg, index) => {
+                    const priceVal = getPackagePrice(pkg);
+                    const durationStr = pkg.duration || pkg.name || 'Package';
+
+                    const pkgElem = document.createElement('div');
+                    pkgElem.className = `pkg-option ${index === 0 ? 'selected' : ''}`;
+                    pkgElem.onclick = () => selectPackage(pkgElem, pkg);
+
+                    pkgElem.innerHTML = `
+                        <div class="pkg-duration"><i class="fa-regular fa-clock text-warning me-1"></i> ${durationStr}</div>
+                        <div class="pkg-price">৳${priceVal} BDT</div>
+                    `;
+                    pkgListDiv.appendChild(pkgElem);
+
+                    if (index === 0) selectedPkg = pkg; // Default first package
+                });
+            } else {
+                pkgListDiv.innerHTML = `<div class="text-center text-danger">No package found!</div>`;
             }
-        };
 
-        closeModal.onclick = () => purchaseModal.style.display = 'none';
-        window.onclick = (e) => { if (e.target === purchaseModal) purchaseModal.style.display = 'none'; };
+            buyModal.show();
+        }
 
-        const mouseGlow = document.getElementById('mouse-glow');
-        document.addEventListener('mousemove', (e) => {
-            mouseGlow.style.left = e.clientX + 'px';
-            mouseGlow.style.top = e.clientY + 'px';
-        });
+        function selectPackage(elem, pkg) {
+            document.querySelectorAll('.pkg-option').forEach(el => el.classList.remove('selected'));
+            elem.classList.add('selected');
+            selectedPkg = pkg;
+        }
+
+        // 3. ডাইরেক্ট বট এপিআই তে টিকেট রিকোয়েস্ট পাঠানো
+        function submitOrder() {
+            if (!selectedPkg) {
+                alert("দয়া করে একটি প্যাকেজ সিলেক্ট করুন!");
+                return;
+            }
+
+            const btn = document.getElementById('btnSubmitTicket');
+            btn.disabled = true;
+            btn.innerText = "CREATING TICKET...";
+
+            const discordUser = document.getElementById('discordUserIdInput').value.trim();
+            const productTitle = selectedProduct.name || selectedProduct.title || "PC Panel";
+            const packageName = selectedPkg.duration || "N/A";
+            const price = getPackagePrice(selectedPkg);
+
+            fetch("https://bangla-ff-bot-server.onrender.com/create-ticket", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    discordUserId: discordUser,
+                    packageName: packageName,
+                    price: price,
+                    productTitle: productTitle
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && data.url) {
+                    window.location.href = data.url; // টিকেট লিংকে রিডাইরেক্ট হবে
+                } else {
+                    alert("টিকেট তৈরি করা সম্ভব হয়নি। আবার চেষ্টা করুন!");
+                    btn.disabled = false;
+                    btn.innerText = "NEXT: ORDER TICKET";
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("সার্ভারে সমস্যা হয়েছে! অনুগ্রহ করে আবার চেষ্টা করুন।");
+                btn.disabled = false;
+                btn.innerText = "NEXT: ORDER TICKET";
+            });
+        }
+
+        window.onload = loadPCPanels;
     </script>
 </body>
 </html>
