@@ -214,7 +214,6 @@
                 }
             });
 
-            // Smart Multi-Path Product Fetching (Checks 'products/pc', 'products', and 'pc_panels')
             const grid = document.getElementById('productsGrid');
 
             function renderProducts(snapshot) {
@@ -225,8 +224,6 @@
                 snapshot.forEach(child => {
                     const p = child.val();
                     if(!p || typeof p !== 'object') return;
-
-                    // If checking root 'products', filter for pc
                     if (child.key === 'mobile' || child.key === 'free') return;
 
                     p.id = child.key;
@@ -251,15 +248,15 @@
                     grid.appendChild(card);
                 });
 
-                return count;
+                if(count === 0) {
+                    grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: var(--text-dim);">No PC products available right now.</p>';
+                }
             }
 
-            // Step 1: Try 'products/pc'
             db.ref('products/pc').on('value', snapshot => {
                 if (snapshot.exists() && snapshot.hasChildren()) {
                     renderProducts(snapshot);
                 } else {
-                    // Step 2: Fallback to 'products'
                     db.ref('products').once('value', snap2 => {
                         if (snap2.exists() && snap2.hasChildren()) {
                             renderProducts(snap2);
@@ -282,7 +279,6 @@
             if (product.packages) {
                 pkgArray = Object.entries(product.packages).map(([id, pkg]) => ({ ...pkg, id }));
             } else {
-                // If no packages node, construct a default package from product root price
                 pkgArray = [{ id: 'default', qty: 1, unit: 'Days', price: getSafePrice(product) }];
             }
 
