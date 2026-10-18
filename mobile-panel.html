@@ -8,47 +8,79 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { background-color: #05020a; color: #ffffff; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; min-height: 100vh; }
+        ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: #05020a; } ::-webkit-scrollbar-thumb { background: #9d00ff; border-radius: 4px; }
         .navbar-custom { background: #0c0514; border-bottom: 1px solid #2a113d; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
-        .logo-img { width: 38px; height: 38px; border-radius: 8px; border: 1px solid #9d00ff; object-fit: cover; }
-        .btn-back { background: rgba(157, 0, 255, 0.15); border: 1px solid #9d00ff; color: white; padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: bold; text-decoration: none; }
-        .btn-discord { background: #ff0066; color: white; border: none; padding: 6px 14px; border-radius: 6px; font-size: 13px; font-weight: bold; text-decoration: none; }
+        .logo-img { width: 35px; height: 35px; border-radius: 8px; border: 1px solid #9d00ff; object-fit: cover; }
+        .btn-back { background: rgba(157, 0, 255, 0.15); border: 1px solid #9d00ff; color: white; padding: 6px 14px; border-radius: 6px; font-size: 14px; font-weight: bold; text-decoration: none; transition: 0.3s; }
+        .btn-back:hover { background: #9d00ff; color: white; }
+        .btn-discord { background: #5865F2; color: white; border: none; padding: 6px 16px; border-radius: 6px; font-size: 14px; font-weight: bold; text-decoration: none; transition: 0.3s; display: inline-flex; align-items: center; gap: 5px; }
+        .btn-discord:hover { background: #4752C4; color: white; }
         .container-custom { max-width: 1100px; margin: 30px auto; padding: 0 15px; }
+        .page-title { text-align: center; color: #ffffff; font-size: 24px; font-weight: 800; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .product-card { background: #11071a; border: 1px solid #2a113d; border-radius: 12px; padding: 15px; text-align: center; transition: 0.3s; }
-        .product-img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 1px solid #9d00ff; margin-bottom: 15px; }
+        .product-card { background: #11071a; border: 1px solid #2a113d; border-radius: 12px; padding: 15px; text-align: center; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-card:hover { border-color: #9d00ff; transform: translateY(-5px); box-shadow: 0 5px 20px rgba(157, 0, 255, 0.25); }
+        .product-img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 1px solid #9d00ff; margin-bottom: 15px; background: #05020a; }
         .product-title { color: #ffffff; font-size: 16px; font-weight: bold; text-transform: uppercase; margin-bottom: 15px; }
-        .btn-buy { background: #9d00ff; color: white; border: none; font-weight: bold; padding: 10px; border-radius: 8px; width: 100%; }
-        .modal-content { background-color: #11071a; border: 1px solid #ff0066; border-radius: 16px; color: white; }
-        .pkg-option { background: #0c0514; border: 1px solid #2a113d; border-radius: 10px; padding: 12px 15px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .pkg-option.selected { border-color: #00cc66; background: rgba(0, 204, 102, 0.08); }
-        .pkg-price { color: #00cc66; font-weight: 800; }
-        .user-id-input { background: #05020a; border: 1px solid #2a113d; color: white; border-radius: 8px; padding: 10px; width: 100%; margin-top: 15px; }
-        .btn-order-ticket { background: #00cc66; color: #000; font-weight: 800; padding: 12px; border-radius: 8px; width: 100%; margin-top: 15px; }
+        .btn-buy { background: #9d00ff; color: white; border: none; font-weight: bold; padding: 10px; border-radius: 8px; width: 100%; font-size: 14px; transition: 0.3s; }
+        .btn-buy:hover { background: #ff0066; }
+        .modal-content { background-color: #11071a; border: 1px solid #ff0066; border-radius: 16px; color: white; box-shadow: 0 0 25px rgba(255, 0, 102, 0.3); }
+        .modal-header { border-bottom: 1px solid #2a113d; padding: 15px 20px; }
+        .modal-title { color: #ff0066; font-size: 18px; font-weight: 800; width: 100%; text-align: center; text-transform: uppercase; }
+        .pkg-option { background: #0c0514; border: 1px solid #2a113d; border-radius: 10px; padding: 12px 15px; margin-bottom: 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: 0.3s; }
+        .pkg-option:hover, .pkg-option.selected { border-color: #00cc66; background: rgba(0, 204, 102, 0.08); }
+        .pkg-duration { color: #ffffff; font-weight: bold; font-size: 14px; }
+        .pkg-price { color: #00cc66; font-weight: 800; font-size: 15px; }
+        .user-id-input { background: #05020a; border: 1px solid #2a113d; color: white; border-radius: 8px; padding: 10px; font-size: 13px; width: 100%; margin-top: 15px; }
+        .user-id-input:focus { border-color: #9d00ff; outline: none; }
+        .btn-order-ticket { background: #00cc66; color: #000; border: none; font-weight: 800; padding: 12px; border-radius: 8px; width: 100%; margin-top: 15px; transition: 0.3s; }
+        .btn-order-ticket:hover { background: #00ff80; transform: scale(1.02); }
     </style>
 </head>
 <body>
+
     <div class="navbar-custom d-flex justify-content-between align-items-center">
-        <a href="index.html" class="btn-back">Back</a>
-        <div class="d-flex align-items-center gap-2">
-            <img src="logo.png" alt="Logo" class="logo-img">
-            <span style="font-weight: 800; color: #ffffff;">BANGLA FF PANEL</span>
+        <div class="d-flex align-items-center gap-3">
+            <a href="index.html" class="btn-back"><i class="fa-solid fa-arrow-left"></i></a>
+            <div class="d-flex align-items-center gap-2">
+                <img src="logo.png" alt="Logo" class="logo-img">
+                <span style="font-weight: 800; color: #ffffff; font-size: 16px;">BANGLA FF PANEL</span>
+            </div>
         </div>
-        <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="btn-discord">Discord</a>
+        <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="btn-discord dynamic-discord">
+            <i class="fa-brands fa-discord"></i> Discord
+        </a>
     </div>
 
     <div class="container-custom">
-        <h2 class="text-center mb-4" style="font-weight: 800;">MOBILE PANEL PREMIUM</h2>
+        <div id="videoContainer" style="display: none; margin-bottom: 30px;">
+            <h5 class="text-white" style="font-weight: 800; text-transform: uppercase;"><i class="fa-brands fa-youtube text-danger me-2"></i>How to Setup</h5>
+            <div style="background: #11071a; border: 1px solid #2a113d; border-radius: 12px; padding: 15px;">
+                <iframe id="videoFrame" style="width: 100%; height: 280px; border-radius: 8px; border: none; display: none;" allowfullscreen></iframe>
+                <a id="ytCard" href="#" target="_blank" style="display: none; position: relative; border-radius: 8px; overflow: hidden; border: 1px solid #9d00ff;">
+                    <img id="ytThumbnail" src="" style="width: 100%; height: 280px; object-fit: cover;">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); padding: 15px 20px; border-radius: 50%;">
+                        <i class="fa-brands fa-youtube" style="color: #ff0000; font-size: 45px;"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <h2 class="page-title"><i class="fa-solid fa-mobile-screen text-danger me-2"></i> MOBILE PANEL PREMIUM</h2>
         <div id="productGrid" class="product-grid"></div>
     </div>
 
     <div class="modal fade" id="buyModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header"><h5 class="modal-title" id="modalProductName">PRODUCT NAME</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalProductName">PRODUCT NAME</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
                 <div class="modal-body">
                     <div id="modalPackagesList"></div>
-                    <input type="text" id="discordUserIdInput" class="user-id-input" placeholder="আপনার Discord Username অথবা ID দিন (Optional)">
-                    <button id="btnSubmitTicket" class="btn-order-ticket" onclick="submitOrder()">NEXT: ORDER TICKET</button>
+                    <div><input type="text" id="discordUserIdInput" class="user-id-input" placeholder="আপনার Discord Username অথবা ID দিন (Optional)"></div>
+                    <button type="button" id="btnSubmitTicket" class="btn-order-ticket" onclick="submitOrder()">NEXT: ORDER TICKET</button>
                 </div>
             </div>
         </div>
@@ -66,38 +98,59 @@
         let selectedProduct = null;
         let selectedPkg = null;
 
+        // Video Load
+        database.ref('settings/mobile_video').on('value', snap => {
+            const url = snap.val();
+            const vc = document.getElementById('videoContainer');
+            const vf = document.getElementById('videoFrame');
+            const yc = document.getElementById('ytCard');
+            if(url) {
+                vc.style.display = 'block';
+                if(url.includes('youtube.com') || url.includes('youtu.be')) {
+                    vf.style.display = 'none'; yc.style.display = 'block';
+                    let ytId = url.includes('v=') ? url.split('v=')[1].split('&')[0] : url.split('youtu.be/')[1].split('?')[0];
+                    document.getElementById('ytThumbnail').src = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+                    yc.href = url;
+                } else {
+                    yc.style.display = 'none'; vf.style.display = 'block';
+                    vf.src = url.includes('drive.google.com') ? url.replace('/view', '/preview') : url;
+                }
+            } else vc.style.display = 'none';
+        });
+
         function getSafePrice(pkg) {
             if (!pkg) return 0;
-            const keys = ['newPrice', 'price', 'salePrice', 'new_price', 'sale_price', 'oldPrice'];
+            const keys = ['newPrice', 'price', 'salePrice', 'new_price', 'sale_price', 'oldPrice', 'resellPrice'];
             for (let k of keys) if (pkg[k] && pkg[k] != 0) return pkg[k];
             for (let k in pkg) if (typeof pkg[k] === 'number' && pkg[k] > 0) return pkg[k];
             return 0;
         }
 
-        database.ref('mobile_panels').on('value', snap => {
+        database.ref('mobile_panels').on('value', (snap) => {
             const grid = document.getElementById('productGrid');
             grid.innerHTML = '';
             allProducts = snap.val() || {};
-            snap.forEach(child => {
+            snap.forEach((child) => {
                 const product = child.val();
                 const card = document.createElement('div');
                 card.className = 'product-card';
-                card.innerHTML = `<img src="${product.imageUrl || 'logo.png'}" class="product-img"><div class="product-title">${product.name || 'Mobile Panel'}</div><button class="btn-buy" onclick="openBuyModal('${child.key}')">BUY NOW</button>`;
+                card.innerHTML = `<div><img src="${product.imageUrl || 'logo.png'}" class="product-img" onerror="this.src='logo.png'"><div class="product-title">${product.name || 'Mobile Panel'}</div></div><button class="btn-buy" onclick="openBuyModal('${child.key}')"><i class="fa-solid fa-cart-shopping me-1"></i> BUY NOW</button>`;
                 grid.appendChild(card);
             });
         });
 
         function openBuyModal(id) {
             selectedProduct = allProducts[id];
-            document.getElementById('modalProductName').innerText = selectedProduct.name || 'Mobile Panel';
+            document.getElementById('modalProductName').innerText = selectedProduct.name || selectedProduct.title;
             const list = document.getElementById('modalPackagesList');
             list.innerHTML = '';
             const pkgs = Array.isArray(selectedProduct.packages) ? selectedProduct.packages : Object.values(selectedProduct.packages || {});
+            selectedPkg = null;
             pkgs.forEach((pkg, index) => {
                 const div = document.createElement('div');
                 div.className = `pkg-option ${index === 0 ? 'selected' : ''}`;
                 div.onclick = () => { document.querySelectorAll('.pkg-option').forEach(el => el.classList.remove('selected')); div.classList.add('selected'); selectedPkg = pkg; };
-                div.innerHTML = `<span>${pkg.duration || 'Pkg'}</span><span class="pkg-price">৳${getSafePrice(pkg)} BDT</span>`;
+                div.innerHTML = `<div class="pkg-duration"><i class="fa-regular fa-clock text-warning me-1"></i> ${pkg.duration || 'Pkg'}</div><div class="pkg-price">৳${getSafePrice(pkg)} BDT</div>`;
                 list.appendChild(div);
                 if (index === 0) selectedPkg = pkg;
             });
@@ -105,13 +158,16 @@
         }
 
         function submitOrder() {
-            if (!selectedPkg) return;
+            if (!selectedPkg) return alert("দয়া করে একটি প্যাকেজ সিলেক্ট করুন!");
             const btn = document.getElementById('btnSubmitTicket');
-            btn.disabled = true;
+            btn.disabled = true; btn.innerText = "CREATING TICKET...";
             fetch("https://bangla-ff-bot-server.onrender.com/create-ticket", {
                 method: "POST", headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ discordUserId: document.getElementById('discordUserIdInput').value, packageName: selectedPkg.duration, price: getSafePrice(selectedPkg), productTitle: selectedProduct.name })
-            }).then(r => r.json()).then(d => d.success ? window.location.href = d.url : alert("Error")).catch(() => btn.disabled = false);
+                body: JSON.stringify({ discordUserId: document.getElementById('discordUserIdInput').value.trim(), packageName: selectedPkg.duration || "N/A", price: getSafePrice(selectedPkg), productTitle: selectedProduct.name || selectedProduct.title })
+            }).then(r => r.json()).then(d => {
+                if (d.success && d.url) window.location.href = d.url;
+                else { alert("টিকেট তৈরি করা সম্ভব হয়নি!"); btn.disabled = false; btn.innerText = "NEXT: ORDER TICKET"; }
+            }).catch(e => { alert("সার্ভার কানেকশন এরর!"); btn.disabled = false; btn.innerText = "NEXT: ORDER TICKET"; });
         }
     </script>
 </body>
