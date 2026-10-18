@@ -21,7 +21,6 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
         body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
-        /* Navbar / Header */
         .navbar {
             display: flex; justify-content: space-between; align-items: center;
             padding: 15px 30px; background: rgba(12, 5, 20, 0.95);
@@ -222,7 +221,9 @@
                     grid.appendChild(card);
                 });
 
-                return count;
+                if(count === 0) {
+                    grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: var(--text-dim);">No Mobile products available right now.</p>';
+                }
             }
 
             db.ref('products/mobile').on('value', snapshot => {
