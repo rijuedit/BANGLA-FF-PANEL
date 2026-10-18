@@ -3,336 +3,614 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PC Panel - BANGLA FF</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <title>PC Panel Store - BANGLA FF PANEL</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Firebase SDK v8 -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
     <style>
-        :root {
-            --bg-dark: #05020a;
-            --bg-card: #0c0514;
-            --neon-purple: #9d00ff;
-            --neon-pink: #ff0066;
-            --neon-green: #00cc66;
-            --text-main: #ffffff;
-            --text-dim: #b3b3b3;
-            --border-color: #2a113d;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
-        body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
+        body {
+            background-color: #0a0512;
+            color: #ffffff;
+            min-height: 100vh;
+        }
 
+        /* Header / Navbar */
         .navbar {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 30px; background: rgba(12, 5, 20, 0.95);
-            border-bottom: 1px solid var(--border-color); position: sticky; top: 0;
-            z-index: 1000; backdrop-filter: blur(10px);
+            background: #140924;
+            border-bottom: 2px solid #2a113d;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
-        .nav-brand { display: flex; align-items: center; gap: 15px; text-decoration: none; cursor: pointer; }
-        .nav-brand img { width: 45px; height: 45px; border-radius: 8px; border: 1px solid var(--neon-purple); object-fit: cover; }
-        .brand-text { display: flex; flex-direction: column; }
-        .brand-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700; color: #ffffff; letter-spacing: 1px; }
-        .brand-subtitle { font-size: 0.8rem; color: var(--neon-pink); font-weight: 700; letter-spacing: 2px; }
-
-        .nav-actions { display: flex; gap: 15px; align-items: center; }
-        .btn-nav {
-            background: #11071a; color: #ffffff; padding: 8px 20px; border-radius: 6px;
-            text-decoration: none; font-weight: bold; display: flex; align-items: center;
-            gap: 8px; border: 1px solid var(--border-color); transition: 0.3s; font-size: 0.95rem;
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
         }
-        .btn-nav:hover { background: #1a0b2e; border-color: var(--neon-purple); }
-        .btn-discord { background: rgba(88, 101, 242, 0.1); border-color: #5865F2; color: #5865F2; }
-        .btn-discord:hover { background: #5865F2; color: #ffffff; border-color: #5865F2; }
 
-        .main-container { max-width: 1000px; margin: 0 auto; padding: 30px 20px; }
+        .nav-logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #a855f7;
+        }
+
+        .brand-text h1 {
+            font-size: 1.2rem;
+            color: #ffffff;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .brand-text span {
+            font-size: 0.75rem;
+            color: #a855f7;
+            font-weight: 600;
+            display: block;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: #1a0b2e;
+            color: #ffffff;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid #2a113d;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            border-color: #a855f7;
+            background: #251042;
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+        }
+
+        .nav-btn.discord {
+            background: #5865F2;
+            border-color: #5865F2;
+        }
+
+        .nav-btn.discord:hover {
+            background: #4752C4;
+            border-color: #4752C4;
+            box-shadow: 0 0 10px rgba(88, 101, 242, 0.4);
+        }
+
+        /* Container & Back Link */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 16px;
+        }
 
         .back-link {
-            display: inline-flex; align-items: center; gap: 8px; background: #0c0514;
-            color: #ffffff; padding: 8px 20px; border-radius: 8px; text-decoration: none;
-            border: 1px solid var(--border-color); margin-bottom: 25px; font-weight: 600; transition: 0.3s;
-        }
-        .back-link:hover { border-color: var(--neon-purple); box-shadow: 0 0 10px rgba(157, 0, 255, 0.2); }
-
-        .video-box {
-            width: 100%; aspect-ratio: 16/9; background: #000; border: 1px solid var(--border-color);
-            border-radius: 12px; overflow: hidden; position: relative; margin-bottom: 30px;
-        }
-        .yt-card { width: 100%; height: 100%; cursor: pointer; position: relative; }
-        .yt-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
-        .play-overlay {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            font-size: 60px; color: #ff0066; text-shadow: 0 0 20px rgba(255, 0, 102, 0.8);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #a855f7;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 20px;
+            background: #140924;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid #2a113d;
+            transition: all 0.3s ease;
         }
 
-        .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; color: #ffffff; margin-bottom: 20px; }
-        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .back-link:hover {
+            background: #1a0b2e;
+            color: #00f2fe;
+            border-color: #00f2fe;
+            transform: translateX(-3px);
+        }
+
+        /* Setup Video Section */
+        .video-section {
+            background: #140924;
+            border: 1px solid #2a113d;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .video-section h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #00f2fe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #0a0512;
+            border: 1px solid #2a113d;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 4px solid #a855f7;
+            padding-left: 12px;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
         .product-card {
-            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px;
-            padding: 25px 20px; text-align: center; transition: 0.3s; cursor: pointer;
+            background: #140924;
+            border: 1px solid #2a113d;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
-        .product-card:hover { border-color: var(--neon-purple); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(157, 0, 255, 0.15); }
-        .product-img { width: 120px; height: 120px; object-fit: contain; margin-bottom: 20px; }
-        .product-name { font-size: 1.4rem; font-weight: bold; margin-bottom: 10px; color: #ffffff; font-family: 'Orbitron', sans-serif; }
-        .price-tag { color: var(--neon-green); font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; }
 
-        .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(5, 2, 10, 0.95); z-index: 2000; justify-content: center; align-items: center; padding: 20px;
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #a855f7;
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.2);
         }
-        .modal-content {
-            background: var(--bg-card); border: 1px solid var(--neon-purple);
-            width: 100%; max-width: 500px; border-radius: 20px; padding: 30px; position: relative;
-        }
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #fff; }
 
-        .package-selector { margin: 20px 0; max-height: 250px; overflow-y: auto; }
-        .package-option {
-            background: rgba(157, 0, 255, 0.05); border: 1px solid var(--border-color);
-            padding: 15px; border-radius: 10px; margin-bottom: 10px;
-            display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.3s;
+        .product-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background: #1a0b2e;
+            border-bottom: 1px solid #2a113d;
         }
-        .package-option.active { border-color: var(--neon-purple); background: rgba(157, 0, 255, 0.25); }
 
-        .buy-now-btn {
-            width: 100%; padding: 16px; background: var(--neon-purple); color: white; border: none;
-            border-radius: 10px; font-weight: bold; font-size: 1.1rem; cursor: pointer; margin-top: 10px;
-            transition: 0.3s; font-family: 'Orbitron', sans-serif;
+        .product-info {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
-        .buy-now-btn:hover { background: #b01aff; box-shadow: 0 0 15px rgba(157, 0, 255, 0.4); }
-        #loading { text-align: center; color: var(--neon-purple); font-size: 1.5rem; padding: 40px; }
+
+        .product-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .product-pricing {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .old-price {
+            font-size: 0.9rem;
+            color: #888;
+            text-decoration: line-through;
+        }
+
+        .sale-price {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #00f2fe;
+        }
+
+        .btn-buy {
+            margin-top: auto;
+            width: 100%;
+            background: linear-gradient(135deg, #a855f7, #6b21a8);
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-buy:hover {
+            background: linear-gradient(135deg, #b866ff, #7e22ce);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+        }
+
+        /* Loading & Empty state */
+        .loading-spinner {
+            text-align: center;
+            padding: 40px;
+            grid-column: 1 / -1;
+            color: #a855f7;
+            font-size: 1.2rem;
+        }
+
+        /* Purchase Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 5, 18, 0.85);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 16px;
+        }
+
+        .modal-card {
+            background: #140924;
+            border: 1px solid #2a113d;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 480px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #2a113d;
+            padding-bottom: 12px;
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: #888;
+            font-size: 1.4rem;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            color: #ff4d4d;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            background: #1a0b2e;
+            border: 1px solid #2a113d;
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #a855f7;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            color: #0a0512;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+        }
     </style>
 </head>
 <body>
 
+    <!-- Header / Navbar -->
     <header class="navbar">
         <a href="index.html" class="nav-brand">
-            <img src="logo.png" alt="Logo">
+            <img src="logo.png" alt="Logo" class="nav-logo" onerror="this.style.display='none'">
             <div class="brand-text">
-                <span class="brand-title">BANGLA FF PANEL</span>
-                <span class="brand-subtitle">PREMIUM CORP</span>
+                <h1>BANGLA FF PANEL</h1>
+                <span>PREMIUM CORP</span>
             </div>
         </a>
         <div class="nav-actions">
-            <a href="index.html" class="btn-nav"><i class="fas fa-home"></i> Home</a>
-            <a href="https://discord.gg/ZBjSWaF7u" class="btn-nav btn-discord" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+            <a href="index.html" class="nav-btn"><i class="fas fa-home"></i> Home</a>
+            <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="nav-btn discord"><i class="fab fa-discord"></i> Discord</a>
         </div>
     </header>
 
-    <div class="main-container">
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Back Link Above Video Box -->
         <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
 
-        <div class="video-box" id="videoBox" style="display:none;">
-            <div id="ytCard" class="yt-card" style="display:none;">
-                <img id="ytThumb" src="" alt="Thumbnail">
-                <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+        <!-- Setup Video Section -->
+        <div class="video-section" id="videoContainer" style="display: none;">
+            <h2><i class="fas fa-play-circle"></i> Setup Video Tutorial</h2>
+            <div class="video-wrapper">
+                <iframe id="videoIframe" src="" allowfullscreen></iframe>
             </div>
-            <iframe id="driveFrame" style="display:none; width:100%; height:100%; border:none;" allow="autoplay"></iframe>
         </div>
 
-        <h2 class="section-title">PREMIUM PC PANELS</h2>
-        
-        <div id="loading"><i class="fas fa-spinner fa-spin"></i> Loading Panels...</div>
-        <div class="products-grid" id="productsGrid"></div>
-    </div>
+        <!-- Section Title -->
+        <h2 class="section-title"><i class="fas fa-desktop"></i> PC Panel Products</h2>
 
-    <!-- Purchase Modal -->
-    <div id="purchaseModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div id="modalBody">
-                <h2 id="modalProdName" style="color: #fff; font-family: 'Orbitron', sans-serif; margin-bottom:20px; text-align:center;"></h2>
-                <div class="package-selector" id="packageList"></div>
-                <label style="font-size: 0.9rem; color: var(--text-dim); display:block; margin-bottom:8px;">Discord Username or 18-Digit User ID:</label>
-                <input type="text" id="discordUser" placeholder="e.g. riju_vai or 123456789012345678" style="width:100%; padding:14px; background:#0c0514; border:1px solid var(--border-color); color:white; border-radius:8px; margin-bottom:20px; outline:none; font-size:1rem;">
-                <button class="buy-now-btn" onclick="processPurchase()">GET TICKET & PURCHASE</button>
-            </div>
+        <!-- Product Grid -->
+        <div class="product-grid" id="productGrid">
+            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Loading Products...</div>
         </div>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <!-- Modal Form -->
+    <div class="modal-overlay" id="purchaseModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalProductName">Buy PC Panel</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="purchaseForm" onsubmit="handleFormSubmit(event)">
+                <input type="hidden" id="selectedProductId">
+                <div class="form-group">
+                    <label for="packageSelect">Select Package / Duration</label>
+                    <select id="packageSelect" class="form-control" required onchange="updateModalPrice()">
+                        <!-- Dynamic Packages -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Total Price (৳)</label>
+                    <input type="text" id="modalPrice" class="form-control" readonly style="color: #00f2fe; font-weight: bold;">
+                </div>
+                <div class="form-group">
+                    <label for="userUid">Your Game UID / Discord Name</label>
+                    <input type="text" id="userUid" class="form-control" placeholder="Enter UID or Discord Tag" required>
+                </div>
+                <div class="form-group">
+                    <label for="paymentMethod">Payment Method</label>
+                    <select id="paymentMethod" class="form-control" required>
+                        <option value="bKash Personal (01869942698)">bKash Personal (01869942698)</option>
+                        <option value="Nagad Personal (01624528622)">Nagad Personal (01624528622)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="trxId">Transaction ID (TrxID)</label>
+                    <input type="text" id="trxId" class="form-control" placeholder="Enter Payment TrxID" required>
+                </div>
+                <button type="submit" class="btn-submit" id="submitBtn">Confirm Order</button>
+            </form>
+        </div>
+    </div>
 
     <script>
-        const firebaseConfig = { databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app" };
+        // Firebase Configuration
+        const firebaseConfig = {
+            databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app"
+        };
         firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
+        const database = firebase.database();
 
-        let selectedProduct = null;
-        let selectedPackage = null;
+        let currentProductsData = {};
 
-        function getSafePrice(item) {
-            if (!item) return 0;
-            const keys = ['salePrice', 'price', 'newPrice', 'buyPrice', 'resellPrice', 'value'];
-            for (let key of keys) {
-                if (item[key] !== undefined && item[key] !== null && parseInt(item[key]) > 0) return parseInt(item[key]);
-            }
-            return 0;
-        }
+        // Fetch Setup Video
+        database.ref('settings/video_pc').on('value', snapshot => {
+            const videoUrl = snapshot.val();
+            const videoContainer = document.getElementById('videoContainer');
+            const videoIframe = document.getElementById('videoIframe');
 
-        async function loadContent() {
-            db.ref('settings/video_pc').once('value', snapshot => {
-                const data = snapshot.val();
-                if (data && data.url) {
-                    const url = data.url;
-                    document.getElementById('videoBox').style.display = 'block';
-                    if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                        let vid = url.includes('v=') ? url.split('v=')[1].split('&')[0] : url.split('/').pop();
-                        document.getElementById('ytThumb').src = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
-                        document.getElementById('ytCard').style.display = 'block';
-                        document.getElementById('ytCard').onclick = () => window.open(url, '_blank');
-                    } else {
-                        document.getElementById('driveFrame').src = url.replace('/view', '/preview');
-                        document.getElementById('driveFrame').style.display = 'block';
-                    }
+            if (videoUrl && videoUrl.trim() !== "") {
+                let embedUrl = videoUrl;
+                if (videoUrl.includes('youtube.com/watch?v=')) {
+                    embedUrl = videoUrl.replace('watch?v=', 'embed/');
+                } else if (videoUrl.includes('youtu.be/')) {
+                    embedUrl = videoUrl.replace('youtu.be/', 'youtube.com/embed/');
+                } else if (videoUrl.includes('drive.google.com') && videoUrl.includes('/view')) {
+                    embedUrl = videoUrl.replace('/view', '/preview');
                 }
-            });
-
-            const grid = document.getElementById('productsGrid');
-
-            function renderProducts(dataObj) {
-                document.getElementById('loading').style.display = 'none';
-                grid.innerHTML = '';
-                if(!dataObj || typeof dataObj !== 'object') {
-                    grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: var(--text-dim);">No PC products available right now.</p>';
-                    return;
-                }
-
-                let count = 0;
-                Object.entries(dataObj).forEach(([key, p]) => {
-                    if(!p || typeof p !== 'object') return;
-                    if (key === 'mobile' || key === 'free' || key === 'settings' || key === 'users') return;
-
-                    p.id = key;
-                    let minPrice = getSafePrice(p);
-                    if (p.packages) {
-                        const pkgArray = Object.values(p.packages);
-                        if (pkgArray.length > 0) minPrice = getSafePrice(pkgArray[0]);
-                    }
-
-                    count++;
-                    const card = document.createElement('div');
-                    card.className = 'product-card';
-                    card.onclick = () => openModal(p);
-                    card.innerHTML = `
-                        <img src="${p.image || p.img || 'logo.png'}" class="product-img" onerror="this.src='logo.png'">
-                        <div class="product-name">${p.name || p.title || 'PC Panel'}</div>
-                        <div class="price-tag">Starting ৳${minPrice}</div>
-                        <div style="color: var(--text-dim); font-size: 0.9rem; background:#11071a; padding:8px; border-radius:6px;"><i class="fas fa-shopping-cart"></i> View Packages</div>
-                    `;
-                    grid.appendChild(card);
-                });
-
-                if(count === 0) {
-                    grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: var(--text-dim);">No PC products available right now.</p>';
-                }
-            }
-
-            db.ref('products/pc').on('value', snapshot => {
-                if (snapshot.exists() && snapshot.hasChildren()) {
-                    renderProducts(snapshot.val());
-                } else {
-                    db.ref('products').on('value', snap2 => {
-                        if (snap2.exists() && snap2.hasChildren()) {
-                            renderProducts(snap2.val());
-                        } else {
-                            db.ref().once('value', snap3 => {
-                                const val = snap3.val();
-                                if(val && val.products) renderProducts(val.products);
-                                else renderProducts(null);
-                            });
-                        }
-                    });
-                }
-            });
-        }
-
-        function openModal(product) {
-            selectedProduct = product;
-            document.getElementById('modalProdName').innerText = product.name || product.title || 'PC Panel';
-            const pkgList = document.getElementById('packageList');
-            pkgList.innerHTML = '';
-
-            let pkgArray = [];
-            if (product.packages) {
-                pkgArray = Object.entries(product.packages).map(([id, pkg]) => ({ ...pkg, id }));
+                videoIframe.src = embedUrl;
+                videoContainer.style.display = 'block';
             } else {
-                pkgArray = [{ id: 'default', qty: 1, unit: 'Days', price: getSafePrice(product) }];
+                videoContainer.style.display = 'none';
+            }
+        });
+
+        // Fetch PC Products from correct node 'pc_panels'
+        database.ref('pc_panels').on('value', snapshot => {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+            currentProductsData = snapshot.val() || {};
+
+            if (!snapshot.exists() || Object.keys(currentProductsData).length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888;">No PC Panels Available At The Moment.</p>';
+                return;
             }
 
-            pkgArray.forEach((pkg, index) => {
-                const price = getSafePrice(pkg);
-                const label = pkg.unit === 'Lifetime' ? 'Lifetime' : `${pkg.qty || 1} ${pkg.unit || 'Days'}`;
-                
-                const div = document.createElement('div');
-                div.className = `package-option ${index === 0 ? 'active' : ''}`;
-                if(index === 0) selectedPackage = { ...pkg, price };
-                
-                div.innerHTML = `
-                    <div style="font-weight:bold; font-size:1.1rem; color:#fff;">${label}</div>
-                    <div style="color: var(--neon-green); font-weight:bold; font-size:1.2rem; font-family:'Orbitron', sans-serif;">৳${price}</div>
-                `;
-                div.onclick = () => {
-                    document.querySelectorAll('.package-option').forEach(el => el.classList.remove('active'));
-                    div.classList.add('active');
-                    selectedPackage = { ...pkg, price };
-                };
-                pkgList.appendChild(div);
-            });
+            Object.keys(currentProductsData).forEach(key => {
+                const item = currentProductsData[key];
+                const oldPrice = item.oldPrice ? `৳${item.oldPrice}` : '';
+                const salePrice = item.salePrice ? `৳${item.salePrice}` : (item.price ? `৳${item.price}` : 'N/A');
 
+                const cardHTML = `
+                    <div class="product-card">
+                        <img src="${item.image || 'https://via.placeholder.com/300x180?text=PC+Panel'}" class="product-img" alt="${item.name}" onerror="this.src='https://via.placeholder.com/300x180?text=No+Image'">
+                        <div class="product-info">
+                            <h3 class="product-title">${item.name || 'PC Panel'}</h3>
+                            <div class="product-pricing">
+                                ${oldPrice ? `<span class="old-price">${oldPrice}</span>` : ''}
+                                <span class="sale-price">${salePrice}</span>
+                            </div>
+                            <button class="btn-buy" onclick="openModal('${key}')">
+                                <i class="fas fa-shopping-cart"></i> Buy Now
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += cardHTML;
+            });
+        });
+
+        // Modal Functionalities
+        function openModal(productId) {
+            const product = currentProductsData[productId];
+            if (!product) return;
+
+            document.getElementById('selectedProductId').value = productId;
+            document.getElementById('modalProductName').innerText = product.name;
+            
+            const pkgSelect = document.getElementById('packageSelect');
+            pkgSelect.innerHTML = '';
+
+            // Handle package pricing if available, else default to product price
+            if (product.packages && typeof product.packages === 'object' && Object.keys(product.packages).length > 0) {
+                Object.keys(product.packages).forEach(pkgName => {
+                    const option = document.createElement('option');
+                    option.value = product.packages[pkgName];
+                    option.textContent = `${pkgName} - ৳${product.packages[pkgName]}`;
+                    pkgSelect.appendChild(option);
+                });
+            } else {
+                const option = document.createElement('option');
+                option.value = product.salePrice || product.price || 0;
+                option.textContent = `Standard License - ৳${product.salePrice || product.price || 0}`;
+                pkgSelect.appendChild(option);
+            }
+
+            updateModalPrice();
             document.getElementById('purchaseModal').style.display = 'flex';
         }
 
-        function closeModal() { document.getElementById('purchaseModal').style.display = 'none'; }
+        function closeModal() {
+            document.getElementById('purchaseModal').style.display = 'none';
+        }
 
-        async function processPurchase() {
-            const discordUser = document.getElementById('discordUser').value.trim();
-            if (!discordUser) return alert("Please enter your Discord Username or User ID");
-            if (!selectedPackage) return alert("Please select a package.");
+        function updateModalPrice() {
+            const pkgSelect = document.getElementById('packageSelect');
+            document.getElementById('modalPrice').value = `৳${pkgSelect.value}`;
+        }
 
-            const btn = document.querySelector('.buy-now-btn');
-            btn.innerText = "CREATING TICKET...";
-            btn.disabled = true;
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Processing Order...';
 
-            const pkgText = selectedPackage.unit === 'Lifetime' ? 'Lifetime' : `${selectedPackage.qty || 1} ${selectedPackage.unit || 'Days'}`;
-            const finalPrice = getSafePrice(selectedPackage);
+            const productId = document.getElementById('selectedProductId').value;
+            const product = currentProductsData[productId];
+            const pkgSelect = document.getElementById('packageSelect');
+            const selectedPackageText = pkgSelect.options[pkgSelect.selectedIndex].text;
+            const uid = document.getElementById('userUid').value;
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const trxId = document.getElementById('trxId').value;
 
-            const ticketData = {
-                discordUserId: discordUser,
-                productName: selectedProduct.name || selectedProduct.title || 'PC Panel',
-                packageName: pkgText,
-                price: finalPrice,
-                paymentDetails: `
-**__Payment Numbers__**
-> bKash Personal: \`01869942698\`
-> Nagad Personal: \`01624528622\`
-
-**__Instructions__**
-1. Send Money (৳${finalPrice}) to any number above.
-2. Provide your Transaction ID and Screenshot in this ticket.
-3. Wait for <@&1560738050743468135> or <@&1560738926581252248> to verify.`
+            const orderPayload = {
+                type: 'PC Panel',
+                productName: product.name,
+                package: selectedPackageText,
+                price: document.getElementById('modalPrice').value,
+                userUid: uid,
+                paymentMethod: paymentMethod,
+                trxId: trxId,
+                timestamp: new Date().toISOString()
             };
 
             try {
-                const res = await fetch('https://bangla-ff-bot-server.onrender.com/create-ticket', {
+                // Send order payload to render bot server
+                await fetch('https://bangla-ff-bot-server.onrender.com/send-ticket', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(ticketData)
+                    body: JSON.stringify(orderPayload)
                 });
-                const result = await res.json();
-                if (result.success) {
-                    window.location.href = result.url;
-                } else {
-                    alert("Error: " + result.message);
-                }
+                alert('Order Submitted Successfully! Please check Discord for processing.');
+                closeModal();
             } catch (err) {
-                alert("Failed to connect to Bot Server.");
+                console.error('Error submitting order:', err);
+                alert('Order request placed! Connection warning: Discord notification may take a moment.');
+                closeModal();
             } finally {
-                btn.innerText = "GET TICKET & PURCHASE";
-                btn.disabled = false;
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Confirm Order';
             }
         }
-
-        loadContent();
     </script>
 </body>
 </html>
