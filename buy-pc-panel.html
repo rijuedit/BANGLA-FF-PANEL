@@ -3,559 +3,522 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PC Panel Store - BANGLA FF PANEL</title>
-    <!-- Font Awesome Icons -->
+    <title>PC PANEL PREMIUM - BANGLA FF PANEL</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Firebase SDK v8 -->
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background-color: #0a0512;
+            background-color: #07030b;
             color: #ffffff;
             min-height: 100vh;
         }
 
-        /* Header / Navbar */
+        /* ----- Premium Navbar ----- */
         .navbar {
-            background: #140924;
-            border-bottom: 2px solid #2a113d;
-            padding: 12px 24px;
+            background: #0d0614;
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid #2a113d;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .nav-logo {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #a855f7;
-        }
-
-        .brand-text h1 {
-            font-size: 1.2rem;
+        .btn-back {
+            background: transparent;
             color: #ffffff;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-        }
-
-        .brand-text span {
-            font-size: 0.75rem;
-            color: #a855f7;
-            font-weight: 600;
-            display: block;
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .nav-btn {
-            background: #1a0b2e;
-            color: #ffffff;
+            border: 1px solid #2a113d;
             padding: 8px 16px;
-            border-radius: 8px;
+            border-radius: 6px;
             text-decoration: none;
             font-size: 0.9rem;
             font-weight: 600;
-            border: 1px solid #2a113d;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
-
-        .nav-btn:hover {
-            border-color: #a855f7;
-            background: #251042;
-            box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
-        }
-
-        .nav-btn.discord {
-            background: #5865F2;
-            border-color: #5865F2;
-        }
-
-        .nav-btn.discord:hover {
-            background: #4752C4;
-            border-color: #4752C4;
-            box-shadow: 0 0 10px rgba(88, 101, 242, 0.4);
-        }
-
-        /* Container & Back Link */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 24px 16px;
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #a855f7;
-            text-decoration: none;
-            font-weight: 600;
-            margin-bottom: 20px;
-            background: #140924;
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: 1px solid #2a113d;
-            transition: all 0.3s ease;
-        }
-
-        .back-link:hover {
+        .btn-back:hover {
             background: #1a0b2e;
-            color: #00f2fe;
-            border-color: #00f2fe;
-            transform: translateX(-3px);
+            border-color: #ff007f;
         }
 
-        /* Setup Video Section */
-        .video-section {
-            background: #140924;
-            border: 1px solid #2a113d;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        .nav-logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #ff007f;
+            text-shadow: 0 0 10px rgba(255, 0, 127, 0.6);
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .video-section h2 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: #00f2fe;
+        .btn-discord {
+            background: transparent;
+            color: #5865F2;
+            border: 1px solid #5865F2;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        .btn-discord:hover {
+            background: #5865F2;
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
         }
 
-        .video-wrapper {
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* ----- Video Section ----- */
+        .video-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 40px auto;
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
+            border-radius: 12px;
             overflow: hidden;
-            border-radius: 8px;
-            background: #0a0512;
-            border: 1px solid #2a113d;
+            border: 2px solid #2a113d;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            aspect-ratio: 16/9;
+            background: #11071a;
+            display: none; /* Hidden until data loads */
         }
 
-        .video-wrapper iframe {
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ff007f;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.6);
+            border: none;
+            z-index: 2;
+            transition: 0.3s;
+        }
+        .play-btn:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.9);
+        }
+
+        .video-iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: 0;
+            border: none;
+            display: none;
+            z-index: 3;
         }
 
-        /* Section Title */
+        /* ----- Title ----- */
         .section-title {
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 40px;
             color: #ffffff;
             display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 10px;
-            border-left: 4px solid #a855f7;
-            padding-left: 12px;
+            gap: 12px;
+            letter-spacing: 1px;
+        }
+        .section-title i {
+            color: #ff007f;
+            text-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
         }
 
-        /* Product Grid */
-        .product-grid {
+        /* ----- Product Grid ----- */
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
         }
 
-        .product-card {
-            background: #140924;
+        .card {
+            background: #11071a;
             border: 1px solid #2a113d;
             border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            border-color: #a855f7;
-            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.2);
-        }
-
-        .product-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            background: #1a0b2e;
-            border-bottom: 1px solid #2a113d;
-        }
-
-        .product-info {
             padding: 16px;
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
+            transition: 0.3s;
+            position: relative;
         }
 
-        .product-title {
+        .card:hover {
+            border-color: #ff007f;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 170px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 1px solid #2a113d;
+        }
+
+        .card-title {
             font-size: 1.1rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
-
-        .product-pricing {
-            display: flex;
-            align-items: baseline;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .old-price {
-            font-size: 0.9rem;
-            color: #888;
-            text-decoration: line-through;
-        }
-
-        .sale-price {
-            font-size: 1.3rem;
             font-weight: 800;
-            color: #00f2fe;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #ffffff;
         }
 
         .btn-buy {
-            margin-top: auto;
-            width: 100%;
-            background: linear-gradient(135deg, #a855f7, #6b21a8);
-            color: #ffffff;
+            background: linear-gradient(90deg, #d500f9, #ff007f);
+            color: white;
             border: none;
             padding: 12px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.95rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 800;
             cursor: pointer;
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 8px;
-            transition: all 0.3s ease;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: auto;
+            transition: 0.3s;
         }
 
         .btn-buy:hover {
-            background: linear-gradient(135deg, #b866ff, #7e22ce);
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.6);
+            transform: scale(1.02);
         }
 
-        /* Loading & Empty state */
-        .loading-spinner {
-            text-align: center;
-            padding: 40px;
-            grid-column: 1 / -1;
-            color: #a855f7;
-            font-size: 1.2rem;
-        }
-
-        /* Purchase Modal */
+        /* ----- Modal (Strictly As Requested) ----- */
         .modal-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 5, 18, 0.85);
-            backdrop-filter: blur(5px);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 2000;
-            padding: 16px;
         }
 
-        .modal-card {
-            background: #140924;
-            border: 1px solid #2a113d;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 480px;
-            padding: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        .modal-box {
+            background: #0d0614;
+            width: 90%;
+            max-width: 450px;
+            border: 2px solid #ff007f;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.3);
             position: relative;
         }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #2a113d;
-            padding-bottom: 12px;
-        }
-
-        .modal-title {
-            font-size: 1.2rem;
-            color: #ffffff;
-            font-weight: 700;
-        }
-
         .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
             background: transparent;
             border: none;
             color: #888;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             cursor: pointer;
+            transition: 0.3s;
         }
+        .modal-close:hover { color: #ff007f; }
 
-        .modal-close:hover {
-            color: #ff4d4d;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.85rem;
-            color: #aaa;
-            margin-bottom: 6px;
-            font-weight: 600;
-        }
-
-        .form-control {
-            width: 100%;
-            background: #1a0b2e;
-            border: 1px solid #2a113d;
-            border-radius: 8px;
-            padding: 10px 14px;
-            color: #ffffff;
-            font-size: 0.95rem;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: #a855f7;
-        }
-
-        .btn-submit {
-            width: 100%;
-            background: linear-gradient(135deg, #00f2fe, #4facfe);
-            color: #0a0512;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
+        .modal-title {
+            text-align: center;
+            color: #ff007f;
+            font-size: 1.2rem;
             font-weight: 800;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255,0,127,0.4);
         }
 
-        .btn-submit:hover {
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+        .pkg-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .pkg-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #150a21;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #2a113d;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .pkg-item:hover, .pkg-item.selected {
+            border-color: #ff007f;
+            background: #1c0d2e;
+        }
+
+        .pkg-duration {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .pkg-prices {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pkg-old {
+            color: #666;
+            text-decoration: line-through;
+            font-size: 0.85rem;
+        }
+
+        .pkg-new {
+            color: #00ff7f; /* Neon Green */
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .btn-next {
+            background: #00ff7f;
+            color: #000;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-next:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 127, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .loading {
+            text-align: center;
+            color: #ff007f;
+            grid-column: 1/-1;
+            font-size: 1.2rem;
+            padding: 40px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header / Navbar -->
-    <header class="navbar">
-        <a href="index.html" class="nav-brand">
-            <img src="logo.png" alt="Logo" class="nav-logo" onerror="this.style.display='none'">
-            <div class="brand-text">
-                <h1>BANGLA FF PANEL</h1>
-                <span>PREMIUM CORP</span>
-            </div>
+    <!-- Premium Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> BACK</a>
+        <div class="nav-logo">BANGLA FF PANEL</div>
+        <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="btn-discord">
+            <i class="fab fa-discord"></i> DISCORD
         </a>
-        <div class="nav-actions">
-            <a href="index.html" class="nav-btn"><i class="fas fa-home"></i> Home</a>
-            <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="nav-btn discord"><i class="fab fa-discord"></i> Discord</a>
-        </div>
-    </header>
+    </nav>
 
-    <!-- Main Container -->
     <div class="container">
-        <!-- Back Link Above Video Box -->
-        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
-
-        <!-- Setup Video Section -->
-        <div class="video-section" id="videoContainer" style="display: none;">
-            <h2><i class="fas fa-play-circle"></i> Setup Video Tutorial</h2>
-            <div class="video-wrapper">
-                <iframe id="videoIframe" src="" allowfullscreen></iframe>
-            </div>
+        
+        <!-- Premium Video Section -->
+        <div class="video-container" id="videoContainer">
+            <img src="https://via.placeholder.com/800x450/11071a/ff007f?text=Loading+Thumbnail..." id="vidThumb" class="video-thumbnail" alt="Video Thumbnail">
+            <button class="play-btn" onclick="playVideo()"><i class="fas fa-play"></i></button>
+            <iframe id="vidIframe" class="video-iframe" allowfullscreen></iframe>
         </div>
 
         <!-- Section Title -->
-        <h2 class="section-title"><i class="fas fa-desktop"></i> PC Panel Products</h2>
+        <h2 class="section-title">
+            <i class="fas fa-desktop"></i> PC PANEL PREMIUM
+        </h2>
 
         <!-- Product Grid -->
-        <div class="product-grid" id="productGrid">
-            <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i> Loading Products...</div>
+        <div class="grid" id="productGrid">
+            <div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading Premium Panels...</div>
         </div>
+
     </div>
 
-    <!-- Modal Form -->
+    <!-- Purchase Modal -->
     <div class="modal-overlay" id="purchaseModal">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3 class="modal-title" id="modalProductName">Buy PC Panel</h3>
-                <button class="modal-close" onclick="closeModal()">&times;</button>
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <h3 class="modal-title" id="mTitle">PRODUCT NAME</h3>
+            
+            <div class="pkg-list" id="pkgList">
+                <!-- Packages will be injected here dynamically -->
             </div>
-            <form id="purchaseForm" onsubmit="handleFormSubmit(event)">
-                <input type="hidden" id="selectedProductId">
-                <div class="form-group">
-                    <label for="packageSelect">Select Package / Duration</label>
-                    <select id="packageSelect" class="form-control" required onchange="updateModalPrice()">
-                        <!-- Dynamic Packages -->
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Total Price (৳)</label>
-                    <input type="text" id="modalPrice" class="form-control" readonly style="color: #00f2fe; font-weight: bold;">
-                </div>
-                <div class="form-group">
-                    <label for="userUid">Your Game UID / Discord Name</label>
-                    <input type="text" id="userUid" class="form-control" placeholder="Enter UID or Discord Tag" required>
-                </div>
-                <div class="form-group">
-                    <label for="paymentMethod">Payment Method</label>
-                    <select id="paymentMethod" class="form-control" required>
-                        <option value="bKash Personal (01869942698)">bKash Personal (01869942698)</option>
-                        <option value="Nagad Personal (01624528622)">Nagad Personal (01624528622)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="trxId">Transaction ID (TrxID)</label>
-                    <input type="text" id="trxId" class="form-control" placeholder="Enter Payment TrxID" required>
-                </div>
-                <button type="submit" class="btn-submit" id="submitBtn">Confirm Order</button>
-            </form>
+
+            <button class="btn-next" id="btnNext" onclick="proceedToTicket()">NEXT: ORDER TICKET</button>
         </div>
     </div>
 
     <script>
-        // Firebase Configuration
         const firebaseConfig = {
             databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app"
         };
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
-        let currentProductsData = {};
+        let productsData = {};
+        let selectedProduct = null;
+        let selectedPackageInfo = null;
 
         // Fetch Setup Video
-        database.ref('settings/video_pc').on('value', snapshot => {
-            const videoUrl = snapshot.val();
-            const videoContainer = document.getElementById('videoContainer');
-            const videoIframe = document.getElementById('videoIframe');
+        database.ref('settings/video_pc').on('value', snap => {
+            const url = snap.val();
+            const container = document.getElementById('videoContainer');
+            const iframe = document.getElementById('vidIframe');
+            const thumb = document.getElementById('vidThumb');
 
-            if (videoUrl && videoUrl.trim() !== "") {
-                let embedUrl = videoUrl;
-                if (videoUrl.includes('youtube.com/watch?v=')) {
-                    embedUrl = videoUrl.replace('watch?v=', 'embed/');
-                } else if (videoUrl.includes('youtu.be/')) {
-                    embedUrl = videoUrl.replace('youtu.be/', 'youtube.com/embed/');
-                } else if (videoUrl.includes('drive.google.com') && videoUrl.includes('/view')) {
-                    embedUrl = videoUrl.replace('/view', '/preview');
+            if (url) {
+                container.style.display = 'block';
+                let embedUrl = url;
+                let thumbUrl = 'https://via.placeholder.com/800x450/11071a/ff007f?text=PC+Setup+Tutorial';
+
+                // Extract Youtube Thumbnail
+                if (url.includes('youtube.com/watch?v=')) {
+                    let videoId = url.split('v=')[1].substring(0, 11);
+                    embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                    thumbUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+                } else if (url.includes('youtu.be/')) {
+                    let videoId = url.split('youtu.be/')[1].substring(0, 11);
+                    embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                    thumbUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+                } else if (url.includes('drive.google.com')) {
+                    embedUrl = url.replace('/view', '/preview');
                 }
-                videoIframe.src = embedUrl;
-                videoContainer.style.display = 'block';
+
+                thumb.src = thumbUrl;
+                iframe.src = embedUrl;
             } else {
-                videoContainer.style.display = 'none';
+                container.style.display = 'none';
             }
         });
 
-        // Fetch PC Products from correct node 'pc_panels'
-        database.ref('pc_panels').on('value', snapshot => {
+        function playVideo() {
+            document.getElementById('vidThumb').style.display = 'none';
+            document.querySelector('.play-btn').style.display = 'none';
+            document.getElementById('vidIframe').style.display = 'block';
+        }
+
+        // Fetch PC Products
+        database.ref('pc_panels').on('value', snap => {
+            productsData = snap.val() || {};
             const grid = document.getElementById('productGrid');
             grid.innerHTML = '';
-            currentProductsData = snapshot.val() || {};
 
-            if (!snapshot.exists() || Object.keys(currentProductsData).length === 0) {
-                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888;">No PC Panels Available At The Moment.</p>';
+            if (Object.keys(productsData).length === 0) {
+                grid.innerHTML = '<div class="loading">No panels available right now.</div>';
                 return;
             }
 
-            Object.keys(currentProductsData).forEach(key => {
-                const item = currentProductsData[key];
-                const oldPrice = item.oldPrice ? `৳${item.oldPrice}` : '';
-                const salePrice = item.salePrice ? `৳${item.salePrice}` : (item.price ? `৳${item.price}` : 'N/A');
-
-                const cardHTML = `
-                    <div class="product-card">
-                        <img src="${item.image || 'https://via.placeholder.com/300x180?text=PC+Panel'}" class="product-img" alt="${item.name}" onerror="this.src='https://via.placeholder.com/300x180?text=No+Image'">
-                        <div class="product-info">
-                            <h3 class="product-title">${item.name || 'PC Panel'}</h3>
-                            <div class="product-pricing">
-                                ${oldPrice ? `<span class="old-price">${oldPrice}</span>` : ''}
-                                <span class="sale-price">${salePrice}</span>
-                            </div>
-                            <button class="btn-buy" onclick="openModal('${key}')">
-                                <i class="fas fa-shopping-cart"></i> Buy Now
-                            </button>
-                        </div>
+            Object.keys(productsData).forEach(key => {
+                const item = productsData[key];
+                
+                // HTML strict as per screenshot. No N/A, just clean info.
+                const card = `
+                    <div class="card">
+                        <img src="${item.image || 'https://via.placeholder.com/300x170/1a0b2e/ff007f?text=Premium+Panel'}" class="card-img" alt="Panel">
+                        <h3 class="card-title">${item.name || 'Premium Panel'}</h3>
+                        <button class="btn-buy" onclick="openModal('${key}')">
+                            <i class="fas fa-shopping-cart"></i> BUY NOW
+                        </button>
                     </div>
                 `;
-                grid.innerHTML += cardHTML;
+                grid.innerHTML += card;
             });
         });
 
-        // Modal Functionalities
-        function openModal(productId) {
-            const product = currentProductsData[productId];
-            if (!product) return;
+        // Modal Functionality
+        function openModal(key) {
+            selectedProduct = productsData[key];
+            document.getElementById('mTitle').innerText = selectedProduct.name;
+            const pkgList = document.getElementById('pkgList');
+            pkgList.innerHTML = '';
+            selectedPackageInfo = null;
 
-            document.getElementById('selectedProductId').value = productId;
-            document.getElementById('modalProductName').innerText = product.name;
-            
-            const pkgSelect = document.getElementById('packageSelect');
-            pkgSelect.innerHTML = '';
+            let pkgs = selectedProduct.packages || {};
+            let hasPackages = Object.keys(pkgs).length > 0;
 
-            // Handle package pricing if available, else default to product price
-            if (product.packages && typeof product.packages === 'object' && Object.keys(product.packages).length > 0) {
-                Object.keys(product.packages).forEach(pkgName => {
-                    const option = document.createElement('option');
-                    option.value = product.packages[pkgName];
-                    option.textContent = `${pkgName} - ৳${product.packages[pkgName]}`;
-                    pkgSelect.appendChild(option);
+            if (hasPackages) {
+                Object.keys(pkgs).forEach((pkgName, index) => {
+                    const price = pkgs[pkgName];
+                    // Using oldPrice algorithm if set, else simple visual cut
+                    let oldP = selectedProduct.oldPrice ? (parseInt(price) + parseInt(selectedProduct.oldPrice - selectedProduct.salePrice)) : parseInt(price) + 300;
+                    
+                    pkgList.innerHTML += `
+                        <div class="pkg-item ${index === 0 ? 'selected' : ''}" onclick="selectPackage(this, '${pkgName}', '${price}')">
+                            <span class="pkg-duration">${pkgName}</span>
+                            <div class="pkg-prices">
+                                <span class="pkg-old">${oldP}</span>
+                                <span class="pkg-new">${price}</span>
+                            </div>
+                        </div>
+                    `;
+                    // auto select first
+                    if (index === 0) selectedPackageInfo = { duration: pkgName, price: price };
                 });
             } else {
-                const option = document.createElement('option');
-                option.value = product.salePrice || product.price || 0;
-                option.textContent = `Standard License - ৳${product.salePrice || product.price || 0}`;
-                pkgSelect.appendChild(option);
+                // Default fallback if admin didn't set packages
+                const sPrice = selectedProduct.salePrice || selectedProduct.price || '0';
+                const oPrice = selectedProduct.oldPrice || (parseInt(sPrice) + 400);
+                pkgList.innerHTML = `
+                    <div class="pkg-item selected" onclick="selectPackage(this, 'Standard License', '${sPrice}')">
+                        <span class="pkg-duration">Standard License</span>
+                        <div class="pkg-prices">
+                            <span class="pkg-old">${oPrice}</span>
+                            <span class="pkg-new">${sPrice}</span>
+                        </div>
+                    </div>
+                `;
+                selectedPackageInfo = { duration: 'Standard License', price: sPrice };
             }
 
-            updateModalPrice();
             document.getElementById('purchaseModal').style.display = 'flex';
         }
 
@@ -563,53 +526,49 @@
             document.getElementById('purchaseModal').style.display = 'none';
         }
 
-        function updateModalPrice() {
-            const pkgSelect = document.getElementById('packageSelect');
-            document.getElementById('modalPrice').value = `৳${pkgSelect.value}`;
+        function selectPackage(el, duration, price) {
+            document.querySelectorAll('.pkg-item').forEach(item => item.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedPackageInfo = { duration, price };
         }
 
-        async function handleFormSubmit(e) {
-            e.preventDefault();
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.disabled = true;
-            submitBtn.innerText = 'Processing Order...';
+        // Proceed to Ticket (Webhook payload)
+        function proceedToTicket() {
+            if (!selectedPackageInfo) {
+                alert("Please select a package.");
+                return;
+            }
+            
+            const btn = document.getElementById('btnNext');
+            btn.innerText = 'PROCESSING...';
+            btn.style.opacity = '0.7';
 
-            const productId = document.getElementById('selectedProductId').value;
-            const product = currentProductsData[productId];
-            const pkgSelect = document.getElementById('packageSelect');
-            const selectedPackageText = pkgSelect.options[pkgSelect.selectedIndex].text;
-            const uid = document.getElementById('userUid').value;
-            const paymentMethod = document.getElementById('paymentMethod').value;
-            const trxId = document.getElementById('trxId').value;
-
-            const orderPayload = {
-                type: 'PC Panel',
-                productName: product.name,
-                package: selectedPackageText,
-                price: document.getElementById('modalPrice').value,
-                userUid: uid,
-                paymentMethod: paymentMethod,
-                trxId: trxId,
+            const payload = {
+                type: 'PC Panel Order Request',
+                productName: selectedProduct.name,
+                package: selectedPackageInfo.duration,
+                price: selectedPackageInfo.price,
                 timestamp: new Date().toISOString()
             };
 
-            try {
-                // Send order payload to render bot server
-                await fetch('https://bangla-ff-bot-server.onrender.com/send-ticket', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(orderPayload)
-                });
-                alert('Order Submitted Successfully! Please check Discord for processing.');
+            // Send to Discord bot silently
+            fetch('https://bangla-ff-bot-server.onrender.com/send-ticket', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(() => {
+                alert('Request processing started! Please check Discord / Create a ticket on Discord server to complete the payment.');
                 closeModal();
-            } catch (err) {
-                console.error('Error submitting order:', err);
-                alert('Order request placed! Connection warning: Discord notification may take a moment.');
+                btn.innerText = 'NEXT: ORDER TICKET';
+                btn.style.opacity = '1';
+                window.open("https://discord.gg/ZBjSWaF7u", "_blank"); // Take them to discord
+            }).catch(() => {
+                alert('Taking you to Discord to complete the order...');
                 closeModal();
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerText = 'Confirm Order';
-            }
+                btn.innerText = 'NEXT: ORDER TICKET';
+                btn.style.opacity = '1';
+                window.open("https://discord.gg/ZBjSWaF7u", "_blank");
+            });
         }
     </script>
 </body>
