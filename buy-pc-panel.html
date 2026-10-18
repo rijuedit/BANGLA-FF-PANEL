@@ -8,12 +8,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
         body {
             background-color: #07030b;
@@ -23,20 +18,16 @@
             position: relative;
         }
 
-        /* Mouse Glow Effect */
         #mouse-glow {
             position: fixed;
-            width: 350px;
-            height: 350px;
+            width: 350px; height: 350px;
             background: radial-gradient(circle, rgba(157, 0, 255, 0.18) 0%, rgba(255, 0, 102, 0.05) 50%, transparent 70%);
             pointer-events: none;
             z-index: 0;
             transform: translate(-50%, -50%);
-            transition: width 0.2s, height 0.2s;
             border-radius: 50%;
         }
 
-        /* ----- Navbar ----- */
         .navbar {
             background: #0d0614;
             padding: 15px 30px;
@@ -58,17 +49,12 @@
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: 700;
-            transition: 0.3s;
             display: flex;
             align-items: center;
             gap: 6px;
+            transition: 0.3s;
         }
-
-        .btn-back:hover {
-            background: #1a0b2e;
-            border-color: #ff007f;
-            color: #ff007f;
-        }
+        .btn-back:hover { border-color: #ff007f; color: #ff007f; }
 
         .nav-logo {
             font-size: 1.3rem;
@@ -93,7 +79,6 @@
             gap: 8px;
             transition: 0.3s;
         }
-
         .btn-discord:hover {
             background: #5865F2;
             color: #ffffff;
@@ -108,7 +93,7 @@
             z-index: 1;
         }
 
-        /* ----- Video Section (Auto Hidden if Empty) ----- */
+        /* Video */
         .video-container {
             width: 100%;
             max-width: 800px;
@@ -122,71 +107,35 @@
             background: #11071a;
             display: none;
         }
-
-        .video-thumbnail {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.75;
-        }
-
+        .video-thumbnail { width: 100%; height: 100%; object-fit: cover; opacity: 0.75; }
         .play-btn {
-            position: absolute;
-            top: 50%;
-            left: 50%;
+            position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            background: #ff007f;
-            color: white;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.6rem;
-            cursor: pointer;
+            background: #ff007f; color: white;
+            width: 65px; height: 65px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 1.6rem; cursor: pointer; border: none; z-index: 2;
             box-shadow: 0 0 25px rgba(255, 0, 127, 0.8);
-            border: none;
-            z-index: 2;
             transition: 0.3s;
         }
-
-        .play-btn:hover {
-            transform: translate(-50%, -50%) scale(1.1);
-            box-shadow: 0 0 35px rgba(255, 0, 127, 1);
-        }
-
+        .play-btn:hover { transform: translate(-50%, -50%) scale(1.1); }
         .video-iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: none;
-            z-index: 3;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            border: none; display: none; z-index: 3;
         }
 
-        /* ----- Section Title ----- */
         .section-title {
             text-align: center;
             font-size: 1.8rem;
             font-weight: 800;
             margin-bottom: 35px;
-            color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 12px;
-            letter-spacing: 1px;
         }
+        .section-title i { color: #ff007f; text-shadow: 0 0 15px rgba(255, 0, 127, 0.6); }
 
-        .section-title i {
-            color: #ff007f;
-            text-shadow: 0 0 15px rgba(255, 0, 127, 0.6);
-        }
-
-        /* ----- Product Grid ----- */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -200,228 +149,118 @@
             padding: 16px;
             display: flex;
             flex-direction: column;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
-
         .card:hover {
             border-color: #ff007f;
             box-shadow: 0 0 20px rgba(255, 0, 127, 0.3);
             transform: translateY(-5px);
         }
-
         .card-img {
-            width: 100%;
-            height: 175px;
-            border-radius: 10px;
-            object-fit: cover;
-            margin-bottom: 15px;
-            border: 1px solid #2a113d;
+            width: 100%; height: 175px;
+            border-radius: 10px; object-fit: cover;
+            margin-bottom: 15px; border: 1px solid #2a113d;
         }
-
         .card-title {
-            font-size: 1.1rem;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #ffffff;
-            letter-spacing: 0.5px;
+            font-size: 1.1rem; font-weight: 800;
+            text-align: center; margin-bottom: 20px;
         }
-
         .btn-buy {
             background: linear-gradient(90deg, #d500f9, #ff007f);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 30px;
-            font-size: 0.95rem;
-            font-weight: 800;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-            margin-top: auto;
+            color: white; border: none; padding: 12px;
+            border-radius: 30px; font-size: 0.95rem; font-weight: 800;
+            cursor: pointer; display: flex; justify-content: center;
+            align-items: center; gap: 10px; width: 100%; margin-top: auto;
             transition: 0.3s;
         }
-
-        .btn-buy:hover {
-            box-shadow: 0 0 20px rgba(255, 0, 127, 0.7);
-            transform: scale(1.02);
-        }
+        .btn-buy:hover { box-shadow: 0 0 20px rgba(255, 0, 127, 0.7); transform: scale(1.02); }
 
         .no-data {
             grid-column: 1 / -1;
-            text-align: center;
-            padding: 50px;
-            color: #888;
-            font-size: 1.1rem;
+            text-align: center; padding: 50px; color: #888; font-size: 1.1rem;
         }
 
-        /* ----- Two-Step Purchase Modal ----- */
+        /* Modal */
         .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(8px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            padding: 15px;
+            display: none; justify-content: center; align-items: center;
+            z-index: 2000; padding: 15px;
         }
-
         .modal-box {
             background: #0d0614;
-            width: 100%;
-            max-width: 440px;
+            width: 100%; max-width: 440px;
             border: 2px solid #ff007f;
-            border-radius: 16px;
-            padding: 25px;
+            border-radius: 16px; padding: 25px;
             box-shadow: 0 0 30px rgba(255, 0, 127, 0.35);
             position: relative;
         }
-
         .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: transparent;
-            border: none;
-            color: #888;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: 0.3s;
+            position: absolute; top: 15px; right: 15px;
+            background: transparent; border: none; color: #888;
+            font-size: 1.2rem; cursor: pointer;
         }
         .modal-close:hover { color: #ff007f; }
-
         .modal-title {
-            text-align: center;
-            color: #ff007f;
-            font-size: 1.2rem;
-            font-weight: 800;
-            margin-bottom: 22px;
-            text-transform: uppercase;
+            text-align: center; color: #ff007f;
+            font-size: 1.2rem; font-weight: 800;
+            margin-bottom: 22px; text-transform: uppercase;
             text-shadow: 0 0 10px rgba(255,0,127,0.4);
         }
 
-        /* Step 1: Packages List */
         .package-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 22px;
-            max-height: 280px;
-            overflow-y: auto;
+            display: flex; flex-direction: column; gap: 12px;
+            margin-bottom: 22px; max-height: 280px; overflow-y: auto;
         }
-
         .package-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #140921;
-            padding: 14px 18px;
-            border-radius: 10px;
-            border: 1px solid #2a113d;
-            cursor: pointer;
-            transition: 0.3s;
+            display: flex; justify-content: space-between; align-items: center;
+            background: #140921; padding: 14px 18px;
+            border-radius: 10px; border: 1px solid #2a113d;
+            cursor: pointer; transition: 0.3s;
         }
-
         .package-item:hover, .package-item.selected {
-            border-color: #ff007f;
-            background: #1e0b33;
+            border-color: #ff007f; background: #1e0b33;
             box-shadow: 0 0 10px rgba(255, 0, 127, 0.2);
         }
-
-        .pkg-duration {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        .pkg-price-box {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
+        .pkg-duration { font-size: 0.95rem; font-weight: 700; color: #fff; }
+        .pkg-price-box { display: flex; align-items: center; gap: 12px; }
         .pkg-old-price {
-            color: #777777;
-            text-decoration: line-through;
-            font-size: 0.88rem;
-            font-weight: 600;
+            color: #777; text-decoration: line-through;
+            font-size: 0.88rem; font-weight: 600;
         }
-
         .pkg-sell-price {
-            color: #00ff7f; /* Bright Neon Green */
-            font-weight: 800;
-            font-size: 1.15rem;
+            color: #00ff7f; font-weight: 800; font-size: 1.15rem;
         }
 
-        /* Step 2: Customer Details Form */
-        .input-group {
-            margin-bottom: 20px;
-        }
-
+        .input-group { margin-bottom: 20px; }
         .input-group label {
-            display: block;
-            color: #ffffff;
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 10px;
+            display: block; color: #fff; font-size: 0.95rem;
+            font-weight: 700; margin-bottom: 10px;
         }
-
         .input-group input {
-            width: 100%;
-            background: #180a29;
-            border: 1px solid #2a113d;
-            border-radius: 8px;
-            padding: 12px 16px;
-            color: #ffffff;
-            font-size: 0.95rem;
-            outline: none;
-            transition: 0.3s;
+            width: 100%; background: #180a29;
+            border: 1px solid #2a113d; border-radius: 8px;
+            padding: 12px 16px; color: #fff; font-size: 0.95rem; outline: none;
         }
-
-        .input-group input:focus {
-            border-color: #ff007f;
-        }
-
+        .input-group input:focus { border-color: #ff007f; }
         .id-help-text {
-            display: block;
-            font-size: 0.78rem;
-            color: #888888;
-            margin-top: 8px;
-            font-weight: 500;
+            display: block; font-size: 0.78rem; color: #888; margin-top: 8px;
         }
 
-        /* Neon Action Buttons */
         .btn-modal-action {
-            background: #00ff7f;
-            color: #000000;
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            font-size: 0.95rem;
-            font-weight: 800;
-            cursor: pointer;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            background: #00ff7f; color: #000; width: 100%;
+            padding: 14px; border: none; border-radius: 10px;
+            font-size: 0.95rem; font-weight: 800; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 0.5px; transition: 0.3s;
         }
-
         .btn-modal-action:hover {
             box-shadow: 0 0 20px rgba(0, 255, 127, 0.6);
             transform: translateY(-2px);
         }
-
         .btn-modal-action:disabled {
-            background: #333;
-            color: #666;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+            background: #333; color: #666; cursor: not-allowed;
+            transform: none; box-shadow: none;
         }
     </style>
 </head>
@@ -429,7 +268,6 @@
 
     <div id="mouse-glow"></div>
 
-    <!-- Header / Navbar -->
     <nav class="navbar">
         <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> BACK</a>
         <div class="nav-logo">BANGLA FF PANEL</div>
@@ -438,43 +276,34 @@
         </a>
     </nav>
 
-    <!-- Main Content Container -->
     <div class="container">
-        
-        <!-- Video Tutorial Section -->
+        <!-- Video -->
         <div class="video-container" id="videoContainer">
-            <img src="https://via.placeholder.com/800x450/11071a/ff007f?text=Loading+Thumbnail..." id="vidThumb" class="video-thumbnail" alt="Video Tutorial">
+            <img src="https://via.placeholder.com/800x450/11071a/ff007f?text=Loading..." id="vidThumb" class="video-thumbnail" alt="Video">
             <button class="play-btn" id="playBtn"><i class="fas fa-play"></i></button>
             <iframe id="vidIframe" class="video-iframe" allowfullscreen></iframe>
         </div>
 
-        <!-- Section Title -->
-        <h2 class="section-title">
-            <i class="fas fa-desktop"></i> PC PANEL PREMIUM
-        </h2>
+        <h2 class="section-title"><i class="fas fa-desktop"></i> PC PANEL PREMIUM</h2>
 
-        <!-- Product Grid -->
         <div class="grid" id="pc-grid">
             <div class="no-data"><i class="fas fa-spinner fa-spin"></i> Loading Products...</div>
         </div>
-
     </div>
 
-    <!-- Purchase Modal (Two-Step Flow) -->
+    <!-- Modal -->
     <div class="modal-overlay" id="purchaseModal">
         <div class="modal-box">
             <button class="modal-close" id="closeModal"><i class="fas fa-times"></i></button>
-            
-            <!-- STEP 1: Package Selection -->
+
+            <!-- Step 1 -->
             <div id="step-packages">
                 <h3 class="modal-title" id="modalProductName">PRODUCT NAME</h3>
-                <div class="package-list" id="packageContainer">
-                    <!-- Dynamic Packages -->
-                </div>
+                <div class="package-list" id="packageContainer"></div>
                 <button class="btn-modal-action" id="btnNextStep">NEXT: ORDER TICKET</button>
             </div>
 
-            <!-- STEP 2: Customer Details -->
+            <!-- Step 2 -->
             <div id="step-user-id" style="display: none;">
                 <h3 class="modal-title">CUSTOMER DETAILS</h3>
                 <div class="input-group">
@@ -484,7 +313,6 @@
                 </div>
                 <button class="btn-modal-action" id="btnConfirmOrder">PROCEED TO DISCORD TICKET</button>
             </div>
-
         </div>
     </div>
 
@@ -492,7 +320,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getDatabase, ref, onValue, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-        // Firebase Setup (Your Original Setup)
         const firebaseConfig = {
             apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
             authDomain: "bangla-ff-admin.firebaseapp.com",
@@ -507,27 +334,24 @@
         const db = getDatabase(app);
         const BOT_SERVER_URL = "https://bangla-ff-bot-server.onrender.com";
 
-        // Global Link Fallbacks
         let globalBuyLink = "";
-        get(ref(db, 'site_settings/pc_panel/buy_link')).then(snapshot => {
-            if (snapshot.exists() && snapshot.val()) globalBuyLink = snapshot.val();
+        get(ref(db, 'site_settings/pc_panel/buy_link')).then(s => {
+            if (s.exists() && s.val()) globalBuyLink = s.val();
         });
 
         onValue(ref(db, 'global_settings/discord_link'), (snapshot) => {
             const link = snapshot.val() || "https://discord.gg/ZBjSWaF7u";
-            document.querySelectorAll('.dynamic-discord').forEach(btn => {
-                btn.href = link;
-            });
+            document.querySelectorAll('.dynamic-discord').forEach(btn => btn.href = link);
         });
 
-        // Mouse Glow Effect
+        // Mouse glow
         const mouseGlow = document.getElementById('mouse-glow');
         document.addEventListener('mousemove', (e) => {
             mouseGlow.style.left = e.clientX + 'px';
             mouseGlow.style.top = e.clientY + 'px';
         });
 
-        // Setup Video Auto-Load (V10 format)
+        // Video
         onValue(ref(db, 'settings/video_pc'), (snapshot) => {
             const url = snapshot.val();
             const container = document.getElementById('videoContainer');
@@ -537,7 +361,7 @@
             if (url && url.trim() !== '') {
                 container.style.display = 'block';
                 let embedUrl = url;
-                let thumbUrl = 'https://via.placeholder.com/800x450/11071a/ff007f?text=PC+Panel+Setup+Tutorial';
+                let thumbUrl = 'https://via.placeholder.com/800x450/11071a/ff007f?text=PC+Setup+Tutorial';
 
                 if (url.includes('youtube.com/watch?v=')) {
                     let vId = url.split('v=')[1].substring(0, 11);
@@ -550,7 +374,6 @@
                 } else if (url.includes('drive.google.com')) {
                     embedUrl = url.replace('/view', '/preview');
                 }
-
                 thumb.src = thumbUrl;
                 iframe.src = embedUrl;
             } else {
@@ -564,7 +387,6 @@
             document.getElementById('vidIframe').style.display = 'block';
         };
 
-        // Modal Variables
         const pcGrid = document.getElementById('pc-grid');
         const purchaseModal = document.getElementById('purchaseModal');
         const closeModalBtn = document.getElementById('closeModal');
@@ -579,7 +401,51 @@
         let selectedProductTitle = "";
         let selectedPackageData = null;
 
-        // Load Products
+        // ========== SMART PACKAGE PARSER (fixes undefined) ==========
+        function parsePackages(raw) {
+            const result = [];
+            if (!raw) return result;
+
+            // Case A: Array of objects  [{duration, old_price, sell_price}, ...]
+            if (Array.isArray(raw)) {
+                raw.forEach((pkg, idx) => {
+                    if (pkg === null || pkg === undefined) return;
+                    if (typeof pkg === 'object') {
+                        result.push({
+                            duration: pkg.duration || pkg.name || pkg.title || pkg.time || `Package ${idx + 1}`,
+                            old_price: pkg.old_price || pkg.oldPrice || pkg.old || pkg.oldprice || '',
+                            sell_price: pkg.sell_price || pkg.salePrice || pkg.sale_price || pkg.price || pkg.amount || pkg.val || pkg.sellPrice || ''
+                        });
+                    } else {
+                        result.push({ duration: `Option ${idx + 1}`, old_price: '', sell_price: pkg });
+                    }
+                });
+                return result;
+            }
+
+            // Case B: Object  { "1 Months": 1100 }  OR  { "1 Months": {sell_price:1100, old_price:1500} }
+            if (typeof raw === 'object') {
+                Object.keys(raw).forEach((key) => {
+                    const val = raw[key];
+                    if (typeof val === 'object' && val !== null) {
+                        result.push({
+                            duration: val.duration || val.name || key,
+                            old_price: val.old_price || val.oldPrice || val.old || '',
+                            sell_price: val.sell_price || val.salePrice || val.sale_price || val.price || val.amount || ''
+                        });
+                    } else {
+                        result.push({
+                            duration: key,
+                            old_price: '',
+                            sell_price: val
+                        });
+                    }
+                });
+            }
+            return result;
+        }
+
+        // Load products
         onValue(ref(db, 'pc_panels'), (snapshot) => {
             pcGrid.innerHTML = '';
             if (!snapshot.exists()) {
@@ -590,13 +456,17 @@
             snapshot.forEach((childSnapshot) => {
                 const itemKey = childSnapshot.key;
                 const item = childSnapshot.val();
+                const title = item.title || item.name || 'PC Panel';
+                const image = item.image || item.img || 'https://via.placeholder.com/300x175/11071a/ff007f?text=PC+PANEL';
 
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
-                    <img src="${item.image || 'https://via.placeholder.com/300x175/11071a/ff007f?text=PC+PANEL'}" class="card-img" alt="${item.title}" onerror="this.src='https://via.placeholder.com/300x175/11071a/ff007f?text=No+Image'">
-                    <h3 class="card-title">${item.title}</h3>
-                    <button class="btn-buy" onclick="openOrderModal('${itemKey}')"><i class="fas fa-shopping-cart"></i> BUY NOW</button>
+                    <img src="${image}" class="card-img" alt="${title}" onerror="this.src='https://via.placeholder.com/300x175/11071a/ff007f?text=No+Image'">
+                    <h3 class="card-title">${title}</h3>
+                    <button class="btn-buy" onclick="openOrderModal('${itemKey}')">
+                        <i class="fas fa-shopping-cart"></i> BUY NOW
+                    </button>
                 `;
                 pcGrid.appendChild(card);
             });
@@ -607,38 +477,68 @@
             get(ref(db, `pc_panels/${itemKey}`)).then((snapshot) => {
                 if (!snapshot.exists()) return;
                 const data = snapshot.val();
-                selectedProductTitle = data.title;
-                selectedPackageData = null;
 
-                modalProductName.innerText = data.title;
-                packageContainer.innerHTML = '';
+                selectedProductTitle = data.title || data.name || 'PC Panel';
+                selectedPackageData = null;
                 discordIdInput.value = '';
 
-                // Read packages EXACTLY like your old code
-                if (data.packages && data.packages.length > 0) {
-                    data.packages.forEach((pkg, index) => {
-                        const isSelected = index === 0; // Auto-select first item
+                modalProductName.innerText = selectedProductTitle;
+                packageContainer.innerHTML = '';
+
+                // Use smart parser
+                const packages = parsePackages(data.packages || data.package || data.prices);
+
+                if (packages.length > 0) {
+                    packages.forEach((pkg, index) => {
+                        const isSelected = index === 0;
                         const pkgDiv = document.createElement('div');
                         pkgDiv.className = `package-item ${isSelected ? 'selected' : ''}`;
+
+                        const oldHTML = pkg.old_price ? `<span class="pkg-old-price">${pkg.old_price}</span>` : '';
+                        const sellVal = (pkg.sell_price !== '' && pkg.sell_price !== undefined && pkg.sell_price !== null) ? pkg.sell_price : '0';
+
                         pkgDiv.innerHTML = `
                             <span class="pkg-duration">${pkg.duration}</span>
                             <div class="pkg-price-box">
-                                ${pkg.old_price ? `<span class="pkg-old-price">${pkg.old_price}</span>` : ''}
-                                <span class="pkg-sell-price">${pkg.sell_price}</span>
+                                ${oldHTML}
+                                <span class="pkg-sell-price">${sellVal}</span>
                             </div>
                         `;
-                        
-                        if (isSelected) selectedPackageData = pkg;
+
+                        if (isSelected) {
+                            selectedPackageData = {
+                                duration: pkg.duration,
+                                sell_price: sellVal,
+                                old_price: pkg.old_price || ''
+                            };
+                        }
 
                         pkgDiv.onclick = () => {
                             document.querySelectorAll('.package-item').forEach(el => el.classList.remove('selected'));
                             pkgDiv.classList.add('selected');
-                            selectedPackageData = pkg;
+                            selectedPackageData = {
+                                duration: pkg.duration,
+                                sell_price: sellVal,
+                                old_price: pkg.old_price || ''
+                            };
                         };
                         packageContainer.appendChild(pkgDiv);
                     });
                 } else {
-                    packageContainer.innerHTML = '<div style="text-align:center; color:#777; padding:20px;">No packages configured.</div>';
+                    // Fallback single price from product root
+                    const fallbackPrice = data.sell_price || data.salePrice || data.price || '0';
+                    const fallbackOld = data.old_price || data.oldPrice || '';
+                    const pkgDiv = document.createElement('div');
+                    pkgDiv.className = 'package-item selected';
+                    pkgDiv.innerHTML = `
+                        <span class="pkg-duration">Standard License</span>
+                        <div class="pkg-price-box">
+                            ${fallbackOld ? `<span class="pkg-old-price">${fallbackOld}</span>` : ''}
+                            <span class="pkg-sell-price">${fallbackPrice}</span>
+                        </div>
+                    `;
+                    selectedPackageData = { duration: 'Standard License', sell_price: fallbackPrice, old_price: fallbackOld };
+                    packageContainer.appendChild(pkgDiv);
                 }
 
                 stepPackages.style.display = 'block';
@@ -647,7 +547,6 @@
             });
         };
 
-        // Go to Step 2
         btnNextStep.onclick = () => {
             if (!selectedPackageData) {
                 alert("দয়া করে যেকোনো একটি প্যাকেজ সিলেক্ট করুন!");
@@ -657,7 +556,6 @@
             stepUserId.style.display = 'block';
         };
 
-        // Submit to Bot Server
         btnConfirmOrder.onclick = async () => {
             const userInputId = discordIdInput.value.trim();
             if (!userInputId) {
@@ -683,19 +581,16 @@
                 });
 
                 const result = await response.json();
-
                 if (result.success && result.url) {
                     window.location.href = result.url;
-                } else {
-                    if (globalBuyLink) window.location.href = globalBuyLink;
-                }
-            } catch (error) {
-                console.error("Bot Connection Error:", error);
-                if (globalBuyLink) {
+                } else if (globalBuyLink) {
                     window.location.href = globalBuyLink;
                 } else {
                     window.location.href = "https://discord.gg/ZBjSWaF7u";
                 }
+            } catch (error) {
+                console.error("Bot Error:", error);
+                window.location.href = globalBuyLink || "https://discord.gg/ZBjSWaF7u";
             } finally {
                 btnConfirmOrder.disabled = false;
                 btnConfirmOrder.innerHTML = 'PROCEED TO DISCORD TICKET';
@@ -703,7 +598,6 @@
             }
         };
 
-        // Close Modals
         closeModalBtn.onclick = () => purchaseModal.style.display = 'none';
         window.onclick = (e) => { if (e.target === purchaseModal) purchaseModal.style.display = 'none'; };
     </script>
