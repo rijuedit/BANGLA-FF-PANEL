@@ -74,10 +74,9 @@
             border-radius: 15px;
             overflow: hidden;
             background: #000;
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
         }
 
-        /* Product Card */
+        /* Product Grid */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -96,11 +95,7 @@
             transition: 0.3s;
         }
 
-        .product-card:hover {
-            border-color: var(--neon-purple);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+        .product-card:hover { border-color: var(--neon-purple); transform: translateY(-5px); }
 
         .product-image {
             width: 100%;
@@ -121,15 +116,9 @@
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
             box-shadow: 0 4px 15px rgba(255, 0, 127, 0.3);
-            transition: 0.3s;
         }
 
-        .btn-buy:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 20px var(--neon-pink);
-        }
-
-        /* Modal Design (Exactly like Screenshot) */
+        /* Modal Design */
         .modal {
             display: none;
             position: fixed;
@@ -158,7 +147,6 @@
             font-weight: bold;
             text-align: center;
             margin-bottom: 20px;
-            text-transform: uppercase;
         }
 
         .package-item {
@@ -174,14 +162,11 @@
             transition: 0.2s;
         }
 
-        .package-item:hover {
+        .package-item:hover, .package-item.selected {
             border-color: var(--neon-green);
         }
 
-        .package-item.selected {
-            border-color: var(--neon-green);
-            background: rgba(0, 255, 127, 0.05);
-        }
+        .package-item.selected { background: rgba(0, 255, 127, 0.05); }
 
         .package-info { display: flex; align-items: center; gap: 10px; }
         .package-info i { color: #facc15; font-size: 14px; }
@@ -196,7 +181,6 @@
             border-radius: 8px;
             margin: 20px 0;
             outline: none;
-            font-size: 14px;
         }
 
         .discord-input:focus { border-color: var(--neon-pink); }
@@ -210,16 +194,9 @@
             font-weight: 800;
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
-            transition: 0.3s;
         }
 
-        .btn-ticket:hover { background: #00d66b; box-shadow: 0 0 20px rgba(0, 255, 127, 0.4); }
-
-        .close-modal {
-            position: absolute;
-            top: 15px; right: 15px;
-            color: #666; font-size: 24px; cursor: pointer;
-        }
+        .close-modal { position: absolute; top: 15px; right: 15px; color: #666; font-size: 24px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -227,39 +204,32 @@
     <div id="mouse-glow"></div>
 
     <nav class="navbar">
-        <a href="index.html" class="nav-btn"><i class="fas fa-chevron-left mr-2"></i>Back</a>
-        <div class="orbitron text-white text-lg font-bold tracking-widest">BANGLA FF PANEL</div>
-        <a href="https://discord.gg/ZBjSWaF7u" class="nav-btn"><i class="fab fa-discord mr-2"></i>Discord</a>
+        <a href="index.html" class="nav-btn">BACK</a>
+        <div class="orbitron text-white text-lg font-bold">BANGLA FF PANEL</div>
+        <a href="https://discord.gg/ZBjSWaF7u" class="nav-btn">DISCORD</a>
     </nav>
 
-    <!-- Setup Video -->
     <div id="videoSection" class="video-container hidden">
         <div id="videoFrame"></div>
     </div>
 
     <div class="text-center mt-10">
-        <h1 class="orbitron text-2xl font-bold flex items-center justify-center gap-3">
-            <i class="fas fa-desktop text-neon-pink"></i> PC PANEL PREMIUM
-        </h1>
+        <h1 class="orbitron text-2xl font-bold uppercase"><i class="fas fa-desktop text-neon-pink"></i> PC PANEL PREMIUM</h1>
     </div>
 
-    <div class="product-grid" id="productGrid">
-        <!-- Products will load here -->
-    </div>
+    <div class="product-grid" id="productGrid"></div>
 
-    <!-- Purchase Modal -->
+    <!-- Modal -->
     <div id="purchaseModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <div id="modalProductTitle" class="modal-title">PRODUCT NAME</div>
             
-            <div id="packageList">
-                <!-- Packages dynamic -->
-            </div>
+            <div id="packageList"></div>
 
             <input type="text" id="discordUser" class="discord-input" placeholder="আপনার Discord Username অথবা ID দিন">
 
-            <button onclick="submitOrder()" class="btn-ticket">NEXT: ORDER TICKET</button>
+            <button id="orderBtn" onclick="submitOrder()" class="btn-ticket">NEXT: ORDER TICKET</button>
         </div>
     </div>
 
@@ -271,10 +241,9 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        let selectedPackage = null;
+        let selectedPkgIndex = null;
         let currentProduct = null;
 
-        // Mouse Move Effect
         document.addEventListener('mousemove', e => {
             const glow = document.getElementById('mouse-glow');
             glow.style.setProperty('--x', e.clientX + 'px');
@@ -282,16 +251,12 @@
         });
 
         // Load Video
-        onValue(ref(db, 'settings/video_pc'), (snapshot) => {
-            const container = document.getElementById('videoSection');
-            const frame = document.getElementById('videoFrame');
-            const url = snapshot.val();
-            if(url) {
-                container.classList.remove('hidden');
-                let embedUrl = url;
-                if(url.includes('youtube.com/watch?v=')) embedUrl = url.replace('watch?v=', 'embed/');
-                else if(url.includes('drive.google.com')) embedUrl = url.replace('/view', '/preview');
-                frame.innerHTML = `<iframe src="${embedUrl}" class="w-full aspect-video" frameborder="0" allowfullscreen></iframe>`;
+        onValue(ref(db, 'settings/video_pc'), (s) => {
+            if(s.exists()) {
+                document.getElementById('videoSection').classList.remove('hidden');
+                let url = s.val();
+                if(url.includes('youtube.com/watch?v=')) url = url.replace('watch?v=', 'embed/');
+                document.getElementById('videoFrame').innerHTML = `<iframe src="${url}" class="w-full aspect-video" frameborder="0" allowfullscreen></iframe>`;
             }
         });
 
@@ -300,69 +265,78 @@
             const grid = document.getElementById('productGrid');
             grid.innerHTML = '';
             if(snapshot.exists()) {
-                const data = snapshot.val();
-                Object.keys(data).forEach(id => {
-                    const p = data[id];
-                    const card = document.createElement('div');
-                    card.className = 'product-card';
-                    card.innerHTML = `
-                        <img src="${p.image}" class="product-image" onerror="this.src='https://placehold.co/400x200?text=No+Image'">
-                        <h3 class="orbitron text-md font-bold mb-4">${p.title}</h3>
-                        <button onclick="openPurchaseModal('${id}')" class="btn-buy"><i class="fas fa-shopping-cart mr-2"></i> Buy Now</button>
+                Object.keys(snapshot.val()).forEach(id => {
+                    const p = snapshot.val()[id];
+                    const div = document.createElement('div');
+                    div.className = 'product-card';
+                    div.innerHTML = `
+                        <img src="${p.image}" class="product-image">
+                        <h3 class="orbitron text-sm font-bold mb-4">${p.title}</h3>
+                        <button onclick="openPurchaseModal('${id}')" class="btn-buy">Buy Now</button>
                     `;
-                    grid.appendChild(card);
+                    grid.appendChild(div);
                 });
             }
         });
 
-        window.openPurchaseModal = function(id) {
-            onValue(ref(db, `pc_panels/${id}`), (snapshot) => {
-                const p = snapshot.val();
-                currentProduct = p;
-                selectedPackage = null;
-                document.getElementById('modalProductTitle').innerText = p.title;
+        window.openPurchaseModal = (id) => {
+            onValue(ref(db, `pc_panels/${id}`), (s) => {
+                currentProduct = s.val();
+                selectedPkgIndex = null;
+                document.getElementById('modalProductTitle').innerText = currentProduct.title;
                 const pkgList = document.getElementById('packageList');
                 pkgList.innerHTML = '';
-
-                if(p.packages) {
-                    p.packages.forEach((pkg, index) => {
-                        const item = document.createElement('div');
-                        item.className = 'package-item';
-                        item.onclick = () => selectPackage(index, item);
-                        item.innerHTML = `
-                            <div class="package-info"><i class="far fa-clock"></i> <span>${pkg.duration}</span></div>
-                            <div class="package-price">৳${pkg.sell_price} BDT</div>
-                        `;
-                        pkgList.appendChild(item);
-                    });
-                }
+                currentProduct.packages.forEach((pkg, i) => {
+                    const item = document.createElement('div');
+                    item.className = 'package-item';
+                    item.onclick = () => {
+                        document.querySelectorAll('.package-item').forEach(el => el.classList.remove('selected'));
+                        item.classList.add('selected');
+                        selectedPkgIndex = i;
+                    };
+                    item.innerHTML = `
+                        <div class="package-info"><i class="far fa-clock"></i> <span>${pkg.duration}</span></div>
+                        <div class="package-price">৳${pkg.sell_price} BDT</div>
+                    `;
+                    pkgList.appendChild(item);
+                });
                 document.getElementById('purchaseModal').style.display = 'flex';
             }, {onlyOnce: true});
         };
 
-        window.selectPackage = function(index, element) {
-            document.querySelectorAll('.package-item').forEach(el => el.classList.remove('selected'));
-            element.classList.add('selected');
-            selectedPackage = currentProduct.packages[index];
-        };
+        window.closeModal = () => document.getElementById('purchaseModal').style.display = 'none';
 
-        window.closeModal = function() {
-            document.getElementById('purchaseModal').style.display = 'none';
-        };
-
-        window.submitOrder = function() {
+        window.submitOrder = async function() {
             const discord = document.getElementById('discordUser').value.trim();
-            if(!selectedPackage) return alert("দয়া করে একটি প্যাকেজ সিলেক্ট করুন।");
-            if(!discord) return alert("দয়া করে আপনার ডিসকর্ড নাম অথবা আইডি দিন।");
+            const btn = document.getElementById('orderBtn');
 
-            const msg = `🛒 *NEW ORDER REQUEST*\n\n` +
-                        `👤 Customer: ${discord}\n` +
-                        `📦 Product: ${currentProduct.title}\n` +
-                        `⏳ Duration: ${selectedPackage.duration}\n` +
-                        `💰 Price: ৳${selectedPackage.sell_price}`;
+            if(selectedPkgIndex === null) return alert("প্যাকেজ সিলেক্ট করুন!");
+            if(!discord) return alert("ডিসকর্ড আইডি দিন!");
 
-            const url = `https://bangla-ff-bot-server.onrender.com/create-ticket?username=${encodeURIComponent(discord)}&details=${encodeURIComponent(msg)}`;
-            window.location.href = url;
+            const pkg = currentProduct.packages[selectedPkgIndex];
+            btn.innerText = "SENDING...";
+            btn.disabled = true;
+
+            const details = `🛒 NEW ORDER\n👤 User: ${discord}\n📦 Product: ${currentProduct.title}\n⏳ Duration: ${pkg.duration}\n💰 Price: ৳${pkg.sell_price}`;
+
+            try {
+                // আমরা API-তে ডাটা পাঠাচ্ছি
+                await fetch(`https://bangla-ff-bot-server.onrender.com/create-ticket`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username: discord,
+                        details: details
+                    })
+                });
+                
+                // সফল হলে বা রিকোয়েস্ট চলে গেলে সরাসরি ডিসকর্ড সার্ভারে নিয়ে যাবে
+                alert("Ticket Request Sent! Redirecting to Discord...");
+                window.location.href = "https://discord.gg/ZBjSWaF7u";
+            } catch (err) {
+                // যদি সার্ভার GET সাপোর্ট করে কিন্তু এরর দেয়, তাও আমরা ডিসকর্ডে পাঠিয়ে দেব
+                window.location.href = `https://bangla-ff-bot-server.onrender.com/create-ticket?username=${encodeURIComponent(discord)}&details=${encodeURIComponent(details)}`;
+            }
         };
     </script>
 </body>
