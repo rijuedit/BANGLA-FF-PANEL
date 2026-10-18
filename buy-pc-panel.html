@@ -21,36 +21,15 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
         body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
 
-        /* Navbar / Header */
         .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background: rgba(12, 5, 20, 0.95);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 30px; background: rgba(12, 5, 20, 0.95);
+            border-bottom: 1px solid var(--border-color); position: sticky; top: 0;
+            z-index: 1000; backdrop-filter: blur(10px);
         }
 
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .nav-brand img {
-            width: 45px;
-            height: 45px;
-            border-radius: 8px;
-            border: 1px solid var(--neon-purple);
-            object-fit: cover;
-        }
-
+        .nav-brand { display: flex; align-items: center; gap: 15px; text-decoration: none; cursor: pointer; }
+        .nav-brand img { width: 45px; height: 45px; border-radius: 8px; border: 1px solid var(--neon-purple); object-fit: cover; }
         .brand-text { display: flex; flex-direction: column; }
         .brand-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700; color: #ffffff; letter-spacing: 1px; }
         .brand-subtitle { font-size: 0.8rem; color: var(--neon-pink); font-weight: 700; letter-spacing: 2px; }
@@ -62,11 +41,9 @@
             gap: 8px; border: 1px solid var(--border-color); transition: 0.3s; font-size: 0.95rem;
         }
         .btn-nav:hover { background: #1a0b2e; border-color: var(--neon-purple); }
-
         .btn-discord { background: rgba(88, 101, 242, 0.1); border-color: #5865F2; color: #5865F2; }
         .btn-discord:hover { background: #5865F2; color: #ffffff; border-color: #5865F2; }
 
-        /* Main Container */
         .main-container { max-width: 1000px; margin: 0 auto; padding: 30px 20px; }
 
         .back-link {
@@ -76,7 +53,6 @@
         }
         .back-link:hover { border-color: var(--neon-purple); box-shadow: 0 0 10px rgba(157, 0, 255, 0.2); }
 
-        /* Video Box */
         .video-box {
             width: 100%; aspect-ratio: 16/9; background: #000; border: 1px solid var(--border-color);
             border-radius: 12px; overflow: hidden; position: relative; margin-bottom: 30px;
@@ -88,7 +64,6 @@
             font-size: 60px; color: #ff0066; text-shadow: 0 0 20px rgba(255, 0, 102, 0.8);
         }
 
-        /* Products Grid */
         .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; color: #ffffff; margin-bottom: 20px; }
         .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
         .product-card {
@@ -100,7 +75,6 @@
         .product-name { font-size: 1.4rem; font-weight: bold; margin-bottom: 10px; color: #ffffff; font-family: 'Orbitron', sans-serif; }
         .price-tag { color: var(--neon-green); font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; }
 
-        /* Modal */
         .modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(5, 2, 10, 0.95); z-index: 2000; justify-content: center; align-items: center; padding: 20px;
@@ -188,7 +162,7 @@
 
         function getSafePrice(item) {
             if (!item) return 0;
-            const keys = ['price', 'salePrice', 'newPrice', 'buyPrice', 'resellPrice', 'value'];
+            const keys = ['salePrice', 'price', 'newPrice', 'buyPrice', 'resellPrice', 'value'];
             for (let key of keys) {
                 if (item[key] !== undefined && item[key] !== null && parseInt(item[key]) > 0) return parseInt(item[key]);
             }
@@ -196,7 +170,6 @@
         }
 
         async function loadContent() {
-            // Load Video
             db.ref('settings/video_pc').once('value', snapshot => {
                 const data = snapshot.val();
                 if (data && data.url) {
@@ -216,23 +189,24 @@
 
             const grid = document.getElementById('productsGrid');
 
-            function renderProducts(snapshot) {
+            function renderProducts(dataObj) {
                 document.getElementById('loading').style.display = 'none';
                 grid.innerHTML = '';
+                if(!dataObj || typeof dataObj !== 'object') {
+                    grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: var(--text-dim);">No PC products available right now.</p>';
+                    return;
+                }
+
                 let count = 0;
-
-                snapshot.forEach(child => {
-                    const p = child.val();
+                Object.entries(dataObj).forEach(([key, p]) => {
                     if(!p || typeof p !== 'object') return;
-                    if (child.key === 'mobile' || child.key === 'free') return;
+                    if (key === 'mobile' || key === 'free' || key === 'settings' || key === 'users') return;
 
-                    p.id = child.key;
-                    let minPrice = 0;
+                    p.id = key;
+                    let minPrice = getSafePrice(p);
                     if (p.packages) {
                         const pkgArray = Object.values(p.packages);
                         if (pkgArray.length > 0) minPrice = getSafePrice(pkgArray[0]);
-                    } else {
-                        minPrice = getSafePrice(p);
                     }
 
                     count++;
@@ -255,14 +229,17 @@
 
             db.ref('products/pc').on('value', snapshot => {
                 if (snapshot.exists() && snapshot.hasChildren()) {
-                    renderProducts(snapshot);
+                    renderProducts(snapshot.val());
                 } else {
-                    db.ref('products').once('value', snap2 => {
+                    db.ref('products').on('value', snap2 => {
                         if (snap2.exists() && snap2.hasChildren()) {
-                            renderProducts(snap2);
+                            renderProducts(snap2.val());
                         } else {
-                            document.getElementById('loading').style.display = 'none';
-                            grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: var(--text-dim);">No PC products available right now.</p>';
+                            db.ref().once('value', snap3 => {
+                                const val = snap3.val();
+                                if(val && val.products) renderProducts(val.products);
+                                else renderProducts(null);
+                            });
                         }
                     });
                 }
