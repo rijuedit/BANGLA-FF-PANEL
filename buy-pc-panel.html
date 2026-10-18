@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PC PANEL PREMIUM - BANGLA FF PANEL</title>
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Firebase SDK -->
+    <!-- Firebase SDK v8 -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -25,7 +26,7 @@
             min-height: 100vh;
         }
 
-        /* ----- Premium Navbar ----- */
+        /* ----- Header / Navbar ----- */
         .navbar {
             background: #0d0614;
             padding: 15px 30px;
@@ -39,44 +40,50 @@
         }
 
         .btn-back {
-            background: transparent;
+            background: #140821;
             color: #ffffff;
             border: 1px solid #2a113d;
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 6px;
             text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 700;
             transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
+
         .btn-back:hover {
             background: #1a0b2e;
             border-color: #ff007f;
+            color: #ff007f;
         }
 
         .nav-logo {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 800;
             color: #ff007f;
-            text-shadow: 0 0 10px rgba(255, 0, 127, 0.6);
+            text-shadow: 0 0 12px rgba(255, 0, 127, 0.7);
             letter-spacing: 1px;
             text-transform: uppercase;
         }
 
         .btn-discord {
-            background: transparent;
+            background: #140821;
             color: #5865F2;
             border: 1px solid #5865F2;
-            padding: 8px 16px;
+            padding: 8px 18px;
             border-radius: 6px;
             text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
             gap: 8px;
             transition: 0.3s;
         }
+
         .btn-discord:hover {
             background: #5865F2;
             color: #ffffff;
@@ -89,11 +96,11 @@
             padding: 30px 20px;
         }
 
-        /* ----- Video Section ----- */
+        /* ----- Video Section (Admin Managed) ----- */
         .video-container {
             width: 100%;
             max-width: 800px;
-            margin: 0 auto 40px auto;
+            margin: 0 auto 35px auto;
             position: relative;
             border-radius: 12px;
             overflow: hidden;
@@ -101,15 +108,14 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.8);
             aspect-ratio: 16/9;
             background: #11071a;
-            display: none; /* Hidden until data loads */
+            display: none;
         }
 
         .video-thumbnail {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.7;
-            transition: 0.3s;
+            opacity: 0.75;
         }
 
         .play-btn {
@@ -119,22 +125,23 @@
             transform: translate(-50%, -50%);
             background: #ff007f;
             color: white;
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 0, 127, 0.6);
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.8);
             border: none;
             z-index: 2;
             transition: 0.3s;
         }
+
         .play-btn:hover {
             transform: translate(-50%, -50%) scale(1.1);
-            box-shadow: 0 0 30px rgba(255, 0, 127, 0.9);
+            box-shadow: 0 0 35px rgba(255, 0, 127, 1);
         }
 
         .video-iframe {
@@ -148,12 +155,12 @@
             z-index: 3;
         }
 
-        /* ----- Title ----- */
+        /* ----- Section Title ----- */
         .section-title {
             text-align: center;
             font-size: 1.8rem;
             font-weight: 800;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
             color: #ffffff;
             display: flex;
             justify-content: center;
@@ -161,9 +168,10 @@
             gap: 12px;
             letter-spacing: 1px;
         }
+
         .section-title i {
             color: #ff007f;
-            text-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+            text-shadow: 0 0 15px rgba(255, 0, 127, 0.6);
         }
 
         /* ----- Product Grid ----- */
@@ -174,26 +182,25 @@
         }
 
         .card {
-            background: #11071a;
-            border: 1px solid #2a113d;
-            border-radius: 12px;
+            background: #0e0617;
+            border: 1.5px solid #2a113d;
+            border-radius: 14px;
             padding: 16px;
             display: flex;
             flex-direction: column;
-            transition: 0.3s;
-            position: relative;
+            transition: all 0.3s ease;
         }
 
         .card:hover {
             border-color: #ff007f;
-            box-shadow: 0 0 20px rgba(255, 0, 127, 0.2);
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.3);
             transform: translateY(-5px);
         }
 
         .card-img {
             width: 100%;
-            height: 170px;
-            border-radius: 8px;
+            height: 175px;
+            border-radius: 10px;
             object-fit: cover;
             margin-bottom: 15px;
             border: 1px solid #2a113d;
@@ -205,6 +212,7 @@
             text-align: center;
             margin-bottom: 20px;
             color: #ffffff;
+            letter-spacing: 0.5px;
         }
 
         .btn-buy {
@@ -213,7 +221,7 @@
             border: none;
             padding: 12px;
             border-radius: 30px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 800;
             cursor: pointer;
             display: flex;
@@ -226,11 +234,11 @@
         }
 
         .btn-buy:hover {
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.6);
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.7);
             transform: scale(1.02);
         }
 
-        /* ----- Modal (Strictly As Requested) ----- */
+        /* ----- Purchase Modal ----- */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -240,16 +248,17 @@
             justify-content: center;
             align-items: center;
             z-index: 2000;
+            padding: 15px;
         }
 
         .modal-box {
             background: #0d0614;
-            width: 90%;
-            max-width: 450px;
+            width: 100%;
+            max-width: 440px;
             border: 2px solid #ff007f;
             border-radius: 16px;
             padding: 25px;
-            box-shadow: 0 0 30px rgba(255, 0, 127, 0.3);
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.35);
             position: relative;
         }
 
@@ -269,9 +278,9 @@
         .modal-title {
             text-align: center;
             color: #ff007f;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 800;
-            margin-bottom: 25px;
+            margin-bottom: 22px;
             text-transform: uppercase;
             text-shadow: 0 0 10px rgba(255,0,127,0.4);
         }
@@ -280,16 +289,18 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            margin-bottom: 25px;
+            margin-bottom: 22px;
+            max-height: 300px;
+            overflow-y: auto;
         }
 
         .pkg-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #150a21;
-            padding: 15px;
-            border-radius: 8px;
+            background: #140921;
+            padding: 14px 18px;
+            border-radius: 10px;
             border: 1px solid #2a113d;
             cursor: pointer;
             transition: 0.3s;
@@ -297,48 +308,52 @@
 
         .pkg-item:hover, .pkg-item.selected {
             border-color: #ff007f;
-            background: #1c0d2e;
+            background: #1e0b33;
+            box-shadow: 0 0 10px rgba(255, 0, 127, 0.2);
         }
 
         .pkg-duration {
             font-size: 0.95rem;
-            font-weight: 600;
-            color: #fff;
+            font-weight: 700;
+            color: #ffffff;
         }
 
         .pkg-prices {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .pkg-old {
-            color: #666;
+            color: #777777;
             text-decoration: line-through;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
+            font-weight: 600;
         }
 
         .pkg-new {
-            color: #00ff7f; /* Neon Green */
+            color: #00ff7f; /* Bright Neon Green */
             font-weight: 800;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
         }
 
         .btn-next {
             background: #00ff7f;
-            color: #000;
+            color: #000000;
             width: 100%;
             padding: 14px;
             border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
+            border-radius: 10px;
+            font-size: 1rem;
             font-weight: 800;
             cursor: pointer;
             transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .btn-next:hover {
-            box-shadow: 0 0 20px rgba(0, 255, 127, 0.5);
+            box-shadow: 0 0 20px rgba(0, 255, 127, 0.6);
             transform: translateY(-2px);
         }
 
@@ -346,14 +361,14 @@
             text-align: center;
             color: #ff007f;
             grid-column: 1/-1;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             padding: 40px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Premium Navbar -->
+    <!-- Header / Navbar -->
     <nav class="navbar">
         <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> BACK</a>
         <div class="nav-logo">BANGLA FF PANEL</div>
@@ -362,23 +377,24 @@
         </a>
     </nav>
 
+    <!-- Main Content -->
     <div class="container">
         
-        <!-- Premium Video Section -->
+        <!-- Video Tutorial Section -->
         <div class="video-container" id="videoContainer">
-            <img src="https://via.placeholder.com/800x450/11071a/ff007f?text=Loading+Thumbnail..." id="vidThumb" class="video-thumbnail" alt="Video Thumbnail">
+            <img src="https://via.placeholder.com/800x450/11071a/ff007f?text=Loading+Thumbnail..." id="vidThumb" class="video-thumbnail" alt="Video Tutorial">
             <button class="play-btn" onclick="playVideo()"><i class="fas fa-play"></i></button>
             <iframe id="vidIframe" class="video-iframe" allowfullscreen></iframe>
         </div>
 
-        <!-- Section Title -->
+        <!-- Section Header -->
         <h2 class="section-title">
             <i class="fas fa-desktop"></i> PC PANEL PREMIUM
         </h2>
 
-        <!-- Product Grid -->
+        <!-- Products Grid -->
         <div class="grid" id="productGrid">
-            <div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading Premium Panels...</div>
+            <div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading Products...</div>
         </div>
 
     </div>
@@ -390,7 +406,7 @@
             <h3 class="modal-title" id="mTitle">PRODUCT NAME</h3>
             
             <div class="pkg-list" id="pkgList">
-                <!-- Packages will be injected here dynamically -->
+                <!-- Package list will load dynamically -->
             </div>
 
             <button class="btn-next" id="btnNext" onclick="proceedToTicket()">NEXT: ORDER TICKET</button>
@@ -398,6 +414,7 @@
     </div>
 
     <script>
+        // Firebase Config
         const firebaseConfig = {
             databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app"
         };
@@ -408,27 +425,26 @@
         let selectedProduct = null;
         let selectedPackageInfo = null;
 
-        // Fetch Setup Video
+        // Auto Load Setup Video from Admin Setting
         database.ref('settings/video_pc').on('value', snap => {
             const url = snap.val();
             const container = document.getElementById('videoContainer');
             const iframe = document.getElementById('vidIframe');
             const thumb = document.getElementById('vidThumb');
 
-            if (url) {
+            if (url && url.trim() !== '') {
                 container.style.display = 'block';
                 let embedUrl = url;
-                let thumbUrl = 'https://via.placeholder.com/800x450/11071a/ff007f?text=PC+Setup+Tutorial';
+                let thumbUrl = 'https://via.placeholder.com/800x450/11071a/ff007f?text=PC+Panel+Setup+Tutorial';
 
-                // Extract Youtube Thumbnail
                 if (url.includes('youtube.com/watch?v=')) {
-                    let videoId = url.split('v=')[1].substring(0, 11);
-                    embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-                    thumbUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+                    let vId = url.split('v=')[1].substring(0, 11);
+                    embedUrl = `https://www.youtube.com/embed/${vId}?autoplay=1`;
+                    thumbUrl = `https://img.youtube.com/vi/${vId}/maxresdefault.jpg`;
                 } else if (url.includes('youtu.be/')) {
-                    let videoId = url.split('youtu.be/')[1].substring(0, 11);
-                    embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-                    thumbUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+                    let vId = url.split('youtu.be/')[1].substring(0, 11);
+                    embedUrl = `https://www.youtube.com/embed/${vId}?autoplay=1`;
+                    thumbUrl = `https://img.youtube.com/vi/${vId}/maxresdefault.jpg`;
                 } else if (url.includes('drive.google.com')) {
                     embedUrl = url.replace('/view', '/preview');
                 }
@@ -446,78 +462,120 @@
             document.getElementById('vidIframe').style.display = 'block';
         }
 
-        // Fetch PC Products
+        // Fetch PC Products from database
         database.ref('pc_panels').on('value', snap => {
             productsData = snap.val() || {};
             const grid = document.getElementById('productGrid');
             grid.innerHTML = '';
 
-            if (Object.keys(productsData).length === 0) {
-                grid.innerHTML = '<div class="loading">No panels available right now.</div>';
+            const keys = Object.keys(productsData);
+            if (keys.length === 0) {
+                grid.innerHTML = '<div class="loading">No PC Panels available at the moment.</div>';
                 return;
             }
 
-            Object.keys(productsData).forEach(key => {
+            keys.forEach(key => {
                 const item = productsData[key];
-                
-                // HTML strict as per screenshot. No N/A, just clean info.
-                const card = `
+                const pName = item.name || item.title || item.productName || 'BR MODS PANEL';
+                const pImg = item.image || item.img || 'https://via.placeholder.com/300x175/11071a/ff007f?text=PC+Panel';
+
+                const cardHTML = `
                     <div class="card">
-                        <img src="${item.image || 'https://via.placeholder.com/300x170/1a0b2e/ff007f?text=Premium+Panel'}" class="card-img" alt="Panel">
-                        <h3 class="card-title">${item.name || 'Premium Panel'}</h3>
+                        <img src="${pImg}" class="card-img" alt="${pName}" onerror="this.src='https://via.placeholder.com/300x175/11071a/ff007f?text=No+Image'">
+                        <h3 class="card-title">${pName}</h3>
                         <button class="btn-buy" onclick="openModal('${key}')">
                             <i class="fas fa-shopping-cart"></i> BUY NOW
                         </button>
                     </div>
                 `;
-                grid.innerHTML += card;
+                grid.innerHTML += cardHTML;
             });
         });
 
-        // Modal Functionality
+        // Smart Package Parser to fix [object Object] and UNDEFINED
         function openModal(key) {
             selectedProduct = productsData[key];
-            document.getElementById('mTitle').innerText = selectedProduct.name;
+            if (!selectedProduct) return;
+
+            const pName = selectedProduct.name || selectedProduct.title || selectedProduct.productName || 'PREMIUM PANEL';
+            document.getElementById('mTitle').innerText = pName;
+            
             const pkgList = document.getElementById('pkgList');
             pkgList.innerHTML = '';
             selectedPackageInfo = null;
 
-            let pkgs = selectedProduct.packages || {};
-            let hasPackages = Object.keys(pkgs).length > 0;
+            let packages = selectedProduct.packages || selectedProduct.package || selectedProduct.prices || {};
+            let parsedPackages = [];
 
-            if (hasPackages) {
-                Object.keys(pkgs).forEach((pkgName, index) => {
-                    const price = pkgs[pkgName];
-                    // Using oldPrice algorithm if set, else simple visual cut
-                    let oldP = selectedProduct.oldPrice ? (parseInt(price) + parseInt(selectedProduct.oldPrice - selectedProduct.salePrice)) : parseInt(price) + 300;
-                    
-                    pkgList.innerHTML += `
-                        <div class="pkg-item ${index === 0 ? 'selected' : ''}" onclick="selectPackage(this, '${pkgName}', '${price}')">
-                            <span class="pkg-duration">${pkgName}</span>
-                            <div class="pkg-prices">
-                                <span class="pkg-old">${oldP}</span>
-                                <span class="pkg-new">${price}</span>
-                            </div>
-                        </div>
-                    `;
-                    // auto select first
-                    if (index === 0) selectedPackageInfo = { duration: pkgName, price: price };
+            // Case 1: Array of packages
+            if (Array.isArray(packages)) {
+                packages.forEach((pkg, idx) => {
+                    if (typeof pkg === 'object' && pkg !== null) {
+                        parsedPackages.push({
+                            name: pkg.name || pkg.duration || pkg.time || `Package ${idx + 1}`,
+                            oldPrice: pkg.oldPrice || pkg.old || '',
+                            price: pkg.price || pkg.salePrice || pkg.val || 0
+                        });
+                    } else {
+                        parsedPackages.push({
+                            name: `Option ${idx + 1}`,
+                            oldPrice: '',
+                            price: pkg
+                        });
+                    }
                 });
-            } else {
-                // Default fallback if admin didn't set packages
+            } 
+            // Case 2: Key-Value Object
+            else if (typeof packages === 'object' && packages !== null) {
+                Object.keys(packages).forEach(pkgKey => {
+                    let val = packages[pkgKey];
+                    if (typeof val === 'object' && val !== null) {
+                        parsedPackages.push({
+                            name: val.name || pkgKey,
+                            oldPrice: val.oldPrice || val.old || '',
+                            price: val.price || val.salePrice || val.amount || 0
+                        });
+                    } else {
+                        parsedPackages.push({
+                            name: pkgKey,
+                            oldPrice: selectedProduct.oldPrice || '',
+                            price: val
+                        });
+                    }
+                });
+            }
+
+            // Fallback if no package array/object is found
+            if (parsedPackages.length === 0) {
                 const sPrice = selectedProduct.salePrice || selectedProduct.price || '0';
-                const oPrice = selectedProduct.oldPrice || (parseInt(sPrice) + 400);
-                pkgList.innerHTML = `
-                    <div class="pkg-item selected" onclick="selectPackage(this, 'Standard License', '${sPrice}')">
-                        <span class="pkg-duration">Standard License</span>
+                const oPrice = selectedProduct.oldPrice || '';
+                parsedPackages.push({
+                    name: 'Standard License',
+                    oldPrice: oPrice,
+                    price: sPrice
+                });
+            }
+
+            // Render Package List strictly like Screenshot #1
+            parsedPackages.forEach((pkg, index) => {
+                const isSelected = index === 0;
+                let oldPriceHTML = pkg.oldPrice ? `<span class="pkg-old">${pkg.oldPrice}</span>` : '';
+                
+                const itemHTML = `
+                    <div class="pkg-item ${isSelected ? 'selected' : ''}" onclick="selectPackage(this, '${pkg.name}', '${pkg.price}')">
+                        <span class="pkg-duration">${pkg.name}</span>
                         <div class="pkg-prices">
-                            <span class="pkg-old">${oPrice}</span>
-                            <span class="pkg-new">${sPrice}</span>
+                            ${oldPriceHTML}
+                            <span class="pkg-new">${pkg.price}</span>
                         </div>
                     </div>
                 `;
-                selectedPackageInfo = { duration: 'Standard License', price: sPrice };
-            }
+                pkgList.innerHTML += itemHTML;
+
+                if (isSelected) {
+                    selectedPackageInfo = { duration: pkg.name, price: pkg.price };
+                }
+            });
 
             document.getElementById('purchaseModal').style.display = 'flex';
         }
@@ -532,38 +590,35 @@
             selectedPackageInfo = { duration, price };
         }
 
-        // Proceed to Ticket (Webhook payload)
+        // Send Order Request to Ticket Bot
         function proceedToTicket() {
             if (!selectedPackageInfo) {
-                alert("Please select a package.");
+                alert("Please select a package duration!");
                 return;
             }
-            
+
             const btn = document.getElementById('btnNext');
-            btn.innerText = 'PROCESSING...';
+            btn.innerText = 'CREATING TICKET...';
             btn.style.opacity = '0.7';
 
             const payload = {
                 type: 'PC Panel Order Request',
-                productName: selectedProduct.name,
+                productName: selectedProduct.name || selectedProduct.title || 'PC Panel',
                 package: selectedPackageInfo.duration,
                 price: selectedPackageInfo.price,
                 timestamp: new Date().toISOString()
             };
 
-            // Send to Discord bot silently
             fetch('https://bangla-ff-bot-server.onrender.com/send-ticket', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             }).then(() => {
-                alert('Request processing started! Please check Discord / Create a ticket on Discord server to complete the payment.');
                 closeModal();
                 btn.innerText = 'NEXT: ORDER TICKET';
                 btn.style.opacity = '1';
-                window.open("https://discord.gg/ZBjSWaF7u", "_blank"); // Take them to discord
+                window.open("https://discord.gg/ZBjSWaF7u", "_blank");
             }).catch(() => {
-                alert('Taking you to Discord to complete the order...');
                 closeModal();
                 btn.innerText = 'NEXT: ORDER TICKET';
                 btn.style.opacity = '1';
