@@ -26,7 +26,7 @@
             min-height: 100vh;
         }
 
-        /* ----- Header / Navbar ----- */
+        /* ----- Navbar ----- */
         .navbar {
             background: #0d0614;
             padding: 15px 30px;
@@ -96,7 +96,7 @@
             padding: 30px 20px;
         }
 
-        /* ----- Video Section (Admin Managed) ----- */
+        /* ----- Video Section (Auto Hidden if Empty) ----- */
         .video-container {
             width: 100%;
             max-width: 800px;
@@ -238,7 +238,7 @@
             transform: scale(1.02);
         }
 
-        /* ----- Purchase Modal ----- */
+        /* ----- Two-Step Purchase Modal ----- */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -278,19 +278,20 @@
         .modal-title {
             text-align: center;
             color: #ff007f;
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 800;
             margin-bottom: 22px;
             text-transform: uppercase;
             text-shadow: 0 0 10px rgba(255,0,127,0.4);
         }
 
+        /* Step 1: Packages List */
         .pkg-list {
             display: flex;
             flex-direction: column;
             gap: 12px;
             margin-bottom: 22px;
-            max-height: 300px;
+            max-height: 280px;
             overflow-y: auto;
         }
 
@@ -327,7 +328,7 @@
         .pkg-old {
             color: #777777;
             text-decoration: line-through;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 600;
         }
 
@@ -337,14 +338,52 @@
             font-size: 1.15rem;
         }
 
-        .btn-next {
+        /* Step 2: Customer Details Form */
+        .form-group-custom {
+            margin-bottom: 20px;
+        }
+
+        .form-label-custom {
+            display: block;
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .form-input-custom {
+            width: 100%;
+            background: #180a29;
+            border: 1px solid #2a113d;
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #ffffff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .form-input-custom:focus {
+            border-color: #ff007f;
+        }
+
+        .form-subtext-custom {
+            display: block;
+            font-size: 0.78rem;
+            color: #888888;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* Neon Action Buttons */
+        .btn-neon {
             background: #00ff7f;
             color: #000000;
             width: 100%;
             padding: 14px;
             border: none;
             border-radius: 10px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 800;
             cursor: pointer;
             transition: 0.3s;
@@ -352,7 +391,7 @@
             letter-spacing: 0.5px;
         }
 
-        .btn-next:hover {
+        .btn-neon:hover {
             box-shadow: 0 0 20px rgba(0, 255, 127, 0.6);
             transform: translateY(-2px);
         }
@@ -377,39 +416,53 @@
         </a>
     </nav>
 
-    <!-- Main Content -->
+    <!-- Main Content Container -->
     <div class="container">
         
-        <!-- Video Tutorial Section -->
+        <!-- Video Tutorial Section (Auto-Hidden if Empty) -->
         <div class="video-container" id="videoContainer">
             <img src="https://via.placeholder.com/800x450/11071a/ff007f?text=Loading+Thumbnail..." id="vidThumb" class="video-thumbnail" alt="Video Tutorial">
             <button class="play-btn" onclick="playVideo()"><i class="fas fa-play"></i></button>
             <iframe id="vidIframe" class="video-iframe" allowfullscreen></iframe>
         </div>
 
-        <!-- Section Header -->
+        <!-- Section Title -->
         <h2 class="section-title">
             <i class="fas fa-desktop"></i> PC PANEL PREMIUM
         </h2>
 
-        <!-- Products Grid -->
+        <!-- Product Grid -->
         <div class="grid" id="productGrid">
             <div class="loading"><i class="fas fa-spinner fa-spin"></i> Loading Products...</div>
         </div>
 
     </div>
 
-    <!-- Purchase Modal -->
+    <!-- Purchase Modal (Two-Step Flow) -->
     <div class="modal-overlay" id="purchaseModal">
         <div class="modal-box">
             <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
-            <h3 class="modal-title" id="mTitle">PRODUCT NAME</h3>
             
-            <div class="pkg-list" id="pkgList">
-                <!-- Package list will load dynamically -->
+            <!-- STEP 1 VIEW: Package Selection -->
+            <div id="step1View">
+                <h3 class="modal-title" id="mTitleStep1">PRODUCT NAME</h3>
+                <div class="pkg-list" id="pkgList">
+                    <!-- Dynamic Packages -->
+                </div>
+                <button class="btn-neon" onclick="goToStep2()">NEXT: ORDER TICKET</button>
             </div>
 
-            <button class="btn-next" id="btnNext" onclick="proceedToTicket()">NEXT: ORDER TICKET</button>
+            <!-- STEP 2 VIEW: Customer Details -->
+            <div id="step2View" style="display: none;">
+                <h3 class="modal-title">CUSTOMER DETAILS</h3>
+                <div class="form-group-custom">
+                    <label class="form-label-custom">👤 আপনার নাম লিখুন:</label>
+                    <input type="text" id="userNameInput" class="form-input-custom" placeholder="এখানে আপনার নাম লিখুন..." required>
+                    <span class="form-subtext-custom">(আপনার ডিসকর্ড ইউজারনেম বা সাধারণ নাম দিতে পারেন)</span>
+                </div>
+                <button class="btn-neon" id="btnSubmitTicket" onclick="submitDiscordTicket()">PROCEED TO DISCORD TICKET</button>
+            </div>
+
         </div>
     </div>
 
@@ -425,7 +478,7 @@
         let selectedProduct = null;
         let selectedPackageInfo = null;
 
-        // Auto Load Setup Video from Admin Setting
+        // Fetch Setup Video Setting
         database.ref('settings/video_pc').on('value', snap => {
             const url = snap.val();
             const container = document.getElementById('videoContainer');
@@ -462,7 +515,7 @@
             document.getElementById('vidIframe').style.display = 'block';
         }
 
-        // Fetch PC Products from database
+        // Fetch Products from RTDB 'pc_panels'
         database.ref('pc_panels').on('value', snap => {
             productsData = snap.val() || {};
             const grid = document.getElementById('productGrid');
@@ -476,7 +529,7 @@
 
             keys.forEach(key => {
                 const item = productsData[key];
-                const pName = item.name || item.title || item.productName || 'BR MODS PANEL';
+                const pName = item.name || item.title || item.productName || 'PC PANEL';
                 const pImg = item.image || item.img || 'https://via.placeholder.com/300x175/11071a/ff007f?text=PC+Panel';
 
                 const cardHTML = `
@@ -492,41 +545,28 @@
             });
         });
 
-        // Smart Package Parser to fix [object Object] and UNDEFINED
+        // Open Modal - Step 1
         function openModal(key) {
             selectedProduct = productsData[key];
             if (!selectedProduct) return;
 
-            const pName = selectedProduct.name || selectedProduct.title || selectedProduct.productName || 'PREMIUM PANEL';
-            document.getElementById('mTitle').innerText = pName;
+            const pName = selectedProduct.name || selectedProduct.title || selectedProduct.productName || 'BASIC PANEL';
+            document.getElementById('mTitleStep1').innerText = pName;
             
             const pkgList = document.getElementById('pkgList');
             pkgList.innerHTML = '';
             selectedPackageInfo = null;
 
+            // Reset Views
+            document.getElementById('step1View').style.display = 'block';
+            document.getElementById('step2View').style.display = 'none';
+            document.getElementById('userNameInput').value = '';
+
             let packages = selectedProduct.packages || selectedProduct.package || selectedProduct.prices || {};
             let parsedPackages = [];
 
-            // Case 1: Array of packages
-            if (Array.isArray(packages)) {
-                packages.forEach((pkg, idx) => {
-                    if (typeof pkg === 'object' && pkg !== null) {
-                        parsedPackages.push({
-                            name: pkg.name || pkg.duration || pkg.time || `Package ${idx + 1}`,
-                            oldPrice: pkg.oldPrice || pkg.old || '',
-                            price: pkg.price || pkg.salePrice || pkg.val || 0
-                        });
-                    } else {
-                        parsedPackages.push({
-                            name: `Option ${idx + 1}`,
-                            oldPrice: '',
-                            price: pkg
-                        });
-                    }
-                });
-            } 
-            // Case 2: Key-Value Object
-            else if (typeof packages === 'object' && packages !== null) {
+            // Smart Parser for package entries to prevent [object Object]
+            if (typeof packages === 'object' && packages !== null) {
                 Object.keys(packages).forEach(pkgKey => {
                     let val = packages[pkgKey];
                     if (typeof val === 'object' && val !== null) {
@@ -536,16 +576,20 @@
                             price: val.price || val.salePrice || val.amount || 0
                         });
                     } else {
+                        // Estimate nice crossed oldPrice matching screenshot ratios if not explicit
+                        let numericSale = parseInt(val) || 0;
+                        let defaultOld = numericSale > 0 ? Math.round(numericSale * 1.25 / 5) * 5 : '';
+                        
                         parsedPackages.push({
                             name: pkgKey,
-                            oldPrice: selectedProduct.oldPrice || '',
+                            oldPrice: selectedProduct.oldPrice || defaultOld,
                             price: val
                         });
                     }
                 });
             }
 
-            // Fallback if no package array/object is found
+            // Fallback if no packages exist
             if (parsedPackages.length === 0) {
                 const sPrice = selectedProduct.salePrice || selectedProduct.price || '0';
                 const oPrice = selectedProduct.oldPrice || '';
@@ -556,7 +600,7 @@
                 });
             }
 
-            // Render Package List strictly like Screenshot #1
+            // Render Package items (Strictly like Screenshot #1)
             parsedPackages.forEach((pkg, index) => {
                 const isSelected = index === 0;
                 let oldPriceHTML = pkg.oldPrice ? `<span class="pkg-old">${pkg.oldPrice}</span>` : '';
@@ -590,15 +634,26 @@
             selectedPackageInfo = { duration, price };
         }
 
-        // Send Order Request to Ticket Bot
-        function proceedToTicket() {
+        // Switch to Step 2
+        function goToStep2() {
             if (!selectedPackageInfo) {
-                alert("Please select a package duration!");
+                alert("দয়া করে একটি প্যাকেজ সিলেক্ট করুন!");
+                return;
+            }
+            document.getElementById('step1View').style.display = 'none';
+            document.getElementById('step2View').style.display = 'block';
+        }
+
+        // Submit Discord Ticket
+        function submitDiscordTicket() {
+            const userName = document.getElementById('userNameInput').value.trim();
+            if (!userName) {
+                alert("দয়া করে আপনার নাম বা ডিসকর্ড ইউজারনেম লিখুন!");
                 return;
             }
 
-            const btn = document.getElementById('btnNext');
-            btn.innerText = 'CREATING TICKET...';
+            const btn = document.getElementById('btnSubmitTicket');
+            btn.innerText = 'PROCESSING...';
             btn.style.opacity = '0.7';
 
             const payload = {
@@ -606,21 +661,23 @@
                 productName: selectedProduct.name || selectedProduct.title || 'PC Panel',
                 package: selectedPackageInfo.duration,
                 price: selectedPackageInfo.price,
+                userName: userName,
                 timestamp: new Date().toISOString()
             };
 
+            // Send payload to Render bot server
             fetch('https://bangla-ff-bot-server.onrender.com/send-ticket', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             }).then(() => {
                 closeModal();
-                btn.innerText = 'NEXT: ORDER TICKET';
+                btn.innerText = 'PROCEED TO DISCORD TICKET';
                 btn.style.opacity = '1';
                 window.open("https://discord.gg/ZBjSWaF7u", "_blank");
             }).catch(() => {
                 closeModal();
-                btn.innerText = 'NEXT: ORDER TICKET';
+                btn.innerText = 'PROCEED TO DISCORD TICKET';
                 btn.style.opacity = '1';
                 window.open("https://discord.gg/ZBjSWaF7u", "_blank");
             });
