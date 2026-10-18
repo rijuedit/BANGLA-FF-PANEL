@@ -51,132 +51,53 @@
             object-fit: cover;
         }
 
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-        }
+        .brand-text { display: flex; flex-direction: column; }
+        .brand-title { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700; color: #ffffff; letter-spacing: 1px; }
+        .brand-subtitle { font-size: 0.8rem; color: var(--neon-pink); font-weight: 700; letter-spacing: 2px; }
 
-        .brand-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #ffffff;
-            letter-spacing: 1px;
-        }
-
-        .brand-subtitle {
-            font-size: 0.8rem;
-            color: var(--neon-pink);
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-
-        .nav-actions {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
+        .nav-actions { display: flex; gap: 15px; align-items: center; }
         .btn-nav {
-            background: #11071a;
-            color: #ffffff;
-            padding: 8px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border: 1px solid var(--border-color);
-            transition: 0.3s;
-            font-size: 0.95rem;
+            background: #11071a; color: #ffffff; padding: 8px 20px; border-radius: 6px;
+            text-decoration: none; font-weight: bold; display: flex; align-items: center;
+            gap: 8px; border: 1px solid var(--border-color); transition: 0.3s; font-size: 0.95rem;
         }
-
         .btn-nav:hover { background: #1a0b2e; border-color: var(--neon-purple); }
 
-        .btn-discord {
-            background: rgba(88, 101, 242, 0.1);
-            border-color: #5865F2;
-            color: #5865F2;
-        }
-        .btn-discord:hover {
-            background: #5865F2;
-            color: #ffffff;
-            border-color: #5865F2;
-        }
+        .btn-discord { background: rgba(88, 101, 242, 0.1); border-color: #5865F2; color: #5865F2; }
+        .btn-discord:hover { background: #5865F2; color: #ffffff; border-color: #5865F2; }
 
-        /* Main Container & Layout */
-        .main-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+        /* Main Container */
+        .main-container { max-width: 1000px; margin: 0 auto; padding: 30px 20px; }
 
         .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #0c0514;
-            color: #ffffff;
-            padding: 8px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            border: 1px solid var(--border-color);
-            margin-bottom: 25px;
-            font-weight: 600;
-            transition: 0.3s;
+            display: inline-flex; align-items: center; gap: 8px; background: #0c0514;
+            color: #ffffff; padding: 8px 20px; border-radius: 8px; text-decoration: none;
+            border: 1px solid var(--border-color); margin-bottom: 25px; font-weight: 600; transition: 0.3s;
         }
-        .back-link:hover {
-            border-color: var(--neon-purple);
-            box-shadow: 0 0 10px rgba(157, 0, 255, 0.2);
-        }
+        .back-link:hover { border-color: var(--neon-purple); box-shadow: 0 0 10px rgba(157, 0, 255, 0.2); }
 
         /* Video Box */
         .video-box {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-            margin-bottom: 40px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            width: 100%; aspect-ratio: 16/9; background: #000; border: 1px solid var(--border-color);
+            border-radius: 12px; overflow: hidden; position: relative; margin-bottom: 30px;
         }
-
         .yt-card { width: 100%; height: 100%; cursor: pointer; position: relative; }
-        .yt-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: 0.3s; }
-        .yt-card:hover img { opacity: 1; }
-        
+        .yt-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
         .play-overlay {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             font-size: 60px; color: #ff0066; text-shadow: 0 0 20px rgba(255, 0, 102, 0.8);
-            transition: 0.3s;
         }
-        .yt-card:hover .play-overlay { transform: translate(-50%, -50%) scale(1.1); color: var(--neon-purple); }
 
         /* Products Grid */
         .section-title { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; color: #ffffff; margin-bottom: 20px; }
-        
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
         .product-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 25px 20px;
-            text-align: center;
-            transition: 0.3s;
-            cursor: pointer;
+            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px;
+            padding: 25px 20px; text-align: center; transition: 0.3s; cursor: pointer;
         }
-
         .product-card:hover { border-color: var(--neon-purple); transform: translateY(-5px); box-shadow: 0 5px 15px rgba(157, 0, 255, 0.15); }
         .product-img { width: 120px; height: 120px; object-fit: contain; margin-bottom: 20px; }
-        .product-name { font-size: 1.5rem; font-weight: bold; margin-bottom: 10px; color: #ffffff; font-family: 'Orbitron', sans-serif; }
+        .product-name { font-size: 1.4rem; font-weight: bold; margin-bottom: 10px; color: #ffffff; font-family: 'Orbitron', sans-serif; }
         .price-tag { color: var(--neon-green); font-size: 1.2rem; font-weight: bold; margin-bottom: 15px; }
 
         /* Modal */
@@ -192,27 +113,23 @@
 
         .package-selector { margin: 20px 0; max-height: 250px; overflow-y: auto; }
         .package-option {
-            background: rgba(157, 0, 255, 0.05);
-            border: 1px solid var(--border-color);
+            background: rgba(157, 0, 255, 0.05); border: 1px solid var(--border-color);
             padding: 15px; border-radius: 10px; margin-bottom: 10px;
             display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.3s;
         }
-        .package-option.active { border-color: var(--neon-purple); background: rgba(157, 0, 255, 0.2); }
+        .package-option.active { border-color: var(--neon-purple); background: rgba(157, 0, 255, 0.25); }
 
         .buy-now-btn {
-            width: 100%; padding: 16px; background: var(--neon-purple);
-            color: white; border: none; border-radius: 10px; font-weight: bold;
-            font-size: 1.1rem; cursor: pointer; margin-top: 10px; transition: 0.3s;
-            font-family: 'Orbitron', sans-serif;
+            width: 100%; padding: 16px; background: var(--neon-purple); color: white; border: none;
+            border-radius: 10px; font-weight: bold; font-size: 1.1rem; cursor: pointer; margin-top: 10px;
+            transition: 0.3s; font-family: 'Orbitron', sans-serif;
         }
         .buy-now-btn:hover { background: #b01aff; box-shadow: 0 0 15px rgba(157, 0, 255, 0.4); }
-        
         #loading { text-align: center; color: var(--neon-purple); font-size: 1.5rem; padding: 40px; }
     </style>
 </head>
 <body>
 
-    <!-- Header exactly as requested -->
     <header class="navbar">
         <a href="index.html" class="nav-brand">
             <img src="logo.png" alt="Logo">
@@ -228,10 +145,8 @@
     </header>
 
     <div class="main-container">
-        <!-- Back Button (Positioned exactly like the image, above the content) -->
         <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
 
-        <!-- Setup Video Section (Managed from Admin, No Skip Button) -->
         <div class="video-box" id="videoBox" style="display:none;">
             <div id="ytCard" class="yt-card" style="display:none;">
                 <img id="ytThumb" src="" alt="Thumbnail">
@@ -264,39 +179,31 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
     <script>
-        const firebaseConfig = {
-            databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app"
-        };
+        const firebaseConfig = { databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app" };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
         let selectedProduct = null;
         let selectedPackage = null;
 
-        // Auto Smart Price Detector
         function getSafePrice(item) {
             if (!item) return 0;
             const keys = ['price', 'salePrice', 'newPrice', 'buyPrice', 'resellPrice', 'value'];
             for (let key of keys) {
-                if (item[key] !== undefined && item[key] !== null && parseInt(item[key]) > 0) {
-                    return parseInt(item[key]);
-                }
+                if (item[key] !== undefined && item[key] !== null && parseInt(item[key]) > 0) return parseInt(item[key]);
             }
             return 0;
         }
 
         async function loadContent() {
-            // Load Video Settings for PC Panel
+            // Load Video
             db.ref('settings/video_pc').once('value', snapshot => {
                 const data = snapshot.val();
                 if (data && data.url) {
                     const url = data.url;
                     document.getElementById('videoBox').style.display = 'block';
-
                     if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                        let vid = "";
-                        if(url.includes('v=')) vid = url.split('v=')[1].split('&')[0];
-                        else vid = url.split('/').pop();
+                        let vid = url.includes('v=') ? url.split('v=')[1].split('&')[0] : url.split('/').pop();
                         document.getElementById('ytThumb').src = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
                         document.getElementById('ytCard').style.display = 'block';
                         document.getElementById('ytCard').onclick = () => window.open(url, '_blank');
@@ -307,71 +214,98 @@
                 }
             });
 
-            // Load PC Products
-            db.ref('products/pc').on('value', snapshot => {
+            // Smart Multi-Path Product Fetching (Checks 'products/pc', 'products', and 'pc_panels')
+            const grid = document.getElementById('productsGrid');
+
+            function renderProducts(snapshot) {
                 document.getElementById('loading').style.display = 'none';
-                const grid = document.getElementById('productsGrid');
                 grid.innerHTML = '';
-                
-                if(!snapshot.exists()) {
-                    grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: var(--text-dim);">No PC products available right now.</p>';
-                    return;
-                }
+                let count = 0;
 
                 snapshot.forEach(child => {
                     const p = child.val();
+                    if(!p || typeof p !== 'object') return;
+
+                    // If checking root 'products', filter for pc
+                    if (child.key === 'mobile' || child.key === 'free') return;
+
                     p.id = child.key;
-                    
                     let minPrice = 0;
                     if (p.packages) {
                         const pkgArray = Object.values(p.packages);
                         if (pkgArray.length > 0) minPrice = getSafePrice(pkgArray[0]);
+                    } else {
+                        minPrice = getSafePrice(p);
                     }
 
+                    count++;
                     const card = document.createElement('div');
                     card.className = 'product-card';
                     card.onclick = () => openModal(p);
                     card.innerHTML = `
-                        <img src="${p.image || 'logo.png'}" class="product-img" onerror="this.src='logo.png'">
-                        <div class="product-name">${p.name}</div>
+                        <img src="${p.image || p.img || 'logo.png'}" class="product-img" onerror="this.src='logo.png'">
+                        <div class="product-name">${p.name || p.title || 'PC Panel'}</div>
                         <div class="price-tag">Starting ৳${minPrice}</div>
                         <div style="color: var(--text-dim); font-size: 0.9rem; background:#11071a; padding:8px; border-radius:6px;"><i class="fas fa-shopping-cart"></i> View Packages</div>
                     `;
                     grid.appendChild(card);
                 });
+
+                return count;
+            }
+
+            // Step 1: Try 'products/pc'
+            db.ref('products/pc').on('value', snapshot => {
+                if (snapshot.exists() && snapshot.hasChildren()) {
+                    renderProducts(snapshot);
+                } else {
+                    // Step 2: Fallback to 'products'
+                    db.ref('products').once('value', snap2 => {
+                        if (snap2.exists() && snap2.hasChildren()) {
+                            renderProducts(snap2);
+                        } else {
+                            document.getElementById('loading').style.display = 'none';
+                            grid.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: var(--text-dim);">No PC products available right now.</p>';
+                        }
+                    });
+                }
             });
         }
 
         function openModal(product) {
             selectedProduct = product;
-            document.getElementById('modalProdName').innerText = product.name;
+            document.getElementById('modalProdName').innerText = product.name || product.title || 'PC Panel';
             const pkgList = document.getElementById('packageList');
             pkgList.innerHTML = '';
 
+            let pkgArray = [];
             if (product.packages) {
-                const pkgs = Object.entries(product.packages);
-                pkgs.forEach(([id, pkg], index) => {
-                    const price = getSafePrice(pkg);
-                    const label = pkg.unit === 'Lifetime' ? 'Lifetime' : `${pkg.qty} ${pkg.unit}`;
-                    
-                    const div = document.createElement('div');
-                    div.className = `package-option ${index === 0 ? 'active' : ''}`;
-                    if(index === 0) selectedPackage = { ...pkg, id, price };
-                    
-                    div.innerHTML = `
-                        <div style="font-weight:bold; font-size:1.1rem; color:#fff;">${label}</div>
-                        <div style="color: var(--neon-green); font-weight:bold; font-size:1.2rem; font-family:'Orbitron', sans-serif;">৳${price}</div>
-                    `;
-                    div.onclick = () => {
-                        document.querySelectorAll('.package-option').forEach(el => el.classList.remove('active'));
-                        div.classList.add('active');
-                        selectedPackage = { ...pkg, id, price };
-                    };
-                    pkgList.appendChild(div);
-                });
+                pkgArray = Object.entries(product.packages).map(([id, pkg]) => ({ ...pkg, id }));
             } else {
-                pkgList.innerHTML = '<p style="color:var(--text-dim); text-align:center;">No packages configured.</p>';
+                // If no packages node, construct a default package from product root price
+                pkgArray = [{ id: 'default', qty: 1, unit: 'Days', price: getSafePrice(product) }];
             }
+
+            pkgArray.forEach((pkg, index) => {
+                const price = getSafePrice(pkg);
+                const label = pkg.unit === 'Lifetime' ? 'Lifetime' : `${pkg.qty || 1} ${pkg.unit || 'Days'}`;
+                
+                const div = document.createElement('div');
+                div.className = `package-option ${index === 0 ? 'active' : ''}`;
+                if(index === 0) selectedPackage = { ...pkg, price };
+                
+                div.innerHTML = `
+                    <div style="font-weight:bold; font-size:1.1rem; color:#fff;">${label}</div>
+                    <div style="color: var(--neon-green); font-weight:bold; font-size:1.2rem; font-family:'Orbitron', sans-serif;">৳${price}</div>
+                `;
+                div.onclick = () => {
+                    document.querySelectorAll('.package-option').forEach(el => el.classList.remove('active'));
+                    div.classList.add('active');
+                    selectedPackage = { ...pkg, price };
+                };
+                pkgList.appendChild(div);
+            });
+
             document.getElementById('purchaseModal').style.display = 'flex';
         }
 
@@ -386,12 +320,12 @@
             btn.innerText = "CREATING TICKET...";
             btn.disabled = true;
 
-            const pkgText = selectedPackage.unit === 'Lifetime' ? 'Lifetime' : `${selectedPackage.qty} ${selectedPackage.unit}`;
+            const pkgText = selectedPackage.unit === 'Lifetime' ? 'Lifetime' : `${selectedPackage.qty || 1} ${selectedPackage.unit || 'Days'}`;
             const finalPrice = getSafePrice(selectedPackage);
 
             const ticketData = {
                 discordUserId: discordUser,
-                productName: selectedProduct.name,
+                productName: selectedProduct.name || selectedProduct.title || 'PC Panel',
                 packageName: pkgText,
                 price: finalPrice,
                 paymentDetails: `
@@ -418,7 +352,7 @@
                     alert("Error: " + result.message);
                 }
             } catch (err) {
-                alert("Failed to connect to Bot Server. Check your internet or try again later.");
+                alert("Failed to connect to Bot Server.");
             } finally {
                 btn.innerText = "GET TICKET & PURCHASE";
                 btn.disabled = false;
