@@ -1,391 +1,453 @@
-
+```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mobile Panels | BANGLA FF PANEL</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-:root{--bg:#07040d;--panel:#140b20;--panel2:#1b102a;--line:#38224d;--purple:#a855f7;--pink:#ec4899;--muted:#b9a6ca;--green:#34d399}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at 50% -10%,#31134a 0,transparent 42%),var(--bg);color:#faf7ff;font-family:Inter,Segoe UI,Arial,sans-serif;min-height:100vh}
-a{color:inherit;text-decoration:none}
-header{position:sticky;top:0;z-index:5;background:#09050eea;backdrop-filter:blur(14px);border-bottom:1px solid #38224d}
-.nav{max-width:1200px;margin:auto;padding:15px 22px;display:flex;align-items:center;justify-content:space-between;gap:14px}
-.logo{font-size:19px;font-weight:900;letter-spacing:.8px}
-.logo span{color:#c084fc}
-.nav-links{display:flex;align-items:center;gap:10px}
-.nav-btn{border:1px solid #51336b;border-radius:10px;padding:10px 14px;font-size:13px;font-weight:700;background:#170c24}
-.nav-btn.primary{background:linear-gradient(110deg,#7c3aed,#a855f7);border-color:#a855f7}
-main{max-width:1200px;margin:auto;padding:30px 22px 60px}
-.hero{padding:30px 24px;border:1px solid #4a2d62;border-radius:20px;background:linear-gradient(120deg,#1c0d2a,#100817 70%);position:relative;overflow:hidden}
-.hero:after{content:"";position:absolute;width:210px;height:210px;border-radius:50%;right:-65px;top:-95px;background:#a855f71f;filter:blur(3px)}
-.eyebrow{color:#d8b4fe;font-size:11px;letter-spacing:2px;font-weight:800}
-.hero h1{font-size:clamp(27px,4vw,42px);margin:10px 0;font-weight:900;letter-spacing:-1px}
-.hero h1 span{background:linear-gradient(90deg,#c084fc,#f0abfc,#fb7185);background-clip:text;color:transparent}
-.hero p{color:var(--muted);margin:0;max-width:580px;line-height:1.7;font-size:14px}
-.video-wrap{margin-top:18px;max-width:560px}
-.video-card{display:block;position:relative;aspect-ratio:16/9;border:1px solid #593878;border-radius:15px;overflow:hidden;background:#100817}
-.video-card img{width:100%;height:100%;object-fit:cover;display:block;transition:.3s}
-.video-card:hover img{transform:scale(1.035);opacity:.8}
-.play{position:absolute;inset:0;display:grid;place-items:center}
-.play i{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:#a855f7ed;box-shadow:0 0 30px #a855f777;font-size:22px}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:32px 0 16px}
-.section-head h2{font-size:22px;margin:0;font-weight:850}
-.section-head p{font-size:12px;color:var(--muted);margin:5px 0 0}
-.count{border:1px solid #4a2d62;border-radius:999px;padding:7px 11px;color:#d8b4fe;font-size:12px}
-.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:17px}
-.product-card{background:linear-gradient(145deg,#1b1028,#100817);border:1px solid var(--line);border-radius:17px;padding:12px;transition:.25s;overflow:hidden}
-.product-card:hover{transform:translateY(-4px);border-color:#a855f7;box-shadow:0 12px 35px #7c3aed24}
-.product-image{height:155px;width:100%;object-fit:cover;border-radius:11px;background:#09050e;border:1px solid #4a2d62}
-.product-name{font-weight:850;font-size:15px;margin:13px 2px 6px;overflow-wrap:anywhere}
-.tag{display:inline-flex;gap:5px;align-items:center;font-size:10px;color:#d8b4fe;background:#a855f71b;border:1px solid #56336f;border-radius:999px;padding:5px 8px}
-.product-bottom{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:13px}
-.starting{font-size:12px;color:var(--muted)}
-.starting b{display:block;color:#86efac;font-size:16px;margin-top:2px}
-.buy-btn{border:0;border-radius:9px;background:linear-gradient(110deg,#7c3aed,#a855f7);color:white;padding:10px 12px;font-size:12px;font-weight:800;cursor:pointer}
-.empty{grid-column:1/-1;text-align:center;padding:45px 15px;border:1px dashed #54346d;border-radius:15px;color:var(--muted)}
-.modal-backdrop{position:fixed;inset:0;background:#000b;backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:16px;z-index:20}
-.modal-backdrop.show{display:flex}
-.modal{width:min(520px,100%);max-height:90vh;overflow:auto;background:#130a1e;border:1px solid #704393;border-radius:18px;box-shadow:0 20px 80px #000a}
-.modal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px;border-bottom:1px solid #382448}
-.modal-head h3{margin:0;font-size:18px}
-.close{border:0;background:transparent;color:#d8c7e5;font-size:22px;cursor:pointer}
-.modal-body{padding:18px}
-.field{margin-bottom:14px}
-.field label{display:block;color:#c7b4d8;font-size:12px;font-weight:700;margin-bottom:7px}
-.field input,.field select{width:100%;background:#09050e;color:#fff;border:1px solid #49305d;border-radius:9px;padding:12px;outline:none}
-.field input:focus,.field select:focus{border-color:#a855f7}
-.packages{display:grid;gap:10px;margin:10px 0 17px}
-.package-option{display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left;padding:13px;border:1px solid #49305d;background:#0c0613;border-radius:11px;color:white;cursor:pointer}
-.package-option.selected{border-color:#a855f7;background:#a855f71b}
-.package-option small{display:block;color:var(--muted);font-size:11px;margin-top:4px}
-.package-option b{color:#86efac;white-space:nowrap}
-.submit-btn{width:100%;border:0;border-radius:10px;background:linear-gradient(110deg,#7c3aed,#a855f7);color:white;padding:13px;font-weight:850;cursor:pointer}
-.submit-btn:disabled{opacity:.55;cursor:wait}
-.notice{font-size:12px;color:var(--muted);line-height:1.6;margin-top:12px}
-.status{font-size:13px;margin-top:12px;color:#fda4af;white-space:pre-wrap}
-footer{border-top:1px solid #38224d;padding:22px;text-align:center;color:#8e7b9e;font-size:12px}
-@media(max-width:1000px){.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:700px){
-.nav{padding:12px 15px}.logo{font-size:15px}
-.nav-btn{padding:9px 10px;font-size:11px}
-main{padding:18px 14px 40px}
-.hero{padding:23px 18px}
-.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
-.product-image{height:120px}.product-card{padding:9px}
-.product-name{font-size:12px;margin-top:10px}
-.product-bottom{align-items:flex-end}
-.buy-btn{padding:9px 10px;font-size:11px}
-.starting{font-size:10px}.starting b{font-size:14px}
-.section-head h2{font-size:19px}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Panels | BR MODS</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0f19;
+      color: #fff;
+    }
+
+    header {
+      padding: 22px 16px;
+      text-align: center;
+      background: linear-gradient(135deg, #101b35, #241044);
+      border-bottom: 1px solid #293653;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      color: #69a9ff;
+      font-size: 28px;
+    }
+
+    header p {
+      margin: 0;
+      color: #c2cce0;
+      font-size: 14px;
+    }
+
+    .container {
+      width: min(1100px, 94%);
+      margin: 24px auto;
+    }
+
+    .status {
+      padding: 14px;
+      margin-bottom: 18px;
+      text-align: center;
+      color: #b8c7df;
+      background: #111a2c;
+      border: 1px solid #263653;
+      border-radius: 10px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      overflow: hidden;
+      background: #121a2a;
+      border: 1px solid #293750;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px #0004;
+    }
+
+    .card img {
+      display: block;
+      width: 100%;
+      height: 190px;
+      object-fit: contain;
+      padding: 10px;
+      background: #0e1523;
+    }
+
+    .card-body { padding: 16px; }
+
+    .card h2 {
+      margin: 0 0 14px;
+      font-size: 19px;
+      overflow-wrap: anywhere;
+    }
+
+    .package {
+      margin: 10px 0;
+      padding: 12px;
+      background: #0b1220;
+      border: 1px solid #273650;
+      border-radius: 10px;
+    }
+
+    .package-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .duration { font-weight: bold; }
+
+    .prices {
+      margin-top: 8px;
+      color: #9fb0ca;
+      font-size: 14px;
+    }
+
+    .old-price {
+      margin-right: 7px;
+      color: #8993a5;
+      text-decoration: line-through;
+    }
+
+    .new-price {
+      color: #62e6a3;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 12px;
+      padding: 12px;
+      border: 0;
+      border-radius: 9px;
+      color: #fff;
+      background: linear-gradient(90deg, #2878ff, #7646ee);
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: 30px 15px;
+      text-align: center;
+      color: #b9c6dc;
+      background: #121a2a;
+      border: 1px solid #293750;
+      border-radius: 12px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: #000b;
+    }
+
+    .modal.show { display: flex; }
+
+    .modal-box {
+      width: min(430px, 100%);
+      padding: 22px;
+      background: #121a2a;
+      border: 1px solid #344563;
+      border-radius: 14px;
+    }
+
+    .modal-box h2 { margin-top: 0; }
+
+    .modal-box input {
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px;
+      color: #fff;
+      background: #0b1220;
+      border: 1px solid #344563;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    .cancel {
+      background: #303b50;
+    }
+
+    footer {
+      padding: 24px 12px;
+      color: #8190a8;
+      text-align: center;
+      font-size: 13px;
+    }
+  </style>
 </head>
+
 <body>
-<header>
- <div class="nav">
-  <a class="logo" href="index.html"><i class="fa-solid fa-bolt" style="color:#c084fc"></i> BANGLA <span>FF PANEL</span></a>
-  <div class="nav-links">
-   <a class="nav-btn" href="index.html"><i class="fa-solid fa-house"></i> Home</a>
-   <a class="nav-btn primary" id="discordLink" href="https://discord.gg/ZBjSWaF7u" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i> Discord</a>
+  <header>
+    <h1>BR MODS</h1>
+    <p>Mobile Panel Store</p>
+  </header>
+
+  <main class="container">
+    <div id="status" class="status">প্যানেল লোড হচ্ছে...</div>
+    <section id="products" class="products"></section>
+  </main>
+
+  <div id="orderModal" class="modal">
+    <div class="modal-box">
+      <h2>অর্ডার করুন</h2>
+      <div id="selectedInfo" class="status"></div>
+
+      <form id="orderForm">
+        <input id="customerName" placeholder="আপনার নাম" required>
+        <input id="customerContact" placeholder="Discord Username / Contact" required>
+        <button id="submitOrder" type="submit">অর্ডার কনফার্ম করুন</button>
+        <button class="cancel" type="button" onclick="closeOrder()">বাতিল</button>
+      </form>
+    </div>
   </div>
- </div>
-</header>
 
-<main>
-<section class="hero">
- <div class="eyebrow">PREMIUM MOBILE COLLECTION</div>
- <h1>Mobile <span>Panels</span></h1>
- <p>Choose your panel and package. Check the duration and price, then create your private Discord order ticket securely.</p>
- <div class="video-wrap" id="videoWrap" hidden>
-  <a class="video-card" id="videoLink" href="#" target="_blank" rel="noopener">
-   <img id="videoThumb" src="" alt="Mobile panel video">
-   <span class="play"><i class="fa-solid fa-play"></i></span>
-  </a>
- </div>
-</section>
+  <footer>© BR MODS — Mobile Panels</footer>
 
-<div class="section-head">
- <div>
-  <h2><i class="fa-solid fa-layer-group me-2" style="color:#c084fc"></i>Available Panels</h2>
-  <p>Select a panel to view available packages.</p>
- </div>
- <span class="count" id="productCount">0 PRODUCTS</span>
-</div>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
-<section id="productGrid" class="product-grid">
- <div class="empty"><i class="fa-solid fa-spinner fa-spin"></i> Loading panels...</div>
-</section>
-</main>
+  <script>
+    const firebaseConfig = {
+      databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app"
+    };
 
-<footer>© <span id="year"></span> BANGLA FF PANEL · Premium Panel Store</footer>
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
 
-<div class="modal-backdrop" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
- <div class="modal">
-  <div class="modal-head">
-   <h3 id="modalTitle">Select package</h3>
-   <button class="close" id="closeProduct" aria-label="Close">&times;</button>
-  </div>
-  <div class="modal-body">
-   <div id="packageList" class="packages"></div>
-   <div class="field">
-    <label for="discordUsername">Discord Username or User ID</label>
-    <input id="discordUsername" type="text" placeholder="Enter Discord username or ID" autocomplete="off">
-   </div>
-   <button class="submit-btn" id="continueBtn"><i class="fa-brands fa-discord"></i> Continue to Discord Order</button>
-   <div class="notice">You must already be a member of our Discord server. If your username is not unique, use your Discord numeric User ID.</div>
-   <div id="orderStatus" class="status" role="status"></div>
-  </div>
- </div>
-</div>
+    const database = firebase.database();
+    const productsEl = document.getElementById("products");
+    const statusEl = document.getElementById("status");
 
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-<script>
-const firebaseConfig = {
- databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app"
-};
-if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-const database = firebase.database();
+    const ORDER_API =
+      "https://bangla-ff-bot-server.onrender.com/create-ticket";
 
-const productGrid = document.getElementById('productGrid');
-const modal = document.getElementById('productModal');
-let products = [], selectedProduct = null, selectedPackage = null, globalBuyLink = '';
+    let selectedOrder = null;
 
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({
- '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
-}[c]));
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]);
+    }
 
-function getPrices(pkg) {
- return {
-  old:Number(pkg?.oldPrice ?? pkg?.old_price ?? 0) || 0,
-  sale:Number(pkg?.newPrice ?? pkg?.salePrice ?? pkg?.sell_price ?? pkg?.price ?? 0) || 0,
-  buy:Number(pkg?.resellPrice ?? pkg?.buyPrice ?? pkg?.buy_price ?? 0) || 0
- };
-}
+    function getPackages(rawPackages) {
+      if (!rawPackages) return [];
 
-function getPackages(p) {
- return Array.isArray(p.packages)
-  ? p.packages
-  : (p.packages ? Object.values(p.packages) : []);
-}
+      const values = Array.isArray(rawPackages)
+        ? rawPackages
+        : Object.values(rawPackages);
 
-function packageLabel(pkg) {
- return pkg.duration || pkg.name || 'Package';
-}
+      return values.filter(pkg => pkg && typeof pkg === "object");
+    }
 
-function formatPrice(v) {
- return '৳' + (Number(v) || 0);
-}
+    function getPrice(pkg) {
+      return Number(
+        pkg.newPrice ??
+        pkg.salePrice ??
+        pkg.sell_price ??
+        pkg.price ??
+        0
+      );
+    }
 
-function showError(message) {
- productGrid.innerHTML = `<div class="empty"><i class="fa-solid fa-circle-exclamation fa-2x mb-3"></i><div>${esc(message)}</div></div>`;
-}
+    function getOldPrice(pkg) {
+      return Number(pkg.oldPrice ?? pkg.old_price ?? 0);
+    }
 
-function renderProducts() {
- productGrid.innerHTML = '';
- document.getElementById('productCount').textContent = `${products.length} PRODUCTS`;
+    function getDuration(pkg) {
+      return pkg.duration ?? pkg.name ?? pkg.title ?? "Package";
+    }
 
- if (!products.length) {
-  showError('No mobile panels are available right now. Please check back later.');
-  return;
- }
+    function getImage(product) {
+      return product.imageUrl ?? product.image ?? product.img ?? "";
+    }
 
- products.forEach(p => {
-  const name = p.data.name || p.data.title || p.data.panelName || 'Mobile Panel';
-  const img = p.data.imageUrl || p.data.image || p.data.img || 'logo.png';
-  const pkgs = getPackages(p.data);
-  const prices = pkgs.map(getPrices).map(x => x.sale).filter(x => x > 0);
-  const min = prices.length ? Math.min(...prices) : 0;
+    function renderProduct(product, id) {
+      const name = product.name ?? product.title ?? "Mobile Panel";
+      const image = getImage(product);
+      const packages = getPackages(product.packages);
 
-  const card = document.createElement('article');
-  card.className = 'product-card';
-  card.innerHTML = `<img class="product-image" src="${esc(img)}" alt="${esc(name)}">
-   <div class="product-name">${esc(name)}</div>
-   <span class="tag"><i class="fa-solid fa-clock"></i> ${pkgs.length} PACKAGE${pkgs.length === 1 ? '' : 'S'}</span>
-   <div class="product-bottom">
-    <div class="starting">Starting from<b>${min ? formatPrice(min) : 'Contact us'}</b></div>
-    <button class="buy-btn"><i class="fa-solid fa-cart-shopping"></i> Choose</button>
-   </div>`;
+      const packageHTML = packages.map((pkg, index) => {
+        const price = getPrice(pkg);
+        const oldPrice = getOldPrice(pkg);
+        const duration = getDuration(pkg);
 
-  const im = card.querySelector('img');
-  im.onerror = function() {
-   this.onerror = null;
-   this.src = 'logo.png';
-  };
+        return `
+          <div class="package">
+            <div class="package-top">
+              <span class="duration">${escapeHTML(duration)}</span>
+              <span class="new-price">৳${escapeHTML(price)}</span>
+            </div>
 
-  card.querySelector('button').onclick = () => openProduct(p);
-  card.onclick = e => {
-   if (!e.target.closest('button')) openProduct(p);
-  };
-  productGrid.appendChild(card);
- });
-}
+            <div class="prices">
+              ${oldPrice > price
+                ? `<span class="old-price">৳${escapeHTML(oldPrice)}</span>`
+                : ""}
+              <span>টাকা</span>
+            </div>
 
-function openProduct(p) {
- selectedProduct = p;
- selectedPackage = null;
+            <button type="button"
+              onclick="openOrder('${escapeHTML(id)}', ${index})">
+              Buy Now
+            </button>
+          </div>
+        `;
+      }).join("");
 
- document.getElementById('modalTitle').textContent =
-  p.data.name || p.data.title || 'Select package';
- document.getElementById('discordUsername').value = '';
- document.getElementById('orderStatus').textContent = '';
+      return `
+        <article class="card">
+          ${image
+            ? `<img src="${escapeHTML(image)}"
+                 alt="${escapeHTML(name)}"
+                 loading="lazy"
+                 onerror="this.style.display='none'">`
+            : ""}
+          <div class="card-body">
+            <h2>${escapeHTML(name)}</h2>
+            ${packageHTML || '<p>এই প্যানেলের কোনো প্যাকেজ পাওয়া যায়নি।</p>'}
+          </div>
+        </article>
+      `;
+    }
 
- const list = document.getElementById('packageList');
- list.innerHTML = '';
- const pkgs = getPackages(p.data);
+    function loadProducts() {
+      database.ref("mobile_panels").on("value", snapshot => {
+        productsEl.innerHTML = "";
 
- if (!pkgs.length) {
-  list.innerHTML = '<div class="notice">No packages available for this panel.</div>';
-  document.getElementById('continueBtn').disabled = true;
- } else {
-  document.getElementById('continueBtn').disabled = false;
+        if (!snapshot.exists()) {
+          statusEl.textContent = "এখনো কোনো Mobile Panel যোগ করা হয়নি।";
+          productsEl.innerHTML =
+            '<div class="empty">কোনো প্যানেল পাওয়া যায়নি।</div>';
+          return;
+        }
 
-  pkgs.forEach((pkg, i) => {
-   const prices = getPrices(pkg);
-   const b = document.createElement('button');
-   b.type = 'button';
-   b.className = 'package-option';
-   b.innerHTML = `<span><strong>${esc(packageLabel(pkg))}</strong>
-    <small>${prices.old ? `Old price: ${formatPrice(prices.old)} · ` : ''}Secure Discord ticket</small></span>
-    <b>${prices.sale ? formatPrice(prices.sale) : 'Contact us'}</b>`;
+        const data = snapshot.val();
+        const entries = Object.entries(data).filter(([id, product]) =>
+          product && typeof product === "object"
+        );
 
-   b.onclick = () => {
-    selectedPackage = {...pkg, label:packageLabel(pkg), prices};
-    list.querySelectorAll('.package-option').forEach(el => el.classList.remove('selected'));
-    b.classList.add('selected');
-   };
+        if (!entries.length) {
+          statusEl.textContent = "কোনো প্যানেল পাওয়া যায়নি।";
+          return;
+        }
 
-   list.appendChild(b);
-   if (i === 0) b.click();
-  });
- }
+        statusEl.textContent = `মোট ${entries.length}টি Mobile Panel পাওয়া গেছে।`;
 
- modal.classList.add('show');
- document.body.style.overflow = 'hidden';
-}
+        productsEl.innerHTML = entries
+          .map(([id, product]) => renderProduct(product, id))
+          .join("");
+      }, error => {
+        console.error("Firebase read error:", error);
+        statusEl.textContent =
+          "প্যানেল লোড করা যায়নি। ব্রাউজারের Console-এ error দেখুন।";
+      });
+    }
 
-function closeModal() {
- modal.classList.remove('show');
- document.body.style.overflow = '';
-}
+    function openOrder(productId, packageIndex) {
+      database.ref("mobile_panels/" + productId).once("value")
+        .then(snapshot => {
+          if (!snapshot.exists()) {
+            alert("এই প্যানেলটি আর পাওয়া যাচ্ছে না।");
+            return;
+          }
 
-document.getElementById('closeProduct').onclick = closeModal;
-modal.addEventListener('click', e => {
- if (e.target === modal) closeModal();
-});
-document.addEventListener('keydown', e => {
- if (e.key === 'Escape') closeModal();
-});
+          const product = snapshot.val();
+          const packages = getPackages(product.packages);
+          const pkg = packages[packageIndex];
 
-document.getElementById('continueBtn').onclick = async () => {
- const user = document.getElementById('discordUsername').value.trim();
- const status = document.getElementById('orderStatus');
- const btn = document.getElementById('continueBtn');
+          if (!pkg) {
+            alert("প্যাকেজটি পাওয়া যায়নি।");
+            return;
+          }
 
- if (!selectedProduct || !selectedPackage) {
-  status.textContent = 'Please select a package first.';
-  return;
- }
- if (!user) {
-  status.textContent = 'Please enter your Discord username or User ID.';
-  return;
- }
+          selectedOrder = {
+            category: "MOBILE PANEL",
+            panelName: product.name ?? product.title ?? "Mobile Panel",
+            duration: getDuration(pkg),
+            price: getPrice(pkg),
+            productId,
+            packageIndex
+          };
 
- const p = selectedProduct.data;
- btn.disabled = true;
- status.textContent = 'Creating your private Discord order ticket...';
+          document.getElementById("selectedInfo").textContent =
+            `${selectedOrder.panelName} — ${selectedOrder.duration} — ৳${selectedOrder.price}`;
 
- try {
-  const response = await fetch('https://bangla-ff-bot-server.onrender.com/create-ticket', {
-   method:'POST',
-   headers:{'Content-Type':'application/json'},
-   body:JSON.stringify({
-    discordUserId:user,
-    discordUsername:user,
-    productTitle:p.name || p.title || p.panelName || 'Mobile Panel',
-    packageName:selectedPackage.label,
-    price:selectedPackage.prices.sale,
-    category:'MOBILE PANEL'
-   })
-  });
+          document.getElementById("orderModal").classList.add("show");
+        })
+        .catch(error => {
+          console.error(error);
+          alert("প্যানেলের তথ্য লোড করা যায়নি।");
+        });
+    }
 
-  let result = {};
-  try {
-   result = await response.json();
-  } catch {}
+    function closeOrder() {
+      document.getElementById("orderModal").classList.remove("show");
+    }
 
-  if (!response.ok || !result.success || !result.url) {
-   const code = result.code || result.error || '';
+    document.getElementById("orderForm").addEventListener("submit", async event => {
+      event.preventDefault();
 
-   if (code === 'MEMBER_NOT_FOUND')
-    throw new Error('This Discord user was not found in the server. Join the server first, or enter your numeric User ID.');
-   if (code === 'USERNAME_NOT_UNIQUE')
-    throw new Error('This username matches multiple members. Please enter your numeric Discord User ID.');
-   if (code === 'BOT_NOT_READY')
-    throw new Error('Discord bot is currently unavailable. Please try again later.');
+      if (!selectedOrder) {
+        alert("আগে একটি প্যাকেজ নির্বাচন করুন।");
+        return;
+      }
 
-   throw new Error(result.message || result.error || 'Could not create your order ticket. Please try again.');
-  }
+      const button = document.getElementById("submitOrder");
+      button.disabled = true;
+      button.textContent = "অপেক্ষা করুন...";
 
-  if (!/^https:\/\/discord\.com\/channels\/\d+\/\d+$/.test(result.url)) {
-   throw new Error('The bot returned an invalid ticket link. Please contact support.');
-  }
+      const payload = {
+        ...selectedOrder,
+        customerName: document.getElementById("customerName").value.trim(),
+        customerContact: document.getElementById("customerContact").value.trim()
+      };
 
-  status.textContent = 'Ticket created! Redirecting to Discord...';
-  window.location.href = result.url;
- } catch (e) {
-  status.textContent = e.message || 'Something went wrong. Please try again.';
-  btn.disabled = false;
- }
-};
+      try {
+        const response = await fetch(ORDER_API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
 
-function youtubeId(url) {
- if (!url) return '';
- try {
-  const u = new URL(url);
-  if (u.hostname.includes('youtu.be')) return u.pathname.slice(1);
-  if (u.searchParams.get('v')) return u.searchParams.get('v');
-  const m = u.pathname.match(/\/(?:embed|shorts)\/([^/?]+)/);
-  return m ? m[1] : '';
- } catch {
-  return '';
- }
-}
+        const result = await response.json().catch(() => ({}));
 
-database.ref('settings/video_mobile').once('value').then(s => {
- const val = s.val();
- const url = typeof val === 'string' ? val : val?.url || '';
- const id = youtubeId(url);
+        if (!response.ok) {
+          throw new Error(result.message || result.error || "অর্ডার পাঠানো যায়নি।");
+        }
 
- if (id) {
-  document.getElementById('videoWrap').hidden = false;
-  document.getElementById('videoLink').href = url;
-  const im = document.getElementById('videoThumb');
-  im.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-  im.onerror = () => {
-   im.src = `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
-  };
- }
-}).catch(() => {});
+        alert("অর্ডার রিকোয়েস্ট পাঠানো হয়েছে!");
+        closeOrder();
+        document.getElementById("orderForm").reset();
+      } catch (error) {
+        console.error("Order error:", error);
+        alert("অর্ডার পাঠানো যায়নি: " + error.message);
+      } finally {
+        button.disabled = false;
+        button.textContent = "অর্ডার কনফার্ম করুন";
+      }
+    });
 
-database.ref('global_buy_link/mobile').once('value').then(s => {
- globalBuyLink = s.val() || '';
- if (globalBuyLink) document.getElementById('discordLink').href = globalBuyLink;
-}).catch(() => {});
-
-database.ref('global_settings/discord_link').once('value').then(s => {
- if (s.val()) document.getElementById('discordLink').href = s.val();
-}).catch(() => {});
-
-database.ref('mobile_panels').on('value', snapshot => {
- products = [];
- snapshot.forEach(child => products.push({id:child.key, data:child.val() || {}}));
- renderProducts();
-}, error => showError('Could not load panels: ' + error.message));
-
-document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+    loadProducts();
+  </script>
 </body>
 </html>
+```
