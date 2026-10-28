@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google AdSense site verification code -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4109990485768727"
+        crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BANGLA FF PANEL</title>
@@ -271,6 +274,44 @@
         }
         .card:hover .explore-btn { background: white; color: black; border-color: white; }
 
+
+        /* Monetag ad placement slots (paste your real Monetag code into each slot) */
+        .monetag-ad-slot {
+            width: min(100% - 40px, 1000px);
+            min-height: 90px;
+            margin: 24px auto;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: 1px dashed #352044;
+            border-radius: 8px;
+            color: #777;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+        .monetag-ad-slot:empty::before {
+            content: "ADVERTISEMENT";
+        }
+        .monetag-sticky-ad {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 999;
+            width: 100%;
+            min-height: 50px;
+            margin: 0;
+            border-radius: 8px 8px 0 0;
+            background: rgba(5, 2, 10, 0.96);
+        }
+        body { padding-bottom: 60px; }
+        @media (max-width: 768px) {
+            .monetag-ad-slot { width: calc(100% - 24px); min-height: 100px; }
+            .monetag-sticky-ad { min-height: 50px; }
+        }
+
         /* Footer Styling */
         .footer {
             margin-top: auto;
@@ -334,6 +375,11 @@
         </div>
     </section>
 
+    <!-- Monetag Ad Slot 1: responsive banner between hero and systems -->
+    <div class="monetag-ad-slot" id="monetag-banner-ad" aria-label="Advertisement">
+        <!-- Paste the Monetag banner ad code here after generating it in your Monetag dashboard. -->
+    </div>
+
     <div class="divider">// AVAILABLE SYSTEMS //</div>
 
     <!-- Main Grid Cards -->
@@ -392,10 +438,20 @@
 
     </div>
 
+    <!-- Monetag Ad Slot 2: banner near the bottom of the page -->
+    <div class="monetag-ad-slot" id="monetag-bottom-banner-ad" aria-label="Advertisement">
+        <!-- Paste a second Monetag ad code here only if Monetag provides a separate ad unit. -->
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <p>© 2026 BANGLA FF PANEL. All rights reserved.</p>
     </footer>
+
+    <!-- Monetag Ad Slot 3: optional sticky bottom ad. Use only if this format is enabled in Monetag. -->
+    <div class="monetag-ad-slot monetag-sticky-ad" id="monetag-sticky-ad" aria-label="Advertisement">
+        <!-- Paste the Monetag sticky/fixed ad code here only if Monetag provides this format. -->
+    </div>
 
     <!-- Firebase Logic -->
     <script type="module">
