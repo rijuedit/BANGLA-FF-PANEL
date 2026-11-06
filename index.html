@@ -1,19 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google AdSense Script -->
     <!-- Google AdSense -->
-<script async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4109990485768727"
-    crossorigin="anonymous"></script>
+    <script async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4109990485768727"
+        crossorigin="anonymous"></script>
 
-    <!-- Google AdSense Account Verification -->
-    <meta name="google-adsense-account"
-          content="ca-pub-4109990485768727">
-
-    <!-- Google Search Console Verification -->
-    <meta name="google-site-verification"
-          content="2pp8s_pbmfBm3nEgkLgFLDxKg_OusA-ZXlQRUeXUGO4">
+    <meta name="google-adsense-account" content="ca-pub-4109990485768727">
+    <meta name="google-site-verification" content="2pp8s_pbmfBm3nEgkLgFLDxKg_OusA-ZXlQRUeXUGO4">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +16,7 @@
     <title>BANGLA FF PANEL</title>
 
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
@@ -34,10 +29,24 @@
             --text-gray: #777777;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: var(--bg-main); color: var(--text-light); min-height: 100vh; overflow-x: hidden; position: relative; display: flex; flex-direction: column; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-        /* Background Glow Effect */
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 60px;
+        }
+
         .bg-glow {
             position: absolute;
             top: 20%;
@@ -49,7 +58,7 @@
             pointer-events: none;
         }
 
-        /* Header / Navbar */
+        /* HEADER */
         .header {
             display: flex;
             justify-content: space-between;
@@ -59,7 +68,6 @@
             z-index: 100;
         }
 
-        /* Clickable Logo Section */
         .brand {
             display: flex;
             align-items: center;
@@ -73,7 +81,7 @@
             height: 40px;
             border-radius: 8px;
             object-fit: cover;
-            border: 1px solid var(--neon-pink); 
+            border: 1px solid var(--neon-pink);
         }
 
         .brand-text h2 {
@@ -105,9 +113,12 @@
             gap: 8px;
             transition: 0.3s;
         }
-        .header-btn:hover { border-color: white; }
 
-        /* Hero Section */
+        .header-btn:hover {
+            border-color: white;
+        }
+
+        /* HERO */
         .hero {
             text-align: center;
             padding: 60px 20px 40px;
@@ -130,7 +141,10 @@
             margin-bottom: 25px;
             text-transform: uppercase;
         }
-        .status-badge i { font-size: 8px; }
+
+        .status-badge i {
+            font-size: 8px;
+        }
 
         .hero h1 {
             font-size: 45px;
@@ -139,7 +153,10 @@
             margin-bottom: 15px;
             text-transform: uppercase;
         }
-        .hero h1 span { color: var(--neon-pink); }
+
+        .hero h1 span {
+            color: var(--neon-pink);
+        }
 
         .hero-subtitle {
             font-size: 11px;
@@ -149,7 +166,7 @@
             margin-bottom: 35px;
         }
 
-        /* Action Buttons */
+        /* HERO BUTTONS */
         .hero-actions {
             display: flex;
             justify-content: center;
@@ -171,7 +188,10 @@
             gap: 10px;
             transition: 0.3s;
         }
-        .action-btn:hover { border-color: var(--text-light); }
+
+        .action-btn:hover {
+            border-color: var(--text-light);
+        }
 
         .icon-btn {
             background: rgba(255, 0, 102, 0.05);
@@ -187,9 +207,13 @@
             font-size: 16px;
             transition: 0.3s;
         }
-        .icon-btn:hover { background: var(--neon-pink); color: white; }
 
-        /* Divider */
+        .icon-btn:hover {
+            background: var(--neon-pink);
+            color: white;
+        }
+
+        /* DIVIDER */
         .divider {
             text-align: center;
             margin: 50px 0 40px;
@@ -199,12 +223,13 @@
             text-transform: uppercase;
         }
 
-        /* Grid Cards */
+        /* GRID */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             max-width: 1000px;
+            width: 100%;
             margin: 0 auto;
             padding: 0 20px;
             position: relative;
@@ -221,16 +246,20 @@
             position: relative;
             transition: 0.3s;
             display: none;
+            color: white;
         }
-        .card.visible { display: block; }
-        
+
+        .card.visible {
+            display: block;
+        }
+
         .card:hover {
             border-color: #3a1b5e;
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* Badges */
+        /* BADGES */
         .badge {
             position: absolute;
             top: 15px;
@@ -242,9 +271,21 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
-        .badge-hot { background: var(--neon-pink); color: white; }
-        .badge-premium { background: #ff9900; color: white; }
-        .badge-vip { background: #0066ff; color: white; }
+
+        .badge-hot {
+            background: var(--neon-pink);
+            color: white;
+        }
+
+        .badge-premium {
+            background: #ff9900;
+            color: white;
+        }
+
+        .badge-vip {
+            background: #0066ff;
+            color: white;
+        }
 
         .card-icon {
             font-size: 35px;
@@ -255,8 +296,18 @@
             justify-content: center;
             min-height: 45px;
         }
-        .card-icon img { width: 50px; height: 50px; object-fit: contain; }
-        .card-icon span { font-size: 40px; line-height: 1; display: inline-block; }
+
+        .card-icon img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .card-icon span {
+            font-size: 40px;
+            line-height: 1;
+            display: inline-block;
+        }
 
         .card-title {
             color: white;
@@ -268,11 +319,12 @@
         }
 
         .card-desc {
-            color: #555;
+            color: #777;
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 30px;
+            overflow-wrap: anywhere;
         }
 
         .explore-btn {
@@ -286,11 +338,35 @@
             text-transform: uppercase;
             transition: 0.3s;
             display: inline-block;
+            text-decoration: none;
         }
-        .card:hover .explore-btn { background: white; color: black; border-color: white; }
 
+        .card:hover .explore-btn {
+            background: white;
+            color: black;
+            border-color: white;
+        }
 
-        /* Monetag ad placement slots (paste your real Monetag code into each slot) */
+        /* DYNAMIC ERROR FIX VIDEO */
+        .tutorial-link {
+            display: inline-block;
+            margin-top: 16px;
+            color: var(--neon-pink);
+            font-size: 11px;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .tutorial-link:hover {
+            color: white;
+        }
+
+        .dynamic-error-fix .explore-btn {
+            margin-top: 2px;
+        }
+
+        /* ADS */
         .monetag-ad-slot {
             width: min(100% - 40px, 1000px);
             min-height: 90px;
@@ -306,9 +382,11 @@
             font-size: 10px;
             letter-spacing: 1px;
         }
+
         .monetag-ad-slot:empty::before {
             content: "ADVERTISEMENT";
         }
+
         .monetag-sticky-ad {
             position: fixed;
             left: 0;
@@ -321,13 +399,8 @@
             border-radius: 8px 8px 0 0;
             background: rgba(5, 2, 10, 0.96);
         }
-        body { padding-bottom: 60px; }
-        @media (max-width: 768px) {
-            .monetag-ad-slot { width: calc(100% - 24px); min-height: 100px; }
-            .monetag-sticky-ad { min-height: 50px; }
-        }
 
-        /* Footer Styling */
+        /* FOOTER */
         .footer {
             margin-top: auto;
             padding: 30px 20px;
@@ -340,139 +413,281 @@
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 30px; }
-            .hero-actions { flex-direction: column; }
-            .action-btn { width: 100%; justify-content: center; }
-            .header { padding: 20px 20px; }
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+            .action-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .monetag-ad-slot {
+                width: calc(100% - 24px);
+                min-height: 100px;
+            }
+
+            .monetag-sticky-ad {
+                min-height: 50px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-text h2 {
+                font-size: 13px;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="bg-glow"></div>
 
-    <!-- Header Section -->
+    <!-- HEADER -->
     <header class="header">
         <a href="index.html" class="brand">
-            <img src="logo.png" alt="Logo" class="site-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/888/888879.png'">
+            <img src="logo.png"
+                 alt="Logo"
+                 class="site-logo"
+                 onerror="this.src='https://cdn-icons-png.flaticon.com/512/888/888879.png'">
+
             <div class="brand-text">
                 <h2>BANGLA FF PANEL</h2>
                 <p>PREMIUM CORP</p>
             </div>
         </a>
 
-        <!-- এখানে dynamic-discord ক্লাস যোগ করা হয়েছে -->
-        <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="header-btn dynamic-discord">
+        <a href="https://discord.gg/ZBjSWaF7u"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="header-btn dynamic-discord">
             <i class="fab fa-discord"></i> Join Discord
         </a>
     </header>
 
-    <!-- Hero Section -->
+    <!-- HERO -->
     <section class="hero">
+
         <div class="status-badge">
             <i class="fas fa-circle"></i> LIVE SERVER ACTIVE
         </div>
-        
+
         <h1>BANGLA FF <span>PANEL</span></h1>
-        <p class="hero-subtitle">NEXT GEN PRIVATE SOLUTIONS • SECURE • RELIABLE</p>
+
+        <p class="hero-subtitle">
+            NEXT GEN PRIVATE SOLUTIONS • SECURE • RELIABLE
+        </p>
 
         <div class="hero-actions">
-            <!-- এখানে dynamic-discord ক্লাস যোগ করা হয়েছে -->
-            <a href="https://discord.gg/ZBjSWaF7u" target="_blank" class="action-btn dynamic-discord">
-                <i class="fab fa-discord"></i> Join Support Discord →
+
+            <a href="https://discord.gg/ZBjSWaF7u"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="action-btn dynamic-discord">
+                <i class="fab fa-discord"></i>
+                Join Support Discord →
             </a>
-            <a href="https://oxi-topup.netlify.app/" target="_blank" class="action-btn">
-                <i class="fas fa-gem"></i> Free Fire Diamond Topup →
+
+            <a href="https://oxi-topup.netlify.app/"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="action-btn">
+                <i class="fas fa-gem"></i>
+                Free Fire Diamond Topup →
             </a>
-            <a href="#" class="icon-btn">
+
+            <a href="#"
+               class="icon-btn"
+               aria-label="Notifications">
                 <i class="fas fa-bell"></i>
             </a>
+
         </div>
     </section>
 
-    <!-- Monetag Ad Slot 1: responsive banner between hero and systems -->
-    <div class="monetag-ad-slot" id="monetag-banner-ad" aria-label="Advertisement">
-        <!-- Paste the Monetag banner ad code here after generating it in your Monetag dashboard. -->
+    <!-- AD SLOT 1 -->
+    <div class="monetag-ad-slot"
+         id="monetag-banner-ad"
+         aria-label="Advertisement">
+        <!-- Monetag banner code এখানে বসাবে -->
     </div>
 
     <div class="divider">// AVAILABLE SYSTEMS //</div>
 
-    <!-- Main Grid Cards -->
+    <!-- MAIN GRID -->
     <div class="grid-container" id="category-grid">
-        
-        <!-- Free Panel -->
-        <a href="free-panel.html" class="card" id="card_free_panel">
+
+        <!-- FREE PANEL -->
+        <a href="free-panel.html"
+           class="card"
+           id="card_free_panel">
+
             <div class="badge badge-hot">HOT</div>
+
             <div class="card-icon" id="icon_free_panel">💻</div>
-            <div class="card-title" id="title_free_panel">FREE PANEL</div>
-            <div class="card-desc">NEW PC PANEL UPDATED OB55</div>
+
+            <div class="card-title" id="title_free_panel">
+                FREE PANEL
+            </div>
+
+            <div class="card-desc">
+                NEW PC PANEL UPDATED OB55
+            </div>
+
             <div class="explore-btn">EXPLORE →</div>
         </a>
 
-        <!-- Free Bypass -->
-        <a href="free-bypass.html" class="card" id="card_free_bypass">
+        <!-- FREE BYPASS -->
+        <a href="free-bypass.html"
+           class="card"
+           id="card_free_bypass">
+
             <div class="card-icon" id="icon_free_bypass">💻</div>
-            <div class="card-title" id="title_free_bypass">FREE BYPASS</div>
-            <div class="card-desc">FAST & RELIABLE MATCHMAKING</div>
+
+            <div class="card-title" id="title_free_bypass">
+                FREE BYPASS
+            </div>
+
+            <div class="card-desc">
+                FAST & RELIABLE MATCHMAKING
+            </div>
+
             <div class="explore-btn">EXPLORE →</div>
         </a>
 
-        <!-- Emulator -->
-        <a href="emulator.html" class="card" id="card_emulator">
-            <div class="card-icon" id="icon_emulator"><i class="far fa-star"></i></div>
-            <div class="card-title" id="title_emulator">EMULATOR</div>
-            <div class="card-desc">BEST WORKING EMULATOR</div>
+        <!-- EMULATOR -->
+        <a href="emulator.html"
+           class="card"
+           id="card_emulator">
+
+            <div class="card-icon" id="icon_emulator">
+                <i class="far fa-star"></i>
+            </div>
+
+            <div class="card-title" id="title_emulator">
+                EMULATOR
+            </div>
+
+            <div class="card-desc">
+                BEST WORKING EMULATOR
+            </div>
+
             <div class="explore-btn">EXPLORE →</div>
         </a>
 
-        <!-- Free Fire APK -->
-        <a href="free-fire-apk.html" class="card" id="card_apk">
-            <div class="card-icon" id="icon_apk"><i class="fas fa-bolt"></i></div>
-            <div class="card-title" id="title_apk">FREE FIRE APK</div>
-            <div class="card-desc">DOWNLOAD LATEST APK V2.0</div>
+        <!-- FREE FIRE APK -->
+        <a href="free-fire-apk.html"
+           class="card"
+           id="card_apk">
+
+            <div class="card-icon" id="icon_apk">
+                <i class="fas fa-bolt"></i>
+            </div>
+
+            <div class="card-title" id="title_apk">
+                FREE FIRE APK
+            </div>
+
+            <div class="card-desc">
+                DOWNLOAD LATEST APK V2.0
+            </div>
+
             <div class="explore-btn">EXPLORE →</div>
         </a>
 
-        <!-- Buy PC Panel -->
-        <a href="buy-pc-panel.html" class="card" id="card_pc_panel">
+        <!-- BUY PC PANEL -->
+        <a href="buy-pc-panel.html"
+           class="card"
+           id="card_pc_panel">
+
             <div class="badge badge-premium">PREMIUM</div>
-            <div class="card-icon" id="icon_pc_panel"><i class="fas fa-desktop"></i></div>
-            <div class="card-title" id="title_pc_panel">BUY PC PANEL</div>
-            <div class="card-desc">ADVANCED VIP FEATURES FOR PC</div>
+
+            <div class="card-icon" id="icon_pc_panel">
+                <i class="fas fa-desktop"></i>
+            </div>
+
+            <div class="card-title" id="title_pc_panel">
+                BUY PC PANEL
+            </div>
+
+            <div class="card-desc">
+                ADVANCED VIP FEATURES FOR PC
+            </div>
+
             <div class="explore-btn">EXPLORE →</div>
         </a>
 
-        <!-- Buy Mobile Panel -->
-        <a href="mobile-panel.html" class="card" id="card_mobile_panel">
+        <!-- BUY MOBILE PANEL -->
+        <a href="mobile-panel.html"
+           class="card"
+           id="card_mobile_panel">
+
             <div class="badge badge-vip">VIP</div>
-            <div class="card-icon" id="icon_mobile_panel"><i class="fas fa-mobile-alt"></i></div>
-            <div class="card-title" id="title_mobile_panel">BUY MOBILE PANEL</div>
-            <div class="card-desc">SAFE VIP PANEL FOR ANDROID/IOS</div>
+
+            <div class="card-icon" id="icon_mobile_panel">
+                <i class="fas fa-mobile-alt"></i>
+            </div>
+
+            <div class="card-title" id="title_mobile_panel">
+                BUY MOBILE PANEL
+            </div>
+
+            <div class="card-desc">
+                SAFE VIP PANEL FOR ANDROID/IOS
+            </div>
+
             <div class="explore-btn">EXPLORE →</div>
         </a>
 
     </div>
 
-    <!-- Monetag Ad Slot 2: banner near the bottom of the page -->
-    <div class="monetag-ad-slot" id="monetag-bottom-banner-ad" aria-label="Advertisement">
-        <!-- Paste a second Monetag ad code here only if Monetag provides a separate ad unit. -->
+    <!-- AD SLOT 2 -->
+    <div class="monetag-ad-slot"
+         id="monetag-bottom-banner-ad"
+         aria-label="Advertisement">
+        <!-- আলাদা Monetag banner code থাকলে এখানে বসাবে -->
     </div>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer class="footer">
         <p>© 2026 BANGLA FF PANEL. All rights reserved.</p>
     </footer>
 
-    <!-- Monetag Ad Slot 3: optional sticky bottom ad. Use only if this format is enabled in Monetag. -->
-    <div class="monetag-ad-slot monetag-sticky-ad" id="monetag-sticky-ad" aria-label="Advertisement">
-        <!-- Paste the Monetag sticky/fixed ad code here only if Monetag provides this format. -->
+    <!-- STICKY AD SLOT -->
+    <div class="monetag-ad-slot monetag-sticky-ad"
+         id="monetag-sticky-ad"
+         aria-label="Advertisement">
+        <!-- Monetag sticky ad code এখানে বসাবে -->
     </div>
 
-    <!-- Firebase Logic -->
+    <!-- FIREBASE -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+        import {
+            getDatabase,
+            ref,
+            onValue
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+        // FIREBASE CONFIG
         const firebaseConfig = {
             apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
             authDomain: "bangla-ff-admin.firebaseapp.com",
@@ -482,63 +697,278 @@
             messagingSenderId: "295013484465",
             appId: "1:295013484465:web:b6bc2a949e239095761f90"
         };
+
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // --- Discord Auto Link Fetcher ---
-        onValue(ref(db, 'global_settings/discord_link'), (snapshot) => {
+
+        // =====================================
+        // DISCORD AUTO LINK
+        // =====================================
+
+        onValue(ref(db, "global_settings/discord_link"), (snapshot) => {
+
             if (snapshot.exists()) {
+
                 const link = snapshot.val();
-                document.querySelectorAll('.dynamic-discord').forEach(btn => {
+
+                document.querySelectorAll(".dynamic-discord").forEach(btn => {
                     btn.href = link;
                 });
-            }
-        });
-        // ----------------------------------------------
 
-        // Smart Icon Renderer (FontAwesome + Emoji + Image)
+            }
+
+        });
+
+
+        // =====================================
+        // ICON RENDERER
+        // =====================================
+
         function renderIcon(iconDiv, data) {
+
             if (!iconDiv || !data) return;
-            const val = (data.iconValue || '').trim();
+
+            const val = (data.iconValue || "").trim();
+
             if (!val) return;
 
-            if (data.iconType === 'image' || val.startsWith('http')) {
-                iconDiv.innerHTML = `<img src="${val}" alt="icon">`;
-            } else if (data.iconType === 'emoji' || (!val.includes('fa-') && !val.startsWith('http'))) {
-                // Direct emoji or plain text
-                iconDiv.innerHTML = `<span>${val}</span>`;
+            if (data.iconType === "image" || val.startsWith("http")) {
+
+                const img = document.createElement("img");
+                img.src = val;
+                img.alt = "Icon";
+
+                iconDiv.replaceChildren(img);
+
+            } else if (
+                data.iconType === "emoji" ||
+                (!val.includes("fa-") && !val.startsWith("http"))
+            ) {
+
+                const span = document.createElement("span");
+                span.textContent = val;
+
+                iconDiv.replaceChildren(span);
+
             } else {
-                // FontAwesome class
-                iconDiv.innerHTML = `<i class="${val}"></i>`;
+
+                const icon = document.createElement("i");
+                icon.className = val;
+
+                iconDiv.replaceChildren(icon);
+
             }
+
         }
 
-        const keys = ['free_panel', 'free_bypass', 'emulator', 'apk', 'pc_panel', 'mobile_panel'];
-        
+
+        // =====================================
+        // OLD CATEGORY BOXES
+        // =====================================
+
+        const keys = [
+            "free_panel",
+            "free_bypass",
+            "emulator",
+            "apk",
+            "pc_panel",
+            "mobile_panel"
+        ];
+
         keys.forEach(key => {
-            // Visibility Toggle
-            onValue(ref(db, `site_visibility/${key}`), s => {
-                const isVisible = !s.exists() || s.val() === true;
+
+            // Visibility
+            onValue(ref(db, `site_visibility/${key}`), snapshot => {
+
+                const isVisible =
+                    !snapshot.exists() || snapshot.val() === true;
+
                 const card = document.getElementById(`card_${key}`);
+
                 if (card) {
-                    if (isVisible) card.classList.add('visible');
-                    else card.classList.remove('visible');
+                    card.classList.toggle("visible", isVisible);
                 }
+
             });
 
-            // Title + Icon Sync from Admin
-            onValue(ref(db, `site_settings/categories/${key}`), s => {
-                if (s.exists()) {
-                    const data = s.val();
+
+            // Title + Icon
+            onValue(ref(db, `site_settings/categories/${key}`), snapshot => {
+
+                if (snapshot.exists()) {
+
+                    const data = snapshot.val();
+
                     if (data.title) {
-                        const titleEl = document.getElementById(`title_${key}`);
-                        if (titleEl) titleEl.innerText = data.title;
+
+                        const titleEl =
+                            document.getElementById(`title_${key}`);
+
+                        if (titleEl) {
+                            titleEl.textContent = data.title;
+                        }
+
                     }
-                    const iconDiv = document.getElementById(`icon_${key}`);
+
+                    const iconDiv =
+                        document.getElementById(`icon_${key}`);
+
                     renderIcon(iconDiv, data);
+
                 }
+
             });
+
         });
+
+
+        // =====================================
+        // DYNAMIC ERROR FIX BOXES
+        // ADMIN DATABASE PATH: error_fixes
+        // =====================================
+
+        const errorFixRef = ref(db, "error_fixes");
+
+        onValue(errorFixRef, (snapshot) => {
+
+            const grid = document.getElementById("category-grid");
+
+            // আগের dynamic box সরিয়ে নতুন box তৈরি
+            document.querySelectorAll(".dynamic-error-fix").forEach(card => {
+                card.remove();
+            });
+
+            if (!snapshot.exists()) {
+                console.log("No Error Fix boxes found.");
+                return;
+            }
+
+            const boxes = snapshot.val();
+
+            Object.entries(boxes).forEach(([id, data]) => {
+
+                // Hidden box দেখাবে না
+                if (data.enabled === false) return;
+
+                // Main card
+                const card = document.createElement("div");
+
+                card.className = "card visible dynamic-error-fix";
+                card.dataset.boxId = id;
+
+
+                // ICON
+                const iconDiv = document.createElement("div");
+
+                iconDiv.className = "card-icon";
+
+                const iconValue = (data.icon || "").trim();
+
+                if (iconValue.startsWith("http")) {
+
+                    const img = document.createElement("img");
+
+                    img.src = iconValue;
+                    img.alt = "Icon";
+
+                    iconDiv.appendChild(img);
+
+                } else if (iconValue.includes("fa-")) {
+
+                    const icon = document.createElement("i");
+
+                    icon.className = iconValue;
+
+                    iconDiv.appendChild(icon);
+
+                } else {
+
+                    const span = document.createElement("span");
+
+                    span.textContent = iconValue || "🛠️";
+
+                    iconDiv.appendChild(span);
+
+                }
+
+
+                // TITLE
+                const title = document.createElement("div");
+
+                title.className = "card-title";
+                title.textContent = data.title || "ERROR FIX";
+
+
+                // DESCRIPTION
+                const desc = document.createElement("div");
+
+                desc.className = "card-desc";
+
+                desc.textContent =
+                    data.description ||
+                    data.status_text ||
+                    "ERROR FIX SOLUTION";
+
+
+                // EXPLORE BUTTON
+                const explore = document.createElement("a");
+
+                explore.className = "explore-btn";
+
+                explore.textContent =
+                    (data.button_text || "EXPLORE") + " →";
+
+                explore.href = data.download_url || "#";
+
+                explore.target = "_blank";
+
+                explore.rel = "noopener noreferrer";
+
+
+                // Add elements to card
+                card.append(
+                    iconDiv,
+                    title,
+                    desc,
+                    explore
+                );
+
+
+                // OPTIONAL TUTORIAL VIDEO
+                if (
+                    data.video_url &&
+                    data.video_enabled !== false
+                ) {
+
+                    const video = document.createElement("a");
+
+                    video.className = "tutorial-link";
+
+                    video.href = data.video_url;
+
+                    video.target = "_blank";
+
+                    video.rel = "noopener noreferrer";
+
+                    video.textContent = "▶ WATCH TUTORIAL";
+
+                    card.appendChild(video);
+
+                }
+
+
+                // Add new box to website
+                grid.appendChild(card);
+
+            });
+
+            console.log("Error Fix boxes loaded successfully.");
+
+        });
+
+
     </script>
+
 </body>
 </html>
