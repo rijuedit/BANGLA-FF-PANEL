@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4109990485768727" crossorigin="anonymous"></script>
     <meta name="google-adsense-account" content="ca-pub-4109990485768727">
     <meta name="google-site-verification" content="2pp8s_pbmfBm3nEgkLgFLDxKg_OusA-ZXlQRUeXUGO4">
@@ -20,12 +19,14 @@
             --text-light: #ffffff;
             --text-gray: #777777;
         }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
         body {
             background-color: var(--bg-main);
             color: var(--text-light);
@@ -34,8 +35,8 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            padding-bottom: 60px;
         }
+
         .bg-glow {
             position: absolute;
             top: 20%;
@@ -46,6 +47,7 @@
             z-index: -1;
             pointer-events: none;
         }
+
         .header {
             display: flex;
             justify-content: space-between;
@@ -54,6 +56,7 @@
             position: relative;
             z-index: 100;
         }
+
         .brand {
             display: flex;
             align-items: center;
@@ -61,6 +64,7 @@
             text-decoration: none;
             cursor: pointer;
         }
+
         .site-logo {
             width: 40px;
             height: 40px;
@@ -68,6 +72,7 @@
             object-fit: cover;
             border: 1px solid var(--neon-pink);
         }
+
         .brand-text h2 {
             font-size: 16px;
             color: white;
@@ -76,12 +81,14 @@
             letter-spacing: 1px;
             margin-bottom: 2px;
         }
+
         .brand-text p {
             font-size: 9px;
             color: var(--text-gray);
             letter-spacing: 3px;
             text-transform: uppercase;
         }
+
         .header-btn {
             background: transparent;
             border: 1px solid #333;
@@ -95,13 +102,18 @@
             gap: 8px;
             transition: 0.3s;
         }
-        .header-btn:hover { border-color: white; }
+
+        .header-btn:hover {
+            border-color: white;
+        }
+
         .hero {
             text-align: center;
             padding: 60px 20px 40px;
             position: relative;
             z-index: 10;
         }
+
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -117,7 +129,11 @@
             margin-bottom: 25px;
             text-transform: uppercase;
         }
-        .status-badge i { font-size: 8px; }
+
+        .status-badge i {
+            font-size: 8px;
+        }
+
         .hero h1 {
             font-size: 45px;
             font-weight: 900;
@@ -125,7 +141,11 @@
             margin-bottom: 15px;
             text-transform: uppercase;
         }
-        .hero h1 span { color: var(--neon-pink); }
+
+        .hero h1 span {
+            color: var(--neon-pink);
+        }
+
         .hero-subtitle {
             font-size: 11px;
             color: var(--text-gray);
@@ -133,12 +153,14 @@
             text-transform: uppercase;
             margin-bottom: 35px;
         }
+
         .hero-actions {
             display: flex;
             justify-content: center;
             gap: 15px;
             align-items: center;
         }
+
         .action-btn {
             background: transparent;
             border: 1px solid #333;
@@ -153,33 +175,20 @@
             gap: 10px;
             transition: 0.3s;
         }
-        .action-btn:hover { border-color: var(--text-light); }
-        .icon-btn {
-            background: rgba(255, 0, 102, 0.05);
-            border: 1px solid rgba(255, 0, 102, 0.2);
-            color: var(--neon-pink);
-            width: 42px;
-            height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 16px;
-            transition: 0.3s;
+
+        .action-btn:hover {
+            border-color: var(--text-light);
         }
-        .icon-btn:hover {
-            background: var(--neon-pink);
-            color: white;
-        }
+
         .divider {
             text-align: center;
-            margin: 50px 0 40px;
+            margin: 30px 0 30px;
             font-size: 11px;
             color: #444;
             letter-spacing: 4px;
             text-transform: uppercase;
         }
+
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -191,6 +200,7 @@
             position: relative;
             z-index: 10;
         }
+
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -203,12 +213,17 @@
             display: none;
             color: white;
         }
-        .card.visible { display: block; }
+
+        .card.visible {
+            display: block;
+        }
+
         .card:hover {
             border-color: #3a1b5e;
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
+
         .badge {
             position: absolute;
             top: 15px;
@@ -220,9 +235,22 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
-        .badge-hot { background: var(--neon-pink); color: white; }
-        .badge-premium { background: #ff9900; color: white; }
-        .badge-vip { background: #0066ff; color: white; }
+
+        .badge-hot {
+            background: var(--neon-pink);
+            color: white;
+        }
+
+        .badge-premium {
+            background: #ff9900;
+            color: white;
+        }
+
+        .badge-vip {
+            background: #0066ff;
+            color: white;
+        }
+
         .card-icon {
             font-size: 35px;
             margin-bottom: 20px;
@@ -232,16 +260,19 @@
             justify-content: center;
             min-height: 45px;
         }
+
         .card-icon img {
             width: 50px;
             height: 50px;
             object-fit: contain;
         }
+
         .card-icon span {
             font-size: 40px;
             line-height: 1;
             display: inline-block;
         }
+
         .card-title {
             color: white;
             font-size: 16px;
@@ -250,6 +281,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+
         .card-desc {
             color: #777;
             font-size: 10px;
@@ -258,6 +290,7 @@
             margin-bottom: 30px;
             overflow-wrap: anywhere;
         }
+
         .explore-btn {
             border: 1px solid #333;
             color: white;
@@ -271,11 +304,13 @@
             display: inline-block;
             text-decoration: none;
         }
+
         .card:hover .explore-btn {
             background: white;
             color: black;
             border-color: white;
         }
+
         .tutorial-link {
             display: inline-block;
             margin-top: 16px;
@@ -285,36 +320,15 @@
             text-decoration: none;
             letter-spacing: 1px;
         }
-        .tutorial-link:hover { color: white; }
-        .dynamic-error-fix .explore-btn { margin-top: 2px; }
-        .monetag-ad-slot {
-            width: min(100% - 40px, 1000px);
-            min-height: 90px;
-            margin: 24px auto;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            border: 1px dashed #352044;
-            border-radius: 8px;
-            color: #777;
-            font-size: 10px;
-            letter-spacing: 1px;
+
+        .tutorial-link:hover {
+            color: white;
         }
-        .monetag-ad-slot:empty::before { content: "ADVERTISEMENT"; }
-        .monetag-sticky-ad {
-            position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 999;
-            min-height: 50px;
-            background: #05020a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
+        .dynamic-error-fix .explore-btn {
+            margin-top: 2px;
         }
+
         footer {
             text-align: center;
             padding: 30px 20px;
@@ -327,7 +341,7 @@
         /* ADMIN-MANAGED BANNER SLIDER */
         .site-banner-wrap {
             width: min(1000px, calc(100% - 40px));
-            margin: 0 auto 28px;
+            margin: 0 auto 20px;
             position: relative;
             z-index: 10;
             overflow: hidden;
@@ -335,24 +349,28 @@
             border-radius: 12px;
             background: var(--card-bg);
         }
+
         .site-banner-track {
             display: flex;
             width: 100%;
             transition: transform .65s ease-in-out;
             will-change: transform;
         }
+
         .site-banner-slide {
             flex: 0 0 100%;
             width: 100%;
             display: block;
             line-height: 0;
         }
+
         .site-banner-slide img {
             display: block;
             width: 100%;
             aspect-ratio: 1000 / 300;
             object-fit: cover;
         }
+
         .site-banner-dots {
             position: absolute;
             left: 0;
@@ -363,27 +381,53 @@
             gap: 7px;
             pointer-events: none;
         }
+
         .site-banner-dot {
             width: 7px;
             height: 7px;
             border-radius: 50%;
             background: rgba(255,255,255,.45);
         }
-        .site-banner-dot.active { background: var(--neon-pink); }
+
+        .site-banner-dot.active {
+            background: var(--neon-pink);
+        }
+
         @media(max-width:600px) {
-            .site-banner-wrap { width: calc(100% - 24px); margin-bottom: 20px; }
-            .site-banner-slide img { aspect-ratio: 16 / 6; }
+            .site-banner-wrap {
+                width: calc(100% - 24px);
+                margin-bottom: 15px;
+            }
+
+            .site-banner-slide img {
+                aspect-ratio: 16 / 6;
+            }
         }
 
         @media (max-width: 768px) {
-            .header { padding: 20px; }
-            .hero { padding: 40px 15px 30px; }
-            .hero h1 { font-size: 32px; }
-            .hero-actions { flex-wrap: wrap; }
-            .grid-container { grid-template-columns: 1fr; }
+            .header {
+                padding: 20px;
+            }
+
+            .hero {
+                padding: 40px 15px 30px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero-actions {
+                flex-wrap: wrap;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <div class="bg-glow"></div>
@@ -401,30 +445,26 @@
                 <p>PREMIUM GAMING TOOLS</p>
             </div>
         </a>
+
         <a href="#" class="header-btn dynamic-discord" target="_blank">
             <i class="fab fa-discord"></i> DISCORD
         </a>
     </header>
-
-    <!-- ADMIN-MANAGED SLIDING BANNERS -->
-    <section class="site-banner-wrap" id="siteBannerWrap" style="display:none" aria-label="Website banners">
-        <div class="site-banner-track" id="siteBannerTrack"></div>
-        <div class="site-banner-dots" id="siteBannerDots"></div>
-    </section>
 
     <!-- HERO -->
     <section class="hero">
         <div class="status-badge">
             <i class="fas fa-circle"></i> SYSTEM ONLINE
         </div>
+
         <h1>BANGLA <span>FF PANEL</span></h1>
         <p class="hero-subtitle">YOUR PREMIUM GAMING SOLUTION</p>
+
         <div class="hero-actions">
             <a href="#" class="action-btn dynamic-discord" target="_blank">
                 <i class="fab fa-discord"></i> JOIN DISCORD
             </a>
 
-            <!-- RESTORED ORIGINAL TOP-UP BUTTON -->
             <a href="https://oxi-topup.netlify.app/"
                target="_blank"
                rel="noopener noreferrer"
@@ -435,9 +475,13 @@
         </div>
     </section>
 
-    <div class="divider">AVAILABLE SERVICES</div>
+    <!-- ADMIN-MANAGED SLIDING BANNERS -->
+    <section class="site-banner-wrap" id="siteBannerWrap" style="display:none" aria-label="Website banners">
+        <div class="site-banner-track" id="siteBannerTrack"></div>
+        <div class="site-banner-dots" id="siteBannerDots"></div>
+    </section>
 
-    <div class="monetag-ad-slot"></div>
+    <div class="divider">AVAILABLE SERVICES</div>
 
     <!-- CATEGORY GRID -->
     <div class="grid-container" id="category-grid">
@@ -486,16 +530,13 @@
 
     </div>
 
-    <div class="monetag-ad-slot"></div>
-
     <footer>
         © 2026 BANGLA FF PANEL. ALL RIGHTS RESERVED.
     </footer>
 
-    <div class="monetag-sticky-ad"></div>
-
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
         import {
             getDatabase,
             ref,
@@ -515,18 +556,23 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
+        // DYNAMIC DISCORD LINK
         onValue(ref(db, "global_settings/discord_link"), (snapshot) => {
             if (snapshot.exists()) {
                 const link = snapshot.val();
+
                 document.querySelectorAll(".dynamic-discord").forEach(btn => {
                     btn.href = link;
                 });
             }
         });
 
+        // CATEGORY ICON RENDERER
         function renderIcon(iconDiv, data) {
             if (!iconDiv || !data) return;
+
             const val = (data.iconValue || "").trim();
+
             if (!val) return;
 
             if (data.iconType === "image" || val.startsWith("http")) {
@@ -534,6 +580,7 @@
                 img.src = val;
                 img.alt = "Icon";
                 iconDiv.replaceChildren(img);
+
             } else if (
                 data.iconType === "emoji" ||
                 (!val.includes("fa-") && !val.startsWith("http"))
@@ -541,6 +588,7 @@
                 const span = document.createElement("span");
                 span.textContent = val;
                 iconDiv.replaceChildren(span);
+
             } else {
                 const icon = document.createElement("i");
                 icon.className = val;
@@ -548,6 +596,7 @@
             }
         }
 
+        // CATEGORY SETTINGS
         const keys = [
             "free_panel",
             "free_bypass",
@@ -558,35 +607,51 @@
         ];
 
         keys.forEach(key => {
+
             onValue(ref(db, `site_visibility/${key}`), snapshot => {
                 const isVisible = !snapshot.exists() || snapshot.val() === true;
+
                 const card = document.getElementById(`card_${key}`);
-                if (card) card.classList.toggle("visible", isVisible);
+
+                if (card) {
+                    card.classList.toggle("visible", isVisible);
+                }
             });
 
             onValue(ref(db, `site_settings/categories/${key}`), snapshot => {
+
                 if (snapshot.exists()) {
                     const data = snapshot.val();
+
                     if (data.title) {
                         const titleEl = document.getElementById(`title_${key}`);
-                        if (titleEl) titleEl.textContent = data.title;
+
+                        if (titleEl) {
+                            titleEl.textContent = data.title;
+                        }
                     }
+
                     const iconDiv = document.getElementById(`icon_${key}`);
+
                     renderIcon(iconDiv, data);
                 }
             });
         });
 
-        // ADMIN-MANAGED BANNERS: load and slide from right to left.
+        // ADMIN-MANAGED BANNER SLIDER
         const bannerRef = ref(db, "site_banners");
+
         let bannerTimer = null;
         let bannerIndex = 0;
 
         onValue(bannerRef, (snapshot) => {
+
             const wrap = document.getElementById("siteBannerWrap");
             const track = document.getElementById("siteBannerTrack");
             const dots = document.getElementById("siteBannerDots");
+
             const banners = snapshot.val() || {};
+
             const activeBanners = Object.entries(banners)
                 .map(([id, item]) => ({ id, ...item }))
                 .filter(item => item.enabled !== false && item.image_url);
@@ -608,7 +673,9 @@
             wrap.style.display = "block";
 
             activeBanners.forEach((item, index) => {
+
                 const slide = document.createElement("a");
+
                 slide.className = "site-banner-slide";
                 slide.href = item.target_url || "#";
 
@@ -616,38 +683,56 @@
                     slide.target = "_blank";
                     slide.rel = "noopener noreferrer";
                 } else {
-                    slide.addEventListener("click", event => event.preventDefault());
+                    slide.addEventListener("click", event => {
+                        event.preventDefault();
+                    });
                 }
 
                 const image = document.createElement("img");
+
                 image.src = item.image_url;
                 image.alt = item.title || "Website banner";
                 image.loading = index === 0 ? "eager" : "lazy";
-                image.onerror = () => slide.remove();
+
+                image.onerror = () => {
+                    slide.remove();
+                };
+
                 slide.appendChild(image);
                 track.appendChild(slide);
 
                 const dot = document.createElement("span");
+
                 dot.className = "site-banner-dot" + (index === 0 ? " active" : "");
+
                 dots.appendChild(dot);
             });
 
             if (activeBanners.length > 1) {
+
                 bannerTimer = setInterval(() => {
-                    bannerIndex = (bannerIndex + 1) % activeBanners.length;
+
+                    const currentSlides = track.children.length;
+
+                    if (currentSlides <= 1) return;
+
+                    bannerIndex = (bannerIndex + 1) % currentSlides;
+
                     track.style.transform = `translateX(-${bannerIndex * 100}%)`;
 
                     [...dots.children].forEach((dot, index) => {
                         dot.classList.toggle("active", index === bannerIndex);
                     });
+
                 }, 4000);
             }
         });
 
-        // ERROR FIX CATEGORY
+        // ERROR FIX BOXES: LOAD ALL ENABLED BOXES WITHOUT A SIX-BOX LIMIT
         const errorFixRef = ref(db, "error_fixes");
 
         onValue(errorFixRef, (snapshot) => {
+
             const grid = document.getElementById("category-grid");
 
             document.querySelectorAll(".dynamic-error-fix").forEach(card => {
@@ -661,42 +746,60 @@
 
             const boxes = snapshot.val();
 
+            // Every enabled Firebase box is displayed. No slice or item limit.
             Object.entries(boxes).forEach(([id, data]) => {
-                if (data.enabled === false) return;
+
+                if (!data || data.enabled === false) return;
 
                 const card = document.createElement("div");
+
                 card.className = "card visible dynamic-error-fix";
                 card.dataset.boxId = id;
 
                 const iconDiv = document.createElement("div");
+
                 iconDiv.className = "card-icon";
 
                 const iconValue = (data.icon || "").trim();
 
                 if (iconValue.startsWith("http")) {
+
                     const img = document.createElement("img");
+
                     img.src = iconValue;
                     img.alt = "Icon";
+
                     iconDiv.appendChild(img);
+
                 } else if (iconValue.includes("fa-")) {
+
                     const icon = document.createElement("i");
+
                     icon.className = iconValue;
+
                     iconDiv.appendChild(icon);
+
                 } else {
+
                     const span = document.createElement("span");
+
                     span.textContent = iconValue || "🛠️";
+
                     iconDiv.appendChild(span);
                 }
 
                 const title = document.createElement("div");
+
                 title.className = "card-title";
                 title.textContent = data.title || "ERROR FIX";
 
                 const desc = document.createElement("div");
+
                 desc.className = "card-desc";
                 desc.textContent = data.description || data.status_text || "ERROR FIX SOLUTION";
 
                 const explore = document.createElement("a");
+
                 explore.className = "explore-btn";
                 explore.textContent = (data.button_text || "EXPLORE") + " →";
                 explore.href = "error-fix.html";
@@ -705,20 +808,24 @@
                 card.append(iconDiv, title, desc, explore);
 
                 if (data.video_url && data.video_enabled !== false) {
+
                     const video = document.createElement("a");
+
                     video.className = "tutorial-link";
                     video.href = data.video_url;
                     video.target = "_blank";
                     video.rel = "noopener noreferrer";
                     video.textContent = "▶ WATCH TUTORIAL";
+
                     card.appendChild(video);
                 }
 
                 grid.appendChild(card);
             });
 
-            console.log("Error Fix boxes loaded successfully.");
+            console.log("All enabled Error Fix boxes loaded successfully.");
         });
+
     </script>
 </body>
 </html>
