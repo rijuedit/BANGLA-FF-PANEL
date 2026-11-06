@@ -2,20 +2,13 @@
 <html lang="en">
 <head>
     <!-- Google AdSense -->
-    <script async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4109990485768727"
-        crossorigin="anonymous"></script>
-
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4109990485768727" crossorigin="anonymous"></script>
     <meta name="google-adsense-account" content="ca-pub-4109990485768727">
     <meta name="google-site-verification" content="2pp8s_pbmfBm3nEgkLgFLDxKg_OusA-ZXlQRUeXUGO4">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>BANGLA FF PANEL</title>
-
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
@@ -27,14 +20,12 @@
             --text-light: #ffffff;
             --text-gray: #777777;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         body {
             background-color: var(--bg-main);
             color: var(--text-light);
@@ -45,7 +36,6 @@
             flex-direction: column;
             padding-bottom: 60px;
         }
-
         .bg-glow {
             position: absolute;
             top: 20%;
@@ -56,8 +46,6 @@
             z-index: -1;
             pointer-events: none;
         }
-
-        /* HEADER */
         .header {
             display: flex;
             justify-content: space-between;
@@ -66,7 +54,6 @@
             position: relative;
             z-index: 100;
         }
-
         .brand {
             display: flex;
             align-items: center;
@@ -74,7 +61,6 @@
             text-decoration: none;
             cursor: pointer;
         }
-
         .site-logo {
             width: 40px;
             height: 40px;
@@ -82,7 +68,6 @@
             object-fit: cover;
             border: 1px solid var(--neon-pink);
         }
-
         .brand-text h2 {
             font-size: 16px;
             color: white;
@@ -91,14 +76,12 @@
             letter-spacing: 1px;
             margin-bottom: 2px;
         }
-
         .brand-text p {
             font-size: 9px;
             color: var(--text-gray);
             letter-spacing: 3px;
             text-transform: uppercase;
         }
-
         .header-btn {
             background: transparent;
             border: 1px solid #333;
@@ -112,19 +95,13 @@
             gap: 8px;
             transition: 0.3s;
         }
-
-        .header-btn:hover {
-            border-color: white;
-        }
-
-        /* HERO */
+        .header-btn:hover { border-color: white; }
         .hero {
             text-align: center;
             padding: 60px 20px 40px;
             position: relative;
             z-index: 10;
         }
-
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -140,11 +117,7 @@
             margin-bottom: 25px;
             text-transform: uppercase;
         }
-
-        .status-badge i {
-            font-size: 8px;
-        }
-
+        .status-badge i { font-size: 8px; }
         .hero h1 {
             font-size: 45px;
             font-weight: 900;
@@ -152,11 +125,7 @@
             margin-bottom: 15px;
             text-transform: uppercase;
         }
-
-        .hero h1 span {
-            color: var(--neon-pink);
-        }
-
+        .hero h1 span { color: var(--neon-pink); }
         .hero-subtitle {
             font-size: 11px;
             color: var(--text-gray);
@@ -164,15 +133,12 @@
             text-transform: uppercase;
             margin-bottom: 35px;
         }
-
-        /* HERO BUTTONS */
         .hero-actions {
             display: flex;
             justify-content: center;
             gap: 15px;
             align-items: center;
         }
-
         .action-btn {
             background: transparent;
             border: 1px solid #333;
@@ -187,11 +153,7 @@
             gap: 10px;
             transition: 0.3s;
         }
-
-        .action-btn:hover {
-            border-color: var(--text-light);
-        }
-
+        .action-btn:hover { border-color: var(--text-light); }
         .icon-btn {
             background: rgba(255, 0, 102, 0.05);
             border: 1px solid rgba(255, 0, 102, 0.2);
@@ -206,13 +168,10 @@
             font-size: 16px;
             transition: 0.3s;
         }
-
         .icon-btn:hover {
             background: var(--neon-pink);
             color: white;
         }
-
-        /* DIVIDER */
         .divider {
             text-align: center;
             margin: 50px 0 40px;
@@ -221,8 +180,6 @@
             letter-spacing: 4px;
             text-transform: uppercase;
         }
-
-        /* GRID */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -234,7 +191,6 @@
             position: relative;
             z-index: 10;
         }
-
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -247,18 +203,12 @@
             display: none;
             color: white;
         }
-
-        .card.visible {
-            display: block;
-        }
-
+        .card.visible { display: block; }
         .card:hover {
             border-color: #3a1b5e;
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-
-        /* BADGES */
         .badge {
             position: absolute;
             top: 15px;
@@ -270,22 +220,9 @@
             letter-spacing: 1px;
             text-transform: uppercase;
         }
-
-        .badge-hot {
-            background: var(--neon-pink);
-            color: white;
-        }
-
-        .badge-premium {
-            background: #ff9900;
-            color: white;
-        }
-
-        .badge-vip {
-            background: #0066ff;
-            color: white;
-        }
-
+        .badge-hot { background: var(--neon-pink); color: white; }
+        .badge-premium { background: #ff9900; color: white; }
+        .badge-vip { background: #0066ff; color: white; }
         .card-icon {
             font-size: 35px;
             margin-bottom: 20px;
@@ -295,19 +232,16 @@
             justify-content: center;
             min-height: 45px;
         }
-
         .card-icon img {
             width: 50px;
             height: 50px;
             object-fit: contain;
         }
-
         .card-icon span {
             font-size: 40px;
             line-height: 1;
             display: inline-block;
         }
-
         .card-title {
             color: white;
             font-size: 16px;
@@ -316,7 +250,6 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-
         .card-desc {
             color: #777;
             font-size: 10px;
@@ -325,7 +258,6 @@
             margin-bottom: 30px;
             overflow-wrap: anywhere;
         }
-
         .explore-btn {
             border: 1px solid #333;
             color: white;
@@ -339,14 +271,11 @@
             display: inline-block;
             text-decoration: none;
         }
-
         .card:hover .explore-btn {
             background: white;
             color: black;
             border-color: white;
         }
-
-        /* DYNAMIC ERROR FIX VIDEO */
         .tutorial-link {
             display: inline-block;
             margin-top: 16px;
@@ -356,16 +285,8 @@
             text-decoration: none;
             letter-spacing: 1px;
         }
-
-        .tutorial-link:hover {
-            color: white;
-        }
-
-        .dynamic-error-fix .explore-btn {
-            margin-top: 2px;
-        }
-
-        /* ADS */
+        .tutorial-link:hover { color: white; }
+        .dynamic-error-fix .explore-btn { margin-top: 2px; }
         .monetag-ad-slot {
             width: min(100% - 40px, 1000px);
             min-height: 90px;
@@ -381,72 +302,26 @@
             font-size: 10px;
             letter-spacing: 1px;
         }
-
-        .monetag-ad-slot:empty::before {
-            content: "ADVERTISEMENT";
-        }
-
+        .monetag-ad-slot:empty::before { content: "ADVERTISEMENT"; }
         .monetag-sticky-ad {
             position: fixed;
             left: 0;
             right: 0;
             bottom: 0;
             z-index: 999;
-            width: 100%;
             min-height: 50px;
-            margin: 0;
-            border-radius: 8px 8px 0 0;
-            background: rgba(5, 2, 10, 0.96);
+            background: #05020a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
-        /* FOOTER */
-        .footer {
-            margin-top: auto;
-            padding: 30px 20px;
+        footer {
             text-align: center;
-            border-top: 1px solid var(--border-color);
-            background: #030107;
-            font-size: 12px;
-            color: var(--text-gray);
+            padding: 30px 20px;
+            margin-top: auto;
+            color: #555;
+            font-size: 11px;
             letter-spacing: 1px;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 30px;
-            }
-
-            .hero-actions {
-                flex-direction: column;
-            }
-
-            .action-btn {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .header {
-                padding: 20px;
-            }
-
-            .monetag-ad-slot {
-                width: calc(100% - 24px);
-                min-height: 100px;
-            }
-
-            .monetag-sticky-ad {
-                min-height: 50px;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .grid-container {
-                grid-template-columns: 1fr;
-            }
-
-            .brand-text h2 {
-                font-size: 13px;
-            }
         }
 
         /* ADMIN-MANAGED BANNER SLIDER */
@@ -500,9 +375,15 @@
             .site-banner-slide img { aspect-ratio: 16 / 6; }
         }
 
+        @media (max-width: 768px) {
+            .header { padding: 20px; }
+            .hero { padding: 40px 15px 30px; }
+            .hero h1 { font-size: 32px; }
+            .hero-actions { flex-wrap: wrap; }
+            .grid-container { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
-
 <body>
 
     <div class="bg-glow"></div>
@@ -510,25 +391,16 @@
     <!-- HEADER -->
     <header class="header">
         <a href="index.html" class="brand">
-            <img src="logo.png"
-                 alt="Logo"
-                 class="site-logo"
-                 onerror="this.src='https://cdn-icons-png.flaticon.com/512/888/888879.png'">
-
+            <img src="https://i.ibb.co/7JqY0sX/logo.png" class="site-logo" alt="Logo">
             <div class="brand-text">
                 <h2>BANGLA FF PANEL</h2>
-                <p>PREMIUM CORP</p>
+                <p>PREMIUM GAMING TOOLS</p>
             </div>
         </a>
-
-        <a href="https://discord.gg/ZBjSWaF7u"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="header-btn dynamic-discord">
-            <i class="fab fa-discord"></i> Join Discord
+        <a href="#" class="header-btn dynamic-discord" target="_blank">
+            <i class="fab fa-discord"></i> DISCORD
         </a>
     </header>
-
 
     <!-- ADMIN-MANAGED SLIDING BANNERS -->
     <section class="site-banner-wrap" id="siteBannerWrap" style="display:none" aria-label="Website banners">
@@ -538,214 +410,88 @@
 
     <!-- HERO -->
     <section class="hero">
-
         <div class="status-badge">
-            <i class="fas fa-circle"></i> LIVE SERVER ACTIVE
+            <i class="fas fa-circle"></i> SYSTEM ONLINE
         </div>
-
-        <h1>BANGLA FF <span>PANEL</span></h1>
-
-        <p class="hero-subtitle">
-            NEXT GEN PRIVATE SOLUTIONS • SECURE • RELIABLE
-        </p>
-
+        <h1>BANGLA <span>FF PANEL</span></h1>
+        <p class="hero-subtitle">YOUR PREMIUM GAMING SOLUTION</p>
         <div class="hero-actions">
-
-            <a href="https://discord.gg/ZBjSWaF7u"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="action-btn dynamic-discord">
-                <i class="fab fa-discord"></i>
-                Join Support Discord →
+            <a href="#" class="action-btn dynamic-discord" target="_blank">
+                <i class="fab fa-discord"></i> JOIN DISCORD
             </a>
-
-            <a href="https://oxi-topup.netlify.app/"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="action-btn">
-                <i class="fas fa-gem"></i>
-                Free Fire Diamond Topup →
+            <a href="https://t.me/bangla_ff_panel" class="icon-btn" target="_blank">
+                <i class="fab fa-telegram-plane"></i>
             </a>
-
-            <a href="#"
-               class="icon-btn"
-               aria-label="Notifications">
-                <i class="fas fa-bell"></i>
-            </a>
-
         </div>
     </section>
 
-    <!-- AD SLOT 1 -->
-    <div class="monetag-ad-slot"
-         id="monetag-banner-ad"
-         aria-label="Advertisement">
-        <!-- Monetag banner code এখানে বসাবে -->
-    </div>
+    <div class="divider">AVAILABLE SERVICES</div>
 
-    <div class="divider">// AVAILABLE SYSTEMS //</div>
+    <div class="monetag-ad-slot"></div>
 
-    <!-- MAIN GRID -->
+    <!-- CATEGORY GRID -->
     <div class="grid-container" id="category-grid">
 
-        <!-- FREE PANEL -->
-        <a href="free-panel.html"
-           class="card"
-           id="card_free_panel">
-
-            <div class="badge badge-hot">HOT</div>
-
-            <div class="card-icon" id="icon_free_panel">💻</div>
-
-            <div class="card-title" id="title_free_panel">
-                FREE PANEL
-            </div>
-
-            <div class="card-desc">
-                NEW PC PANEL UPDATED OB55
-            </div>
-
-            <div class="explore-btn">EXPLORE →</div>
+        <a href="free-panel.html" class="card" id="card_free_panel">
+            <div class="card-icon" id="icon_free_panel"><i class="fas fa-laptop-code"></i></div>
+            <div class="card-title" id="title_free_panel">FREE PANEL</div>
+            <div class="card-desc">ACCESS FREE PANEL</div>
+            <span class="explore-btn">EXPLORE →</span>
         </a>
 
-        <!-- FREE BYPASS -->
-        <a href="free-bypass.html"
-           class="card"
-           id="card_free_bypass">
-
-            <div class="card-icon" id="icon_free_bypass">💻</div>
-
-            <div class="card-title" id="title_free_bypass">
-                FREE BYPASS
-            </div>
-
-            <div class="card-desc">
-                FAST & RELIABLE MATCHMAKING
-            </div>
-
-            <div class="explore-btn">EXPLORE →</div>
+        <a href="free-bypass.html" class="card" id="card_free_bypass">
+            <div class="card-icon" id="icon_free_bypass"><i class="fas fa-shield-virus"></i></div>
+            <div class="card-title" id="title_free_bypass">FREE BYPASS</div>
+            <div class="card-desc">ACCESS FREE BYPASS</div>
+            <span class="explore-btn">EXPLORE →</span>
         </a>
 
-        <!-- EMULATOR -->
-        <a href="emulator.html"
-           class="card"
-           id="card_emulator">
-
-            <div class="card-icon" id="icon_emulator">
-                <i class="far fa-star"></i>
-            </div>
-
-            <div class="card-title" id="title_emulator">
-                EMULATOR
-            </div>
-
-            <div class="card-desc">
-                BEST WORKING EMULATOR
-            </div>
-
-            <div class="explore-btn">EXPLORE →</div>
+        <a href="emulator.html" class="card" id="card_emulator">
+            <div class="card-icon" id="icon_emulator"><i class="fas fa-microchip"></i></div>
+            <div class="card-title" id="title_emulator">EMULATOR</div>
+            <div class="card-desc">EMULATOR SETTINGS</div>
+            <span class="explore-btn">EXPLORE →</span>
         </a>
 
-        <!-- FREE FIRE APK -->
-        <a href="free-fire-apk.html"
-           class="card"
-           id="card_apk">
-
-            <div class="card-icon" id="icon_apk">
-                <i class="fas fa-bolt"></i>
-            </div>
-
-            <div class="card-title" id="title_apk">
-                FREE FIRE APK
-            </div>
-
-            <div class="card-desc">
-                DOWNLOAD LATEST APK V2.0
-            </div>
-
-            <div class="explore-btn">EXPLORE →</div>
+        <a href="apk.html" class="card" id="card_apk">
+            <div class="card-icon" id="icon_apk"><i class="fas fa-mobile"></i></div>
+            <div class="card-title" id="title_apk">FREE FIRE APK</div>
+            <div class="card-desc">DOWNLOAD GAME FILES</div>
+            <span class="explore-btn">EXPLORE →</span>
         </a>
 
-        <!-- BUY PC PANEL -->
-        <a href="buy-pc-panel.html"
-           class="card"
-           id="card_pc_panel">
-
-            <div class="badge badge-premium">PREMIUM</div>
-
-            <div class="card-icon" id="icon_pc_panel">
-                <i class="fas fa-desktop"></i>
-            </div>
-
-            <div class="card-title" id="title_pc_panel">
-                BUY PC PANEL
-            </div>
-
-            <div class="card-desc">
-                ADVANCED VIP FEATURES FOR PC
-            </div>
-
-            <div class="explore-btn">EXPLORE →</div>
+        <a href="pc-panel.html" class="card" id="card_pc_panel">
+            <div class="card-icon" id="icon_pc_panel"><i class="fas fa-desktop"></i></div>
+            <div class="card-title" id="title_pc_panel">PAID PC PANELS</div>
+            <div class="card-desc">PREMIUM PC TOOLS</div>
+            <span class="explore-btn">EXPLORE →</span>
         </a>
 
-        <!-- BUY MOBILE PANEL -->
-        <a href="mobile-panel.html"
-           class="card"
-           id="card_mobile_panel">
-
-            <div class="badge badge-vip">VIP</div>
-
-            <div class="card-icon" id="icon_mobile_panel">
-                <i class="fas fa-mobile-alt"></i>
-            </div>
-
-            <div class="card-title" id="title_mobile_panel">
-                BUY MOBILE PANEL
-            </div>
-
-            <div class="card-desc">
-                SAFE VIP PANEL FOR ANDROID/IOS
-            </div>
-
-            <div class="explore-btn">EXPLORE →</div>
+        <a href="mobile-panel.html" class="card" id="card_mobile_panel">
+            <div class="card-icon" id="icon_mobile_panel"><i class="fas fa-mobile-alt"></i></div>
+            <div class="card-title" id="title_mobile_panel">PAID MOBILE PANELS</div>
+            <div class="card-desc">PREMIUM MOBILE TOOLS</div>
+            <span class="explore-btn">EXPLORE →</span>
         </a>
 
     </div>
 
-    <!-- AD SLOT 2 -->
-    <div class="monetag-ad-slot"
-         id="monetag-bottom-banner-ad"
-         aria-label="Advertisement">
-        <!-- আলাদা Monetag banner code থাকলে এখানে বসাবে -->
-    </div>
+    <div class="monetag-ad-slot"></div>
 
-    <!-- FOOTER -->
-    <footer class="footer">
-        <p>© 2026 BANGLA FF PANEL. All rights reserved.</p>
+    <footer>
+        © 2026 BANGLA FF PANEL. ALL RIGHTS RESERVED.
     </footer>
 
-    <!-- STICKY AD SLOT -->
-    <div class="monetag-ad-slot monetag-sticky-ad"
-         id="monetag-sticky-ad"
-         aria-label="Advertisement">
-        <!-- Monetag sticky ad code এখানে বসাবে -->
-    </div>
+    <div class="monetag-sticky-ad"></div>
 
-    <!-- FIREBASE -->
     <script type="module">
-
-        import {
-            initializeApp
-        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import {
             getDatabase,
             ref,
             onValue
         } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-
-        // FIREBASE CONFIG
         const firebaseConfig = {
             apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
             authDomain: "bangla-ff-admin.firebaseapp.com",
@@ -759,71 +505,38 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-
-        // =====================================
-        // DISCORD AUTO LINK
-        // =====================================
-
         onValue(ref(db, "global_settings/discord_link"), (snapshot) => {
-
             if (snapshot.exists()) {
-
                 const link = snapshot.val();
-
                 document.querySelectorAll(".dynamic-discord").forEach(btn => {
                     btn.href = link;
                 });
-
             }
-
         });
 
-
-        // =====================================
-        // ICON RENDERER
-        // =====================================
-
         function renderIcon(iconDiv, data) {
-
             if (!iconDiv || !data) return;
-
             const val = (data.iconValue || "").trim();
-
             if (!val) return;
 
             if (data.iconType === "image" || val.startsWith("http")) {
-
                 const img = document.createElement("img");
                 img.src = val;
                 img.alt = "Icon";
-
                 iconDiv.replaceChildren(img);
-
             } else if (
                 data.iconType === "emoji" ||
                 (!val.includes("fa-") && !val.startsWith("http"))
             ) {
-
                 const span = document.createElement("span");
                 span.textContent = val;
-
                 iconDiv.replaceChildren(span);
-
             } else {
-
                 const icon = document.createElement("i");
                 icon.className = val;
-
                 iconDiv.replaceChildren(icon);
-
             }
-
         }
-
-
-        // =====================================
-        // OLD CATEGORY BOXES
-        // =====================================
 
         const keys = [
             "free_panel",
@@ -835,57 +548,24 @@
         ];
 
         keys.forEach(key => {
-
-            // Visibility
             onValue(ref(db, `site_visibility/${key}`), snapshot => {
-
-                const isVisible =
-                    !snapshot.exists() || snapshot.val() === true;
-
+                const isVisible = !snapshot.exists() || snapshot.val() === true;
                 const card = document.getElementById(`card_${key}`);
-
-                if (card) {
-                    card.classList.toggle("visible", isVisible);
-                }
-
+                if (card) card.classList.toggle("visible", isVisible);
             });
 
-
-            // Title + Icon
             onValue(ref(db, `site_settings/categories/${key}`), snapshot => {
-
                 if (snapshot.exists()) {
-
                     const data = snapshot.val();
-
                     if (data.title) {
-
-                        const titleEl =
-                            document.getElementById(`title_${key}`);
-
-                        if (titleEl) {
-                            titleEl.textContent = data.title;
-                        }
-
+                        const titleEl = document.getElementById(`title_${key}`);
+                        if (titleEl) titleEl.textContent = data.title;
                     }
-
-                    const iconDiv =
-                        document.getElementById(`icon_${key}`);
-
+                    const iconDiv = document.getElementById(`icon_${key}`);
                     renderIcon(iconDiv, data);
-
                 }
-
             });
-
         });
-
-
-        // =====================================
-        // DYNAMIC ERROR FIX BOXES
-        // ADMIN DATABASE PATH: error_fixes
-        // =====================================
-
 
         // ADMIN-MANAGED BANNERS: load and slide from right to left.
         const bannerRef = ref(db, "site_banners");
@@ -905,6 +585,7 @@
                 clearInterval(bannerTimer);
                 bannerTimer = null;
             }
+
             track.innerHTML = "";
             dots.innerHTML = "";
             bannerIndex = 0;
@@ -915,10 +596,12 @@
             }
 
             wrap.style.display = "block";
+
             activeBanners.forEach((item, index) => {
                 const slide = document.createElement("a");
                 slide.className = "site-banner-slide";
                 slide.href = item.target_url || "#";
+
                 if (item.target_url) {
                     slide.target = "_blank";
                     slide.rel = "noopener noreferrer";
@@ -943,6 +626,7 @@
                 bannerTimer = setInterval(() => {
                     bannerIndex = (bannerIndex + 1) % activeBanners.length;
                     track.style.transform = `translateX(-${bannerIndex * 100}%)`;
+
                     [...dots.children].forEach((dot, index) => {
                         dot.classList.toggle("active", index === bannerIndex);
                     });
@@ -950,13 +634,12 @@
             }
         });
 
+        // ERROR FIX CATEGORY
         const errorFixRef = ref(db, "error_fixes");
 
         onValue(errorFixRef, (snapshot) => {
-
             const grid = document.getElementById("category-grid");
 
-            // আগের dynamic box সরিয়ে নতুন box তৈরি
             document.querySelectorAll(".dynamic-error-fix").forEach(card => {
                 card.remove();
             });
@@ -969,125 +652,63 @@
             const boxes = snapshot.val();
 
             Object.entries(boxes).forEach(([id, data]) => {
-
-                // Hidden box দেখাবে না
                 if (data.enabled === false) return;
 
-                // Main card
                 const card = document.createElement("div");
-
                 card.className = "card visible dynamic-error-fix";
                 card.dataset.boxId = id;
 
-
-                // ICON
                 const iconDiv = document.createElement("div");
-
                 iconDiv.className = "card-icon";
 
                 const iconValue = (data.icon || "").trim();
 
                 if (iconValue.startsWith("http")) {
-
                     const img = document.createElement("img");
-
                     img.src = iconValue;
                     img.alt = "Icon";
-
                     iconDiv.appendChild(img);
-
                 } else if (iconValue.includes("fa-")) {
-
                     const icon = document.createElement("i");
-
                     icon.className = iconValue;
-
                     iconDiv.appendChild(icon);
-
                 } else {
-
                     const span = document.createElement("span");
-
                     span.textContent = iconValue || "🛠️";
-
                     iconDiv.appendChild(span);
-
                 }
 
-
-                // TITLE
                 const title = document.createElement("div");
-
                 title.className = "card-title";
                 title.textContent = data.title || "ERROR FIX";
 
-
-                // DESCRIPTION
                 const desc = document.createElement("div");
-
                 desc.className = "card-desc";
+                desc.textContent = data.description || data.status_text || "ERROR FIX SOLUTION";
 
-                desc.textContent =
-                    data.description ||
-                    data.status_text ||
-                    "ERROR FIX SOLUTION";
-
-
-                // EXPLORE BUTTON
                 const explore = document.createElement("a");
-
                 explore.className = "explore-btn";
-
-                explore.textContent =
-                    (data.button_text || "EXPLORE") + " →";
-
+                explore.textContent = (data.button_text || "EXPLORE") + " →";
                 explore.href = "error-fix.html";
                 explore.target = "_self";
 
+                card.append(iconDiv, title, desc, explore);
 
-                // Add elements to card
-                card.append(
-                    iconDiv,
-                    title,
-                    desc,
-                    explore
-                );
-
-
-                // OPTIONAL TUTORIAL VIDEO
-                if (
-                    data.video_url &&
-                    data.video_enabled !== false
-                ) {
-
+                if (data.video_url && data.video_enabled !== false) {
                     const video = document.createElement("a");
-
                     video.className = "tutorial-link";
-
                     video.href = data.video_url;
-
                     video.target = "_blank";
-
                     video.rel = "noopener noreferrer";
-
                     video.textContent = "▶ WATCH TUTORIAL";
-
                     card.appendChild(video);
-
                 }
 
-
-                // Add new box to website
                 grid.appendChild(card);
-
             });
 
             console.log("Error Fix boxes loaded successfully.");
-
         });
-
-
     </script>
-
 </body>
 </html>
