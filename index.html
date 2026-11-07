@@ -110,6 +110,8 @@
             border-color:white;
         }
 
+        /* BANNER */
+
         .site-banner-wrap {
             width:min(1000px,calc(100% - 40px));
             margin:10px auto 0;
@@ -163,6 +165,8 @@
         .site-banner-dot.active {
             background:var(--neon-pink);
         }
+
+        /* HERO */
 
         .hero {
             text-align:center;
@@ -228,6 +232,8 @@
             text-transform:uppercase;
         }
 
+        /* CATEGORY BOXES */
+
         .grid-container {
             display:grid;
             grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
@@ -252,6 +258,7 @@
             display:block;
             color:white;
             min-width:0;
+            cursor:pointer;
         }
 
         .card:hover {
@@ -331,19 +338,51 @@
         }
 
         @media(max-width:600px) {
-            .header { padding:18px 15px; }
-            .site-banner-wrap { width:calc(100% - 24px); margin-top:5px; }
-            .site-banner-slide img { aspect-ratio:16 / 6; }
-            .hero { padding:22px 12px 20px; }
-            .hero-actions { gap:10px; }
-            .action-btn { padding:11px 16px; font-size:11px; }
-            .grid-container { grid-template-columns:1fr; }
+            .header {
+                padding:18px 15px;
+            }
+
+            .site-banner-wrap {
+                width:calc(100% - 24px);
+                margin-top:5px;
+            }
+
+            .site-banner-slide img {
+                aspect-ratio:16 / 6;
+            }
+
+            .hero {
+                padding:22px 12px 20px;
+            }
+
+            .hero-actions {
+                gap:10px;
+            }
+
+            .action-btn {
+                padding:11px 16px;
+                font-size:11px;
+            }
+
+            .grid-container {
+                grid-template-columns:1fr;
+            }
         }
 
         @media(max-width:380px) {
-            .brand-text h2 { font-size:13px; }
-            .brand-text p { font-size:8px; letter-spacing:2px; }
-            .site-logo { width:35px; height:35px; }
+            .brand-text h2 {
+                font-size:13px;
+            }
+
+            .brand-text p {
+                font-size:8px;
+                letter-spacing:2px;
+            }
+
+            .site-logo {
+                width:35px;
+                height:35px;
+            }
         }
     </style>
 </head>
@@ -353,35 +392,71 @@
 <div class="bg-glow"></div>
 
 <header class="header">
+
     <a href="index.html" class="brand">
-        <img src="logo.png" alt="Logo" class="site-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/888/888879.png'">
+
+        <img
+            src="logo.png"
+            alt="Logo"
+            class="site-logo"
+            onerror="this.src='https://cdn-icons-png.flaticon.com/512/888/888879.png'"
+        >
+
         <div class="brand-text">
             <h2>BANGLA FF PANEL</h2>
             <p>PREMIUM GAMING TOOLS</p>
         </div>
+
     </a>
-    <a href="#" class="header-btn dynamic-discord" target="_blank" rel="noopener noreferrer">
+
+    <a href="#" class="header-btn dynamic-discord"
+       target="_blank" rel="noopener noreferrer">
+
         <i class="fab fa-discord"></i> DISCORD
+
     </a>
+
 </header>
 
+<!-- BANNER -->
+
 <section class="site-banner-wrap" id="siteBannerWrap" style="display:none">
+
     <div class="site-banner-track" id="siteBannerTrack"></div>
+
     <div class="site-banner-dots" id="siteBannerDots"></div>
+
 </section>
 
+<!-- HERO -->
+
 <section class="hero">
+
     <div class="status-badge">
         <i class="fas fa-circle"></i> SYSTEM ONLINE
     </div>
+
     <div class="hero-actions">
-        <a href="#" class="action-btn dynamic-discord" target="_blank" rel="noopener noreferrer">
+
+        <a href="#" class="action-btn dynamic-discord"
+           target="_blank" rel="noopener noreferrer">
+
             <i class="fab fa-discord"></i> JOIN DISCORD
+
         </a>
-        <a href="https://oxi-topup.netlify.app/" target="_blank" rel="noopener noreferrer" class="action-btn">
-            <i class="fas fa-gem"></i> Free Fire Diamond Topup →
+
+        <a
+            href="https://oxi-topup.netlify.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="action-btn"
+        >
+            <i class="fas fa-gem"></i>
+            Free Fire Diamond Topup →
         </a>
+
     </div>
+
 </section>
 
 <div class="divider">AVAILABLE SERVICES</div>
@@ -392,244 +467,632 @@
     © 2026 BANGLA FF PANEL. ALL RIGHTS RESERVED.
 </footer>
 
+<!-- FIREBASE SCRIPT -->
+
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    onValue
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
+
     apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
+
     authDomain: "bangla-ff-admin.firebaseapp.com",
+
     databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
+
     projectId: "bangla-ff-admin",
+
     storageBucket: "bangla-ff-admin.firebasestorage.app",
+
     messagingSenderId: "295013484465",
+
     appId: "1:295013484465:web:b6bc2a949e239095761f90"
+
 };
+
 
 const app = initializeApp(firebaseConfig);
+
 const db = getDatabase(app);
 
+
+/* DEFAULT CATEGORY DATA */
+
 const defaultBoxes = {
-    free_panel:   { title: "Free Panel",        iconType: "icon", iconValue: "fas fa-laptop-code",       publicLink: "free-panel.html" },
-    free_bypass:  { title: "Free Bypass",       iconType: "icon", iconValue: "fas fa-shield-virus",      publicLink: "free-bypass.html" },
-    emulator:     { title: "Emulator",          iconType: "icon", iconValue: "fas fa-microchip",         publicLink: "emulator.html" },
-    pc_panel:     { title: "Paid PC Panels",    iconType: "icon", iconValue: "fas fa-desktop",           publicLink: "pc-panel.html" },
-    mobile_panel: { title: "Paid Mobile Panels",iconType: "icon", iconValue: "fas fa-mobile-alt",        publicLink: "mobile-panel.html" },
-    apk:          { title: "Free Fire APK",     iconType: "icon", iconValue: "fas fa-mobile",            publicLink: "apk.html" },
-    error_fix:   { title: "Error Fix",         iconType: "icon", iconValue: "fas fa-screwdriver-wrench",publicLink: "error-fix.html" }
+
+    free_panel: {
+        title: "Free Panel",
+        iconType: "icon",
+        iconValue: "fas fa-laptop-code",
+        publicLink: "free-panel.html"
+    },
+
+    free_bypass: {
+        title: "Free Bypass",
+        iconType: "icon",
+        iconValue: "fas fa-shield-virus",
+        publicLink: "free-bypass.html"
+    },
+
+    emulator: {
+        title: "Emulator",
+        iconType: "icon",
+        iconValue: "fas fa-microchip",
+        publicLink: "emulator.html"
+    },
+
+    pc_panel: {
+        title: "Paid PC Panels",
+        iconType: "icon",
+        iconValue: "fas fa-desktop",
+        publicLink: "pc-panel.html"
+    },
+
+    mobile_panel: {
+        title: "Paid Mobile Panels",
+        iconType: "icon",
+        iconValue: "fas fa-mobile-alt",
+        publicLink: "mobile-panel.html"
+    },
+
+    apk: {
+        title: "Free Fire APK",
+        iconType: "icon",
+        iconValue: "fas fa-mobile",
+        publicLink: "apk.html"
+    },
+
+    error_fix: {
+        title: "Error Fix",
+        iconType: "icon",
+        iconValue: "fas fa-screwdriver-wrench",
+        publicLink: "error-fix.html"
+    }
+
 };
 
+
+/* STATE */
+
 let categoriesData = { ...defaultBoxes };
+
 let visibilityState = {};
+
 let deletedCategories = {};
 
-function renderIcon(container, data) {
-    container.innerHTML = "";
-    const value = (data.iconValue || "").trim();
 
-    if (!value) {
-        container.innerHTML = "<span>📦</span>";
-        return;
-    }
-
-    if (data.iconType === "image" || value.startsWith("http")) {
-        const img = document.createElement("img");
-        img.src = value;
-        container.appendChild(img);
-    } else if (data.iconType === "emoji" || (!value.includes("fa-") && !value.startsWith("http"))) {
-        const span = document.createElement("span");
-        span.textContent = value;
-        container.appendChild(span);
-    } else {
-        const icon = document.createElement("i");
-        icon.className = value;
-        container.appendChild(icon);
-    }
-}
+/* GET CATEGORY LINK */
 
 function getPublicLink(key, data) {
-    // 1. যদি publicLink থাকে এবং খালি না হয়
-    if (data.publicLink && data.publicLink.trim() !== "") {
-        return data.publicLink.trim();
+
+    const possibleLinks = [
+
+        data.publicLink,
+
+        data.userLink,
+
+        data.pageLink,
+
+        data.link,
+
+        defaultBoxes[key]?.publicLink
+
+    ];
+
+    for (const link of possibleLinks) {
+
+        if (
+            typeof link === "string" &&
+            link.trim() !== ""
+        ) {
+
+            return link.trim();
+
+        }
+
     }
 
-    // 2. ডিফল্ট বক্স থেকে নেওয়ার চেষ্টা
-    if (defaultBoxes[key] && defaultBoxes[key].publicLink) {
-        return defaultBoxes[key].publicLink;
-    }
+    return "";
 
-    // 3. manageLink থেকে অটো বানানো (manage-error-fix.html → error-fix.html)
-    if (data.manageLink && data.manageLink.trim() !== "") {
-        return data.manageLink.trim().replace(/^manage-/, "");
-    }
-
-    return null;
 }
 
+
+/* ICON RENDER */
+
+function renderIcon(container, data) {
+
+    container.innerHTML = "";
+
+    const value = String(data.iconValue || "").trim();
+
+    if (!value) {
+
+        const span = document.createElement("span");
+
+        span.textContent = "📦";
+
+        container.appendChild(span);
+
+        return;
+
+    }
+
+    if (
+        data.iconType === "image" ||
+        value.startsWith("http")
+    ) {
+
+        const img = document.createElement("img");
+
+        img.src = value;
+
+        img.alt = "Category Icon";
+
+        img.onerror = () => {
+
+            img.replaceWith(document.createTextNode("📦"));
+
+        };
+
+        container.appendChild(img);
+
+    }
+
+    else if (
+        data.iconType === "emoji" ||
+        (!value.includes("fa-") && !value.startsWith("http"))
+    ) {
+
+        const span = document.createElement("span");
+
+        span.textContent = value;
+
+        container.appendChild(span);
+
+    }
+
+    else {
+
+        const icon = document.createElement("i");
+
+        icon.className = value;
+
+        container.appendChild(icon);
+
+    }
+
+}
+
+
+/* RENDER CATEGORY BOXES */
+
 function renderCategories() {
+
     const grid = document.getElementById("category-grid");
+
+    if (!grid) return;
+
     grid.innerHTML = "";
 
     Object.entries(categoriesData).forEach(([key, data]) => {
-        if (!data) return;
+
+        if (!data || typeof data !== "object") return;
+
         if (deletedCategories[key] === true) return;
+
         if (visibilityState[key] === false) return;
 
+
         const card = document.createElement("a");
+
         card.className = "card";
 
-        const link = getPublicLink(key, data);
 
-        if (link) {
-            card.href = link;
+        /* NAVIGATION FIX */
+
+        const destination = getPublicLink(key, data);
+
+        if (destination) {
+
+            card.href = destination;
+
         } else {
-            card.href = "javascript:void(0)";
-            card.addEventListener("click", (e) => {
-                e.preventDefault();
-                alert("Link not added yet! Please set User Site Page Link from Admin Panel.");
+
+            card.href = "#";
+
+            card.addEventListener("click", function(event) {
+
+                event.preventDefault();
+
+                alert("Public page link has not been added yet!");
+
             });
+
         }
+
+
+        /* ICON */
 
         const icon = document.createElement("div");
+
         icon.className = "card-icon";
+
         renderIcon(icon, data);
 
+
+        /* TITLE */
+
         const title = document.createElement("div");
+
         title.className = "card-title";
+
         title.textContent = data.title || "CATEGORY";
 
+
+        /* DESCRIPTION */
+
         const description = document.createElement("div");
+
         description.className = "card-desc";
-        description.textContent = data.description || ("ACCESS " + (data.title || "SERVICE"));
+
+        description.textContent =
+            data.description || "ACCESS " + (data.title || "SERVICE");
+
+
+        /* EXPLORE */
 
         const explore = document.createElement("span");
+
         explore.className = "explore-btn";
+
         explore.textContent = "EXPLORE →";
 
-        card.append(icon, title, description, explore);
+
+        card.append(
+            icon,
+            title,
+            description,
+            explore
+        );
+
         grid.appendChild(card);
+
     });
+
 }
 
-// প্রথমে ডিফল্ট দিয়ে রেন্ডার
+
+/* INITIAL RENDER */
+
 renderCategories();
 
-onValue(ref(db, "site_settings/categories"), (snapshot) => {
-    const firebaseData = snapshot.val() || {};
-    const merged = {};
 
-    // আগে সব ডিফল্ট বক্স রাখি
-    Object.keys(defaultBoxes).forEach((key) => {
-        merged[key] = {
-            ...defaultBoxes[key],
-            ...(firebaseData[key] || {})
-        };
-        // publicLink কখনো হারাতে দিব না
-        if (!merged[key].publicLink) {
-            merged[key].publicLink = defaultBoxes[key].publicLink;
-        }
-    });
+/* CATEGORY LISTENER */
 
-    // ফায়ারবেসে নতুন যেগুলো আছে (push ID দিয়ে তৈরি) সেগুলো যোগ করি
-    Object.keys(firebaseData).forEach((key) => {
-        if (!merged[key]) {
-            merged[key] = { ...firebaseData[key] };
-        }
-    });
+onValue(
+    ref(db, "site_settings/categories"),
 
-    categoriesData = merged;
-    renderCategories();
-});
+    (snapshot) => {
 
-onValue(ref(db, "site_visibility"), (snapshot) => {
-    visibilityState = snapshot.val() || {};
-    renderCategories();
-});
+        const firebaseCategories = snapshot.val() || {};
 
-onValue(ref(db, "site_settings/deleted_categories"), (snapshot) => {
-    deletedCategories = snapshot.val() || {};
-    renderCategories();
-});
+        categoriesData = {};
 
-// Discord
-onValue(ref(db, "global_settings/discord_link"), (snapshot) => {
-    if (!snapshot.exists()) return;
-    const link = snapshot.val();
-    document.querySelectorAll(".dynamic-discord").forEach((btn) => {
-        btn.href = link;
-    });
-});
 
-// Banner
+        /* DEFAULT + FIREBASE DATA */
+
+        Object.entries(defaultBoxes).forEach(([key, defaultData]) => {
+
+            categoriesData[key] = {
+
+                ...defaultData,
+
+                ...(firebaseCategories[key] || {})
+
+            };
+
+        });
+
+
+        /* ADDITIONAL CATEGORIES */
+
+        Object.entries(firebaseCategories).forEach(([key, data]) => {
+
+            if (!categoriesData[key] && data) {
+
+                categoriesData[key] = data;
+
+            }
+
+        });
+
+
+        renderCategories();
+
+    },
+
+    (error) => {
+
+        console.error("Category loading error:", error);
+
+    }
+
+);
+
+
+/* VISIBILITY LISTENER */
+
+onValue(
+    ref(db, "site_visibility"),
+
+    (snapshot) => {
+
+        visibilityState = snapshot.val() || {};
+
+        renderCategories();
+
+    },
+
+    (error) => {
+
+        console.error("Visibility loading error:", error);
+
+    }
+
+);
+
+
+/* DELETED CATEGORY LISTENER */
+
+onValue(
+    ref(db, "site_settings/deleted_categories"),
+
+    (snapshot) => {
+
+        deletedCategories = snapshot.val() || {};
+
+        renderCategories();
+
+    },
+
+    (error) => {
+
+        console.error("Deleted category loading error:", error);
+
+    }
+
+);
+
+
+/* DISCORD LINK */
+
+onValue(
+    ref(db, "global_settings/discord_link"),
+
+    (snapshot) => {
+
+        const link = snapshot.val();
+
+        if (!link || typeof link !== "string") return;
+
+        document.querySelectorAll(".dynamic-discord").forEach(button => {
+
+            button.href = link;
+
+        });
+
+    },
+
+    (error) => {
+
+        console.error("Discord loading error:", error);
+
+    }
+
+);
+
+
+/* BANNER SLIDER */
+
 const bannerRef = ref(db, "site_banners");
+
 let bannerTimer = null;
+
 let bannerIndex = 0;
 
-onValue(bannerRef, (snapshot) => {
-    const wrap = document.getElementById("siteBannerWrap");
-    const track = document.getElementById("siteBannerTrack");
-    const dots = document.getElementById("siteBannerDots");
-    const banners = snapshot.val() || {};
 
-    const activeBanners = Object.entries(banners)
-        .map(([id, item]) => ({ id, ...item }))
-        .filter(item => item && item.enabled !== false && item.image_url);
+onValue(
+    bannerRef,
 
-    if (bannerTimer) {
-        clearInterval(bannerTimer);
-        bannerTimer = null;
-    }
+    (snapshot) => {
 
-    track.innerHTML = "";
-    dots.innerHTML = "";
-    track.style.transform = "translateX(0)";
-    bannerIndex = 0;
+        const wrap = document.getElementById("siteBannerWrap");
 
-    if (!activeBanners.length) {
-        wrap.style.display = "none";
-        return;
-    }
+        const track = document.getElementById("siteBannerTrack");
 
-    wrap.style.display = "block";
+        const dots = document.getElementById("siteBannerDots");
 
-    activeBanners.forEach((item, index) => {
-        const slide = document.createElement("a");
-        slide.className = "site-banner-slide";
-        slide.href = item.target_url || "#";
 
-        if (item.target_url) {
-            slide.target = "_blank";
-            slide.rel = "noopener noreferrer";
-        } else {
-            slide.addEventListener("click", (e) => e.preventDefault());
+        const banners = snapshot.val() || {};
+
+
+        const activeBanners = Object.entries(banners)
+
+            .map(([id, item]) => ({ id, ...item }))
+
+            .filter(item =>
+                item &&
+                item.enabled !== false &&
+                typeof item.image_url === "string" &&
+                item.image_url.trim() !== ""
+            );
+
+
+        if (bannerTimer) {
+
+            clearInterval(bannerTimer);
+
+            bannerTimer = null;
+
         }
 
-        const image = document.createElement("img");
-        image.src = item.image_url;
-        image.alt = item.title || "Website banner";
-        image.loading = index === 0 ? "eager" : "lazy";
-        image.onerror = () => slide.remove();
 
-        slide.appendChild(image);
-        track.appendChild(slide);
+        track.innerHTML = "";
 
-        const dot = document.createElement("span");
-        dot.className = "site-banner-dot" + (index === 0 ? " active" : "");
-        dots.appendChild(dot);
-    });
+        dots.innerHTML = "";
 
-    if (activeBanners.length > 1) {
-        bannerTimer = setInterval(() => {
+        track.style.transform = "translateX(0)";
+
+        bannerIndex = 0;
+
+
+        if (!activeBanners.length) {
+
+            wrap.style.display = "none";
+
+            return;
+
+        }
+
+
+        wrap.style.display = "block";
+
+
+        activeBanners.forEach((item, index) => {
+
+            const slide = document.createElement("a");
+
+            slide.className = "site-banner-slide";
+
+
+            if (item.target_url) {
+
+                slide.href = item.target_url;
+
+                slide.target = "_blank";
+
+                slide.rel = "noopener noreferrer";
+
+            }
+
+            else {
+
+                slide.href = "#";
+
+                slide.addEventListener("click", event => {
+
+                    event.preventDefault();
+
+                });
+
+            }
+
+
+            const image = document.createElement("img");
+
+            image.src = item.image_url;
+
+            image.alt = item.title || "Website banner";
+
+            image.loading = index === 0 ? "eager" : "lazy";
+
+
+            image.onerror = () => {
+
+                slide.remove();
+
+                updateDots();
+
+            };
+
+
+            slide.appendChild(image);
+
+            track.appendChild(slide);
+
+
+            const dot = document.createElement("span");
+
+            dot.className =
+                "site-banner-dot" + (index === 0 ? " active" : "");
+
+
+            dots.appendChild(dot);
+
+        });
+
+
+        function updateDots() {
+
             const total = track.children.length;
-            if (total <= 1) return;
-            bannerIndex = (bannerIndex + 1) % total;
-            track.style.transform = `translateX(-${bannerIndex * 100}%)`;
-            [...dots.children].forEach((dot, i) => {
-                dot.classList.toggle("active", i === bannerIndex);
+
+            if (!total) {
+
+                wrap.style.display = "none";
+
+                return;
+
+            }
+
+
+            bannerIndex = bannerIndex % total;
+
+
+            track.style.transform =
+                `translateX(-${bannerIndex * 100}%)`;
+
+
+            [...dots.children].forEach((dot, index) => {
+
+                dot.classList.toggle(
+                    "active",
+                    index === bannerIndex
+                );
+
             });
-        }, 4000);
+
+        }
+
+
+        if (activeBanners.length > 1) {
+
+            bannerTimer = setInterval(() => {
+
+                const totalSlides = track.children.length;
+
+                if (totalSlides <= 1) return;
+
+
+                bannerIndex = (bannerIndex + 1) % totalSlides;
+
+                updateDots();
+
+            }, 4000);
+
+        }
+
+    },
+
+    (error) => {
+
+        console.error("Banner loading error:", error);
+
     }
-});
+
+);
+
 </script>
 
 </body>
