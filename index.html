@@ -110,7 +110,6 @@
             border-color:white;
         }
 
-        /* BANNER */
         .site-banner-wrap {
             width:min(1000px,calc(100% - 40px));
             margin:10px auto 0;
@@ -165,7 +164,6 @@
             background:var(--neon-pink);
         }
 
-        /* HERO */
         .hero {
             text-align:center;
             padding:25px 20px;
@@ -230,7 +228,6 @@
             text-transform:uppercase;
         }
 
-        /* CATEGORY BOXES */
         .grid-container {
             display:grid;
             grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
@@ -413,16 +410,15 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 const defaultBoxes = {
-    free_panel: { title: "Free Panel", iconType: "icon", iconValue: "fas fa-laptop-code", publicLink: "free-panel.html" },
-    free_bypass: { title: "Free Bypass", iconType: "icon", iconValue: "fas fa-shield-virus", publicLink: "free-bypass.html" },
-    emulator: { title: "Emulator", iconType: "icon", iconValue: "fas fa-microchip", publicLink: "emulator.html" },
-    pc_panel: { title: "Paid PC Panels", iconType: "icon", iconValue: "fas fa-desktop", publicLink: "pc-panel.html" },
-    mobile_panel: { title: "Paid Mobile Panels", iconType: "icon", iconValue: "fas fa-mobile-alt", publicLink: "mobile-panel.html" },
-    apk: { title: "Free Fire APK", iconType: "icon", iconValue: "fas fa-mobile", publicLink: "apk.html" },
-    error_fix: { title: "Error Fix", iconType: "icon", iconValue: "fas fa-screwdriver-wrench", publicLink: "error-fix.html" }
+    free_panel:   { title: "Free Panel",        iconType: "icon", iconValue: "fas fa-laptop-code",       publicLink: "free-panel.html" },
+    free_bypass:  { title: "Free Bypass",       iconType: "icon", iconValue: "fas fa-shield-virus",      publicLink: "free-bypass.html" },
+    emulator:     { title: "Emulator",          iconType: "icon", iconValue: "fas fa-microchip",         publicLink: "emulator.html" },
+    pc_panel:     { title: "Paid PC Panels",    iconType: "icon", iconValue: "fas fa-desktop",           publicLink: "pc-panel.html" },
+    mobile_panel: { title: "Paid Mobile Panels",iconType: "icon", iconValue: "fas fa-mobile-alt",        publicLink: "mobile-panel.html" },
+    apk:          { title: "Free Fire APK",     iconType: "icon", iconValue: "fas fa-mobile",            publicLink: "apk.html" },
+    error_fix:   { title: "Error Fix",         iconType: "icon", iconValue: "fas fa-screwdriver-wrench",publicLink: "error-fix.html" }
 };
 
-// Initial state
 let categoriesData = { ...defaultBoxes };
 let visibilityState = {};
 let deletedCategories = {};
@@ -451,6 +447,25 @@ function renderIcon(container, data) {
     }
 }
 
+function getPublicLink(key, data) {
+    // 1. যদি publicLink থাকে এবং খালি না হয়
+    if (data.publicLink && data.publicLink.trim() !== "") {
+        return data.publicLink.trim();
+    }
+
+    // 2. ডিফল্ট বক্স থেকে নেওয়ার চেষ্টা
+    if (defaultBoxes[key] && defaultBoxes[key].publicLink) {
+        return defaultBoxes[key].publicLink;
+    }
+
+    // 3. manageLink থেকে অটো বানানো (manage-error-fix.html → error-fix.html)
+    if (data.manageLink && data.manageLink.trim() !== "") {
+        return data.manageLink.trim().replace(/^manage-/, "");
+    }
+
+    return null;
+}
+
 function renderCategories() {
     const grid = document.getElementById("category-grid");
     grid.innerHTML = "";
@@ -462,11 +477,17 @@ function renderCategories() {
 
         const card = document.createElement("a");
         card.className = "card";
-        // যদি পাবলিক লিংক না থাকে, তাহলে পেজ রিলোড হবে না (খালি # থাকবে)
-        card.href = data.publicLink && data.publicLink.trim() !== "" ? data.publicLink : "javascript:void(0)";
 
-        if(card.href === "javascript:void(0)") {
-             card.onclick = () => alert("Link not added yet!");
+        const link = getPublicLink(key, data);
+
+        if (link) {
+            card.href = link;
+        } else {
+            card.href = "javascript:void(0)";
+            card.addEventListener("click", (e) => {
+                e.preventDefault();
+                alert("Link not added yet! Please set User Site Page Link from Admin Panel.");
+            });
         }
 
         const icon = document.createElement("div");
@@ -479,7 +500,7 @@ function renderCategories() {
 
         const description = document.createElement("div");
         description.className = "card-desc";
-        description.textContent = data.description || "ACCESS " + (data.title || "SERVICE");
+        description.textContent = data.description || ("ACCESS " + (data.title || "SERVICE"));
 
         const explore = document.createElement("span");
         explore.className = "explore-btn";
@@ -490,11 +511,33 @@ function renderCategories() {
     });
 }
 
-// Render instantly with default boxes
+// প্রথমে ডিফল্ট দিয়ে রেন্ডার
 renderCategories();
 
 onValue(ref(db, "site_settings/categories"), (snapshot) => {
-    categoriesData = { ...defaultBoxes, ...(snapshot.val() || {}) };
+    const firebaseData = snapshot.val() || {};
+    const merged = {};
+
+    // আগে সব ডিফল্ট বক্স রাখি
+    Object.keys(defaultBoxes).forEach((key) => {
+        merged[key] = {
+            ...defaultBoxes[key],
+            ...(firebaseData[key] || {})
+        };
+        // publicLink কখনো হারাতে দিব না
+        if (!merged[key].publicLink) {
+            merged[key].publicLink = defaultBoxes[key].publicLink;
+        }
+    });
+
+    // ফায়ারবেসে নতুন যেগুলো আছে (push ID দিয়ে তৈরি) সেগুলো যোগ করি
+    Object.keys(firebaseData).forEach((key) => {
+        if (!merged[key]) {
+            merged[key] = { ...firebaseData[key] };
+        }
+    });
+
+    categoriesData = merged;
     renderCategories();
 });
 
@@ -508,16 +551,16 @@ onValue(ref(db, "site_settings/deleted_categories"), (snapshot) => {
     renderCategories();
 });
 
-// DISCORD LINK
+// Discord
 onValue(ref(db, "global_settings/discord_link"), (snapshot) => {
     if (!snapshot.exists()) return;
     const link = snapshot.val();
-    document.querySelectorAll(".dynamic-discord").forEach(button => {
-        button.href = link;
+    document.querySelectorAll(".dynamic-discord").forEach((btn) => {
+        btn.href = link;
     });
 });
 
-// BANNER SLIDER
+// Banner
 const bannerRef = ref(db, "site_banners");
 let bannerTimer = null;
 let bannerIndex = 0;
@@ -558,14 +601,13 @@ onValue(bannerRef, (snapshot) => {
             slide.target = "_blank";
             slide.rel = "noopener noreferrer";
         } else {
-            slide.addEventListener("click", event => event.preventDefault());
+            slide.addEventListener("click", (e) => e.preventDefault());
         }
 
         const image = document.createElement("img");
         image.src = item.image_url;
         image.alt = item.title || "Website banner";
         image.loading = index === 0 ? "eager" : "lazy";
-
         image.onerror = () => slide.remove();
 
         slide.appendChild(image);
@@ -578,12 +620,12 @@ onValue(bannerRef, (snapshot) => {
 
     if (activeBanners.length > 1) {
         bannerTimer = setInterval(() => {
-            const totalSlides = track.children.length;
-            if (totalSlides <= 1) return;
-            bannerIndex = (bannerIndex + 1) % totalSlides;
+            const total = track.children.length;
+            if (total <= 1) return;
+            bannerIndex = (bannerIndex + 1) % total;
             track.style.transform = `translateX(-${bannerIndex * 100}%)`;
-            [...dots.children].forEach((dot, index) => {
-                dot.classList.toggle("active", index === bannerIndex);
+            [...dots.children].forEach((dot, i) => {
+                dot.classList.toggle("active", i === bannerIndex);
             });
         }, 4000);
     }
