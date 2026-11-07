@@ -1,1 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4109990485768727" crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-4109990485768727">
+    <meta name="google-site-verification" content="2pp8s_pbmfBm3nEgkLgFLDxKg_OusA-ZXlQRUeXUGO4">
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BANGLA FF PANEL</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-main:#05020a;
+            --card-bg:#0b0512;
+            --border-color:#1a0b2e;
+            --neon-pink:#ff0066;
+            --neon-green:#00cc66;
+            --text-light:#ffffff;
+            --text-gray:#777777;
+        }
+
+        * {
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+        }
+
+        body {
+            background-color:var(--bg-main);
+            color:var(--text-light);
+            min-height:100vh;
+            overflow-x:hidden;
+            position:relative;
+            display:flex;
+            flex-direction:column;
+        }
+
+        .bg-glow {
+            position:absolute;
+            top:20%;
+            left:20%;
+            width:400px;
+            height:400px;
+            background:radial-gradient(circle,rgba(255,0,102,.05) 0%,transparent 70%);
+            z-index:-1;
+            pointer-events:none;
+        }
+
+        .header {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:25px 50px;
+            position:relative;
+            z-index:100;
+        }
+
+        .brand {
+            display:flex;
+            align-items:center;
+            gap:15px;
+            text-decoration:none;
+            cursor:pointer;
+        }
+
+        .site-logo {
+            width:40px;
+            height:40px;
+            border-radius:8px;
+            object-fit:cover;
+            border:1px solid var(--neon-pink);
+        }
+
+        .brand-text h2 {
+            font-size:16px;
+            color:white;
+            font-weight:800;
+            text-transform:uppercase;
+            letter-spacing:1px;
+            margin-bottom:2px;
+        }
+
+        .brand-text p {
+            font-size:9px;
+            color:var(--text-gray);
+            letter-spacing:3px;
+            text-transform:uppercase;
+        }
+
+        .header-btn {
+            background:transparent;
+            border:1px solid #333;
+            color:white;
+            padding:8px 15px;
+            border-radius:6px;
+            font-size:12px;
+            text-decoration:none;
+            display:flex;
+            align-items:center;
+            gap:8px;
+            transition:.3s;
+        }
+
+        .header-btn:hover {
+            border-color:white;
+        }
+
+        .site-banner-wrap {
+            width:min(1000px,calc(100% - 40px));
+            margin:10px auto 0;
+            position:relative;
+            z-index:10;
+            overflow:hidden;
+            border:1px solid var(--border-color);
+            border-radius:12px;
+            background:var(--card-bg);
+        }
+
+        .site-banner-track {
+            display:flex;
+            width:100%;
+            transition:transform .65s ease-in-out;
+            will-change:transform;
+        }
+
+        .site-banner-slide {
+            flex:0 0 100%;
+            width:100%;
+            display:block;
+            line-height:0;
+        }
+
+        .site-banner-slide img {
+            display:block;
+            width:100%;
+            aspect-ratio:1000 / 300;
+            object-fit:cover;
+        }
+
+        .site-banner-dots {
+            position:absolute;
+            left:0;
+            right:0;
+            bottom:10px;
+            display:flex;
+            justify-content:center;
+            gap:7px;
+            pointer-events:none;
+        }
+
+        .site-banner-dot {
+            width:7px;
+            height:7px;
+            border-radius:50%;
+            background:rgba(255,255,255,.45);
+        }
+
+        .site-banner-dot.active {
+            background:var(--neon-pink);
+        }
+
+        .hero {
+            text-align:center;
+            padding:25px 20px;
+            position:relative;
+            z-index:10;
+        }
+
+        .status-badge {
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            background:rgba(0,204,102,.05);
+            border:1px solid var(--neon-green);
+            color:var(--neon-green);
+            padding:6px 16px;
+            border-radius:20px;
+            font-size:10px;
+            font-weight:bold;
+            letter-spacing:1px;
+            margin-bottom:20px;
+            text-transform:uppercase;
+        }
+
+        .status-badge i {
+            font-size:8px;
+        }
+
+        .hero-actions {
+            display:flex;
+            justify-content:center;
+            gap:15px;
+            align-items:center;
+            flex-wrap:wrap;
+        }
+
+        .action-btn {
+            background:transparent;
+            border:1px solid #333;
+            color:white;
+            padding:12px 25px;
+            border-radius:8px;
+            font-size:12px;
+            font-weight:bold;
+            text-decoration:none;
+            display:flex;
+            align-items:center;
+            gap:10px;
+            transition:.3s;
+        }
+
+        .action-btn:hover {
+            border-color:var(--text-light);
+            background:rgba(255,255,255,.05);
+        }
+
+        .divider {
+            text-align:center;
+            margin:25px 0;
+            font-size:11px;
+            color:#444;
+            letter-spacing:4px;
+            text-transform:uppercase;
+        }
+
+        .grid-container {
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+            gap:20px;
+            max-width:1000px;
+            width:100%;
+            margin:0 auto;
+            padding:0 20px;
+            position:relative;
+            z-index:10;
+        }
+
+        .card {
+            background:var(--card-bg);
+            border:1px solid var(--border-color);
+            border-radius:12px;
+            padding:40px 20px;
+            text-align:center;
+            text-decoration:none;
+            position:relative;
+            transition:.3s;
+            display:block;
+            color:white;
+            min-width:0;
+        }
+
+        .card:hover {
+            border-color:#3a1b5e;
+            transform:translateY(-5px);
+            box-shadow:0 10px 30px rgba(0,0,0,.5);
+        }
+
+        .card-icon {
+            font-size:35px;
+            margin-bottom:20px;
+            color:#ff3366;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            min-height:45px;
+        }
+
+        .card-icon img {
+            width:50px;
+            height:50px;
+            object-fit:contain;
+        }
+
+        .card-icon span {
+            font-size:40px;
+            line-height:1;
+            display:inline-block;
+        }
+
+        .card-title {
+            color:white;
+            font-size:16px;
+            font-weight:800;
+            margin-bottom:10px;
+            text-transform:uppercase;
+            letter-spacing:1px;
+            overflow-wrap:anywhere;
+        }
+
+        .card-desc {
+            color:#777;
+            font-size:10px;
+            text-transform:uppercase;
+            letter-spacing:1px;
+            margin-bottom:30px;
+            overflow-wrap:anywhere;
+        }
+
+        .explore-btn {
+            border:1px solid #333;
+            color:white;
+            padding:8px 20px;
+            border-radius:20px;
+            font-size:10px;
+            font-weight:bold;
+            letter-spacing:1px;
+            text-transform:uppercase;
+            transition:.3s;
+            display:inline-block;
+            text-decoration:none;
+        }
+
+        .card:hover .explore-btn {
+            background:white;
+            color:black;
+            border-color:white;
+        }
+
+        footer {
+            text-align:center;
+            padding:30px 20px;
+            margin-top:auto;
+            color:#555;
+            font-size:11px;
+            letter-spacing:1px;
+        }
+
+        @media(max-width:600px) {
+            .header { padding:18px 15px; }
+            .site-banner-wrap { width:calc(100% - 24px); margin-top:5px; }
+            .site-banner-slide img { aspect-ratio:16 / 6; }
+            .hero { padding:22px 12px 20px; }
+            .hero-actions { gap:10px; }
+            .action-btn { padding:11px 16px; font-size:11px; }
+            .grid-container { grid-template-columns:1fr; }
+        }
+
+        @media(max-width:380px) {
+            .brand-text h2 { font-size:13px; }
+            .brand-text p { font-size:8px; letter-spacing:2px; }
+            .site-logo { width:35px; height:35px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="bg-glow"></div>
+
+<header class="header">
+    <a href="index.html" class="brand">
+        <img src="logo.png" alt="Logo" class="site-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/888/888879.png'">
+        <div class="brand-text">
+            <h2>BANGLA FF PANEL</h2>
+            <p>PREMIUM GAMING TOOLS</p>
+        </div>
+    </a>
+    <a href="#" class="header-btn dynamic-discord" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-discord"></i> DISCORD
+    </a>
+</header>
+
+<section class="site-banner-wrap" id="siteBannerWrap" style="display:none">
+    <div class="site-banner-track" id="siteBannerTrack"></div>
+    <div class="site-banner-dots" id="siteBannerDots"></div>
+</section>
+
+<section class="hero">
+    <div class="status-badge">
+        <i class="fas fa-circle"></i> SYSTEM ONLINE
+    </div>
+    <div class="hero-actions">
+        <a href="#" class="action-btn dynamic-discord" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-discord"></i> JOIN DISCORD
+        </a>
+        <a href="https://oxi-topup.netlify.app/" target="_blank" rel="noopener noreferrer" class="action-btn">
+            <i class="fas fa-gem"></i> Free Fire Diamond Topup →
+        </a>
+    </div>
+</section>
+
+<div class="divider">AVAILABLE SERVICES</div>
+
+<div class="grid-container" id="category-grid"></div>
+
+<footer>
+    © 2026 BANGLA FF PANEL. ALL RIGHTS RESERVED.
+</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
+    authDomain: "bangla-ff-admin.firebaseapp.com",
+    databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "bangla-ff-admin",
+    storageBucket: "bangla-ff-admin.firebasestorage.app",
+    messagingSenderId: "295013484465",
+    appId: "1:295013484465:web:b6bc2a949e239095761f90"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// গিটহাবের ফাইলের নাম অনুযায়ী ১০০% কারেক্ট লিংক
+const defaultBoxes = {
+    free_panel:   { title: "Free Panel",        iconType: "icon", iconValue: "fas fa-laptop-code",       publicLink: "free-panel.html" },
+    free_bypass:  { title: "Free Bypass",       iconType: "icon", iconValue: "fas fa-shield-virus",      publicLink: "free-bypass.html" },
+    emulator:     { title: "Emulator",          iconType: "icon", iconValue: "fas fa-microchip",         publicLink: "emulator.html" },
+    pc_panel:     { title: "Paid PC Panels",    iconType: "icon", iconValue: "fas fa-desktop",           publicLink: "buy-pc-panel.html" },
+    mobile_panel: { title: "Paid Mobile Panels",iconType: "icon", iconValue: "fas fa-mobile-alt",        publicLink: "mobile-panel.html" },
+    apk:          { title: "Free Fire APK",     iconType: "icon", iconValue: "fas fa-mobile",            publicLink: "free-fire-apk.html" },
+    error_fix:    { title: "Error Fix",         iconType: "icon", iconValue: "fas fa-screwdriver-wrench",publicLink: "error-fix.html" }
+};
+
+let categoriesData = { ...defaultBoxes };
+let visibilityState = {};
+let deletedCategories = {};
+
+function renderIcon(container, data) {
+    container.innerHTML = "";
+    const value = (data.iconValue || "").trim();
+
+    if (!value) {
+        container.innerHTML = "<span>📦</span>";
+        return;
+    }
+
+    if (data.iconType === "image" || value.startsWith("http")) {
+        const img = document.createElement("img");
+        img.src = value;
+        container.appendChild(img);
+    } else if (data.iconType === "emoji" || (!value.includes("fa-") && !value.startsWith("http"))) {
+        const span = document.createElement("span");
+        span.textContent = value;
+        container.appendChild(span);
+    } else {
+        const icon = document.createElement("i");
+        icon.className = value;
+        container.appendChild(icon);
+    }
+}
+
+function renderCategories() {
+    const grid = document.getElementById("category-grid");
+    grid.innerHTML = "";
+
+    Object.entries(categoriesData).forEach(([key, data]) => {
+        if (!data) return;
+        if (deletedCategories[key] === true) return;
+        if (visibilityState[key] === false) return;
+
+        const card = document.createElement("a");
+        card.className = "card";
+
+        // লিংক ঠিক রাখা
+        let targetLink = data.publicLink;
+        if (!targetLink || targetLink.trim() === "") {
+            if (defaultBoxes[key]) {
+                targetLink = defaultBoxes[key].publicLink;
+            }
+        }
+
+        card.href = targetLink && targetLink.trim() !== "" ? targetLink : "javascript:void(0)";
+
+        const icon = document.createElement("div");
+        icon.className = "card-icon";
+        renderIcon(icon, data);
+
+        const title = document.createElement("div");
+        title.className = "card-title";
+        title.textContent = data.title || "CATEGORY";
+
+        const description = document.createElement("div");
+        description.className = "card-desc";
+        description.textContent = data.description || ("ACCESS " + (data.title || "SERVICE"));
+
+        const explore = document.createElement("span");
+        explore.className = "explore-btn";
+        explore.textContent = "EXPLORE →";
+
+        card.append(icon, title, description, explore);
+        grid.appendChild(card);
+    });
+}
+
+renderCategories();
+
+onValue(ref(db, "site_settings/categories"), (snapshot) => {
+    const firebaseData = snapshot.val() || {};
+    const merged = {};
+
+    Object.keys(defaultBoxes).forEach((key) => {
+        merged[key] = {
+            ...defaultBoxes[key],
+            ...(firebaseData[key] || {})
+        };
+        // গিটহাবের আসল লিংক ব্যাকআপ রাখা
+        if (!merged[key].publicLink || merged[key].publicLink.trim() === "") {
+            merged[key].publicLink = defaultBoxes[key].publicLink;
+        }
+    });
+
+    Object.keys(firebaseData).forEach((key) => {
+        if (!merged[key]) {
+            merged[key] = { ...firebaseData[key] };
+        }
+    });
+
+    categoriesData = merged;
+    renderCategories();
+});
+
+onValue(ref(db, "site_visibility"), (snapshot) => {
+    visibilityState = snapshot.val() || {};
+    renderCategories();
+});
+
+onValue(ref(db, "site_settings/deleted_categories"), (snapshot) => {
+    deletedCategories = snapshot.val() || {};
+    renderCategories();
+});
+
+// Discord
+onValue(ref(db, "global_settings/discord_link"), (snapshot) => {
+    if (!snapshot.exists()) return;
+    const link = snapshot.val();
+    document.querySelectorAll(".dynamic-discord").forEach((btn) => {
+        btn.href = link;
+    });
+});
+
+// Banner
+const bannerRef = ref(db, "site_banners");
+let bannerTimer = null;
+let bannerIndex = 0;
+
+onValue(bannerRef, (snapshot) => {
+    const wrap = document.getElementById("siteBannerWrap");
+    const track = document.getElementById("siteBannerTrack");
+    const dots = document.getElementById("siteBannerDots");
+    const banners = snapshot.val() || {};
+
+    const activeBanners = Object.entries(banners)
+        .map(([id, item]) => ({ id, ...item }))
+        .filter(item => item && item.enabled !== false && item.image_url);
+
+    if (bannerTimer) {
+        clearInterval(bannerTimer);
+        bannerTimer = null;
+    }
+
+    track.innerHTML = "";
+    dots.innerHTML = "";
+    track.style.transform = "translateX(0)";
+    bannerIndex = 0;
+
+    if (!activeBanners.length) {
+        wrap.style.display = "none";
+        return;
+    }
+
+    wrap.style.display = "block";
+
+    activeBanners.forEach((item, index) => {
+        const slide = document.createElement("a");
+        slide.className = "site-banner-slide";
+        slide.href = item.target_url || "#";
+
+        if (item.target_url) {
+            slide.target = "_blank";
+            slide.rel = "noopener noreferrer";
+        } else {
+            slide.addEventListener("click", (e) => e.preventDefault());
+        }
+
+        const image = document.createElement("img");
+        image.src = item.image_url;
+        image.alt = item.title || "Website banner";
+        image.loading = index === 0 ? "eager" : "lazy";
+        image.onerror = () => slide.remove();
+
+        slide.appendChild(image);
+        track.appendChild(slide);
+
+        const dot = document.createElement("span");
+        dot.className = "site-banner-dot" + (index === 0 ? " active" : "");
+        dots.appendChild(dot);
+    });
+
+    if (activeBanners.length > 1) {
+        bannerTimer = setInterval(() => {
+            const total = track.children.length;
+            if (total <= 1) return;
+            bannerIndex = (bannerIndex + 1) % total;
+            track.style.transform = `translateX(-${bannerIndex * 100}%)`;
+            [...dots.children].forEach((dot, i) => {
+                dot.classList.toggle("active", i === bannerIndex);
+            });
+        }, 4000);
+    }
+});
+</script>
+
+</body>
+</html>
