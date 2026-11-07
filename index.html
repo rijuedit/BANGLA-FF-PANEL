@@ -111,7 +111,6 @@
         }
 
         /* BANNER */
-
         .site-banner-wrap {
             width:min(1000px,calc(100% - 40px));
             margin:10px auto 0;
@@ -167,7 +166,6 @@
         }
 
         /* HERO */
-
         .hero {
             text-align:center;
             padding:25px 20px;
@@ -233,7 +231,6 @@
         }
 
         /* CATEGORY BOXES */
-
         .grid-container {
             display:grid;
             grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
@@ -337,51 +334,19 @@
         }
 
         @media(max-width:600px) {
-            .header {
-                padding:18px 15px;
-            }
-
-            .site-banner-wrap {
-                width:calc(100% - 24px);
-                margin-top:5px;
-            }
-
-            .site-banner-slide img {
-                aspect-ratio:16 / 6;
-            }
-
-            .hero {
-                padding:22px 12px 20px;
-            }
-
-            .hero-actions {
-                gap:10px;
-            }
-
-            .action-btn {
-                padding:11px 16px;
-                font-size:11px;
-            }
-
-            .grid-container {
-                grid-template-columns:1fr;
-            }
+            .header { padding:18px 15px; }
+            .site-banner-wrap { width:calc(100% - 24px); margin-top:5px; }
+            .site-banner-slide img { aspect-ratio:16 / 6; }
+            .hero { padding:22px 12px 20px; }
+            .hero-actions { gap:10px; }
+            .action-btn { padding:11px 16px; font-size:11px; }
+            .grid-container { grid-template-columns:1fr; }
         }
 
         @media(max-width:380px) {
-            .brand-text h2 {
-                font-size:13px;
-            }
-
-            .brand-text p {
-                font-size:8px;
-                letter-spacing:2px;
-            }
-
-            .site-logo {
-                width:35px;
-                height:35px;
-            }
+            .brand-text h2 { font-size:13px; }
+            .brand-text p { font-size:8px; letter-spacing:2px; }
+            .site-logo { width:35px; height:35px; }
         }
     </style>
 </head>
@@ -390,73 +355,39 @@
 
 <div class="bg-glow"></div>
 
-<!-- HEADER -->
-
 <header class="header">
-
     <a href="index.html" class="brand">
-
-        <img src="logo.png"
-             alt="Logo"
-             class="site-logo"
-             onerror="this.src='https://cdn-icons-png.flaticon.com/512/888/888879.png'">
-
+        <img src="logo.png" alt="Logo" class="site-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/888/888879.png'">
         <div class="brand-text">
             <h2>BANGLA FF PANEL</h2>
             <p>PREMIUM GAMING TOOLS</p>
         </div>
-
     </a>
-
     <a href="#" class="header-btn dynamic-discord" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-discord"></i> DISCORD
     </a>
-
 </header>
 
-<!-- BANNER -->
-
-<section class="site-banner-wrap"
-         id="siteBannerWrap"
-         style="display:none"
-         aria-label="Website banners">
-
+<section class="site-banner-wrap" id="siteBannerWrap" style="display:none">
     <div class="site-banner-track" id="siteBannerTrack"></div>
     <div class="site-banner-dots" id="siteBannerDots"></div>
-
 </section>
 
-<!-- HERO -->
-
 <section class="hero">
-
     <div class="status-badge">
         <i class="fas fa-circle"></i> SYSTEM ONLINE
     </div>
-
     <div class="hero-actions">
-
         <a href="#" class="action-btn dynamic-discord" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-discord"></i> JOIN DISCORD
         </a>
-
-        <a href="https://oxi-topup.netlify.app/"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="action-btn">
-
-            <i class="fas fa-gem"></i>
-            Free Fire Diamond Topup →
-
+        <a href="https://oxi-topup.netlify.app/" target="_blank" rel="noopener noreferrer" class="action-btn">
+            <i class="fas fa-gem"></i> Free Fire Diamond Topup →
         </a>
-
     </div>
-
 </section>
 
 <div class="divider">AVAILABLE SERVICES</div>
-
-<!-- ALL CATEGORY BOXES ARE LOADED FROM FIREBASE -->
 
 <div class="grid-container" id="category-grid"></div>
 
@@ -465,14 +396,8 @@
 </footer>
 
 <script type="module">
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-
-import {
-    getDatabase,
-    ref,
-    onValue
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
@@ -487,129 +412,65 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-/*
-  Default categories.
-  All additional categories are loaded from Firebase.
-*/
-
 const defaultBoxes = {
-    free_panel: {
-        title: "Free Panel",
-        iconType: "icon",
-        iconValue: "fas fa-laptop-code",
-        publicLink: "free-panel.html"
-    },
-    free_bypass: {
-        title: "Free Bypass",
-        iconType: "icon",
-        iconValue: "fas fa-shield-virus",
-        publicLink: "free-bypass.html"
-    },
-    emulator: {
-        title: "Emulator",
-        iconType: "icon",
-        iconValue: "fas fa-microchip",
-        publicLink: "emulator.html"
-    },
-    pc_panel: {
-        title: "Paid PC Panels",
-        iconType: "icon",
-        iconValue: "fas fa-desktop",
-        publicLink: "pc-panel.html"
-    },
-    mobile_panel: {
-        title: "Paid Mobile Panels",
-        iconType: "icon",
-        iconValue: "fas fa-mobile-alt",
-        publicLink: "mobile-panel.html"
-    },
-    apk: {
-        title: "Free Fire APK",
-        iconType: "icon",
-        iconValue: "fas fa-mobile",
-        publicLink: "apk.html"
-    },
-    error_fix: {
-        title: "Error Fix",
-        iconType: "icon",
-        iconValue: "fas fa-screwdriver-wrench",
-        publicLink: "error-fix.html"
-    }
+    free_panel: { title: "Free Panel", iconType: "icon", iconValue: "fas fa-laptop-code", publicLink: "free-panel.html" },
+    free_bypass: { title: "Free Bypass", iconType: "icon", iconValue: "fas fa-shield-virus", publicLink: "free-bypass.html" },
+    emulator: { title: "Emulator", iconType: "icon", iconValue: "fas fa-microchip", publicLink: "emulator.html" },
+    pc_panel: { title: "Paid PC Panels", iconType: "icon", iconValue: "fas fa-desktop", publicLink: "pc-panel.html" },
+    mobile_panel: { title: "Paid Mobile Panels", iconType: "icon", iconValue: "fas fa-mobile-alt", publicLink: "mobile-panel.html" },
+    apk: { title: "Free Fire APK", iconType: "icon", iconValue: "fas fa-mobile", publicLink: "apk.html" },
+    error_fix: { title: "Error Fix", iconType: "icon", iconValue: "fas fa-screwdriver-wrench", publicLink: "error-fix.html" }
 };
 
-let categoriesData = {};
+// Initial state
+let categoriesData = { ...defaultBoxes };
 let visibilityState = {};
 let deletedCategories = {};
 
-/* ICON RENDERER */
-
 function renderIcon(container, data) {
-
     container.innerHTML = "";
-
     const value = (data.iconValue || "").trim();
 
     if (!value) {
-        const span = document.createElement("span");
-        span.textContent = "📦";
-        container.appendChild(span);
+        container.innerHTML = "<span>📦</span>";
         return;
     }
 
     if (data.iconType === "image" || value.startsWith("http")) {
-
         const img = document.createElement("img");
         img.src = value;
-        img.alt = "Category Icon";
-
         container.appendChild(img);
-
-    } else if (
-        data.iconType === "emoji" ||
-        (!value.includes("fa-") && !value.startsWith("http"))
-    ) {
-
+    } else if (data.iconType === "emoji" || (!value.includes("fa-") && !value.startsWith("http"))) {
         const span = document.createElement("span");
         span.textContent = value;
-
         container.appendChild(span);
-
     } else {
-
         const icon = document.createElement("i");
         icon.className = value;
-
         container.appendChild(icon);
     }
 }
 
-/* RENDER ALL ENABLED CATEGORIES */
-
 function renderCategories() {
-
     const grid = document.getElementById("category-grid");
-
     grid.innerHTML = "";
 
     Object.entries(categoriesData).forEach(([key, data]) => {
-
         if (!data) return;
-
-        // Do not show deleted boxes
         if (deletedCategories[key] === true) return;
-
-        // Hide OFF boxes
         if (visibilityState[key] === false) return;
 
         const card = document.createElement("a");
         card.className = "card";
+        // যদি পাবলিক লিংক না থাকে, তাহলে পেজ রিলোড হবে না (খালি # থাকবে)
+        card.href = data.publicLink && data.publicLink.trim() !== "" ? data.publicLink : "javascript:void(0)";
 
-        // Public page link, never the admin management link
-        card.href = data.publicLink || "#";
+        if(card.href === "javascript:void(0)") {
+             card.onclick = () => alert("Link not added yet!");
+        }
 
         const icon = document.createElement("div");
         icon.className = "card-icon";
-
         renderIcon(icon, data);
 
         const title = document.createElement("div");
@@ -618,79 +479,53 @@ function renderCategories() {
 
         const description = document.createElement("div");
         description.className = "card-desc";
-
-        description.textContent =
-            data.description ||
-            (key === "error_fix"
-                ? "ERROR FIX SOLUTION"
-                : "ACCESS " + (data.title || "SERVICE"));
+        description.textContent = data.description || "ACCESS " + (data.title || "SERVICE");
 
         const explore = document.createElement("span");
         explore.className = "explore-btn";
         explore.textContent = "EXPLORE →";
 
         card.append(icon, title, description, explore);
-
         grid.appendChild(card);
     });
 }
 
-/* LOAD ADMIN CATEGORY DATA */
+// Render instantly with default boxes
+renderCategories();
 
 onValue(ref(db, "site_settings/categories"), (snapshot) => {
-
-    categoriesData = {
-        ...defaultBoxes,
-        ...(snapshot.val() || {})
-    };
-
+    categoriesData = { ...defaultBoxes, ...(snapshot.val() || {}) };
     renderCategories();
 });
-
-/* LOAD ON/OFF SETTINGS */
 
 onValue(ref(db, "site_visibility"), (snapshot) => {
-
     visibilityState = snapshot.val() || {};
-
     renderCategories();
 });
-
-/* LOAD DELETED CATEGORY MARKERS */
 
 onValue(ref(db, "site_settings/deleted_categories"), (snapshot) => {
-
     deletedCategories = snapshot.val() || {};
-
     renderCategories();
 });
 
-/* GLOBAL DISCORD LINK */
-
+// DISCORD LINK
 onValue(ref(db, "global_settings/discord_link"), (snapshot) => {
-
     if (!snapshot.exists()) return;
-
     const link = snapshot.val();
-
     document.querySelectorAll(".dynamic-discord").forEach(button => {
         button.href = link;
     });
 });
 
-/* ADMIN-MANAGED BANNER SLIDER */
-
+// BANNER SLIDER
 const bannerRef = ref(db, "site_banners");
-
 let bannerTimer = null;
 let bannerIndex = 0;
 
 onValue(bannerRef, (snapshot) => {
-
     const wrap = document.getElementById("siteBannerWrap");
     const track = document.getElementById("siteBannerTrack");
     const dots = document.getElementById("siteBannerDots");
-
     const banners = snapshot.val() || {};
 
     const activeBanners = Object.entries(banners)
@@ -715,9 +550,7 @@ onValue(bannerRef, (snapshot) => {
     wrap.style.display = "block";
 
     activeBanners.forEach((item, index) => {
-
         const slide = document.createElement("a");
-
         slide.className = "site-banner-slide";
         slide.href = item.target_url || "#";
 
@@ -725,53 +558,36 @@ onValue(bannerRef, (snapshot) => {
             slide.target = "_blank";
             slide.rel = "noopener noreferrer";
         } else {
-            slide.addEventListener("click", event => {
-                event.preventDefault();
-            });
+            slide.addEventListener("click", event => event.preventDefault());
         }
 
         const image = document.createElement("img");
-
         image.src = item.image_url;
         image.alt = item.title || "Website banner";
         image.loading = index === 0 ? "eager" : "lazy";
 
-        image.onerror = () => {
-            slide.remove();
-        };
+        image.onerror = () => slide.remove();
 
         slide.appendChild(image);
         track.appendChild(slide);
 
         const dot = document.createElement("span");
-
-        dot.className =
-            "site-banner-dot" + (index === 0 ? " active" : "");
-
+        dot.className = "site-banner-dot" + (index === 0 ? " active" : "");
         dots.appendChild(dot);
     });
 
     if (activeBanners.length > 1) {
-
         bannerTimer = setInterval(() => {
-
             const totalSlides = track.children.length;
-
             if (totalSlides <= 1) return;
-
             bannerIndex = (bannerIndex + 1) % totalSlides;
-
-            track.style.transform =
-                `translateX(-${bannerIndex * 100}%)`;
-
+            track.style.transform = `translateX(-${bannerIndex * 100}%)`;
             [...dots.children].forEach((dot, index) => {
                 dot.classList.toggle("active", index === bannerIndex);
             });
-
         }, 4000);
     }
 });
-
 </script>
 
 </body>
