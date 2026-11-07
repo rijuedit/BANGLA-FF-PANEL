@@ -1,428 +1,386 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4109990485768727" crossorigin="anonymous"></script>
     <meta name="google-adsense-account" content="ca-pub-4109990485768727">
     <meta name="google-site-verification" content="2pp8s_pbmfBm3nEgkLgFLDxKg_OusA-ZXlQRUeXUGO4">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>BANGLA FF PANEL</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --bg-main: #05020a;
-            --card-bg: #0b0512;
-            --border-color: #1a0b2e;
-            --neon-pink: #ff0066;
-            --neon-green: #00cc66;
-            --text-light: #ffffff;
-            --text-gray: #777777;
+            --bg-main:#05020a;
+            --card-bg:#0b0512;
+            --border-color:#1a0b2e;
+            --neon-pink:#ff0066;
+            --neon-green:#00cc66;
+            --text-light:#ffffff;
+            --text-gray:#777777;
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
         }
 
         body {
-            background-color: var(--bg-main);
-            color: var(--text-light);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            display: flex;
-            flex-direction: column;
+            background-color:var(--bg-main);
+            color:var(--text-light);
+            min-height:100vh;
+            overflow-x:hidden;
+            position:relative;
+            display:flex;
+            flex-direction:column;
         }
 
         .bg-glow {
-            position: absolute;
-            top: 20%;
-            left: 20%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255, 0, 102, 0.05) 0%, transparent 70%);
-            z-index: -1;
-            pointer-events: none;
+            position:absolute;
+            top:20%;
+            left:20%;
+            width:400px;
+            height:400px;
+            background:radial-gradient(circle,rgba(255,0,102,.05) 0%,transparent 70%);
+            z-index:-1;
+            pointer-events:none;
         }
 
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 25px 50px;
-            position: relative;
-            z-index: 100;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:25px 50px;
+            position:relative;
+            z-index:100;
         }
 
         .brand {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-            cursor: pointer;
+            display:flex;
+            align-items:center;
+            gap:15px;
+            text-decoration:none;
+            cursor:pointer;
         }
 
         .site-logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            object-fit: cover;
-            border: 1px solid var(--neon-pink);
+            width:40px;
+            height:40px;
+            border-radius:8px;
+            object-fit:cover;
+            border:1px solid var(--neon-pink);
         }
 
         .brand-text h2 {
-            font-size: 16px;
-            color: white;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 2px;
+            font-size:16px;
+            color:white;
+            font-weight:800;
+            text-transform:uppercase;
+            letter-spacing:1px;
+            margin-bottom:2px;
         }
 
         .brand-text p {
-            font-size: 9px;
-            color: var(--text-gray);
-            letter-spacing: 3px;
-            text-transform: uppercase;
+            font-size:9px;
+            color:var(--text-gray);
+            letter-spacing:3px;
+            text-transform:uppercase;
         }
 
         .header-btn {
-            background: transparent;
-            border: 1px solid #333;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 6px;
-            font-size: 12px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.3s;
+            background:transparent;
+            border:1px solid #333;
+            color:white;
+            padding:8px 15px;
+            border-radius:6px;
+            font-size:12px;
+            text-decoration:none;
+            display:flex;
+            align-items:center;
+            gap:8px;
+            transition:.3s;
         }
 
         .header-btn:hover {
-            border-color: white;
+            border-color:white;
         }
 
         /* BANNER */
+
         .site-banner-wrap {
-            width: min(1000px, calc(100% - 40px));
-            margin: 10px auto 0;
-            position: relative;
-            z-index: 10;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            background: var(--card-bg);
+            width:min(1000px,calc(100% - 40px));
+            margin:10px auto 0;
+            position:relative;
+            z-index:10;
+            overflow:hidden;
+            border:1px solid var(--border-color);
+            border-radius:12px;
+            background:var(--card-bg);
         }
 
         .site-banner-track {
-            display: flex;
-            width: 100%;
-            transition: transform .65s ease-in-out;
-            will-change: transform;
+            display:flex;
+            width:100%;
+            transition:transform .65s ease-in-out;
+            will-change:transform;
         }
 
         .site-banner-slide {
-            flex: 0 0 100%;
-            width: 100%;
-            display: block;
-            line-height: 0;
+            flex:0 0 100%;
+            width:100%;
+            display:block;
+            line-height:0;
         }
 
         .site-banner-slide img {
-            display: block;
-            width: 100%;
-            aspect-ratio: 1000 / 300;
-            object-fit: cover;
+            display:block;
+            width:100%;
+            aspect-ratio:1000 / 300;
+            object-fit:cover;
         }
 
         .site-banner-dots {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 10px;
-            display: flex;
-            justify-content: center;
-            gap: 7px;
-            pointer-events: none;
+            position:absolute;
+            left:0;
+            right:0;
+            bottom:10px;
+            display:flex;
+            justify-content:center;
+            gap:7px;
+            pointer-events:none;
         }
 
         .site-banner-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: rgba(255,255,255,.45);
+            width:7px;
+            height:7px;
+            border-radius:50%;
+            background:rgba(255,255,255,.45);
         }
 
         .site-banner-dot.active {
-            background: var(--neon-pink);
+            background:var(--neon-pink);
         }
 
-        /* HERO CONTENT BELOW BANNER */
+        /* HERO */
+
         .hero {
-            text-align: center;
-            padding: 25px 20px 25px;
-            position: relative;
-            z-index: 10;
+            text-align:center;
+            padding:25px 20px;
+            position:relative;
+            z-index:10;
         }
 
         .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 204, 102, 0.05);
-            border: 1px solid var(--neon-green);
-            color: var(--neon-green);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            background:rgba(0,204,102,.05);
+            border:1px solid var(--neon-green);
+            color:var(--neon-green);
+            padding:6px 16px;
+            border-radius:20px;
+            font-size:10px;
+            font-weight:bold;
+            letter-spacing:1px;
+            margin-bottom:20px;
+            text-transform:uppercase;
         }
 
         .status-badge i {
-            font-size: 8px;
+            font-size:8px;
         }
 
         .hero-actions {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
+            display:flex;
+            justify-content:center;
+            gap:15px;
+            align-items:center;
+            flex-wrap:wrap;
         }
 
         .action-btn {
-            background: transparent;
-            border: 1px solid #333;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: bold;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: 0.3s;
+            background:transparent;
+            border:1px solid #333;
+            color:white;
+            padding:12px 25px;
+            border-radius:8px;
+            font-size:12px;
+            font-weight:bold;
+            text-decoration:none;
+            display:flex;
+            align-items:center;
+            gap:10px;
+            transition:.3s;
         }
 
         .action-btn:hover {
-            border-color: var(--text-light);
-            background: rgba(255,255,255,0.05);
+            border-color:var(--text-light);
+            background:rgba(255,255,255,.05);
         }
 
         .divider {
-            text-align: center;
-            margin: 25px 0 25px;
-            font-size: 11px;
-            color: #444;
-            letter-spacing: 4px;
-            text-transform: uppercase;
+            text-align:center;
+            margin:25px 0;
+            font-size:11px;
+            color:#444;
+            letter-spacing:4px;
+            text-transform:uppercase;
         }
 
         /* CATEGORY BOXES */
+
         .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 10;
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+            gap:20px;
+            max-width:1000px;
+            width:100%;
+            margin:0 auto;
+            padding:0 20px;
+            position:relative;
+            z-index:10;
         }
 
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 40px 20px;
-            text-align: center;
-            text-decoration: none;
-            position: relative;
-            transition: 0.3s;
-            display: none;
-            color: white;
-        }
-
-        .card.visible {
-            display: block;
+            background:var(--card-bg);
+            border:1px solid var(--border-color);
+            border-radius:12px;
+            padding:40px 20px;
+            text-align:center;
+            text-decoration:none;
+            position:relative;
+            transition:.3s;
+            display:block;
+            color:white;
+            min-width:0;
         }
 
         .card:hover {
-            border-color: #3a1b5e;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 9px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .badge-hot {
-            background: var(--neon-pink);
-            color: white;
-        }
-
-        .badge-premium {
-            background: #ff9900;
-            color: white;
-        }
-
-        .badge-vip {
-            background: #0066ff;
-            color: white;
+            border-color:#3a1b5e;
+            transform:translateY(-5px);
+            box-shadow:0 10px 30px rgba(0,0,0,.5);
         }
 
         .card-icon {
-            font-size: 35px;
-            margin-bottom: 20px;
-            color: #ff3366;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 45px;
+            font-size:35px;
+            margin-bottom:20px;
+            color:#ff3366;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            min-height:45px;
         }
 
         .card-icon img {
-            width: 50px;
-            height: 50px;
-            object-fit: contain;
+            width:50px;
+            height:50px;
+            object-fit:contain;
         }
 
         .card-icon span {
-            font-size: 40px;
-            line-height: 1;
-            display: inline-block;
+            font-size:40px;
+            line-height:1;
+            display:inline-block;
         }
 
         .card-title {
-            color: white;
-            font-size: 16px;
-            font-weight: 800;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color:white;
+            font-size:16px;
+            font-weight:800;
+            margin-bottom:10px;
+            text-transform:uppercase;
+            letter-spacing:1px;
+            overflow-wrap:anywhere;
         }
 
         .card-desc {
-            color: #777;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
-            overflow-wrap: anywhere;
+            color:#777;
+            font-size:10px;
+            text-transform:uppercase;
+            letter-spacing:1px;
+            margin-bottom:30px;
+            overflow-wrap:anywhere;
         }
 
         .explore-btn {
-            border: 1px solid #333;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: 0.3s;
-            display: inline-block;
-            text-decoration: none;
+            border:1px solid #333;
+            color:white;
+            padding:8px 20px;
+            border-radius:20px;
+            font-size:10px;
+            font-weight:bold;
+            letter-spacing:1px;
+            text-transform:uppercase;
+            transition:.3s;
+            display:inline-block;
+            text-decoration:none;
         }
 
         .card:hover .explore-btn {
-            background: white;
-            color: black;
-            border-color: white;
-        }
-
-        .tutorial-link {
-            display: inline-block;
-            margin-top: 16px;
-            color: var(--neon-pink);
-            font-size: 11px;
-            font-weight: bold;
-            text-decoration: none;
-            letter-spacing: 1px;
-        }
-
-        .tutorial-link:hover {
-            color: white;
-        }
-
-        .dynamic-error-fix .explore-btn {
-            margin-top: 2px;
+            background:white;
+            color:black;
+            border-color:white;
         }
 
         footer {
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: auto;
-            color: #555;
-            font-size: 11px;
-            letter-spacing: 1px;
+            text-align:center;
+            padding:30px 20px;
+            margin-top:auto;
+            color:#555;
+            font-size:11px;
+            letter-spacing:1px;
         }
 
         @media(max-width:600px) {
             .header {
-                padding: 18px 15px;
+                padding:18px 15px;
             }
 
             .site-banner-wrap {
-                width: calc(100% - 24px);
-                margin-top: 5px;
+                width:calc(100% - 24px);
+                margin-top:5px;
             }
 
             .site-banner-slide img {
-                aspect-ratio: 16 / 6;
+                aspect-ratio:16 / 6;
             }
 
             .hero {
-                padding: 22px 12px 20px;
+                padding:22px 12px 20px;
             }
 
             .hero-actions {
-                gap: 10px;
+                gap:10px;
             }
 
             .action-btn {
-                padding: 11px 16px;
-                font-size: 11px;
+                padding:11px 16px;
+                font-size:11px;
             }
 
             .grid-container {
-                grid-template-columns: 1fr;
+                grid-template-columns:1fr;
             }
         }
 
-        @media (max-width: 380px) {
+        @media(max-width:380px) {
             .brand-text h2 {
-                font-size: 13px;
+                font-size:13px;
             }
 
             .brand-text p {
-                font-size: 8px;
-                letter-spacing: 2px;
+                font-size:8px;
+                letter-spacing:2px;
             }
 
             .site-logo {
-                width: 35px;
-                height: 35px;
+                width:35px;
+                height:35px;
             }
         }
     </style>
@@ -430,398 +388,391 @@
 
 <body>
 
-    <div class="bg-glow"></div>
+<div class="bg-glow"></div>
 
-    <!-- HEADER -->
-    <header class="header">
-        <a href="index.html" class="brand">
-            <img src="logo.png"
-                 alt="Logo"
-                 class="site-logo"
-                 onerror="this.src='https://cdn-icons-png.flaticon.com/512/888/888879.png'">
+<!-- HEADER -->
 
-            <div class="brand-text">
-                <h2>BANGLA FF PANEL</h2>
-                <p>PREMIUM GAMING TOOLS</p>
-            </div>
-        </a>
+<header class="header">
 
-        <a href="#" class="header-btn dynamic-discord" target="_blank">
-            <i class="fab fa-discord"></i> DISCORD
-        </a>
-    </header>
+    <a href="index.html" class="brand">
 
-    <!-- BANNER AT THE TOP -->
-    <section class="site-banner-wrap" id="siteBannerWrap" style="display:none" aria-label="Website banners">
-        <div class="site-banner-track" id="siteBannerTrack"></div>
-        <div class="site-banner-dots" id="siteBannerDots"></div>
-    </section>
+        <img src="logo.png"
+             alt="Logo"
+             class="site-logo"
+             onerror="this.src='https://cdn-icons-png.flaticon.com/512/888/888879.png'">
 
-    <!-- ONLY SYSTEM STATUS AND ACTION BUTTONS BELOW BANNER -->
-    <section class="hero">
-        <div class="status-badge">
-            <i class="fas fa-circle"></i> SYSTEM ONLINE
+        <div class="brand-text">
+            <h2>BANGLA FF PANEL</h2>
+            <p>PREMIUM GAMING TOOLS</p>
         </div>
 
-        <div class="hero-actions">
-            <a href="#" class="action-btn dynamic-discord" target="_blank">
-                <i class="fab fa-discord"></i> JOIN DISCORD
-            </a>
+    </a>
 
-            <a href="https://oxi-topup.netlify.app/"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="action-btn">
-                <i class="fas fa-gem"></i>
-                Free Fire Diamond Topup →
-            </a>
-        </div>
-    </section>
+    <a href="#" class="header-btn dynamic-discord" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-discord"></i> DISCORD
+    </a>
 
-    <div class="divider">AVAILABLE SERVICES</div>
+</header>
 
-    <!-- CATEGORY GRID -->
-    <div class="grid-container" id="category-grid">
+<!-- BANNER -->
 
-        <a href="free-panel.html" class="card" id="card_free_panel">
-            <div class="card-icon" id="icon_free_panel"><i class="fas fa-laptop-code"></i></div>
-            <div class="card-title" id="title_free_panel">FREE PANEL</div>
-            <div class="card-desc">ACCESS FREE PANEL</div>
-            <span class="explore-btn">EXPLORE →</span>
+<section class="site-banner-wrap"
+         id="siteBannerWrap"
+         style="display:none"
+         aria-label="Website banners">
+
+    <div class="site-banner-track" id="siteBannerTrack"></div>
+    <div class="site-banner-dots" id="siteBannerDots"></div>
+
+</section>
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="status-badge">
+        <i class="fas fa-circle"></i> SYSTEM ONLINE
+    </div>
+
+    <div class="hero-actions">
+
+        <a href="#" class="action-btn dynamic-discord" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-discord"></i> JOIN DISCORD
         </a>
 
-        <a href="free-bypass.html" class="card" id="card_free_bypass">
-            <div class="card-icon" id="icon_free_bypass"><i class="fas fa-shield-virus"></i></div>
-            <div class="card-title" id="title_free_bypass">FREE BYPASS</div>
-            <div class="card-desc">ACCESS FREE BYPASS</div>
-            <span class="explore-btn">EXPLORE →</span>
-        </a>
+        <a href="https://oxi-topup.netlify.app/"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="action-btn">
 
-        <a href="emulator.html" class="card" id="card_emulator">
-            <div class="card-icon" id="icon_emulator"><i class="fas fa-microchip"></i></div>
-            <div class="card-title" id="title_emulator">EMULATOR</div>
-            <div class="card-desc">EMULATOR SETTINGS</div>
-            <span class="explore-btn">EXPLORE →</span>
-        </a>
+            <i class="fas fa-gem"></i>
+            Free Fire Diamond Topup →
 
-        <a href="apk.html" class="card" id="card_apk">
-            <div class="card-icon" id="icon_apk"><i class="fas fa-mobile"></i></div>
-            <div class="card-title" id="title_apk">FREE FIRE APK</div>
-            <div class="card-desc">DOWNLOAD GAME FILES</div>
-            <span class="explore-btn">EXPLORE →</span>
-        </a>
-
-        <a href="pc-panel.html" class="card" id="card_pc_panel">
-            <div class="card-icon" id="icon_pc_panel"><i class="fas fa-desktop"></i></div>
-            <div class="card-title" id="title_pc_panel">PAID PC PANELS</div>
-            <div class="card-desc">PREMIUM PC TOOLS</div>
-            <span class="explore-btn">EXPLORE →</span>
-        </a>
-
-        <a href="mobile-panel.html" class="card" id="card_mobile_panel">
-            <div class="card-icon" id="icon_mobile_panel"><i class="fas fa-mobile-alt"></i></div>
-            <div class="card-title" id="title_mobile_panel">PAID MOBILE PANELS</div>
-            <div class="card-desc">PREMIUM MOBILE TOOLS</div>
-            <span class="explore-btn">EXPLORE →</span>
         </a>
 
     </div>
 
-    <footer>
-        © 2026 BANGLA FF PANEL. ALL RIGHTS RESERVED.
-    </footer>
+</section>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+<div class="divider">AVAILABLE SERVICES</div>
 
-        import {
-            getDatabase,
-            ref,
-            onValue
-        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+<!-- ALL CATEGORY BOXES ARE LOADED FROM FIREBASE -->
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
-            authDomain: "bangla-ff-admin.firebaseapp.com",
-            databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "bangla-ff-admin",
-            storageBucket: "bangla-ff-admin.firebasestorage.app",
-            messagingSenderId: "295013484465",
-            appId: "1:295013484465:web:b6bc2a949e239095761f90"
-        };
+<div class="grid-container" id="category-grid"></div>
 
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
+<footer>
+    © 2026 BANGLA FF PANEL. ALL RIGHTS RESERVED.
+</footer>
 
-        // DYNAMIC DISCORD LINK
-        onValue(ref(db, "global_settings/discord_link"), (snapshot) => {
-            if (snapshot.exists()) {
-                const link = snapshot.val();
+<script type="module">
 
-                document.querySelectorAll(".dynamic-discord").forEach(btn => {
-                    btn.href = link;
-                });
-            }
-        });
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 
-        // CATEGORY ICON RENDERER
-        function renderIcon(iconDiv, data) {
-            if (!iconDiv || !data) return;
+import {
+    getDatabase,
+    ref,
+    onValue
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-            const val = (data.iconValue || "").trim();
+const firebaseConfig = {
+    apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
+    authDomain: "bangla-ff-admin.firebaseapp.com",
+    databaseURL: "https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "bangla-ff-admin",
+    storageBucket: "bangla-ff-admin.firebasestorage.app",
+    messagingSenderId: "295013484465",
+    appId: "1:295013484465:web:b6bc2a949e239095761f90"
+};
 
-            if (!val) return;
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-            if (data.iconType === "image" || val.startsWith("http")) {
-                const img = document.createElement("img");
-                img.src = val;
-                img.alt = "Icon";
-                iconDiv.replaceChildren(img);
+/*
+  Default categories.
+  All additional categories are loaded from Firebase.
+*/
 
-            } else if (
-                data.iconType === "emoji" ||
-                (!val.includes("fa-") && !val.startsWith("http"))
-            ) {
-                const span = document.createElement("span");
-                span.textContent = val;
-                iconDiv.replaceChildren(span);
+const defaultBoxes = {
+    free_panel: {
+        title: "Free Panel",
+        iconType: "icon",
+        iconValue: "fas fa-laptop-code",
+        publicLink: "free-panel.html"
+    },
+    free_bypass: {
+        title: "Free Bypass",
+        iconType: "icon",
+        iconValue: "fas fa-shield-virus",
+        publicLink: "free-bypass.html"
+    },
+    emulator: {
+        title: "Emulator",
+        iconType: "icon",
+        iconValue: "fas fa-microchip",
+        publicLink: "emulator.html"
+    },
+    pc_panel: {
+        title: "Paid PC Panels",
+        iconType: "icon",
+        iconValue: "fas fa-desktop",
+        publicLink: "pc-panel.html"
+    },
+    mobile_panel: {
+        title: "Paid Mobile Panels",
+        iconType: "icon",
+        iconValue: "fas fa-mobile-alt",
+        publicLink: "mobile-panel.html"
+    },
+    apk: {
+        title: "Free Fire APK",
+        iconType: "icon",
+        iconValue: "fas fa-mobile",
+        publicLink: "apk.html"
+    },
+    error_fix: {
+        title: "Error Fix",
+        iconType: "icon",
+        iconValue: "fas fa-screwdriver-wrench",
+        publicLink: "error-fix.html"
+    }
+};
 
-            } else {
-                const icon = document.createElement("i");
-                icon.className = val;
-                iconDiv.replaceChildren(icon);
-            }
+let categoriesData = {};
+let visibilityState = {};
+let deletedCategories = {};
+
+/* ICON RENDERER */
+
+function renderIcon(container, data) {
+
+    container.innerHTML = "";
+
+    const value = (data.iconValue || "").trim();
+
+    if (!value) {
+        const span = document.createElement("span");
+        span.textContent = "📦";
+        container.appendChild(span);
+        return;
+    }
+
+    if (data.iconType === "image" || value.startsWith("http")) {
+
+        const img = document.createElement("img");
+        img.src = value;
+        img.alt = "Category Icon";
+
+        container.appendChild(img);
+
+    } else if (
+        data.iconType === "emoji" ||
+        (!value.includes("fa-") && !value.startsWith("http"))
+    ) {
+
+        const span = document.createElement("span");
+        span.textContent = value;
+
+        container.appendChild(span);
+
+    } else {
+
+        const icon = document.createElement("i");
+        icon.className = value;
+
+        container.appendChild(icon);
+    }
+}
+
+/* RENDER ALL ENABLED CATEGORIES */
+
+function renderCategories() {
+
+    const grid = document.getElementById("category-grid");
+
+    grid.innerHTML = "";
+
+    Object.entries(categoriesData).forEach(([key, data]) => {
+
+        if (!data) return;
+
+        // Do not show deleted boxes
+        if (deletedCategories[key] === true) return;
+
+        // Hide OFF boxes
+        if (visibilityState[key] === false) return;
+
+        const card = document.createElement("a");
+        card.className = "card";
+
+        // Public page link, never the admin management link
+        card.href = data.publicLink || "#";
+
+        const icon = document.createElement("div");
+        icon.className = "card-icon";
+
+        renderIcon(icon, data);
+
+        const title = document.createElement("div");
+        title.className = "card-title";
+        title.textContent = data.title || "CATEGORY";
+
+        const description = document.createElement("div");
+        description.className = "card-desc";
+
+        description.textContent =
+            data.description ||
+            (key === "error_fix"
+                ? "ERROR FIX SOLUTION"
+                : "ACCESS " + (data.title || "SERVICE"));
+
+        const explore = document.createElement("span");
+        explore.className = "explore-btn";
+        explore.textContent = "EXPLORE →";
+
+        card.append(icon, title, description, explore);
+
+        grid.appendChild(card);
+    });
+}
+
+/* LOAD ADMIN CATEGORY DATA */
+
+onValue(ref(db, "site_settings/categories"), (snapshot) => {
+
+    categoriesData = {
+        ...defaultBoxes,
+        ...(snapshot.val() || {})
+    };
+
+    renderCategories();
+});
+
+/* LOAD ON/OFF SETTINGS */
+
+onValue(ref(db, "site_visibility"), (snapshot) => {
+
+    visibilityState = snapshot.val() || {};
+
+    renderCategories();
+});
+
+/* LOAD DELETED CATEGORY MARKERS */
+
+onValue(ref(db, "site_settings/deleted_categories"), (snapshot) => {
+
+    deletedCategories = snapshot.val() || {};
+
+    renderCategories();
+});
+
+/* GLOBAL DISCORD LINK */
+
+onValue(ref(db, "global_settings/discord_link"), (snapshot) => {
+
+    if (!snapshot.exists()) return;
+
+    const link = snapshot.val();
+
+    document.querySelectorAll(".dynamic-discord").forEach(button => {
+        button.href = link;
+    });
+});
+
+/* ADMIN-MANAGED BANNER SLIDER */
+
+const bannerRef = ref(db, "site_banners");
+
+let bannerTimer = null;
+let bannerIndex = 0;
+
+onValue(bannerRef, (snapshot) => {
+
+    const wrap = document.getElementById("siteBannerWrap");
+    const track = document.getElementById("siteBannerTrack");
+    const dots = document.getElementById("siteBannerDots");
+
+    const banners = snapshot.val() || {};
+
+    const activeBanners = Object.entries(banners)
+        .map(([id, item]) => ({ id, ...item }))
+        .filter(item => item && item.enabled !== false && item.image_url);
+
+    if (bannerTimer) {
+        clearInterval(bannerTimer);
+        bannerTimer = null;
+    }
+
+    track.innerHTML = "";
+    dots.innerHTML = "";
+    track.style.transform = "translateX(0)";
+    bannerIndex = 0;
+
+    if (!activeBanners.length) {
+        wrap.style.display = "none";
+        return;
+    }
+
+    wrap.style.display = "block";
+
+    activeBanners.forEach((item, index) => {
+
+        const slide = document.createElement("a");
+
+        slide.className = "site-banner-slide";
+        slide.href = item.target_url || "#";
+
+        if (item.target_url) {
+            slide.target = "_blank";
+            slide.rel = "noopener noreferrer";
+        } else {
+            slide.addEventListener("click", event => {
+                event.preventDefault();
+            });
         }
 
-        // CATEGORY SETTINGS
-        const keys = [
-            "free_panel",
-            "free_bypass",
-            "emulator",
-            "apk",
-            "pc_panel",
-            "mobile_panel"
-        ];
+        const image = document.createElement("img");
 
-        keys.forEach(key => {
+        image.src = item.image_url;
+        image.alt = item.title || "Website banner";
+        image.loading = index === 0 ? "eager" : "lazy";
 
-            onValue(ref(db, `site_visibility/${key}`), snapshot => {
-                const isVisible = !snapshot.exists() || snapshot.val() === true;
+        image.onerror = () => {
+            slide.remove();
+        };
 
-                const card = document.getElementById(`card_${key}`);
+        slide.appendChild(image);
+        track.appendChild(slide);
 
-                if (card) {
-                    card.classList.toggle("visible", isVisible);
-                }
+        const dot = document.createElement("span");
+
+        dot.className =
+            "site-banner-dot" + (index === 0 ? " active" : "");
+
+        dots.appendChild(dot);
+    });
+
+    if (activeBanners.length > 1) {
+
+        bannerTimer = setInterval(() => {
+
+            const totalSlides = track.children.length;
+
+            if (totalSlides <= 1) return;
+
+            bannerIndex = (bannerIndex + 1) % totalSlides;
+
+            track.style.transform =
+                `translateX(-${bannerIndex * 100}%)`;
+
+            [...dots.children].forEach((dot, index) => {
+                dot.classList.toggle("active", index === bannerIndex);
             });
 
-            onValue(ref(db, `site_settings/categories/${key}`), snapshot => {
+        }, 4000);
+    }
+});
 
-                if (snapshot.exists()) {
-                    const data = snapshot.val();
+</script>
 
-                    if (data.title) {
-                        const titleEl = document.getElementById(`title_${key}`);
-
-                        if (titleEl) {
-                            titleEl.textContent = data.title;
-                        }
-                    }
-
-                    const iconDiv = document.getElementById(`icon_${key}`);
-
-                    renderIcon(iconDiv, data);
-                }
-            });
-        });
-
-        // ADMIN-MANAGED BANNER SLIDER
-        const bannerRef = ref(db, "site_banners");
-
-        let bannerTimer = null;
-        let bannerIndex = 0;
-
-        onValue(bannerRef, (snapshot) => {
-
-            const wrap = document.getElementById("siteBannerWrap");
-            const track = document.getElementById("siteBannerTrack");
-            const dots = document.getElementById("siteBannerDots");
-
-            const banners = snapshot.val() || {};
-
-            const activeBanners = Object.entries(banners)
-                .map(([id, item]) => ({ id, ...item }))
-                .filter(item => item.enabled !== false && item.image_url);
-
-            if (bannerTimer) {
-                clearInterval(bannerTimer);
-                bannerTimer = null;
-            }
-
-            track.innerHTML = "";
-            dots.innerHTML = "";
-            bannerIndex = 0;
-
-            if (!activeBanners.length) {
-                wrap.style.display = "none";
-                return;
-            }
-
-            wrap.style.display = "block";
-
-            activeBanners.forEach((item, index) => {
-
-                const slide = document.createElement("a");
-
-                slide.className = "site-banner-slide";
-                slide.href = item.target_url || "#";
-
-                if (item.target_url) {
-                    slide.target = "_blank";
-                    slide.rel = "noopener noreferrer";
-                } else {
-                    slide.addEventListener("click", event => {
-                        event.preventDefault();
-                    });
-                }
-
-                const image = document.createElement("img");
-
-                image.src = item.image_url;
-                image.alt = item.title || "Website banner";
-                image.loading = index === 0 ? "eager" : "lazy";
-
-                image.onerror = () => {
-                    slide.remove();
-                };
-
-                slide.appendChild(image);
-                track.appendChild(slide);
-
-                const dot = document.createElement("span");
-
-                dot.className = "site-banner-dot" + (index === 0 ? " active" : "");
-
-                dots.appendChild(dot);
-            });
-
-            if (activeBanners.length > 1) {
-
-                bannerTimer = setInterval(() => {
-
-                    const currentSlides = track.children.length;
-
-                    if (currentSlides <= 1) return;
-
-                    bannerIndex = (bannerIndex + 1) % currentSlides;
-
-                    track.style.transform = `translateX(-${bannerIndex * 100}%)`;
-
-                    [...dots.children].forEach((dot, index) => {
-                        dot.classList.toggle("active", index === bannerIndex);
-                    });
-
-                }, 4000);
-            }
-        });
-
-        // LOAD ALL ENABLED ERROR FIX BOXES
-        const errorFixRef = ref(db, "error_fixes");
-
-        onValue(errorFixRef, (snapshot) => {
-
-            const grid = document.getElementById("category-grid");
-
-            document.querySelectorAll(".dynamic-error-fix").forEach(card => {
-                card.remove();
-            });
-
-            if (!snapshot.exists()) {
-                console.log("No Error Fix boxes found.");
-                return;
-            }
-
-            const boxes = snapshot.val();
-
-            Object.entries(boxes).forEach(([id, data]) => {
-
-                if (!data || data.enabled === false) return;
-
-                const card = document.createElement("div");
-
-                card.className = "card visible dynamic-error-fix";
-                card.dataset.boxId = id;
-
-                const iconDiv = document.createElement("div");
-
-                iconDiv.className = "card-icon";
-
-                const iconValue = (data.icon || "").trim();
-
-                if (iconValue.startsWith("http")) {
-
-                    const img = document.createElement("img");
-
-                    img.src = iconValue;
-                    img.alt = "Icon";
-
-                    iconDiv.appendChild(img);
-
-                } else if (iconValue.includes("fa-")) {
-
-                    const icon = document.createElement("i");
-
-                    icon.className = iconValue;
-
-                    iconDiv.appendChild(icon);
-
-                } else {
-
-                    const span = document.createElement("span");
-
-                    span.textContent = iconValue || "🛠️";
-
-                    iconDiv.appendChild(span);
-                }
-
-                const title = document.createElement("div");
-
-                title.className = "card-title";
-                title.textContent = data.title || "ERROR FIX";
-
-                const desc = document.createElement("div");
-
-                desc.className = "card-desc";
-                desc.textContent = data.description || data.status_text || "ERROR FIX SOLUTION";
-
-                const explore = document.createElement("a");
-
-                explore.className = "explore-btn";
-                explore.textContent = (data.button_text || "EXPLORE") + " →";
-                explore.href = "error-fix.html";
-                explore.target = "_self";
-
-                card.append(iconDiv, title, desc, explore);
-
-                if (data.video_url && data.video_enabled !== false) {
-
-                    const video = document.createElement("a");
-
-                    video.className = "tutorial-link";
-                    video.href = data.video_url;
-                    video.target = "_blank";
-                    video.rel = "noopener noreferrer";
-                    video.textContent = "▶ WATCH TUTORIAL";
-
-                    card.appendChild(video);
-                }
-
-                grid.appendChild(card);
-            });
-
-            console.log("All enabled Error Fix boxes loaded successfully.");
-        });
-
-    </script>
 </body>
 </html>
