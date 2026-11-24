@@ -3,46 +3,41 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Special Panel</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#080510;color:#fff;font-family:Arial,sans-serif;padding:25px}
-.wrap{max-width:1100px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-h1{color:#ff4c9a;text-shadow:0 0 15px #ff168b}button,.btn{border:0;border-radius:9px;padding:12px 17px;background:linear-gradient(90deg,#a000ff,#ff168b);color:white;font-weight:bold;cursor:pointer;text-decoration:none}
+*{box-sizing:border-box}body{margin:0;background:#080510;color:#fff;font-family:Arial,sans-serif;padding:22px}
+.wrap{max-width:1100px;margin:auto}header{text-align:center;padding:20px}
+h1{color:#ff4c9a;text-shadow:0 0 15px #ff168b}
 .panel{background:#160d20;border:1px solid #64205d;border-radius:15px;padding:20px;margin:18px 0;box-shadow:0 0 18px #8b007522}
-input{width:100%;padding:13px;margin:7px 0 13px;background:#090610;border:1px solid #64305f;border-radius:8px;color:white}
-label{color:#ff9acb;font-weight:bold}.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1}
-.file{background:#0d0914;padding:15px;border-radius:12px;margin:12px 0;border:1px solid #49204c}
-.file button{margin:5px 5px 0 0}.danger{background:#b51d42}.muted{color:#bbaabd}
+button,.download{border:0;border-radius:9px;padding:11px 15px;background:linear-gradient(90deg,#a000ff,#ff168b);color:white;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block;margin:5px}
+#videoBox iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:12px}
+#files{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.file{background:#0d0914;padding:17px;border:1px solid #49204c;border-radius:13px}
+.file h3{overflow-wrap:anywhere;color:#ff9acb}
+.muted{color:#bbaabd}
+.modal{display:none;position:fixed;inset:0;background:#000c;align-items:center;justify-content:center;padding:18px;z-index:5}
+.modalbox{background:#1b1024;border:1px solid #a12a87;border-radius:15px;padding:22px;width:100%;max-width:420px}
+.credential{background:#090610;border:1px solid #64305f;border-radius:8px;padding:12px;margin:10px 0;overflow-wrap:anywhere}
 </style>
 </head>
 <body>
 <div class="wrap">
-<div class="top"><h1>🔥 SPECIAL PANEL ADMIN</h1><button onclick="location.href='index.html'">Dashboard</button></div>
-<div class="panel">
-<h2>Panel Settings</h2>
-<label>Video URL</label><input id="videoUrl" placeholder="YouTube video link">
-<label><input type="checkbox" id="videoEnabled" style="width:auto"> Enable Video</label>
-<label>RAR Password</label><input id="rarPassword" placeholder="Enter RAR password">
-<button onclick="saveSettings()">Save Settings</button>
+<header><h1>🔥 SPECIAL PANEL</h1><p class="muted">Welcome to Special Panel</p></header>
+<div class="panel" id="videoBox" style="display:none"><h2>Video Tutorial</h2><div id="videoFrame"></div></div>
+<div class="panel" id="rarBox" style="display:none"><h2>RAR Password</h2><p id="rarText"></p><button onclick="copyText(rarValue)">Copy RAR Password</button></div>
+<div class="panel"><h2>Available Files</h2><div id="files"><p class="muted">Loading files...</p></div></div>
 </div>
-<div class="panel">
-<h2 id="formTitle">Add New File</h2>
-<label>File Title</label><input id="fileTitle" placeholder="File name">
-<label>Download URL</label><input id="downloadUrl" placeholder="https://...">
-<div class="row">
-<div><label>Username</label><input id="username" placeholder="Username"></div>
-<div><label>Password</label><input id="password" placeholder="Password"></div>
-</div>
-<button onclick="saveFile()">Save File</button>
-<button class="danger" onclick="resetForm()">Cancel Edit</button>
-</div>
-<div class="panel"><h2>Manage Files</h2><div id="fileList">Loading...</div></div>
-</div>
+<div class="modal" id="credentialModal">
+<div class="modalbox">
+<h2>User Password</h2>
+<p>Username</p><div class="credential" id="userText"></div><button onclick="copyText(currentUser)">Copy Username</button>
+<p>Password</p><div class="credential" id="passText"></div><button onclick="copyText(currentPass)">Copy Password</button>
+<br><br><button onclick="closeModal()">Close</button>
+</div></div>
 <script type="module">
-import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {getDatabase,ref,onValue,set,update,remove,push} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import{getDatabase,ref,onValue}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 const firebaseConfig={
 apiKey:"AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
 authDomain:"bangla-ff-admin.firebaseapp.com",
@@ -52,47 +47,41 @@ storageBucket:"bangla-ff-admin.firebasestorage.app",
 messagingSenderId:"295013484465",
 appId:"1:295013484465:web:b6bc2a949e239095761f90"
 };
-const app=initializeApp(firebaseConfig),db=getDatabase(app),auth=getAuth(app);
-const SECTION_ID="special";
-const settingsRef=ref(db,`panel_sections/${SECTION_ID}/settings`);
-const filesRef=ref(db,`panel_sections/${SECTION_ID}/files`);
-let editingId=null;
-onAuthStateChanged(auth,user=>{if(!user)location.href="login.html";});
-onValue(settingsRef,s=>{const d=s.val()||{};videoUrl.value=d.video_url||"";videoEnabled.checked=!!d.video_enabled;rarPassword.value=d.rar_password||"";});
-onValue(filesRef,s=>{
-const data=s.val()||{};fileList.innerHTML="";
-if(!Object.keys(data).length){fileList.innerHTML='<p class="muted">No files added yet.</p>';return;}
-Object.entries(data).forEach(([id,f])=>{
-const el=document.createElement("div");el.className="file";
-const title=document.createElement("h3");title.textContent=f.title||"Untitled";
-const url=document.createElement("p");url.textContent=f.download_url||"";
-const edit=document.createElement("button");edit.textContent="Edit";edit.onclick=()=>editFile(id,f);
-const del=document.createElement("button");del.textContent="Delete";del.className="danger";del.onclick=()=>deleteFile(id);
-el.append(title,url,edit,del);fileList.append(el);
+const app=initializeApp(firebaseConfig),db=getDatabase(app),SECTION_ID="special";
+let rarValue="",currentUser="",currentPass="";
+function youtubeId(url){
+try{const u=new URL(url);if(u.hostname.includes("youtu.be"))return u.pathname.slice(1);return u.searchParams.get("v")||u.pathname.split("/").filter(Boolean).pop();}catch{return"";}
+}
+function safeUrl(value){
+try{const u=new URL(value);return["http:","https:"].includes(u.protocol)?u.href:"#";}catch{return"#";}
+}
+window.copyText=async text=>{try{await navigator.clipboard.writeText(text||"");alert("Copied!");}catch{alert("Copy failed. Please copy manually.");}};
+window.closeModal=()=>credentialModal.style.display="none";
+window.showCredentials=(u,p)=>{
+currentUser=u||"";currentPass=p||"";
+userText.textContent=currentUser||"Not set";passText.textContent=currentPass||"Not set";
+credentialModal.style.display="flex";
+};
+onValue(ref(db,`panel_sections/${SECTION_ID}/settings`),s=>{
+const d=s.val()||{};
+rarValue=d.rar_password||"";
+rarBox.style.display=rarValue?"block":"none";rarText.textContent=rarValue;
+const id=d.video_enabled?youtubeId(d.video_url||""):"";
+videoBox.style.display=id?"block":"none";
+videoFrame.innerHTML="";
+if(id){const iframe=document.createElement("iframe");iframe.src="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(id);iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";iframe.allowFullscreen=true;videoFrame.append(iframe);}
+});
+onValue(ref(db,`panel_sections/${SECTION_ID}/files`),s=>{
+const data=s.val()||{};files.innerHTML="";
+if(!Object.keys(data).length){files.innerHTML='<p class="muted">No files available right now.</p>';return;}
+Object.values(data).forEach(f=>{
+const card=document.createElement("div");card.className="file";
+const title=document.createElement("h3");title.textContent=f.title||"Panel File";
+const link=document.createElement("a");link.className="download";link.textContent="Download";link.href=safeUrl(f.download_url||"");link.target="_blank";link.rel="noopener noreferrer";
+const pass=document.createElement("button");pass.textContent="User Password";pass.onclick=()=>showCredentials(f.username,f.password);
+card.append(title,link,pass);files.append(card);
 });
 });
-window.saveSettings=async()=>{
-try{await set(settingsRef,{video_url:videoUrl.value.trim(),video_enabled:videoEnabled.checked,rar_password:rarPassword.value});alert("Settings saved!");}
-catch(e){alert(e.message);}
-};
-window.saveFile=async()=>{
-const title=fileTitle.value.trim(),url=downloadUrl.value.trim();
-if(!title||!url){alert("File title and download URL are required.");return;}
-try{
-const data={title,download_url:url,username:username.value.trim(),password:password.value};
-if(editingId)await update(ref(db,`panel_sections/${SECTION_ID}/files/${editingId}`),data);
-else await push(filesRef,data);
-resetForm();alert("File saved!");
-}catch(e){alert(e.message);}
-};
-window.editFile=(id,f)=>{
-editingId=id;fileTitle.value=f.title||"";downloadUrl.value=f.download_url||"";
-username.value=f.username||"";password.value=f.password||"";
-formTitle.textContent="Edit File";
-window.scrollTo({top:0,behavior:"smooth"});
-};
-window.deleteFile=async id=>{if(confirm("Delete this file?"))try{await remove(ref(db,`panel_sections/${SECTION_ID}/files/${id}`));}catch(e){alert(e.message);}};
-window.resetForm=()=>{editingId=null;fileTitle.value="";downloadUrl.value="";username.value="";password.value="";formTitle.textContent="Add New File";};
 </script>
 </body>
 </html>
