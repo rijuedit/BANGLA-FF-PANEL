@@ -1,1 +1,85 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VIP Panel</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#080510;color:#fff;font-family:Arial,sans-serif;padding:22px}
+.wrap{max-width:1100px;margin:auto}header{text-align:center;padding:20px}
+h1{color:#d6a6ff;text-shadow:0 0 15px #a000ff}
+.panel{background:#160d20;border:1px solid #64205d;border-radius:15px;padding:20px;margin:18px 0;box-shadow:0 0 18px #8b007522}
+button,.download{border:0;border-radius:9px;padding:11px 15px;background:linear-gradient(90deg,#7000db,#c026ff);color:white;font-weight:bold;cursor:pointer;text-decoration:none;display:inline-block;margin:5px}
+#videoFrame iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:12px}
+#files{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.file{background:#0d0914;padding:17px;border:1px solid #49204c;border-radius:13px}
+.file h3{overflow-wrap:anywhere;color:#d6a6ff}
+.muted{color:#bbaabd}
+.modal{display:none;position:fixed;inset:0;background:#000c;align-items:center;justify-content:center;padding:18px;z-index:5}
+.modalbox{background:#1b1024;border:1px solid #a12a87;border-radius:15px;padding:22px;width:100%;max-width:420px}
+.credential{background:#090610;border:1px solid #64305f;border-radius:8px;padding:12px;margin:10px 0;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><h1>💎 VIP PANEL</h1><p class="muted">Welcome to VIP Panel</p></header>
+<div class="panel" id="videoBox" style="display:none"><h2>Video Tutorial</h2><div id="videoFrame"></div></div>
+<div class="panel" id="rarBox" style="display:none"><h2>RAR Password</h2><p id="rarText"></p><button onclick="copyText(rarValue)">Copy RAR Password</button></div>
+<div class="panel"><h2>Available Files</h2><div id="files"><p class="muted">Loading files...</p></div></div>
+</div>
+<div class="modal" id="credentialModal">
+<div class="modalbox">
+<h2>User Password</h2>
+<p>Username</p><div class="credential" id="userText"></div><button onclick="copyText(currentUser)">Copy Username</button>
+<p>Password</p><div class="credential" id="passText"></div><button onclick="copyText(currentPass)">Copy Password</button>
+<br><br><button onclick="closeModal()">Close</button>
+</div></div>
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import{getDatabase,ref,onValue}from"https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+const firebaseConfig={
+apiKey:"AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
+authDomain:"bangla-ff-admin.firebaseapp.com",
+databaseURL:"https://bangla-ff-admin-default-rtdb.asia-southeast1.firebasedatabase.app",
+projectId:"bangla-ff-admin",
+storageBucket:"bangla-ff-admin.firebasestorage.app",
+messagingSenderId:"295013484465",
+appId:"1:295013484465:web:b6bc2a949e239095761f90"
+};
+const app=initializeApp(firebaseConfig),db=getDatabase(app),SECTION_ID="vip";
+let rarValue="",currentUser="",currentPass="";
+function youtubeId(url){
+try{const u=new URL(url);if(u.hostname.includes("youtu.be"))return u.pathname.slice(1);return u.searchParams.get("v")||u.pathname.split("/").filter(Boolean).pop();}catch{return"";}
+}
+function safeUrl(value){
+try{const u=new URL(value);return["http:","https:"].includes(u.protocol)?u.href:"#";}catch{return"#";}
+}
+window.copyText=async text=>{try{await navigator.clipboard.writeText(text||"");alert("Copied!");}catch{alert("Copy failed. Please copy manually.");}};
+window.closeModal=()=>credentialModal.style.display="none";
+window.showCredentials=(u,p)=>{
+currentUser=u||"";currentPass=p||"";
+userText.textContent=currentUser||"Not set";passText.textContent=currentPass||"Not set";
+credentialModal.style.display="flex";
+};
+onValue(ref(db,`panel_sections/${SECTION_ID}/settings`),s=>{
+const d=s.val()||{};rarValue=d.rar_password||"";
+rarBox.style.display=rarValue?"block":"none";rarText.textContent=rarValue;
+const id=d.video_enabled?youtubeId(d.video_url||""):"";
+videoBox.style.display=id?"block":"none";videoFrame.innerHTML="";
+if(id){const iframe=document.createElement("iframe");iframe.src="https://www.youtube-nocookie.com/embed/"+encodeURIComponent(id);iframe.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";iframe.allowFullscreen=true;videoFrame.append(iframe);}
+});
+onValue(ref(db,`panel_sections/${SECTION_ID}/files`),s=>{
+const data=s.val()||{};files.innerHTML="";
+if(!Object.keys(data).length){files.innerHTML='<p class="muted">No files available right now.</p>';return;}
+Object.values(data).forEach(f=>{
+const card=document.createElement("div");card.className="file";
+const title=document.createElement("h3");title.textContent=f.title||"VIP File";
+const link=document.createElement("a");link.className="download";link.textContent="Download";link.href=safeUrl(f.download_url||"");link.target="_blank";link.rel="noopener noreferrer";
+const pass=document.createElement("button");pass.textContent="User Password";pass.onclick=()=>showCredentials(f.username,f.password);
+card.append(title,link,pass);files.append(card);
+});
+});
+</script>
+</body>
+</html>
