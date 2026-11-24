@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Premium Panel - Bangla FF</title>
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background:#05020a;color:#fff;padding:20px}
@@ -31,65 +32,131 @@ button{border:0;border-radius:7px;padding:10px 15px;cursor:pointer;font-weight:b
 .credential-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .credential-row span{overflow-wrap:anywhere;min-width:0}
 .close{background:#b51e36;color:white;width:100%;margin-top:15px}
-@media(max-width:500px){body{padding:12px}.section{padding:14px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.file-card{padding:12px}.file-card h3{font-size:14px}}
+
+/* PREMIUM PIN LOCK */
+#pinLock{
+ position:fixed;
+ inset:0;
+ z-index:9999;
+ background:#05020a;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+}
+.pin-box{
+ width:100%;
+ max-width:380px;
+ background:#11071a;
+ border:1px solid #9d00ff;
+ border-radius:15px;
+ padding:28px 22px;
+ text-align:center;
+ box-shadow:0 0 25px #9d00ff33;
+}
+.pin-box h2{color:#d58aff;margin-bottom:10px}
+.pin-box p{color:#aaa;font-size:14px;margin-bottom:20px}
+.pin-box input{
+ width:100%;
+ padding:13px;
+ border-radius:8px;
+ border:1px solid #46205d;
+ outline:none;
+ background:#08040e;
+ color:white;
+ font-size:17px;
+ text-align:center;
+ margin-bottom:12px;
+}
+.pin-box input:focus{border-color:#d000ff}
+.pin-box button{
+ width:100%;
+ background:#9d00ff;
+ color:white;
+ padding:13px;
+ font-size:15px;
+}
+#pinError{color:#ff4d79;font-size:13px;margin-top:12px;min-height:17px}
+
+@media(max-width:500px){
+ body{padding:12px}
+ .section{padding:14px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .file-card{padding:12px}
+ .file-card h3{font-size:14px}
+}
 </style>
 </head>
+
 <body>
-<div class="container">
-<h1 id="pageTitle">PREMIUM PANEL</h1>
 
-<div class="section" id="videoSection" style="display:none">
-<h2>Video Tutorial</h2>
-<div class="video-box" id="videoBox"></div>
-</div>
-
-<div class="section">
-<h2>RAR Password</h2>
-<div class="rar">
-<span id="rarText">Loading...</span>
-<button class="copy" id="copyRar">Copy Password</button>
-</div>
+<!-- PIN LOCK -->
+<div id="pinLock">
+ <div class="pin-box">
+  <h2>PREMIUM ACCESS</h2>
+  <p>Enter your PIN to access Premium Panel</p>
+  <input type="password" id="pinInput" placeholder="Enter PIN" autocomplete="off">
+  <button id="unlockBtn">UNLOCK</button>
+  <div id="pinError"></div>
+ </div>
 </div>
 
-<div class="section">
-<h2>Available Files</h2>
-<div class="grid" id="fileGrid">
-<div class="empty">Loading files...</div>
-</div>
-</div>
+<div id="appContent" style="display:none">
+ <div class="container">
+
+  <h1 id="pageTitle">PREMIUM PANEL</h1>
+
+  <div class="section" id="videoSection" style="display:none">
+   <h2>Video Tutorial</h2>
+   <div class="video-box" id="videoBox"></div>
+  </div>
+
+  <div class="section">
+   <h2>RAR Password</h2>
+   <div class="rar">
+    <span id="rarText">Loading...</span>
+    <button class="copy" id="copyRar">Copy Password</button>
+   </div>
+  </div>
+
+  <div class="section">
+   <h2>Available Files</h2>
+   <div class="grid" id="fileGrid">
+    <div class="empty">Loading files...</div>
+   </div>
+  </div>
+
+ </div>
 </div>
 
 <div class="modal" id="passwordModal">
-<div class="modal-box">
-<h2>User Login Information</h2>
+ <div class="modal-box">
+  <h2>User Login Information</h2>
 
-<div class="credential">
-<b>USERNAME</b>
-<div class="credential-row">
-<span id="modalUsername">Not set</span>
-<button class="copy" id="copyUsername">Copy</button>
-</div>
-</div>
+  <div class="credential">
+   <b>USERNAME</b>
+   <div class="credential-row">
+    <span id="modalUsername">Not set</span>
+    <button class="copy" id="copyUsername">Copy</button>
+   </div>
+  </div>
 
-<div class="credential">
-<b>PASSWORD</b>
-<div class="credential-row">
-<span id="modalPassword">Not set</span>
-<button class="copy" id="copyPassword">Copy</button>
-</div>
-</div>
+  <div class="credential">
+   <b>PASSWORD</b>
+   <div class="credential-row">
+    <span id="modalPassword">Not set</span>
+    <button class="copy" id="copyPassword">Copy</button>
+   </div>
+  </div>
 
-<button class="close" id="closeModal">Close</button>
-</div>
+  <button class="close" id="closeModal">Close</button>
+ </div>
 </div>
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {getDatabase,ref,onValue} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-/* এই লাইনটি ফাইল অনুযায়ী পরিবর্তন করবে:
-   premium / special / vip
-*/
 const SECTION_ID = "premium";
 
 const firebaseConfig = {
@@ -115,6 +182,57 @@ const videoBox=document.getElementById("videoBox");
 const fileGrid=document.getElementById("fileGrid");
 const modal=document.getElementById("passwordModal");
 
+const pinLock=document.getElementById("pinLock");
+const pinInput=document.getElementById("pinInput");
+const pinError=document.getElementById("pinError");
+const appContent=document.getElementById("appContent");
+
+let currentPin="";
+let settingsLoaded=false;
+
+function showPremium(){
+ pinLock.style.display="none";
+ appContent.style.display="block";
+}
+
+function showLock(){
+ appContent.style.display="none";
+ pinLock.style.display="flex";
+}
+
+function checkPin(){
+ const entered=pinInput.value.trim();
+
+ if(!currentPin){
+  sessionStorage.removeItem("premium_unlocked");
+  showPremium();
+  return;
+ }
+
+ if(entered===currentPin){
+  sessionStorage.setItem("premium_unlocked",currentPin);
+  pinInput.value="";
+  pinError.textContent="";
+  showPremium();
+ }else{
+  pinError.textContent="Incorrect PIN! Please try again.";
+  pinInput.value="";
+  pinInput.focus();
+ }
+}
+
+document.getElementById("unlockBtn").onclick=()=>{
+ if(!settingsLoaded){
+  pinError.textContent="Please wait...";
+  return;
+ }
+ checkPin();
+};
+
+pinInput.addEventListener("keydown",e=>{
+ if(e.key==="Enter")checkPin();
+});
+
 function copyText(value){
  if(!value){
   alert("Nothing to copy!");
@@ -129,6 +247,7 @@ function getYouTubeEmbed(url){
  try{
   const u=new URL(url);
   let id="";
+
   if(u.hostname.includes("youtu.be")){
    id=u.pathname.slice(1);
   }else if(u.hostname.includes("youtube.com")){
@@ -136,23 +255,42 @@ function getYouTubeEmbed(url){
    if(u.pathname.startsWith("/embed/"))id=u.pathname.split("/")[2];
    if(u.pathname.startsWith("/shorts/"))id=u.pathname.split("/")[2];
   }
+
   return id ? "https://www.youtube.com/embed/"+encodeURIComponent(id) : "";
- }catch(e){return ""}
+ }catch(e){
+  return "";
+ }
 }
 
+/* PIN এবং অন্যান্য Settings */
 onValue(settingsRef,snap=>{
  const data=snap.val()||{};
 
+ currentPin=String(data.access_pin||"").trim();
+ settingsLoaded=true;
+
+ if(!currentPin){
+  sessionStorage.removeItem("premium_unlocked");
+  showPremium();
+ }else if(sessionStorage.getItem("premium_unlocked")===currentPin){
+  showPremium();
+ }else{
+  showLock();
+ }
+
  rarText.textContent=data.rar_password||"Not set";
+
  document.getElementById("copyRar").onclick=()=>{
   copyText(data.rar_password||"");
  };
 
  const videoUrl=(data.video_url||"").trim();
+
  if(data.video_enabled===true && videoUrl){
   const embed=getYouTubeEmbed(videoUrl);
   videoSection.style.display="block";
   videoBox.innerHTML="";
+
   if(embed){
    const iframe=document.createElement("iframe");
    iframe.src=embed;
@@ -167,13 +305,17 @@ onValue(settingsRef,snap=>{
   videoSection.style.display="none";
   videoBox.innerHTML="";
  }
+},error=>{
+ pinError.textContent="Unable to load settings. Please refresh.";
 });
 
+/* Files */
 onValue(filesRef,snap=>{
  const files=snap.val()||{};
  fileGrid.innerHTML="";
 
  const entries=Object.entries(files);
+
  if(!entries.length){
   fileGrid.innerHTML='<div class="empty">No files available right now.</div>';
   return;
@@ -196,11 +338,19 @@ onValue(filesRef,snap=>{
   const passwordBtn=document.createElement("button");
   passwordBtn.className="password-btn";
   passwordBtn.textContent="User Password";
+
   passwordBtn.onclick=()=>{
    document.getElementById("modalUsername").textContent=file.username||"Not set";
    document.getElementById("modalPassword").textContent=file.password||"Not set";
-   document.getElementById("copyUsername").onclick=()=>copyText(file.username||"");
-   document.getElementById("copyPassword").onclick=()=>copyText(file.password||"");
+
+   document.getElementById("copyUsername").onclick=()=>{
+    copyText(file.username||"");
+   };
+
+   document.getElementById("copyPassword").onclick=()=>{
+    copyText(file.password||"");
+   };
+
    modal.style.display="flex";
   };
 
@@ -222,8 +372,10 @@ const titles={
  special:"SPECIAL PANEL",
  vip:"VIP PANEL"
 };
+
 pageTitle.textContent=titles[SECTION_ID]||"PANEL";
 document.title=(titles[SECTION_ID]||"PANEL")+" - Bangla FF";
 </script>
+
 </body>
 </html>
