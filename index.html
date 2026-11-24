@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +13,6 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Prevent old layout flash -->
     <style>
         html {
             background: #05020a;
@@ -33,7 +31,6 @@
         }
     </style>
 
-    <!-- Emergency fallback if Firebase cannot connect -->
     <script>
         window.__showWebsite = function () {
             document.body.classList.add("page-ready");
@@ -371,7 +368,6 @@
             letter-spacing: 1px;
         }
 
-        /* Mobile */
         @media(max-width: 600px) {
             .header {
                 padding: 18px 15px;
@@ -442,7 +438,6 @@
     </a>
 </header>
 
-<!-- Banner: reserve layout space before Firebase responds -->
 <section class="site-banner-wrap"
          id="siteBannerWrap"
          style="visibility:hidden">
@@ -461,7 +456,6 @@
            class="action-btn dynamic-discord"
            target="_blank"
            rel="noopener noreferrer">
-
             <i class="fab fa-discord"></i> JOIN DISCORD
         </a>
 
@@ -469,7 +463,6 @@
            target="_blank"
            rel="noopener noreferrer"
            class="action-btn">
-
             <i class="fas fa-gem"></i> Free Fire Diamond Topup →
         </a>
     </div>
@@ -496,9 +489,7 @@ import {
 from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 
-/* ========================================
-   FIREBASE CONFIGURATION
-======================================== */
+/* FIREBASE CONFIGURATION */
 
 const firebaseConfig = {
     apiKey: "AIzaSyDOFL6dKvw_RfyKMe3QQgvE4lt7Gtc4yaM",
@@ -514,9 +505,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 
-/* ========================================
-   DEFAULT CATEGORIES
-======================================== */
+/* DEFAULT CATEGORIES */
 
 const defaultBoxes = {
 
@@ -571,31 +560,26 @@ const defaultBoxes = {
 };
 
 
-/* ========================================
-   GLOBAL VARIABLES
-======================================== */
+/* GLOBAL VARIABLES */
 
 let categoriesData = { ...defaultBoxes };
 let visibilityState = {};
 let deletedCategories = {};
+let categoryOrder = [];
 
 let bannerTimer = null;
 let bannerIndex = 0;
 
 
-/* ========================================
-   WAIT FOR INITIAL FIREBASE DATA
-
-   Website will appear after the first
-   Firebase responses have been received.
-======================================== */
+/* INITIAL DATA CONTROL */
 
 const requiredInitialData = new Set([
     "categories",
     "visibility",
     "deleted",
     "discord",
-    "banners"
+    "banners",
+    "order"
 ]);
 
 const receivedInitialData = new Set();
@@ -608,15 +592,39 @@ function markInitialDataReceived(name) {
 
         clearTimeout(window.__pageFallbackTimer);
 
-        // All initial Firebase data is ready.
         window.__showWebsite();
     }
 }
 
 
-/* ========================================
-   RENDER ICON
-======================================== */
+/* SORT CATEGORIES USING ADMIN ORDER */
+
+function getOrderedCategoryKeys() {
+
+    const allKeys = Object.keys(categoriesData).filter(key => {
+
+        return categoriesData[key] &&
+               deletedCategories[key] !== true;
+
+    });
+
+    const savedOrder = Array.isArray(categoryOrder)
+        ? categoryOrder
+        : [];
+
+    // First show categories in Admin's saved order.
+    // Then append new categories that are not in that order.
+
+    const orderedKeys = [
+        ...savedOrder.filter(key => allKeys.includes(key)),
+        ...allKeys.filter(key => !savedOrder.includes(key))
+    ];
+
+    return orderedKeys;
+}
+
+
+/* RENDER ICON */
 
 function renderIcon(container, data) {
 
@@ -625,7 +633,6 @@ function renderIcon(container, data) {
     const value = (data.iconValue || "").trim();
 
     if (!value) {
-
         container.innerHTML = "<span>📦</span>";
         return;
     }
@@ -636,6 +643,11 @@ function renderIcon(container, data) {
 
         img.src = value;
         img.alt = data.title || "Category icon";
+
+        img.onerror = () => {
+            img.remove();
+            container.innerHTML = "<span>📦</span>";
+        };
 
         container.appendChild(img);
 
@@ -661,9 +673,7 @@ function renderIcon(container, data) {
 }
 
 
-/* ========================================
-   SAFE CATEGORY LINK
-======================================== */
+/* SAFE CATEGORY LINK */
 
 function getCategoryLink(key, data) {
 
@@ -671,19 +681,13 @@ function getCategoryLink(key, data) {
         ? data.publicLink.trim()
         : "";
 
-    // Empty or invalid placeholder link:
-    // use the original default destination.
-
     if (
         !targetLink ||
         targetLink === "#" ||
         /^javascript:/i.test(targetLink)
     ) {
-
         targetLink = defaultBoxes[key]?.publicLink || "";
     }
-
-    // Do not allow JavaScript URLs.
 
     if (/^javascript:/i.test(targetLink)) {
         targetLink = defaultBoxes[key]?.publicLink || "";
@@ -693,9 +697,7 @@ function getCategoryLink(key, data) {
 }
 
 
-/* ========================================
-   RENDER CATEGORIES
-======================================== */
+/* RENDER CATEGORIES */
 
 function renderCategories() {
 
@@ -703,7 +705,11 @@ function renderCategories() {
 
     grid.innerHTML = "";
 
-    Object.entries(categoriesData).forEach(([key, data]) => {
+    const orderedKeys = getOrderedCategoryKeys();
+
+    orderedKeys.forEach((key) => {
+
+        const data = categoriesData[key];
 
         if (!data) return;
 
@@ -718,11 +724,8 @@ function renderCategories() {
         const targetLink = getCategoryLink(key, data);
 
         if (targetLink) {
-
             card.href = targetLink;
-
         } else {
-
             card.removeAttribute("href");
         }
 
@@ -760,8 +763,6 @@ function renderCategories() {
         explore.textContent = "EXPLORE →";
 
 
-        // The complete card is one clickable link.
-
         card.append(
             icon,
             title,
@@ -775,16 +776,12 @@ function renderCategories() {
 }
 
 
-/* ========================================
-   INITIAL DEFAULT RENDER
-======================================== */
+/* INITIAL DEFAULT RENDER */
 
 renderCategories();
 
 
-/* ========================================
-   FIREBASE: CATEGORIES
-======================================== */
+/* FIREBASE: CATEGORIES */
 
 onValue(
     ref(db, "site_settings/categories"),
@@ -798,18 +795,14 @@ onValue(
         Object.keys(defaultBoxes).forEach((key) => {
 
             merged[key] = {
-
                 ...defaultBoxes[key],
-
                 ...(firebaseData[key] || {})
-
             };
 
             if (
                 !merged[key].publicLink ||
                 !merged[key].publicLink.trim()
             ) {
-
                 merged[key].publicLink =
                     defaultBoxes[key].publicLink;
             }
@@ -820,9 +813,7 @@ onValue(
         Object.keys(firebaseData).forEach((key) => {
 
             if (!merged[key]) {
-
                 merged[key] = { ...firebaseData[key] };
-
             }
 
         });
@@ -846,9 +837,7 @@ onValue(
 );
 
 
-/* ========================================
-   FIREBASE: VISIBILITY
-======================================== */
+/* FIREBASE: VISIBILITY */
 
 onValue(
     ref(db, "site_visibility"),
@@ -873,9 +862,7 @@ onValue(
 );
 
 
-/* ========================================
-   FIREBASE: DELETED CATEGORIES
-======================================== */
+/* FIREBASE: DELETED CATEGORIES */
 
 onValue(
     ref(db, "site_settings/deleted_categories"),
@@ -900,9 +887,55 @@ onValue(
 );
 
 
-/* ========================================
-   FIREBASE: DISCORD LINK
-======================================== */
+/* FIREBASE: CATEGORY ORDER
+   Same path used by Admin Dashboard:
+   site_settings/category_order
+*/
+
+onValue(
+    ref(db, "site_settings/category_order"),
+
+    (snapshot) => {
+
+        const value = snapshot.val();
+
+        if (Array.isArray(value)) {
+
+            categoryOrder = value.filter(
+                key => typeof key === "string"
+            );
+
+        } else if (value && typeof value === "object") {
+
+            // Supports object-based order too.
+
+            categoryOrder = Object.entries(value)
+                .sort((a, b) => Number(a[1]) - Number(b[1]))
+                .map(entry => entry[0]);
+
+        } else {
+
+            categoryOrder = [];
+
+        }
+
+        renderCategories();
+
+        markInitialDataReceived("order");
+
+    },
+
+    (error) => {
+
+        console.error("Category order Firebase error:", error);
+
+        markInitialDataReceived("order");
+
+    }
+);
+
+
+/* FIREBASE: DISCORD LINK */
 
 onValue(
     ref(db, "global_settings/discord_link"),
@@ -942,15 +975,10 @@ onValue(
 );
 
 
-/* ========================================
-   FIREBASE: WEBSITE BANNERS
-======================================== */
-
-const bannerRef = ref(db, "site_banners");
-
+/* FIREBASE: WEBSITE BANNERS */
 
 onValue(
-    bannerRef,
+    ref(db, "site_banners"),
 
     (snapshot) => {
 
@@ -991,8 +1019,6 @@ onValue(
         bannerIndex = 0;
 
 
-        // No active banners.
-
         if (!activeBanners.length) {
 
             wrap.style.display = "none";
@@ -1004,8 +1030,6 @@ onValue(
             return;
         }
 
-
-        // Active banners found.
 
         wrap.style.display = "block";
 
@@ -1032,9 +1056,7 @@ onValue(
                 slide.href = "#";
 
                 slide.addEventListener("click", (e) => {
-
                     e.preventDefault();
-
                 });
 
             }
@@ -1082,8 +1104,6 @@ onValue(
         });
 
 
-        // Start banner slider.
-
         if (activeBanners.length > 1) {
 
             bannerTimer = setInterval(() => {
@@ -1092,13 +1112,10 @@ onValue(
 
                 if (total <= 1) return;
 
-
                 bannerIndex = (bannerIndex + 1) % total;
-
 
                 track.style.transform =
                     `translateX(-${bannerIndex * 100}%)`;
-
 
                 [...dots.children].forEach((dot, index) => {
 
@@ -1113,8 +1130,6 @@ onValue(
 
         }
 
-
-        // Banner data is now ready.
 
         markInitialDataReceived("banners");
 
